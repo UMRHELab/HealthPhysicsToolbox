@@ -32,7 +32,8 @@ Finally, if the calculation did not cause an error,
 the result is converted to the desired units, and then
 displayed in the result label.
 """
-def handle_calculation(root, category, mode, item, energy_str, result_box):
+def handle_calculation(root, category, mode, item, energy_str,
+                       result_box, range_result):
     root.focus()
 
     # Gets units from user prefs
@@ -73,8 +74,10 @@ def handle_calculation(root, category, mode, item, energy_str, result_box):
 
     if mode == "Density":
         result = find_density(category, item)
+        result2 = 0
     else:
         result = find_data(category, mode, item, energy_target, "Alphas")
+        result2 = find_density(category, item)
 
     # Displays result label
     if not result in errors:
@@ -82,6 +85,9 @@ def handle_calculation(root, category, mode, item, energy_str, result_box):
         if mode == "CSDA Range":
             result *= csda_numerator[num]
             result /= csda_denominator[den]
+            result2 *= density_numerator[num]
+            result2 /= density_denominator[den.split("\u00B2", 1)[0] + "\u00B3"]
+            edit_result(f"{(result/result2):.4g} {den.split("\u00B2", 1)[0]}", range_result)
         else:
             result *= density_numerator[num]
             result /= density_denominator[den]

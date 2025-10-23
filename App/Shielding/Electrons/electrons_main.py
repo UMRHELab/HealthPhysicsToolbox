@@ -115,35 +115,46 @@ def electrons_main(root, category="Common Elements",
         event.widget.selection_clear()
         warning_label.config(text="")
 
-        if event.widget.get() != "Range-Energy Curve" \
-                and mode == "Range-Energy Curve":
-            # Gets rid of result label when switching off Range-Energy Curve mode
+        if (event.widget.get() != "Range-Energy Curve" and
+            event.widget.get() != "CSDA Range") \
+                and (mode == "Range-Energy Curve" or mode == "CSDA Range"):
+            # Gets rid of result label when switching off Range-Energy Curve
+            # / CSDA Range mode
             range_label.pack_forget()
             range_result.pack_forget()
             range_check.pack_forget()
 
             add_main_frame()
-        elif mode != "Range-Energy Curve" \
-             and event.widget.get() == "Range-Energy Curve":
+        elif (mode != "Range-Energy Curve" and mode != "CSDA Range") \
+             and (event.widget.get() == "Range-Energy Curve" or
+                  event.widget.get() == "CSDA Range"):
             # Creates range label
             mode_dropdown.pack(pady=(20,10))
             range_check.pack(pady=(0,20))
             var_range.set(linear)
 
-            if not linear:
+            if event.widget.get() == "Range-Energy Curve" and not linear:
                 # Forgets select interacting medium frame
                 main_frame.pack_forget()
                 empty_frame2.pack_forget()
-            else:
+            elif linear:
                 # Reset in preparation to re-add range box in correct place
                 warning_label.pack_forget()
 
                 # Adds range box
-                range_label.pack(pady=(5, 1))
-                range_result.pack(pady=(1, 0))
+                range_label.pack(pady=(5,1))
+                range_result.pack(pady=(1,0))
 
                 # Adds warning label
-                warning_label.pack(pady=(1, 5))
+                warning_label.pack(pady=(1,5))
+        elif event.widget.get() == "CSDA Range" and mode == "Range-Energy Curve":
+            if not linear:
+                add_main_frame()
+        elif event.widget.get() == "Range-Energy Curve" and mode == "CSDA Range":
+            if not linear:
+                # Forgets select interacting medium frame
+                main_frame.pack_forget()
+                empty_frame2.pack_forget()
 
         if event.widget.get() == "Density" \
                 and mode != "Density":
@@ -198,7 +209,7 @@ def electrons_main(root, category="Common Elements",
     mode_dropdown = make_dropdown(inner_mode_frame, var_mode, mode_choices, select_mode,
                                   pady=20)
 
-    # Stores whether to find linear range for Range-Energy Curve mode
+    # Stores whether to find linear range for Range-Energy Curve / CSDA Range mode
     var_range = tk.IntVar()
     var_range.set(int(linear))
 
@@ -225,8 +236,9 @@ def electrons_main(root, category="Common Elements",
             range_result.pack_forget()
 
             # Forgets select interacting medium frame
-            main_frame.pack_forget()
-            empty_frame2.pack_forget()
+            if mode == "Range-Energy Curve":
+                main_frame.pack_forget()
+                empty_frame2.pack_forget()
         linear = bool(var_range.get())
 
     # Creates checkbox for finding range
@@ -234,7 +246,7 @@ def electrons_main(root, category="Common Elements",
                                   variable=var_range, style="Maize.TCheckbutton",
                                   command=lambda: range_hit())
 
-    if mode == "Range-Energy Curve":
+    if mode == "Range-Energy Curve" or mode == "CSDA Range":
         # Displays the range option
         mode_dropdown.pack(pady=(20,10))
         range_check.pack(pady=(0,20))
@@ -378,7 +390,7 @@ def electrons_main(root, category="Common Elements",
     warning_label = ttk.Label(inner_result_frame, text="", style="Error.TLabel")
     warning_label.pack(pady=(1,5))
 
-    if mode == "Range-Energy Curve" and linear:
+    if (mode == "Range-Energy Curve" or mode == "CSDA Range") and linear:
         # Reset in preparation to re-add range box in correct place
         warning_label.pack_forget()
 

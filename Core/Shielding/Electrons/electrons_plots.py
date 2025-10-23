@@ -72,7 +72,7 @@ def export_data(root, item, category, mode, choice, save, error_label, linear):
     # Sets up columns for dataframe
     energy_col = "Electron Energy (" + energy_unit + ")"
     unit = " (" + num + "/" + den + ")"
-    if mode == "Range-Energy Curve" and linear:
+    if (mode == "CSDA Range" or mode == "Range-Energy Curve") and linear:
         unit = " (" + den.split("\u00B2", 1)[0] + ")"
     mode_col = mode
     if mode == "CSDA Range" or mode == "Range-Energy Curve":
@@ -120,7 +120,7 @@ def export_data(root, item, category, mode, choice, save, error_label, linear):
     if mode == "CSDA Range" or mode == "Range-Energy Curve":
         df[mode_col] *= csda_numerator[num]
         df[mode_col] /= csda_denominator[den]
-    if mode == "Range-Energy Curve" and linear:
+    if (mode == "CSDA Range" or mode == "Range-Energy Curve") and linear:
         density = find_density(category, item)
         density *= density_numerator[num]
         density /= density_denominator[den.split("\u00B2", 1)[0] + "\u00B3"]

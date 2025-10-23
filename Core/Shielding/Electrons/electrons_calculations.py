@@ -84,6 +84,9 @@ def handle_calculation(root, category, mode, item, energy_str,
     elif mode == "Density":
         result = find_density(category, item)
         result2 = 0
+    elif mode == "CSDA Range":
+        result = find_data(category, mode, item, energy_target, "Electrons")
+        result2 = find_density(category, item)
     else:
         result = find_data(category, mode, item, energy_target, "Electrons")
         result2 = 0
@@ -94,13 +97,12 @@ def handle_calculation(root, category, mode, item, energy_str,
         if mode == "CSDA Range" or mode == "Range-Energy Curve":
             result *= csda_numerator[num]
             result /= csda_denominator[den]
+            result2 *= density_numerator[num]
+            result2 /= density_denominator[den.split("\u00B2", 1)[0] + "\u00B3"]
+            edit_result(f"{(result / result2):.4g} {den.split("\u00B2", 1)[0]}", range_result)
         elif mode == "Density":
             result *= density_numerator[num]
             result /= density_denominator[den]
-        if mode == "Range-Energy Curve":
-            result2 *= density_numerator[num]
-            result2 /= density_denominator[den.split("\u00B2", 1)[0] + "\u00B3"]
-            edit_result(f"{(result/result2):.4g} {den.split("\u00B2", 1)[0]}", range_result)
         edit_result(f"{result:.4g}", result_box, num=num, den=den)
     else:
         edit_result(result, result_box)

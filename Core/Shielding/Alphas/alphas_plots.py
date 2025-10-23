@@ -6,9 +6,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from Utility.Functions.logic_utility import get_unit
 from Utility.Functions.gui_utility import no_selection
-from Utility.Functions.math_utility import find_data, energy_units
 from Utility.Functions.choices import element_choices, material_choices
 from Utility.Functions.files import save_file, resource_path, get_user_data_path
+from Utility.Functions.math_utility import find_data, find_density, energy_units
+from Utility.Functions.math_utility import density_numerator, density_denominator
 from Core.Shielding.Alphas.alphas_calculations import csda_numerator, csda_denominator
 
 #####################################################################################
@@ -32,7 +33,7 @@ configure_plot.
 Finally, if the file is meant to be saved, we pass on the
 work to the save_file function. Otherwise, we show the plot.
 """
-def export_data(root, item, category, mode, choice, save, error_label):
+def export_data(root, item, category, mode, choice, save, error_label, linear):
     root.focus()
 
     # Gets units from user prefs
@@ -62,6 +63,8 @@ def export_data(root, item, category, mode, choice, save, error_label):
     # Sets up columns for dataframe
     energy_col = "Alpha Energy (" + energy_unit + ")"
     unit = " (" + num + "/" + den + ")"
+    if linear:
+        unit = " (" + den.split("\u00B2", 1)[0] + ")"
     mode_col = mode + unit
     cols = [energy_col, mode_col]
 
@@ -94,6 +97,11 @@ def export_data(root, item, category, mode, choice, save, error_label):
     # Convert to desired unit
     df[mode_col] *= csda_numerator[num]
     df[mode_col] /= csda_denominator[den]
+    if linear:
+        density = find_density(category, item)
+        density *= density_numerator[num]
+        density /= density_denominator[den.split("\u00B2", 1)[0] + "\u00B3"]
+        df[mode_col] /= density
 
     if choice == "Plot":
         configure_plot(df, energy_col, mode_col, item)

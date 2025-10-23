@@ -26,7 +26,7 @@ The sections and widgets are stored in export_list so they can be
 accessed later by clear_export.
 """
 def alphas_export(root, category, mode, common_el, common_mat, element,
-                  material, custom_mat):
+                  material, custom_mat, linear):
     global export_list
 
     # Makes title frame
@@ -80,7 +80,7 @@ def alphas_export(root, category, mode, common_el, common_mat, element,
                                get_item(category, common_el, common_mat,
                                         element, material, custom_mat),
                                            category, mode, var_export.get(),
-                                           var_save.get(), error_label))
+                                           var_save.get(), error_label, linear))
     export_button.config(width=get_width(["Export"]))
     export_button.pack(pady=(10,5))
 
@@ -92,7 +92,7 @@ def alphas_export(root, category, mode, common_el, common_mat, element,
     back_button = ttk.Button(root, text="Back", style="Maize.TButton", padding=(0,0),
                              command=lambda: advanced_back(root, category, mode,
                                                            common_el, common_mat, element,
-                                                           material, custom_mat))
+                                                           material, custom_mat, linear))
     back_button.config(width=get_width(["Back"]))
     back_button.pack(pady=5)
 
@@ -124,9 +124,9 @@ alpha range advanced screen.
 It is called when the Back button is hit.
 """
 def advanced_back(root, category, mode, common_el, common_mat, element,
-                  material, custom_mat):
+                  material, custom_mat, linear):
     from App.Shielding.Alphas.alphas_advanced import alphas_advanced
 
     clear_export()
     alphas_advanced(root, category, mode, common_el, common_mat, element,
-                       material, custom_mat)
+                       material, custom_mat, linear)
