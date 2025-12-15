@@ -39,7 +39,7 @@ The sections and widgets are stored in main_list so they can be
 accessed later by clear_main.
 """
 def decay_calc_main(root, category="Common Elements", mode="Activities",
-                    common_el="Ag", element="Ac", dates=False):
+                    common_el="Ag", element="Ac", isotope=None, dates=False):
     global main_list
 
     # Gets units from user prefs
@@ -226,7 +226,8 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
 
     # Retrieves isotopes for current element
     isotope_choices = get_isotopes(get_item(category, common_el, "", element, "", ""))
-    isotope = isotope_choices[0]
+    if not isotope:
+        isotope = isotope_choices[0]
 
     # Stores isotope and sets default
     var_isotope = tk.StringVar(root)
@@ -343,7 +344,8 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
     advanced_button = ttk.Button(root, text="Advanced Settings",
                                  style="Maize.TButton", padding=(0,0),
                                  command=lambda: to_advanced(root, category, mode,
-                                                             common_el, element, dates))
+                                                             common_el, element,
+                                                             isotope, dates))
     advanced_button.config(width=get_width(["Advanced Settings"]))
     advanced_button.pack(pady=5)
 
@@ -396,10 +398,10 @@ decay calculator main screen and then creating the
 decay calculator advanced screen.
 It is called when the Advanced Settings button is hit.
 """
-def to_advanced(root, category, mode, common_el, element, dates):
+def to_advanced(root, category, mode, common_el, element, isotope, dates):
     root.focus()
     from App.Decay.Calculator.decay_calc_advanced import decay_calc_advanced
 
     clear_main()
-    decay_calc_advanced(root, category, mode, common_el, element, dates)
+    decay_calc_advanced(root, category, mode, common_el, element, isotope, dates)
     scroll_to_top()

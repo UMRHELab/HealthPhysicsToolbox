@@ -32,7 +32,7 @@ The sections and widgets are stored in main_list so they can be
 accessed later by clear_main.
 """
 def decay_info_main(root, category="Common Elements", mode="Decay Scheme (Plot)",
-                    common_el="Ag", element="Ac"):
+                    common_el="Ag", element="Ac", isotope=None):
     global main_list
 
     # Makes title frame
@@ -230,7 +230,8 @@ def decay_info_main(root, category="Common Elements", mode="Decay Scheme (Plot)"
 
     # Retrieves isotopes for current element
     isotope_choices = get_isotopes(get_item(category, common_el, "", element, "", ""))
-    isotope = isotope_choices[0]
+    if not isotope:
+        isotope = isotope_choices[0]
 
     # Stores isotope and sets default
     var_isotope = tk.StringVar(root)
@@ -279,7 +280,7 @@ def decay_info_main(root, category="Common Elements", mode="Decay Scheme (Plot)"
     advanced_button = ttk.Button(root, text="Advanced Settings",
                                  style="Maize.TButton", padding=(0,0),
                                  command=lambda: to_advanced(root, category, mode,
-                                                             common_el, element))
+                                                             common_el, element, isotope))
     advanced_button.config(width=get_width(["Advanced Settings"]))
     advanced_button.pack(pady=5)
 
@@ -327,9 +328,9 @@ decay information main screen and then creating the
 decay information advanced screen.
 It is called when the Advanced Settings button is hit.
 """
-def to_advanced(root, category, mode, common_el, element):
+def to_advanced(root, category, mode, common_el, element, isotope):
     root.focus()
     from App.Decay.Information.decay_info_advanced import decay_info_advanced
 
     clear_main()
-    decay_info_advanced(root, category, mode, common_el, element)
+    decay_info_advanced(root, category, mode, common_el, element, isotope)

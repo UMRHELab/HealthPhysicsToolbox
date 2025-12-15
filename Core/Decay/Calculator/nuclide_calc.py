@@ -85,7 +85,7 @@ def nuclide_plot(isotope, initial_amount, time, dates, result_box):
         amount_unit = prefs.get("amount_unit", "Bq")
         time_unit = prefs.get("time_unit", "s")
     if dates:
-        time_unit = "s"
+        time_unit = "d"
 
     # Clears result box
     result_box.config(state="normal")

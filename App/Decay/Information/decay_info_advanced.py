@@ -19,7 +19,7 @@ advanced_list = []
 # MENU SECTION
 #####################################################################################
 
-def decay_info_advanced(root, category, mode, common_el, element):
+def decay_info_advanced(root, category, mode, common_el, element, isotope):
     global advanced_list
 
     # Gets half-life unit from user prefs
@@ -140,7 +140,8 @@ def decay_info_advanced(root, category, mode, common_el, element):
     # Creates Back button to return to decay information main screen
     back_button = ttk.Button(root, text="Back", style="Maize.TButton",
                              padding=(0,0),
-                             command=lambda: to_main(root, category, mode, common_el, element))
+                             command=lambda: to_main(root, category, mode, common_el,
+                                                     element, isotope))
     back_button.config(width=get_width(["Back"]))
     back_button.pack(pady=5)
 
@@ -173,11 +174,11 @@ decay information advanced screen and then creating the
 decay information main screen.
 It is called when the Back button is hit.
 """
-def to_main(root, category, mode, common_el, element):
+def to_main(root, category, mode, common_el, element, isotope):
     from App.Decay.Information.decay_info_main import decay_info_main
 
     clear_advanced()
-    decay_info_main(root, category, mode, common_el, element)
+    decay_info_main(root, category, mode, common_el, element, isotope)
 
 """
 This function opens the decay information References.txt file.

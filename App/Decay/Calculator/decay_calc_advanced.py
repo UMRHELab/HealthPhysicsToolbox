@@ -17,7 +17,7 @@ advanced_list = []
 # MENU SECTION
 #####################################################################################
 
-def decay_calc_advanced(root, category, mode, common_el, element, dates):
+def decay_calc_advanced(root, category, mode, common_el, element, isotope, dates):
     global advanced_list
 
     # Gets units from user prefs
@@ -231,7 +231,7 @@ def decay_calc_advanced(root, category, mode, common_el, element, dates):
     back_button = ttk.Button(root, text="Back", style="Maize.TButton",
                              padding=(0,0),
                              command=lambda: to_main(root, category, mode, common_el, element,
-                                                     dates))
+                                                     isotope, dates))
     back_button.config(width=get_width(["Back"]))
     back_button.pack(pady=5)
 
@@ -264,11 +264,11 @@ decay calculator advanced screen and then creating the
 decay calculator main screen.
 It is called when the Back button is hit.
 """
-def to_main(root, category, mode, common_el, element, dates):
+def to_main(root, category, mode, common_el, element, isotope, dates):
     from App.Decay.Calculator.decay_calc_main import decay_calc_main
 
     clear_advanced()
-    decay_calc_main(root, category, mode, common_el, element, dates)
+    decay_calc_main(root, category, mode, common_el, element, isotope, dates)
 
 """
 This function opens the decay calculator References.txt file.
