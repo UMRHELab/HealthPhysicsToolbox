@@ -117,7 +117,7 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
 
     # Logic for when an element category is selected
     def select_category(event):
-        nonlocal choices, category, common_el, element, isotope
+        nonlocal choices, category, common_el, element, isotope, nuclide_vars
 
         event.widget.selection_clear()
         previous_element = get_item(category, common_el, "", element, "", "")
@@ -141,6 +141,9 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
         var_isotope.set(isotope)
         isotope_dropdown.config(values=isotopes, width=get_width(isotopes))
 
+        # Initializes nuclide selectors
+        nuclide_vars = get_nuclide_vars(isotope)
+
         root.focus()
 
     # Frame for element category selection
@@ -159,7 +162,7 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
 
     # Logic for when enter is hit when using the element autocomplete combobox
     def on_enter(_):
-        nonlocal common_el, element, isotope
+        nonlocal common_el, element, isotope, nuclide_vars
         value = var_element.get()
 
         if value not in choices:
@@ -181,6 +184,9 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
 
         element_dropdown.selection_clear()
         element_dropdown.icursor(tk.END)
+
+        # Initializes nuclide selectors
+        nuclide_vars = get_nuclide_vars(isotope)
 
     # Logic for when an element is selected
     def on_select_element(event):
