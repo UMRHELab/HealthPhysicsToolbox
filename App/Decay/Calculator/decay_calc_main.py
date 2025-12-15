@@ -241,7 +241,7 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
 
     # Input box width
     small_entry_width = 7 if platform.system() == "Windows" else 8
-    entry_width = 20 if platform.system() == "Windows" else 22
+    entry_width = 10 if platform.system() == "Windows" else 12
 
     # Frame for details
     details_frame = SectionFrame(root, title="Input Details")
@@ -266,7 +266,7 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
         time_input.pack(pady=(1,20))
     else:
         # Format label
-        format_label = ttk.Label(inner_details_frame, text="Format: YYYY-MM-DD-HH-MM-SS",
+        format_label = ttk.Label(inner_details_frame, text="Format: YYYY-MM-DD",
                                  style="Black.TLabel")
         format_label.pack(pady=(15,1))
 

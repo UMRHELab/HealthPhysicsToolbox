@@ -8,9 +8,6 @@ from datetime import datetime
 ### ERROR MESSAGES ###
 format_error = "Error: Invalid format."
 month_error = "Error: Month must be in [1, 12]."
-hour_error = "Error: Hour must be in [0, 23]."
-minute_error = "Error: Minute must be in [0, 59]."
-second_error = "Error: Second must be in [0, 59]."
 
 """
 This function checks whether the day is valid based on the year and month.
@@ -63,28 +60,25 @@ def time_elapsed(start_date, end_date):
     end_split = end_date.split("-")
 
     # Error check for invalid format
-    if len(start_split) != 6 or len(end_split) != 6:
+    if len(start_split) != 3 or len(end_split) != 3:
         return format_error
 
     # Error check for invalid format
     if len(start_split[0]) != 4 or len(end_split[0]) != 4 or\
         len(start_split[1]) != 2 or len(end_split[1]) != 2 or\
-        len(start_split[2]) != 2 or len(end_split[2]) != 2 or\
-        len(start_split[3]) != 2 or len(end_split[3]) != 2 or\
-        len(start_split[4]) != 2 or len(end_split[4]) != 2 or\
-        len(start_split[5]) != 2 or len(end_split[5]) != 2:
+        len(start_split[2]) != 2 or len(end_split[2]) != 2:
         return format_error
 
     # Error check for non-integer date/time inputs
     try:
-        for x in range(6):
+        for x in range(3):
             start_split[x] = int(start_split[x])
             end_split[x] = int(end_split[x])
     except ValueError:
         return format_error
 
     # Error check for negative date/time inputs
-    for x in range(6):
+    for x in range(3):
         if start_split[x] < 0 or end_split[x] < 0:
             return format_error
 
@@ -101,25 +95,13 @@ def time_elapsed(start_date, end_date):
     if end_day_error:
         return end_day_error
 
-    # Error check for invalid hour
-    if start_split[3] > 23 or end_split[3] > 23:
-        return hour_error
-
-    # Error check for invalid minute
-    if start_split[4] > 59 or end_split[3] > 59:
-        return minute_error
-
-    # Error check for invalid second
-    if start_split[5] > 59 or end_split[5] > 59:
-        return second_error
-
     # Format
-    fmt = "%Y-%m-%d-%H-%M-%S"
+    fmt = "%Y-%m-%d"
 
-    # Example dates
+    # Start and end dates
     d1 = datetime.strptime(start_date, fmt)
     d2 = datetime.strptime(end_date, fmt)
 
-    # Difference in seconds
-    diff_seconds = int((d2 - d1).total_seconds())
-    return diff_seconds
+    # Difference in days
+    diff_days = (d2 - d1).days
+    return diff_days
