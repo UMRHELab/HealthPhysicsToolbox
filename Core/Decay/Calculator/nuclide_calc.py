@@ -6,6 +6,7 @@ import radioactivedecay as rd
 import matplotlib.pyplot as plt
 from Utility.Functions.gui_utility import edit_result
 from Utility.Functions.files import get_user_data_path
+from Utility.Functions.choices import get_chosen_nuclides
 
 #####################################################################################
 # CALCULATIONS SECTION
@@ -17,7 +18,8 @@ The function checks if the time already has an error.
 If not, the function decides what calculation to
 perform based on the selected calculation mode.
 """
-def handle_calculation(root, mode, isotope, initial_amount, time, dates, result_box):
+def handle_calculation(root, mode, isotope, initial_amount, time, dates,
+                       result_box, nuclide_vars):
     root.focus()
 
     # Error-check for invalid time inputs
@@ -28,15 +30,17 @@ def handle_calculation(root, mode, isotope, initial_amount, time, dates, result_
 
     match mode:
         case "Activities":
-            nuclide_activities(isotope, initial_amount, time, dates, result_box)
+            nuclide_activities(isotope, initial_amount, time, dates, result_box,
+                               nuclide_vars)
         case "Plot":
-            nuclide_plot(isotope, initial_amount, time, dates, result_box)
+            nuclide_plot(isotope, initial_amount, time, dates, result_box,
+                         nuclide_vars)
 
 """
 This function retrieves the activities
 given a particular isotope, initial amount, and time.
 """
-def nuclide_activities(isotope, initial_amount, time, dates, result_box):
+def nuclide_activities(isotope, initial_amount, time, dates, result_box, nuclide_vars):
     # Gets units from user prefs
     db_path = get_user_data_path("Settings/Decay/Calculator")
     with shelve.open(db_path) as prefs:
@@ -69,16 +73,20 @@ def nuclide_activities(isotope, initial_amount, time, dates, result_box):
     else:
         activities = t1.activities(amount_unit)
 
+    # Gets desired nuclides for plot
+    nuclides = get_chosen_nuclides(nuclide_vars)
+
     # Fills result box
     for activity in activities:
-        result_box.insert(tk.END, f"{activity}, {activities[activity]:.4g}\n")
-    result_box.config(state="disabled", height=len(activities))
+        if activity in nuclides:
+            result_box.insert(tk.END, f"{activity}, {activities[activity]:.4g}\n")
+    result_box.config(state="disabled", height=len(nuclides))
 
 """
 This function retrieves the activities plot
 given a particular isotope, initial amount, and time.
 """
-def nuclide_plot(isotope, initial_amount, time, dates, result_box):
+def nuclide_plot(isotope, initial_amount, time, dates, result_box, nuclide_vars):
     # Gets units from user prefs
     db_path = get_user_data_path("Settings/Decay/Calculator")
     with shelve.open(db_path) as prefs:
@@ -98,9 +106,12 @@ def nuclide_plot(isotope, initial_amount, time, dates, result_box):
         time = float(time)
         initial_amount = float(initial_amount)
 
+    # Gets desired nuclides for plot
+    nuclides = get_chosen_nuclides(nuclide_vars)
+
     # Retrieves plot
     t0 = rd.Inventory({isotope: initial_amount}, amount_unit)
-    t0.plot(time, time_unit, yunits=amount_unit)
+    t0.plot(time, time_unit, yunits=amount_unit, display=nuclides)
 
     # Fills result box
     result_box.insert(tk.END, "Plotted!")

@@ -3,9 +3,10 @@ import shelve
 import tkinter as tk
 from tkinter import ttk
 from App.style import SectionFrame
-from Utility.Functions.choices import get_choices
 from Utility.Functions.gui_utility import make_vertical_frame
+from Utility.Functions.gui_utility import interaction_checkbox
 from Utility.Functions.gui_utility import make_spacer, get_width
+from Utility.Functions.choices import get_choices, get_successors
 from Utility.Functions.gui_utility import make_title_frame, basic_label
 from Utility.Functions.files import resource_path, open_file, get_user_data_path
 from Utility.Functions.gui_utility import make_action_dropdown, make_unit_dropdown
@@ -17,7 +18,8 @@ advanced_list = []
 # MENU SECTION
 #####################################################################################
 
-def decay_calc_advanced(root, category, mode, common_el, element, isotope, dates):
+def decay_calc_advanced(root, category, mode, common_el, element, isotope,
+                        dates, nuclide_vars):
     global advanced_list
 
     # Gets units from user prefs
@@ -60,7 +62,7 @@ def decay_calc_advanced(root, category, mode, common_el, element, isotope, dates
 
     # Frame for action selection
     action_frame = tk.Frame(inner_a_r_frame, bg="#F2F2F2")
-    action_frame.pack(pady=(15, 5))
+    action_frame.pack(pady=(15,5))
 
     # Action label
     basic_label(action_frame, "Action:")
@@ -209,20 +211,41 @@ def decay_calc_advanced(root, category, mode, common_el, element, isotope, dates
     # Spacer
     empty_frame2 = make_spacer(root)
 
+    # Gets successors of isotope
+    successors = get_successors(isotope)
+
+    # Frame for nuclide selection settings
+    nuclides_frame = SectionFrame(root, title="Desired Nuclides for "+isotope)
+    nuclides_frame.pack()
+    inner_nuclides_frame = nuclides_frame.get_inner_frame()
+    inner_nuclides_frame.config(pady=10)
+
+    # Frame for checkboxes
+    if len(successors) != 0:
+        checks = tk.Frame(inner_nuclides_frame, bg="#F2F2F2")
+        checks.pack()
+
+        for successor in successors:
+            interaction_checkbox(checks, nuclide_vars[successor], successor,
+                                 lambda: root.focus())
+
+    # Spacer
+    empty_frame3 = make_spacer(root)
+
     # Frame for References, & Help
     bottom_frame = tk.Frame(root, bg="#F2F2F2")
     bottom_frame.pack(pady=5)
 
     # Creates References button
     references_button = ttk.Button(bottom_frame, text="References", style="Maize.TButton",
-                                   padding=(0, 0),
+                                   padding=(0,0),
                                    command=lambda: open_ref(root))
     references_button.config(width=get_width(["References"]))
     references_button.pack(side='left', padx=5)
 
     # Creates Help button
     help_button = ttk.Button(bottom_frame, text="Help", style="Maize.TButton",
-                             padding=(0, 0),
+                             padding=(0,0),
                              command=lambda: open_help(root))
     help_button.config(width=get_width(["Help"]))
     help_button.pack(side='left', padx=5)
@@ -231,7 +254,7 @@ def decay_calc_advanced(root, category, mode, common_el, element, isotope, dates
     back_button = ttk.Button(root, text="Back", style="Maize.TButton",
                              padding=(0,0),
                              command=lambda: to_main(root, category, mode, common_el, element,
-                                                     isotope, dates))
+                                                     isotope, dates, nuclide_vars))
     back_button.config(width=get_width(["Back"]))
     back_button.pack(pady=5)
 
@@ -239,6 +262,7 @@ def decay_calc_advanced(root, category, mode, common_el, element, isotope, dates
     advanced_list = [title_frame,
                      a_r_frame, empty_frame1,
                      unit_frame, empty_frame2,
+                     nuclides_frame, empty_frame3,
                      bottom_frame, back_button]
 
 #####################################################################################
@@ -264,11 +288,11 @@ decay calculator advanced screen and then creating the
 decay calculator main screen.
 It is called when the Back button is hit.
 """
-def to_main(root, category, mode, common_el, element, isotope, dates):
+def to_main(root, category, mode, common_el, element, isotope, dates, nuclide_vars):
     from App.Decay.Calculator.decay_calc_main import decay_calc_main
 
     clear_advanced()
-    decay_calc_main(root, category, mode, common_el, element, isotope, dates)
+    decay_calc_main(root, category, mode, common_el, element, isotope, dates, nuclide_vars)
 
 """
 This function opens the decay calculator References.txt file.

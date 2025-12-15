@@ -2,6 +2,8 @@
 import csv
 import json
 import shelve
+from tkinter import IntVar
+import radioactivedecay as rd
 from Utility.Functions.files import resource_path, get_user_data_path
 
 # Choices using an element or a material
@@ -89,10 +91,52 @@ def read_pt_choices(choices):
 # ISOTOPE SECTION
 #####################################################################################
 
+"""
+Gets all isotopes of an element.
+"""
 def get_isotopes(element):
     with open("Data/Radioactive Decay/Isotopes.json", "r") as f:
         isotopes = json.load(f)
     return isotopes[element]
+
+"""
+Gets all successors of an isotope in a decay chain.
+"""
+def get_successors(isotope):
+    t0 = rd.Inventory({isotope: 0})
+    t1 = t0.decay(0)
+    activities_og = t1.activities()
+    activities = []
+    for activity in activities_og:
+        activities.append(str(activity))
+    return activities
+
+"""
+Makes an IntVar for each successor of an isotope.
+"""
+def get_nuclide_vars(isotope):
+    # Gets successors of isotope
+    successors = get_successors(isotope)
+
+    # Makes an IntVar for each successor
+    nuclide_vars = {}
+    for successor in successors:
+        new_var = IntVar()
+        new_var.set(1)
+        nuclide_vars[successor] = new_var
+
+    return nuclide_vars
+
+"""
+Gets the selected nuclides from the nuclide variables.
+"""
+def get_chosen_nuclides(nuclide_vars) -> list[str]:
+    nuclides = []
+    for nuc, var in nuclide_vars.items():
+        if var.get():
+            nuclides.append(nuc)
+
+    return nuclides
 
 #####################################################################################
 # COLUMNS SECTION

@@ -9,11 +9,11 @@ from App.scroll import scroll_to_top
 from Utility.Functions.time import get_time
 from Utility.Functions.files import get_user_data_path
 from Utility.Functions.gui_utility import make_exit_button
-from Utility.Functions.choices import get_choices, get_isotopes
 from Utility.Functions.gui_utility import make_spacer, get_width
 from Utility.Functions.logic_utility import get_item, valid_saved
 from Core.Decay.Calculator.nuclide_calc import handle_calculation
 from Utility.Functions.gui_utility import basic_label, make_title_frame
+from Utility.Functions.choices import get_choices, get_isotopes, get_nuclide_vars
 from Utility.Functions.gui_utility import make_item_dropdown, make_category_dropdown
 from Utility.Functions.gui_utility import make_dropdown, result_label, make_result_box
 
@@ -39,8 +39,18 @@ The sections and widgets are stored in main_list so they can be
 accessed later by clear_main.
 """
 def decay_calc_main(root, category="Common Elements", mode="Activities",
-                    common_el="Ag", element="Ac", isotope=None, dates=False):
+                    common_el="Ag", element="Ac", isotope=None, dates=False,
+                    nuclide_vars=None):
     global main_list
+
+    # Retrieves isotopes for current element
+    isotope_choices = get_isotopes(get_item(category, common_el, "", element, "", ""))
+    if not isotope:
+        isotope = isotope_choices[0]
+
+    # Initializes nuclide selectors if necessary
+    if not nuclide_vars:
+        nuclide_vars = get_nuclide_vars(isotope)
 
     # Gets units from user prefs
     db_path = get_user_data_path("Settings/Decay/Calculator")
@@ -174,7 +184,7 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
 
     # Logic for when an element is selected
     def on_select_element(event):
-        nonlocal common_el, element, isotope
+        nonlocal common_el, element, isotope, nuclide_vars
 
         event.widget.selection_clear()
         value = var_element.get()
@@ -191,6 +201,9 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
                 common_el = value
         var_isotope.set(isotope)
         isotope_dropdown.config(values=isotopes, width=get_width(isotopes))
+
+        # Initializes nuclide selectors
+        nuclide_vars = get_nuclide_vars(isotope)
 
         root.focus()
 
@@ -211,11 +224,14 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
 
     # Logic for when an isotope is selected
     def on_select_isotope(event):
-        nonlocal isotope
+        nonlocal isotope, nuclide_vars
 
         event.widget.selection_clear()
         isotope = var_isotope.get()
         root.focus()
+
+        # Initializes nuclide selectors
+        nuclide_vars = get_nuclide_vars(isotope)
 
     # Frame for isotope selection
     isotope_frame = tk.Frame(nuclide_side_frame, bg="#F2F2F2")
@@ -223,11 +239,6 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
 
     # Isotope label
     basic_label(isotope_frame, "Isotope:")
-
-    # Retrieves isotopes for current element
-    isotope_choices = get_isotopes(get_item(category, common_el, "", element, "", ""))
-    if not isotope:
-        isotope = isotope_choices[0]
 
     # Stores isotope and sets default
     var_isotope = tk.StringVar(root)
@@ -330,7 +341,8 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
                              command=lambda: handle_calculation(root, mode, isotope,
                                                                 initial_input.get(),
             get_time(dates, time_input.get(), start_date_input.get(), end_date_input.get()),
-                                                                dates, result_box))
+                                                                dates, result_box,
+                                                                nuclide_vars))
     calc_button.config(width=get_width(["Calculate"]))
     calc_button.pack(pady=(20,5))
 
@@ -345,7 +357,7 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
                                  style="Maize.TButton", padding=(0,0),
                                  command=lambda: to_advanced(root, category, mode,
                                                              common_el, element,
-                                                             isotope, dates))
+                                                             isotope, dates, nuclide_vars))
     advanced_button.config(width=get_width(["Advanced Settings"]))
     advanced_button.pack(pady=5)
 
@@ -398,10 +410,12 @@ decay calculator main screen and then creating the
 decay calculator advanced screen.
 It is called when the Advanced Settings button is hit.
 """
-def to_advanced(root, category, mode, common_el, element, isotope, dates):
+def to_advanced(root, category, mode, common_el, element, isotope,
+                dates, nuclide_vars):
     root.focus()
     from App.Decay.Calculator.decay_calc_advanced import decay_calc_advanced
 
     clear_main()
-    decay_calc_advanced(root, category, mode, common_el, element, isotope, dates)
+    decay_calc_advanced(root, category, mode, common_el, element, isotope,
+                        dates, nuclide_vars)
     scroll_to_top()
