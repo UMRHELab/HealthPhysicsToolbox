@@ -18,6 +18,21 @@ advanced_list = []
 # MENU SECTION
 #####################################################################################
 
+"""
+This function sets up the decay calculator advanced screen.
+The following sections and widgets are created:
+   Module Title (Decay Calculator)
+   Customize Common Elements section
+   Select Units section
+   Desired Nuclides for Isotope section
+   References button
+   Help button
+   Back button
+This function contains all of the logic involving these widgets'
+behaviors.
+The sections and widgets are stored in advanced_list so they can be
+accessed later by clear_advanced.
+"""
 def decay_calc_advanced(root, category, mode, common_el, element, isotope,
                         dates, nuclide_vars):
     global advanced_list
@@ -215,13 +230,17 @@ def decay_calc_advanced(root, category, mode, common_el, element, isotope,
     successors = get_successors(isotope)
 
     # Frame for nuclide selection settings
-    nuclides_frame = SectionFrame(root, title="Desired Nuclides for "+isotope)
-    nuclides_frame.pack()
-    inner_nuclides_frame = nuclides_frame.get_inner_frame()
-    inner_nuclides_frame.config(pady=10)
+    nuclides_frame = SectionFrame(root, title="Desired Nuclides for " + isotope)
+
+    # Spacer
+    empty_frame3 = tk.Frame()
 
     # Frame for checkboxes
     if len(successors) != 0:
+        nuclides_frame.pack()
+        inner_nuclides_frame = nuclides_frame.get_inner_frame()
+        inner_nuclides_frame.config(pady=10)
+
         checks = tk.Frame(inner_nuclides_frame, bg="#F2F2F2")
         checks.pack()
 
@@ -229,8 +248,8 @@ def decay_calc_advanced(root, category, mode, common_el, element, isotope,
             interaction_checkbox(checks, nuclide_vars[successor], successor,
                                  lambda: root.focus())
 
-    # Spacer
-    empty_frame3 = make_spacer(root)
+        # Spacer
+        empty_frame3 = make_spacer(root)
 
     # Frame for References, & Help
     bottom_frame = tk.Frame(root, bg="#F2F2F2")

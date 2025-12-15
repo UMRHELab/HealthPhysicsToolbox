@@ -18,6 +18,20 @@ main_list = []
 # MENU SECTION
 #####################################################################################
 
+"""
+This function sets up the general isotope main screen.
+The following sections and widgets are created:
+   Module Title (Isotope Information)
+   Select Calculation Mode section
+   Select Isotope section
+   Result section (title dependent on Calculation Mode)
+   Advanced Settings button
+   Exit button
+This function contains all of the logic involving these widgets'
+behaviors.
+The sections and widgets are stored in main_list so they can be
+accessed later by clear_main.
+"""
 def isotopes_main(root, category="Common Elements", mode="Proton Number",
                   common_el="Ag", element="Ac"):
     global main_list

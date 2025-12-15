@@ -1,6 +1,7 @@
 ##### IMPORTS #####
 import csv
 import json
+import math
 import shelve
 from tkinter import IntVar
 import radioactivedecay as rd
@@ -103,6 +104,8 @@ def get_isotopes(element):
 Gets all successors of an isotope in a decay chain.
 """
 def get_successors(isotope):
+    if math.isinf(rd.Nuclide(isotope).half_life()):
+        return []
     t0 = rd.Inventory({isotope: 0})
     t1 = t0.decay(0)
     activities_og = t1.activities()

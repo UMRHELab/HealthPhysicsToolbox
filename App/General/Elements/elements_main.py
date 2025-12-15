@@ -18,6 +18,20 @@ main_list = []
 # MENU SECTION
 #####################################################################################
 
+"""
+This function sets up the general element main screen.
+The following sections and widgets are created:
+   Module Title (Element Information)
+   Select Calculation Mode section
+   Select Element section
+   Result section (title dependent on Calculation Mode)
+   Advanced Settings button
+   Exit button
+This function contains all of the logic involving these widgets'
+behaviors.
+The sections and widgets are stored in main_list so they can be
+accessed later by clear_main.
+"""
 def elements_main(root, category="Common Elements", mode="Atomic Number",
                   common_el="Ag", element="Ac"):
     global main_list

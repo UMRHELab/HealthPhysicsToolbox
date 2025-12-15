@@ -19,6 +19,20 @@ advanced_list = []
 # MENU SECTION
 #####################################################################################
 
+"""
+This function sets up the decay information advanced screen.
+The following sections and widgets are created:
+   Module Title (Decay Information)
+   Customize Common Elements section
+   Select Units section
+   References button
+   Help button
+   Back button
+This function contains all of the logic involving these widgets'
+behaviors.
+The sections and widgets are stored in advanced_list so they can be
+accessed later by clear_advanced.
+"""
 def decay_info_advanced(root, category, mode, common_el, element, isotope):
     global advanced_list
 
