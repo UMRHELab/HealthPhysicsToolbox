@@ -37,6 +37,17 @@ def configure_style():
                           "bold"))
     style.map("Maize.TCheckbutton",
               background=[('active', "#F2F2F2")])
+    style.map(
+        "Maize.TCheckbutton",
+        indicatorbackground=[
+            ("alternate", "white"),
+            ("!selected", "white"),
+            ("selected", "white"),
+        ],
+        indicatorforeground=[
+            ("alternate", "black"),
+        ]
+    )
     style.configure("White.TLabel",
                     background="#00274C",
                     foreground="white",

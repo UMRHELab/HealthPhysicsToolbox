@@ -87,6 +87,25 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
         nonlocal mode
         event.widget.selection_clear()
 
+        if event.widget.get() != "Plot" \
+                and mode == "Plot":
+            # Gets rid of save file option when switching off of decay scheme plot mode
+            save.pack_forget()
+        elif mode != "Plot" \
+                and event.widget.get() == "Plot":
+            # Reset in preparation to re-add results section in correct place
+            calc_button.pack_forget()
+            result.pack_forget()
+            result_box.pack_forget()
+
+            # Creates save file option when switching to decay scheme plot mode
+            save.pack(pady=(20,0))
+
+            # Re-adds everything below save file option section
+            calc_button.pack(pady=(20,5))
+            result.pack(pady=(5,1))
+            result_box.pack(pady=(1,20))
+
         # Update mode variable and fixes result section title
         mode = var_mode.get()
         result_frame.change_title(mode)
@@ -148,7 +167,7 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
 
     # Frame for element category selection
     category_frame = tk.Frame(inner_nuclide_frame, bg="#F2F2F2")
-    category_frame.pack(pady=(15, 5))
+    category_frame.pack(pady=(15,5))
 
     # Category label
     basic_label(category_frame, "Category:")
@@ -341,6 +360,19 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
     result_frame.pack()
     inner_result_frame = result_frame.get_inner_frame()
 
+    # Stores whether file is saved and sets default
+    var_save = tk.IntVar()
+    var_save.set(0)
+
+    # Creates checkbox for saving file
+    save = ttk.Checkbutton(inner_result_frame, text="Save Plot", variable=var_save,
+                           style="Maize.TCheckbutton", command=lambda: root.focus())
+
+    # If we are in plot mode we create the option
+    # to save or not save the plot
+    if mode == "Plot":
+        save.pack(pady=(20,0))
+
     # Creates Calculate button
     calc_button = ttk.Button(inner_result_frame, text="Calculate",
                              style="Maize.TButton", padding=(0,0),
@@ -348,12 +380,13 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
                                                                 initial_input.get(),
             get_time(dates, time_input.get(), start_date_input.get(), end_date_input.get()),
                                                                 dates, result_box,
-                                                                nuclide_vars))
+                                                                nuclide_vars,
+                                                                var_save.get()))
     calc_button.config(width=get_width(["Calculate"]))
     calc_button.pack(pady=(20,5))
 
     # Result label
-    result_label(inner_result_frame)
+    result = result_label(inner_result_frame)
 
     # Displays the result of calculation
     result_box = make_result_box(inner_result_frame)

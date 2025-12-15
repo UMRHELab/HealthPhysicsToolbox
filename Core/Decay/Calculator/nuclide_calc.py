@@ -4,6 +4,7 @@ import shelve
 import tkinter as tk
 import radioactivedecay as rd
 import matplotlib.pyplot as plt
+from Utility.Functions.files import save_file
 from Utility.Functions.gui_utility import edit_result
 from Utility.Functions.files import get_user_data_path
 from Utility.Functions.choices import get_chosen_nuclides
@@ -19,7 +20,7 @@ If not, the function decides what calculation to
 perform based on the selected calculation mode.
 """
 def handle_calculation(root, mode, isotope, initial_amount, time, dates,
-                       result_box, nuclide_vars):
+                       result_box, nuclide_vars, save):
     root.focus()
 
     # Error-check for invalid time inputs
@@ -34,7 +35,7 @@ def handle_calculation(root, mode, isotope, initial_amount, time, dates,
                                nuclide_vars)
         case "Plot":
             nuclide_plot(isotope, initial_amount, time, dates, result_box,
-                         nuclide_vars)
+                         nuclide_vars, save)
 
 """
 This function retrieves the activities
@@ -86,7 +87,8 @@ def nuclide_activities(isotope, initial_amount, time, dates, result_box, nuclide
 This function retrieves the activities plot
 given a particular isotope, initial amount, and time.
 """
-def nuclide_plot(isotope, initial_amount, time, dates, result_box, nuclide_vars):
+def nuclide_plot(isotope, initial_amount, time, dates, result_box,
+                 nuclide_vars, save):
     # Gets units from user prefs
     db_path = get_user_data_path("Settings/Decay/Calculator")
     with shelve.open(db_path) as prefs:
@@ -111,15 +113,21 @@ def nuclide_plot(isotope, initial_amount, time, dates, result_box, nuclide_vars)
 
     # Retrieves plot
     t0 = rd.Inventory({isotope: initial_amount}, amount_unit)
-    t0.plot(time, time_unit, yunits=amount_unit, display=nuclides)
+    fig, ax = t0.plot(time, time_unit, yunits=amount_unit, display=nuclides)
 
     # Fills result box
     result_box.insert(tk.END, "Plotted!")
     result_box.config(state="disabled", height=1)
 
-    # Shows plot
+    # Titles plot
     plt.title(isotope, fontsize=12)
-    plt.show()
+
+    if not save:
+        # Shows plot
+        plt.show()
+    else:
+        # Saves plot
+        save_file(fig, "Plot", result_box, isotope, "decay", True)
 
 """
 This function handles the error-checking for activities.
