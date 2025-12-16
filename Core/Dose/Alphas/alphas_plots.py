@@ -7,10 +7,11 @@ import matplotlib.pyplot as plt
 from Utility.Functions.logic_utility import get_unit
 from Utility.Functions.gui_utility import no_selection
 from Core.Dose.Alphas.alphas_calculations import sp_denominator
-from Utility.Functions.math_utility import find_data, energy_units
 from Utility.Functions.choices import element_choices, material_choices
 from Core.Dose.Alphas.alphas_calculations import sp_e_numerator, sp_l_numerator
 from Utility.Functions.files import save_file, resource_path, get_user_data_path
+from Utility.Functions.math_utility import find_data, find_density, energy_units
+from Utility.Functions.math_utility import density_numerator, density_denominator
 
 #####################################################################################
 # EXPORT SECTION
@@ -35,7 +36,8 @@ configure_plot.
 Finally, if the file is meant to be saved, we pass on the
 work to the save_file function. Otherwise, we show the plot.
 """
-def export_data(root, item, category, mode, interactions, choice, save, error_label):
+def export_data(root, item, category, mode, interactions, choice, save,
+                error_label, linear):
     root.focus()
 
     # Gets units from user prefs
@@ -106,12 +108,20 @@ def export_data(root, item, category, mode, interactions, choice, save, error_la
     df[energy_col] /= energy_units[energy_unit]
 
     # Convert to desired unit
+    density_mult = 1
+    if linear:
+        density_mult = find_density(category, item)
+        density_mult *= density_numerator[den]
+        density_mult /= density_denominator[num_l.split("\u00B2", 1)[0] + "\u00B3"]
     for interaction in interactions:
         df[interaction] *= sp_e_numerator[num_e]
         df[interaction] *= sp_l_numerator[num_l]
         df[interaction] /= sp_denominator[den]
+        df[interaction] *= density_mult
 
     unit = " (" + num + "/" + den + ")"
+    if linear:
+        unit = " (" + num_e + "/" + num_l.split("\u00B2", 1)[0] + ")"
     mode_col = mode + unit
 
     if choice == "Plot":

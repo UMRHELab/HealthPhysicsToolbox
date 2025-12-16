@@ -28,7 +28,7 @@ The sections and widgets are stored in export_list so they can be
 accessed later by clear_export.
 """
 def electrons_export(root, category, mode, interactions, common_el, common_mat,
-                     element, material, custom_mat):
+                     element, material, custom_mat, linear):
     global export_list
 
     # Makes title frame
@@ -122,7 +122,8 @@ def electrons_export(root, category, mode, interactions, common_el, common_mat,
                                         element, material, custom_mat),
                                            category, mode,
                                get_interactions(interaction_choices, interaction_vars),
-                                           var_export.get(), var_save.get(), error_label))
+                                           var_export.get(), var_save.get(), error_label,
+                                           linear))
     export_button.config(width=get_width(["Export"]))
     export_button.pack(pady=(10,5))
 
@@ -134,7 +135,7 @@ def electrons_export(root, category, mode, interactions, common_el, common_mat,
     back_button = ttk.Button(root, text="Back", style="Maize.TButton", padding=(0,0),
                              command=lambda: advanced_back(root, category, mode, interactions,
                                                            common_el, common_mat, element,
-                                                           material, custom_mat))
+                                                           material, custom_mat, linear))
     back_button.config(width=get_width(["Back"]))
     back_button.pack(pady=5)
 
@@ -167,9 +168,9 @@ electron stopping power advanced screen.
 It is called when the Back button is hit.
 """
 def advanced_back(root, category, mode, interactions, common_el, common_mat,
-                  element, material, custom_mat):
+                  element, material, custom_mat, linear):
     from App.Dose.Electrons.electrons_advanced import electrons_advanced
 
     clear_export()
     electrons_advanced(root, category, mode, interactions, common_el, common_mat,
-                       element, material, custom_mat)
+                       element, material, custom_mat, linear)

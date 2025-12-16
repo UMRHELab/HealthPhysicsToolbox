@@ -41,7 +41,7 @@ The sections and widgets are stored in advanced_list so they can be
 accessed later by clear_advanced.
 """
 def alphas_advanced(root, category, mode, interactions, common_el,
-                    common_mat, element, material, custom_mat):
+                    common_mat, element, material, custom_mat, linear):
     global advanced_list
 
     # Gets units from user prefs
@@ -103,7 +103,7 @@ def alphas_advanced(root, category, mode, interactions, common_el,
         to_custom = lambda: to_custom_menu(root, category, mode,
                             get_interactions(interaction_choices, interaction_vars),
                                            common_el, common_mat,
-                                           element, material, custom_mat)
+                                           element, material, custom_mat, linear)
         return make_vertical_frame(root, inner_a_r_frame, var_action.get(),
                                    var_customize_category.get(), non_common, common,
                                    non_common_m, common_m, custom, a_r_button,
@@ -338,7 +338,8 @@ def alphas_advanced(root, category, mode, interactions, common_el,
                                    to_export_menu(root, category, mode,
                             get_interactions(interaction_choices, interaction_vars),
                                                   common_el, common_mat,
-                                                  element, material, custom_mat))
+                                                  element, material, custom_mat,
+                                                  linear))
         export_button.config(width=get_width(["Export Menu"]))
         export_button.pack(side='left', padx=5)
 
@@ -362,7 +363,8 @@ def alphas_advanced(root, category, mode, interactions, common_el,
                              command=lambda: to_main(root, category, mode,
                              get_interactions(interaction_choices, interaction_vars),
                                                      common_el, common_mat,
-                                                     element, material, custom_mat))
+                                                     element, material, custom_mat,
+                                                     linear))
     back_button.config(width=get_width(["Back"]))
     back_button.pack(pady=5)
 
@@ -397,12 +399,12 @@ alpha stopping power main screen.
 It is called when the Back button is hit.
 """
 def to_main(root, category, mode, interactions, common_el, common_mat,
-            element, material, custom_mat):
+            element, material, custom_mat, linear):
     from App.Dose.Alphas.alphas_main import alphas_main
 
     clear_advanced()
     alphas_main(root, category, mode, interactions, common_el, common_mat,
-                element, material, custom_mat)
+                element, material, custom_mat, linear)
 
 """
 This function transitions from the alpha stopping power advanced screen
@@ -412,10 +414,10 @@ add custom materials menu.
 It is called when the Add Custom Materials button is hit.
 """
 def to_custom_menu(root, category, mode, interactions, common_el, common_mat,
-                   element, material, custom_mat):
+                   element, material, custom_mat, linear):
     clear_advanced()
     back = lambda: alphas_advanced(root, category, mode, interactions, common_el,
-                                   common_mat, element, material, custom_mat)
+                                   common_mat, element, material, custom_mat, linear)
 
     # Gets density units from user prefs
     db_path = get_user_data_path("Settings/Dose/Alphas")
@@ -433,10 +435,10 @@ alpha stopping power export screen.
 It is called when the Export Menu button is hit.
 """
 def to_export_menu(root, category, mode, interactions, common_el, common_mat,
-                   element, material, custom_mat):
+                   element, material, custom_mat, linear):
     clear_advanced()
     alphas_export(root, category, mode, interactions, common_el, common_mat,
-                  element, material, custom_mat)
+                  element, material, custom_mat, linear)
 
 """
 This function opens the alpha stopping power References.txt file.

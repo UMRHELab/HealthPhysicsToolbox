@@ -35,7 +35,7 @@ the result is converted to the desired units, and then
 displayed in the result label.
 """
 def handle_calculation(root, category, mode, interactions, item,
-                       energy_str, result_box):
+                       energy_str, result_box, range_result):
     root.focus()
 
     # Gets units from user prefs
@@ -88,10 +88,13 @@ def handle_calculation(root, category, mode, interactions, item,
                 result = datum
                 break
             result += datum
+        result2 = find_density(category, item)
     elif mode == "Density":
         result = find_density(category, item)
-    elif mode == "Radiation Yield" or mode == "Density Effect Delta":
+        result2 = 0
+    else:
         result = find_data(category, mode, item, energy_target, "Electrons")
+        result2 = 0
 
     # Displays result label
     if not result in errors:
@@ -100,6 +103,10 @@ def handle_calculation(root, category, mode, interactions, item,
             result *= sp_e_numerator[num_e]
             result *= sp_l_numerator[num_l]
             result /= sp_denominator[den]
+            result2 *= density_numerator[den]
+            lin_den = num_l.split("\u00B2", 1)[0]
+            result2 /= density_denominator[lin_den + "\u00B3"]
+            edit_result(f"{(result*result2):.4g} {num_e}/{lin_den}", range_result)
         elif mode == "Density":
             result *= density_numerator[num]
             result /= density_denominator[den]

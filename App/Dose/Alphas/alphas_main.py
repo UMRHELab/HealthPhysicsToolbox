@@ -41,7 +41,7 @@ def alphas_main(root, category="Common Elements",
                 mode="Mass Stopping Power", interactions=None, common_el="Ag",
                 common_mat="Air (dry, near sea level)", element="Ac",
                 material="A-150 Tissue-Equivalent Plastic (A150TEP)",
-                custom_mat=""):
+                custom_mat="", linear=False):
     global main_list
 
     # Gets energy unit from user prefs
@@ -86,6 +86,25 @@ def alphas_main(root, category="Common Elements",
         nonlocal mode, empty_frame3
         event.widget.selection_clear()
 
+        if event.widget.get() != "Mass Stopping Power" \
+                and mode == "Mass Stopping Power":
+            # Gets rid of result label when switching off Mass Stopping Power mode
+            range_label.pack_forget()
+            range_result.pack_forget()
+            range_check.pack_forget()
+            mode_dropdown.pack(pady=20)
+        elif mode != "Mass Stopping Power" \
+             and event.widget.get() == "Mass Stopping Power":
+            # Creates range label
+            mode_dropdown.pack(pady=(20,10))
+            range_check.pack(pady=(0,20))
+            var_range.set(linear)
+
+            if linear:
+                # Adds range box
+                range_label.pack(pady=(5,1))
+                range_result.pack(pady=(1,20))
+
         if event.widget.get() == "Density" \
                 and mode != "Density":
             # Gets rid of input energy section when switching to density mode
@@ -123,12 +142,47 @@ def alphas_main(root, category="Common Elements",
         result_box.delete("1.0", tk.END)
         result_box.config(state="disabled")
 
+        # Clear range label
+        range_result.config(state="normal")
+        range_result.delete("1.0", tk.END)
+        range_result.config(state="disabled")
+
         root.focus()
 
     # Creates dropdown menu for mode
     mode_choices = ["Mass Stopping Power",
                     "Density"]
-    _ = make_dropdown(inner_mode_frame, var_mode, mode_choices, select_mode, pady=20)
+    mode_dropdown = make_dropdown(inner_mode_frame, var_mode, mode_choices, select_mode,
+                                  pady=20)
+
+    # Stores whether to find linear stopping power for Mass Stopping Power mode
+    var_range = tk.IntVar()
+    var_range.set(int(linear))
+
+    def range_hit():
+        nonlocal linear
+
+        root.focus()
+        if var_range.get() == 1:
+            # Adds range box
+            range_label.pack(pady=(5, 1))
+            range_result.pack(pady=(1, 20))
+        else:
+            # Forgets range box
+            range_label.pack_forget()
+            range_result.pack_forget()
+
+        linear = bool(var_range.get())
+
+    # Creates checkbox for finding range
+    range_check = ttk.Checkbutton(inner_mode_frame, text="Find Linear Stopping Power?",
+                                  variable=var_range, style="Maize.TCheckbutton",
+                                  command=lambda: range_hit())
+
+    if mode == "Mass Stopping Power":
+        # Displays the range option
+        mode_dropdown.pack(pady=(20,10))
+        range_check.pack(pady=(0,20))
 
     # Spacer
     empty_frame1 = make_spacer(root)
@@ -243,7 +297,7 @@ def alphas_main(root, category="Common Elements",
                              command=lambda: handle_calculation(root, category,
                                                                 mode, interactions, var.get(),
                                                                 energy_entry.get(),
-                                                                result_box))
+                                                                result_box, range_result))
     calc_button.config(width=get_width(["Calculate"]))
     calc_button.pack(pady=(20,5))
 
@@ -253,13 +307,26 @@ def alphas_main(root, category="Common Elements",
     # Displays the result of calculation
     result_box = make_result_box(inner_result_frame)
 
+    # Creates range result box
+    range_label = ttk.Label(inner_result_frame, text="Linear Stopping Power:",
+                            style="Black.TLabel")
+    range_result = tk.Text(inner_result_frame, height=1, borderwidth=3, bd=3,
+                           highlightthickness=0, relief='solid')
+    range_result.config(bg='white', fg='black', state="disabled", width=entry_width,
+                        font=monospace_font)
+
+    if mode == "Mass Stopping Power" and linear:
+        # Adds range box
+        range_label.pack(pady=(5,1))
+        range_result.pack(pady=(1,20))
+
     # Creates Advanced Settings button
     advanced_button = ttk.Button(root, text="Advanced Settings",
                                  style="Maize.TButton", padding=(0,0),
                                  command=lambda: to_advanced(root, category,
                                                              mode, interactions, common_el,
                                                              common_mat, element, material,
-                                                             custom_mat))
+                                                             custom_mat, linear))
     advanced_button.config(width=get_width(["Advanced Settings"]))
     advanced_button.pack(pady=5)
 
@@ -309,10 +376,10 @@ alpha stopping power advanced screen.
 It is called when the Advanced Settings button is hit.
 """
 def to_advanced(root, category, mode, interactions, common_el,
-                common_mat, element, material, custom_mat):
+                common_mat, element, material, custom_mat, linear):
     root.focus()
     from App.Dose.Alphas.alphas_advanced import alphas_advanced
 
     clear_main()
     alphas_advanced(root, category, mode, interactions, common_el,
-                    common_mat, element, material, custom_mat)
+                    common_mat, element, material, custom_mat, linear)
