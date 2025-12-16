@@ -52,13 +52,13 @@ def export_data(root, item, category, mode, interactions, choice, save, error_la
     num_e_units = [sp_e_num, "", "", d_num]
     num_l_units = [sp_l_num, "", "", d_num]
     den_units = [sp_den, "", "", d_den]
-    mode_choices = ["Stopping Power",
+    mode_choices = ["Mass Stopping Power",
                     "Radiation Yield",
                     "Density Effect Delta",
                     "Density"]
     num_e = get_unit(num_e_units, mode_choices, mode)
     num_l = get_unit(num_l_units, mode_choices, mode)
-    num = num_e + " * " + num_l if mode == "Stopping Power" else num_e
+    num = num_e + " * " + num_l if mode == "Mass Stopping Power" else num_e
     den = get_unit(den_units, mode_choices, mode)
 
     # Error-check for no selected item
@@ -67,7 +67,7 @@ def export_data(root, item, category, mode, interactions, choice, save, error_la
         return
 
     # Error-check for no interactions selected
-    if mode == "Stopping Power" and len(interactions) == 0:
+    if mode == "Mass Stopping Power" and len(interactions) == 0:
         error_label.config(style="Error.TLabel", text="Error: No interactions selected.")
         return
 
@@ -76,7 +76,7 @@ def export_data(root, item, category, mode, interactions, choice, save, error_la
     # Sets up columns for dataframe
     energy_col = "Electron Energy (" + energy_unit + ")"
     cols = [energy_col]
-    if mode == "Stopping Power":
+    if mode == "Mass Stopping Power":
         for interaction in interactions:
             cols.append(interaction)
     else:
@@ -90,7 +90,7 @@ def export_data(root, item, category, mode, interactions, choice, save, error_la
 
         df[energy_col] = df2["Kinetic Energy"]
 
-        if mode == "Stopping Power":
+        if mode == "Mass Stopping Power":
             for interaction in interactions:
                 df[interaction] = df2[interaction]
         else:
@@ -114,7 +114,7 @@ def export_data(root, item, category, mode, interactions, choice, save, error_la
     df[energy_col] /= energy_units[energy_unit]
 
     # Convert to desired unit
-    if mode == "Stopping Power":
+    if mode == "Mass Stopping Power":
         for interaction in interactions:
             df[interaction] *= sp_e_numerator[num_e]
             df[interaction] *= sp_l_numerator[num_l]
@@ -122,7 +122,7 @@ def export_data(root, item, category, mode, interactions, choice, save, error_la
 
     unit = " (" + num + "/" + den + ")"
     mode_col = mode
-    if mode == "Stopping Power":
+    if mode == "Mass Stopping Power":
         mode_col += unit
 
     if choice == "Plot":
@@ -133,7 +133,7 @@ def export_data(root, item, category, mode, interactions, choice, save, error_la
             error_label.config(style="Success.TLabel", text=choice + " exported!")
             plt.show()
     else:
-        if mode == "Stopping Power":
+        if mode == "Mass Stopping Power":
             for interaction in interactions:
                 df.rename(columns={interaction: interaction+unit}, inplace=True)
         save_file(df, choice, error_label, item, "stopping")
@@ -147,7 +147,7 @@ This function configures the plot that is being exported
 using the dataframe and other information.
 First, the plot is cleared from any previous exports.
 Then, we plot each interaction column against the data column.
-The title and axis titles are all configured
+The title, legend, and axis titles are all configured
 and the axis scales are set to logarithmic.
 """
 def configure_plot(interactions, df, energy_col, mode_col, item):
@@ -155,7 +155,7 @@ def configure_plot(interactions, df, energy_col, mode_col, item):
     plt.clf()
 
     # Plot the data
-    if mode_col.split(" ", 1)[0] == "Stopping":
+    if mode_col.split(" ", 2)[1] == "Stopping":
         for interaction in interactions:
             plt.plot(df[energy_col], df[interaction], marker='o', label=interaction)
     else:
@@ -163,6 +163,7 @@ def configure_plot(interactions, df, energy_col, mode_col, item):
     plt.title(item + " - " + mode_col, fontsize=8.5)
     plt.xscale('log')
     plt.yscale('log')
+    plt.legend()
     if mode_col.split(" ", 1)[0] == "Stopping":
         plt.legend()
     plt.xlabel(energy_col)
@@ -217,7 +218,7 @@ def make_df_for_material(file_like, df, material, category, mode, interactions):
     # Finds the data for mode at each energy value and adds to dataframe
     for index, val in enumerate(vals):
         row = [val]
-        if mode == "Stopping Power":
+        if mode == "Mass Stopping Power":
             for interaction in interactions:
                 x = find_data(category, interaction, material, val, "Electrons")
                 row.append(x)

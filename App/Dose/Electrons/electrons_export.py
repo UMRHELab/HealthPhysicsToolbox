@@ -51,7 +51,7 @@ def electrons_export(root, category, mode, interactions, common_el, common_mat,
     var2 = tk.IntVar()
     interaction_vars = [var0, var1, var2]
 
-    if mode == "Stopping Power":
+    if mode == "Mass Stopping Power":
         # Frame for interactions
         interactions_frame = SectionFrame(root, title="Select Interaction Types")
         interactions_frame.pack()

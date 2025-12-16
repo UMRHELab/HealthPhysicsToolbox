@@ -38,7 +38,7 @@ The sections and widgets are stored in main_list so they can be
 accessed later by clear_main.
 """
 def electrons_main(root, category="Common Elements",
-                   mode="Stopping Power", interactions=None, common_el="Ag",
+                   mode="Mass Stopping Power", interactions=None, common_el="Ag",
                    common_mat="Air (dry, near sea level)", element="Ac",
                    material="A-150 Tissue-Equivalent Plastic (A150TEP)",
                    custom_mat=""):
@@ -50,7 +50,7 @@ def electrons_main(root, category="Common Elements",
         energy_unit = prefs.get("energy_unit", "MeV")
 
     # Sets default interaction - Stopping Power - Total
-    if mode == "Stopping Power" and (interactions is None or not interactions):
+    if mode == "Mass Stopping Power" and (interactions is None or not interactions):
         interactions = ["Stopping Power - Total"]
 
     # Makes title frame
@@ -126,7 +126,7 @@ def electrons_main(root, category="Common Elements",
         root.focus()
 
     # Creates dropdown menu for mode
-    mode_choices = ["Stopping Power",
+    mode_choices = ["Mass Stopping Power",
                     "Radiation Yield",
                     "Density Effect Delta",
                     "Density"]

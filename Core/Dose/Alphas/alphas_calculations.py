@@ -52,11 +52,11 @@ def handle_calculation(root, category, mode, interactions, item,
     num_e_units = [sp_e_num, d_num]
     num_l_units = [sp_l_num, d_num]
     den_units = [sp_den, d_den]
-    mode_choices = ["Stopping Power",
+    mode_choices = ["Mass Stopping Power",
                     "Density"]
     num_e = get_unit(num_e_units, mode_choices, mode)
     num_l = get_unit(num_l_units, mode_choices, mode)
-    num = num_e + " * " + num_l if mode == "Stopping Power" else num_e
+    num = num_e + " * " + num_l if mode == "Mass Stopping Power" else num_e
     den = get_unit(den_units, mode_choices, mode)
 
     # Error-check for no selected item
@@ -92,7 +92,7 @@ def handle_calculation(root, category, mode, interactions, item,
     # Displays result label
     if not result in errors:
         # Converts result to desired units
-        if mode == "Stopping Power":
+        if mode == "Mass Stopping Power":
             result *= sp_e_numerator[num_e]
             result *= sp_l_numerator[num_l]
             result /= sp_denominator[den]

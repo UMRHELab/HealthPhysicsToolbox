@@ -52,11 +52,11 @@ def export_data(root, item, category, mode, interactions, choice, save, error_la
     num_e_units = [sp_e_num, d_num]
     num_l_units = [sp_l_num, d_num]
     den_units = [sp_den, d_den]
-    mode_choices = ["Stopping Power",
+    mode_choices = ["Mass Stopping Power",
                     "Density"]
     num_e = get_unit(num_e_units, mode_choices, mode)
     num_l = get_unit(num_l_units, mode_choices, mode)
-    num = num_e + " * " + num_l if mode == "Stopping Power" else num_e
+    num = num_e + " * " + num_l if mode == "Mass Stopping Power" else num_e
     den = get_unit(den_units, mode_choices, mode)
 
     # Error-check for no selected item
@@ -135,7 +135,7 @@ This function configures the plot that is being exported
 using the dataframe and other information.
 First, the plot is cleared from any previous exports.
 Then, we plot each interaction column against the data column.
-The title and axis titles are all configured
+The title, legend, and axis titles are all configured
 and the axis scales are set to logarithmic.
 """
 def configure_plot(interactions, df, energy_col, mode_col, item):

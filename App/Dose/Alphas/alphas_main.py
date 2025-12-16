@@ -38,7 +38,7 @@ The sections and widgets are stored in main_list so they can be
 accessed later by clear_main.
 """
 def alphas_main(root, category="Common Elements",
-                mode="Stopping Power", interactions=None, common_el="Ag",
+                mode="Mass Stopping Power", interactions=None, common_el="Ag",
                 common_mat="Air (dry, near sea level)", element="Ac",
                 material="A-150 Tissue-Equivalent Plastic (A150TEP)",
                 custom_mat=""):
@@ -50,7 +50,7 @@ def alphas_main(root, category="Common Elements",
         energy_unit = prefs.get("energy_unit", "MeV")
 
     # Sets default interaction - Total Stopping Power
-    if mode == "Stopping Power" and (interactions is None or not interactions):
+    if mode == "Mass Stopping Power" and (interactions is None or not interactions):
         interactions = ["Total Stopping Power"]
 
     # Makes title frame
@@ -126,7 +126,7 @@ def alphas_main(root, category="Common Elements",
         root.focus()
 
     # Creates dropdown menu for mode
-    mode_choices = ["Stopping Power",
+    mode_choices = ["Mass Stopping Power",
                     "Density"]
     _ = make_dropdown(inner_mode_frame, var_mode, mode_choices, select_mode, pady=20)
 

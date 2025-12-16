@@ -190,8 +190,8 @@ def alphas_advanced(root, category, mode, interactions, common_el,
             set_default()
 
     # Select Interaction Types section is only created if
-    # Calculation Mode is Stopping Power
-    if mode == "Stopping Power":
+    # Calculation Mode is Mass Stopping Power
+    if mode == "Mass Stopping Power":
         interactions_frame.pack()
 
         checks = tk.Frame(inner_interactions_frame, bg="#F2F2F2")
@@ -218,7 +218,8 @@ def alphas_advanced(root, category, mode, interactions, common_el,
     unit_side_frame.pack(pady=(20,0) if mode != "Density" else 20)
 
     # Units label
-    unit_label = ttk.Label(unit_side_frame, text=mode + " Units:", style="Black.TLabel")
+    mode_text = mode[5:] if mode == "Mass Stopping Power" else mode
+    unit_label = ttk.Label(unit_side_frame, text=mode_text+" Units:", style="Black.TLabel")
     unit_label.pack(side='left', padx=5)
 
     # Logic for when a numerator unit is selected
@@ -227,7 +228,7 @@ def alphas_advanced(root, category, mode, interactions, common_el,
         root.focus()
         selection = event.widget.get()
         with shelve.open(db_path) as shelve_prefs:
-            if mode == "Stopping Power":
+            if mode == "Mass Stopping Power":
                 shelve_prefs["sp_e_num"] = selection
             elif mode == "Density":
                 shelve_prefs["d_num"] = selection
@@ -238,7 +239,7 @@ def alphas_advanced(root, category, mode, interactions, common_el,
         root.focus()
         selection = event.widget.get()
         with shelve.open(db_path) as shelve_prefs:
-            if mode == "Stopping Power":
+            if mode == "Mass Stopping Power":
                 shelve_prefs["sp_l_num"] = selection
             elif mode == "Density":
                 shelve_prefs["d_num"] = selection
@@ -249,13 +250,13 @@ def alphas_advanced(root, category, mode, interactions, common_el,
         root.focus()
         selection = event.widget.get()
         with shelve.open(db_path) as shelve_prefs:
-            if mode == "Stopping Power":
+            if mode == "Mass Stopping Power":
                 shelve_prefs["sp_den"] = selection
             elif mode == "Density":
                 shelve_prefs["d_den"] = selection
 
     # Mode choices
-    mode_choices = ["Stopping Power",
+    mode_choices = ["Mass Stopping Power",
                     "Density"]
 
     # Possible unit choices
@@ -271,7 +272,7 @@ def alphas_advanced(root, category, mode, interactions, common_el,
     numerator_e_choices = list(get_unit(num_e_choices, mode_choices, mode).keys())
     _ = make_unit_dropdown(unit_side_frame, var_numerator_e, numerator_e_choices, on_select_e_num)
 
-    if mode == "Stopping Power":
+    if mode == "Mass Stopping Power":
         # * label
         slash_label = ttk.Label(unit_side_frame, text="*", style="Black.TLabel")
         slash_label.pack(side='left')
