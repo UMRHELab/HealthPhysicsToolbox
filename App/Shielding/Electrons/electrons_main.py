@@ -81,9 +81,6 @@ def electrons_main(root, category="Common Elements",
     def add_main_frame():
         nonlocal empty_frame2, empty_frame3
 
-        # Fixes mode dropdown padding
-        mode_dropdown.pack(pady=20)
-
         # Reset in preparation to re-add main frame in correct place
         main_list.remove(empty_frame2)
         main_list.remove(empty_frame3)
@@ -123,7 +120,7 @@ def electrons_main(root, category="Common Elements",
             range_label.pack_forget()
             range_result.pack_forget()
             range_check.pack_forget()
-
+            mode_dropdown.pack(pady=20)
             add_main_frame()
         elif (mode != "Range-Energy Curve" and mode != "CSDA Range") \
              and (event.widget.get() == "Range-Energy Curve" or
@@ -147,6 +144,7 @@ def electrons_main(root, category="Common Elements",
 
                 # Adds warning label
                 warning_label.pack(pady=(1,5))
+
         elif event.widget.get() == "CSDA Range" and mode == "Range-Energy Curve":
             if not linear:
                 add_main_frame()
@@ -240,6 +238,9 @@ def electrons_main(root, category="Common Elements",
                 main_frame.pack_forget()
                 empty_frame2.pack_forget()
         linear = bool(var_range.get())
+
+        # Fixes result box padding
+        result_box.pack(pady=(1,0) if not linear else (1,20))
 
     # Creates checkbox for finding range
     range_check = ttk.Checkbutton(inner_mode_frame, text="Find Linear Range?",
@@ -376,7 +377,7 @@ def electrons_main(root, category="Common Elements",
     result_label(inner_result_frame)
 
     # Displays the result of calculation
-    result_box = make_result_box(inner_result_frame, pady=(1,0))
+    result_box = make_result_box(inner_result_frame, pady=(1,0) if not linear else (1,20))
 
     # Creates range result box
     range_label = ttk.Label(inner_result_frame, text="Linear Range:",

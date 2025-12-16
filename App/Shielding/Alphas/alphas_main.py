@@ -138,6 +138,11 @@ def alphas_main(root, category="Common Elements",
         result_box.delete("1.0", tk.END)
         result_box.config(state="disabled")
 
+        # Clear range label
+        range_result.config(state="normal")
+        range_result.delete("1.0", tk.END)
+        range_result.config(state="disabled")
+
         root.focus()
 
     # Creates dropdown menu for mode
