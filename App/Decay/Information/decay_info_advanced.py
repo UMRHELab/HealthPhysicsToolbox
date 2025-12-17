@@ -9,6 +9,7 @@ from Utility.Functions.files import resource_path, open_file
 from Utility.Functions.gui_utility import make_vertical_frame
 from Core.Decay.Information.nuclide_info import half_life_units
 from Utility.Functions.gui_utility import make_spacer, get_width
+from App.Decay.Information.decay_info_export import decay_info_export
 from Utility.Functions.gui_utility import make_title_frame, basic_label
 from Utility.Functions.gui_utility import make_unit_dropdown, make_action_dropdown
 
@@ -25,6 +26,7 @@ The following sections and widgets are created:
    Module Title (Decay Information)
    Customize Common Elements section
    Select Units section
+   Export button
    References button
    Help button
    Back button
@@ -133,9 +135,17 @@ def decay_info_advanced(root, category, mode, common_el, element, isotope):
         # Spacer
         empty_frame2 = make_spacer(root)
 
-    # Frame for References, & Help
+    # Frame for Export Menu, References, & Help
     bottom_frame = tk.Frame(root, bg="#F2F2F2")
     bottom_frame.pack(pady=5)
+
+    # Creates Export Menu button
+    export_button = ttk.Button(bottom_frame, text="Export Menu", style="Maize.TButton",
+                               padding=(0,0),
+                               command=lambda:
+                               to_export_menu(root, category, mode, common_el, element, isotope))
+    export_button.config(width=get_width(["Export Menu"]))
+    export_button.pack(side='left', padx=5)
 
     # Creates References button
     references_button = ttk.Button(bottom_frame, text="References", style="Maize.TButton",
@@ -193,6 +203,17 @@ def to_main(root, category, mode, common_el, element, isotope):
 
     clear_advanced()
     decay_info_main(root, category, mode, common_el, element, isotope)
+
+"""
+This function transitions from the decay information advanced screen
+to the decay information export screen by first clearing the
+decay information advanced screen and then creating the
+decay information export screen.
+It is called when the Export Menu button is hit.
+"""
+def to_export_menu(root, category, mode, common_el, element, isotope):
+    clear_advanced()
+    decay_info_export(root, category, mode, common_el, element, isotope)
 
 """
 This function opens the decay information References.txt file.
