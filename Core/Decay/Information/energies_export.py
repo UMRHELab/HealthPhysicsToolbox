@@ -21,7 +21,7 @@ with columns for radiation type, yield, and energy.
 The dataframe is populated from the icrp-07.json file.
 Finally, we pass on the work to the save_file function.
 """
-def export_data(root, item, rad_types, isotope, error_label):
+def export_data(root, item, rad_types, isotope, error_label, sort_column, sort_order):
     root.focus()
 
     # Gets energy unit from user prefs
@@ -42,7 +42,7 @@ def export_data(root, item, rad_types, isotope, error_label):
     error_label.config(style="Error.TLabel", text="")
 
     # Sets up columns for dataframe
-    type_col = "Type"
+    type_col = "Radiation Type"
     yield_col = "Yield"
     energy_col = "Energy (" + energy_unit + ")"
     cols = [type_col, yield_col, energy_col]
@@ -80,14 +80,30 @@ def export_data(root, item, rad_types, isotope, error_label):
         "Fission Fragment",               "Neutron",
     ]
 
-    # Sort dataframe
+
+    # Create temporary column for radiation type sorting
     rad_order = {rad: i for i, rad in enumerate(rad_types)}
-    df["rad_order"] = df["Type"].map(rad_order)
-    df.sort_values(
-        by=["rad_order", yield_col, energy_col],
-        ascending=[True, False, True],
-        inplace=True
-    )
-    df.drop(columns=["rad_order"], inplace=True)
+    temp_col = "rad_order"
+    df[temp_col] = df[type_col].map(rad_order)
+
+    # Configure sort order
+    by = []
+    ascending = []
+    sort_order = sort_order == "Ascending"
+    if sort_column == type_col:
+        by = [temp_col, yield_col, energy_col]
+        ascending = [sort_order, False, True]
+    elif sort_column == yield_col:
+        by = [yield_col, temp_col, energy_col]
+        ascending = [sort_order, True, True]
+    elif sort_column == energy_col.split(' ')[0]:
+        by = [energy_col, temp_col, yield_col]
+        ascending = [sort_order, True, False]
+
+    # Sort dataframe
+    df.sort_values(by=by, ascending=ascending, inplace=True)
+
+    # Drop temporary column
+    df.drop(columns=[temp_col], inplace=True)
 
     save_file(df, "Data", error_label, isotope, "energies")

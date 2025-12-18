@@ -73,6 +73,90 @@ def decay_info_export(root, category, mode, common_el, element, isotope):
     # Spacer
     empty_frame1 = make_spacer(root)
 
+    # Frame for sorting exported data
+    sort_frame = SectionFrame(root, title="Sort Exported Data")
+    sort_frame.pack()
+    inner_sort_frame = sort_frame.get_inner_frame()
+
+    # Sets back to default sort
+    def default_sort():
+        root.focus()
+        var_column.set("Radiation Type")
+        var_order.set("Ascending")
+
+    # Creates button to set sort to default sort
+    default_button = ttk.Button(inner_sort_frame, text="Default",
+                                style="Maize.TButton", padding=(2,0),
+                                command=lambda: default_sort())
+    default_button.config(width=get_width(["Back"]))
+    default_button.pack(pady=(20,0))
+
+    # Horizontal frame for column settings
+    column_side_frame = tk.Frame(inner_sort_frame, bg="#F2F2F2")
+    column_side_frame.pack(pady=(20,0))
+
+    # Column label
+    column_label = ttk.Label(column_side_frame, text="Column:",
+                             style="Black.TLabel")
+    column_label.pack(side='left', padx=5)
+
+    # Column variable
+    column = "Radiation Type"
+
+    # Stores column and sets default
+    var_column = tk.StringVar(root)
+    var_column.set(column)
+
+    # Logic for when a column is selected
+    def select_column(event):
+        nonlocal column
+        event.widget.selection_clear()
+
+        # Update column variable
+        column = var_column.get()
+
+        root.focus()
+
+    # Creates dropdown menu for columns
+    column_choices = ["Radiation Type",
+                      "Yield",
+                      "Energy"]
+    _ = make_unit_dropdown(column_side_frame, var_column, column_choices, select_column)
+
+    # Horizontal frame for order settings
+    order_side_frame = tk.Frame(inner_sort_frame, bg="#F2F2F2")
+    order_side_frame.pack(pady=(20,20))
+
+    # Order label
+    order_label = ttk.Label(order_side_frame, text="Order:",
+                             style="Black.TLabel")
+    order_label.pack(side='left', padx=5)
+
+    # Order variable
+    order = "Ascending"
+
+    # Stores order and sets default
+    var_order = tk.StringVar(root)
+    var_order.set(order)
+
+    # Logic for when an order is selected
+    def select_order(event):
+        nonlocal order
+        event.widget.selection_clear()
+
+        # Update order variable
+        order = var_order.get()
+
+        root.focus()
+
+    # Creates dropdown menu for orders
+    order_choices = ["Ascending",
+                     "Descending"]
+    _ = make_unit_dropdown(order_side_frame, var_order, order_choices, select_order)
+
+    # Spacer
+    empty_frame2 = make_spacer(root)
+
     # Frame for options
     options_frame = SectionFrame(root, title="Export Options")
     options_frame.pack()
@@ -114,7 +198,8 @@ def decay_info_export(root, category, mode, common_el, element, isotope):
                                export_data(root,
                                            get_item(category, common_el, "", element, "", ""),
                                            set(get_interactions(rad_types, rad_type_vars)),
-                                           isotope, error_label))
+                                           isotope, error_label, var_column.get(),
+                                           var_order.get()))
     export_button.config(width=get_width(["Export"]))
     export_button.pack(pady=(10,5))
 
@@ -132,6 +217,7 @@ def decay_info_export(root, category, mode, common_el, element, isotope):
     # Stores nodes into global list
     export_list = [title_frame,
                    radiation_types_frame, empty_frame1,
+                   sort_frame, empty_frame2,
                    options_frame, back_button]
 
 #####################################################################################
