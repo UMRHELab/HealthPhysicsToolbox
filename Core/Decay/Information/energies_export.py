@@ -1,7 +1,10 @@
 ##### IMPORTS #####
 import json
+import shelve
 import pandas as pd
+from Utility.Functions.files import get_user_data_path
 from Utility.Functions.gui_utility import no_selection
+from Utility.Functions.math_utility import energy_units
 from Utility.Functions.files import save_file, resource_path
 
 #####################################################################################
@@ -21,6 +24,11 @@ Finally, we pass on the work to the save_file function.
 def export_data(root, item, rad_types, isotope, error_label):
     root.focus()
 
+    # Gets energy unit from user prefs
+    db_path = get_user_data_path("Settings/Decay/Information")
+    with shelve.open(db_path) as prefs:
+        energy_unit = prefs.get("energy_unit", "MeV")
+
     # Error-check for no selected item
     if item == "":
         error_label.config(style="Error.TLabel", text=no_selection)
@@ -36,7 +44,7 @@ def export_data(root, item, rad_types, isotope, error_label):
     # Sets up columns for dataframe
     type_col = "Type"
     yield_col = "Yield"
-    energy_col = "Energy (MeV)"
+    energy_col = "Energy (" + energy_unit + ")"
     cols = [type_col, yield_col, energy_col]
 
     df = pd.DataFrame(columns=cols)
@@ -58,6 +66,9 @@ def export_data(root, item, rad_types, isotope, error_label):
                                  yield_col : rad["yield"],
                                  energy_col : rad["energy_MeV"]}
 
+    # Converts energy column to desired energy unit
+    df[energy_col] /= energy_units[energy_unit]
+
     # List of radiation types
     rad_types = [
         "Gamma Ray",                      "Prompt Gamma Ray",
@@ -73,7 +84,7 @@ def export_data(root, item, rad_types, isotope, error_label):
     rad_order = {rad: i for i, rad in enumerate(rad_types)}
     df["rad_order"] = df["Type"].map(rad_order)
     df.sort_values(
-        by=["rad_order", "Yield", "Energy (MeV)"],
+        by=["rad_order", yield_col, energy_col],
         ascending=[True, False, True],
         inplace=True
     )
