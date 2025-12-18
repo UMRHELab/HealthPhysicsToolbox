@@ -2,8 +2,10 @@
 import tkinter as tk
 from tkinter import ttk
 from App.style import SectionFrame
+from Utility.Functions.gui_utility import interaction_checkbox
 from Core.Decay.Information.energies_export import export_data
-from Utility.Functions.gui_utility import get_width, make_title_frame
+from Utility.Functions.logic_utility import get_item, get_interactions
+from Utility.Functions.gui_utility import make_spacer, get_width, make_title_frame
 
 # For global access to nodes on decay information export screen
 export_list = []
@@ -29,9 +31,54 @@ def decay_info_export(root, category, mode, common_el, element, isotope):
     # Makes title frame
     title_frame = make_title_frame(root, "Decay Information", "Decay/Information")
 
-    # Stores whether file is saved and sets default
-    var_save = tk.IntVar()
-    var_save.set(1)
+    # Frame for radiation types
+    radiation_types_frame = SectionFrame(root, title="Select Radiation Types")
+    radiation_types_frame.pack()
+    inner_radiation_types_frame = radiation_types_frame.get_inner_frame()
+    inner_radiation_types_frame.config(pady=10)
+
+    # Logic for when a radiation type is selected
+    on_select = lambda: root.focus()
+
+    # List of radiation types
+    rad_types = [
+        "Gamma Ray",                      "Prompt Gamma Ray",
+        "Delayed Gamma Ray",              "X-Ray",
+        "Annihilation Photon",            "Beta+ Particle",
+        "Beta- Particle",                 "Delayed Beta Particle",
+        "Internal Conversion Electron",   "Auger Electron",
+        "Alpha Particle",                 "Alpha Recoil Nucleus",
+        "Fission Fragment",               "Neutron",
+    ]
+
+    # Variables for each radiation type
+    var0 = tk.IntVar(value=1)
+    var1 = tk.IntVar(value=1)
+    var2 = tk.IntVar(value=1)
+    var3 = tk.IntVar(value=1)
+    var4 = tk.IntVar(value=1)
+    var5 = tk.IntVar(value=1)
+    var6 = tk.IntVar(value=1)
+    var7 = tk.IntVar(value=1)
+    var8 = tk.IntVar(value=1)
+    var9 = tk.IntVar(value=1)
+    var10 = tk.IntVar(value=1)
+    var11 = tk.IntVar(value=1)
+    var12 = tk.IntVar(value=1)
+    var13 = tk.IntVar(value=1)
+    rad_type_vars = [var0,  var1,  var2,  var3,  var4,  var5,  var6,
+                     var7,  var8,  var9,  var10, var11, var12, var13]
+
+    # Frame for radiation type checkboxes
+    checks = tk.Frame(inner_radiation_types_frame, bg="#F2F2F2")
+    checks.pack()
+
+    # Checkboxes for each radiation type
+    for index, rad_type in enumerate(rad_types):
+        interaction_checkbox(checks, rad_type_vars[index], rad_type, on_select)
+
+    # Spacer
+    empty_frame1 = make_spacer(root)
 
     # Frame for options
     options_frame = SectionFrame(root, title="Export Options")
@@ -47,7 +94,8 @@ def decay_info_export(root, category, mode, common_el, element, isotope):
                                padding=(0,0),
                                command=lambda:
                                export_data(root,
-                                           element if category == "All Elements" else common_el,
+                                           get_item(category, common_el, "", element, "", ""),
+                                           set(get_interactions(rad_types, rad_type_vars)),
                                            isotope, error_label))
     export_button.config(width=get_width(["Export"]))
     export_button.pack(pady=(10,5))
@@ -65,6 +113,7 @@ def decay_info_export(root, category, mode, common_el, element, isotope):
 
     # Stores nodes into global list
     export_list = [title_frame,
+                   radiation_types_frame, empty_frame1,
                    options_frame, back_button]
 
 #####################################################################################

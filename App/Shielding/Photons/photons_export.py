@@ -67,20 +67,8 @@ def photons_export(root, category, mode, interactions, common_el, common_mat,
     checks.pack()
 
     # Checkboxes for each interaction type
-    interaction_checkbox(checks, var0,
-                         "Total Attenuation with Coherent Scattering", on_select)
-    interaction_checkbox(checks, var1,
-                         "Total Attenuation without Coherent Scattering", on_select)
-    interaction_checkbox(checks, var2,
-                         "Pair Production in Electron Field", on_select)
-    interaction_checkbox(checks, var3,
-                         "Pair Production in Nuclear Field", on_select)
-    interaction_checkbox(checks, var4,
-                         "Scattering - Incoherent", on_select)
-    interaction_checkbox(checks, var5,
-                         "Scattering - Coherent", on_select)
-    interaction_checkbox(checks, var6,
-                         "Photo-Electric Absorption", on_select)
+    for index, interaction in enumerate(interaction_choices):
+        interaction_checkbox(checks, interaction_vars[index], interaction, on_select)
 
     # Spacer
     empty_frame1 = make_spacer(root)

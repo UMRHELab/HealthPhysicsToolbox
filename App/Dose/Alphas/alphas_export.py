@@ -59,9 +59,8 @@ def alphas_export(root, category, mode, interactions, common_el, common_mat,
     checks.pack()
 
     # Checkboxes for each interaction type
-    interaction_checkbox(checks, var0, "Total Stopping Power", on_select)
-    interaction_checkbox(checks, var1, "Electronic Stopping Power", on_select)
-    interaction_checkbox(checks, var2, "Nuclear Stopping Power", on_select)
+    for index, interaction in enumerate(interaction_choices):
+        interaction_checkbox(checks, interaction_vars[index], interaction, on_select)
 
     # Spacer
     empty_frame1 = make_spacer(root)

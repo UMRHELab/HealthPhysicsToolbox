@@ -66,9 +66,8 @@ def electrons_export(root, category, mode, interactions, common_el, common_mat,
         checks.pack()
 
         # Checkboxes for each interaction type
-        interaction_checkbox(checks, var0, "Stopping Power - Total", on_select)
-        interaction_checkbox(checks, var1, "Stopping Power - Collision", on_select)
-        interaction_checkbox(checks, var2, "Stopping Power - Radiative", on_select)
+        for index, interaction in enumerate(interaction_choices):
+            interaction_checkbox(checks, interaction_vars[index], interaction, on_select)
 
         # Spacer
         empty_frame1 = make_spacer(root)

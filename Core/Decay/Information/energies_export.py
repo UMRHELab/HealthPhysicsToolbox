@@ -12,17 +12,23 @@ from Utility.Functions.files import save_file, resource_path
 This function is called when the Export button is hit.
 The function handles the following error:
    No selected item
+   No radiation types selected
 If the error is not applicable, a dataframe is set up
 with columns for radiation type, yield, and energy.
 The dataframe is populated from the icrp-07.json file.
 Finally, we pass on the work to the save_file function.
 """
-def export_data(root, item, isotope, error_label):
+def export_data(root, item, rad_types, isotope, error_label):
     root.focus()
 
     # Error-check for no selected item
     if item == "":
         error_label.config(style="Error.TLabel", text=no_selection)
+        return
+
+    # Error-check for no radiation types selected
+    if len(rad_types) == 0:
+        error_label.config(style="Error.TLabel", text="Error: No radiation types selected.")
         return
 
     error_label.config(style="Error.TLabel", text="")
@@ -47,8 +53,9 @@ def export_data(root, item, isotope, error_label):
 
         # Populates dataframe
         for index, rad in enumerate(data["radiations"]):
-            df.loc[index] = {type_col : rad["type"],
-                             yield_col : rad["yield"],
-                             energy_col : rad["energy_MeV"]}
+            if rad["type"] in rad_types:
+                df.loc[index] = {type_col : rad["type"],
+                                 yield_col : rad["yield"],
+                                 energy_col : rad["energy_MeV"]}
 
     save_file(df, "Data", error_label, item, "energies")
