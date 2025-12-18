@@ -58,4 +58,25 @@ def export_data(root, item, rad_types, isotope, error_label):
                                  yield_col : rad["yield"],
                                  energy_col : rad["energy_MeV"]}
 
-    save_file(df, "Data", error_label, item, "energies")
+    # List of radiation types
+    rad_types = [
+        "Gamma Ray",                      "Prompt Gamma Ray",
+        "Delayed Gamma Ray",              "Annihilation Photon",
+        "X-Ray",                          "Beta- Particle",
+        "Delayed Beta Particle",          "Beta+ Particle",
+        "Internal Conversion Electron",   "Auger Electron",
+        "Alpha Particle",                 "Alpha Recoil Nucleus",
+        "Fission Fragment",               "Neutron",
+    ]
+
+    # Sort dataframe
+    rad_order = {rad: i for i, rad in enumerate(rad_types)}
+    df["rad_order"] = df["Type"].map(rad_order)
+    df.sort_values(
+        by=["rad_order", "Yield", "Energy (MeV)"],
+        ascending=[True, False, True],
+        inplace=True
+    )
+    df.drop(columns=["rad_order"], inplace=True)
+
+    save_file(df, "Data", error_label, isotope, "energies")

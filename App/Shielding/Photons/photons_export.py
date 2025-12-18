@@ -53,14 +53,7 @@ def photons_export(root, category, mode, interactions, common_el, common_mat,
                            "Photo-Electric Absorption"]
 
     # Variables for each interaction type
-    var0 = tk.IntVar()
-    var1 = tk.IntVar()
-    var2 = tk.IntVar()
-    var3 = tk.IntVar()
-    var4 = tk.IntVar()
-    var5 = tk.IntVar()
-    var6 = tk.IntVar()
-    interaction_vars = [var0, var1, var2, var3, var4, var5, var6]
+    interaction_vars = [tk.IntVar() for _ in range(len(interaction_choices))]
 
     # Frame for interaction checkboxes
     checks = tk.Frame(inner_interactions_frame, bg="#F2F2F2")

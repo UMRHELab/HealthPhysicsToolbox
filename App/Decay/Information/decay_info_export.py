@@ -43,31 +43,16 @@ def decay_info_export(root, category, mode, common_el, element, isotope):
     # List of radiation types
     rad_types = [
         "Gamma Ray",                      "Prompt Gamma Ray",
-        "Delayed Gamma Ray",              "X-Ray",
-        "Annihilation Photon",            "Beta+ Particle",
-        "Beta- Particle",                 "Delayed Beta Particle",
+        "Delayed Gamma Ray",              "Annihilation Photon",
+        "X-Ray",                          "Beta- Particle",
+        "Delayed Beta Particle",          "Beta+ Particle",
         "Internal Conversion Electron",   "Auger Electron",
         "Alpha Particle",                 "Alpha Recoil Nucleus",
         "Fission Fragment",               "Neutron",
     ]
 
     # Variables for each radiation type
-    var0 = tk.IntVar(value=1)
-    var1 = tk.IntVar(value=1)
-    var2 = tk.IntVar(value=1)
-    var3 = tk.IntVar(value=1)
-    var4 = tk.IntVar(value=1)
-    var5 = tk.IntVar(value=1)
-    var6 = tk.IntVar(value=1)
-    var7 = tk.IntVar(value=1)
-    var8 = tk.IntVar(value=1)
-    var9 = tk.IntVar(value=1)
-    var10 = tk.IntVar(value=1)
-    var11 = tk.IntVar(value=1)
-    var12 = tk.IntVar(value=1)
-    var13 = tk.IntVar(value=1)
-    rad_type_vars = [var0,  var1,  var2,  var3,  var4,  var5,  var6,
-                     var7,  var8,  var9,  var10, var11, var12, var13]
+    rad_type_vars = [tk.IntVar(value=1) for _ in range(len(rad_types))]
 
     # Frame for radiation type checkboxes
     checks = tk.Frame(inner_radiation_types_frame, bg="#F2F2F2")

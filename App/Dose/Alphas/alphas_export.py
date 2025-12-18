@@ -40,10 +40,7 @@ def alphas_export(root, category, mode, interactions, common_el, common_mat,
                            "Nuclear Stopping Power"]
 
     # Variables for each interaction type
-    var0 = tk.IntVar()
-    var1 = tk.IntVar()
-    var2 = tk.IntVar()
-    interaction_vars = [var0, var1, var2]
+    interaction_vars = [tk.IntVar() for _ in range(len(interaction_choices))]
 
     # Frame for interactions
     interactions_frame = SectionFrame(root, title="Select Interaction Types")
