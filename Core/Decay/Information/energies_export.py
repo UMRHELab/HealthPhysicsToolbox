@@ -16,12 +16,19 @@ This function is called when the Export button is hit.
 The function handles the following error:
    No selected item
    No radiation types selected
+   Non-number yield threshold input
+   Non-number energy threshold input
+   Yield threshold cannot be negative
+   Energy threshold cannot be negative
+   Yield minimum cannot be more than yield maximum
+   Energy minimum cannot be more than energy maximum
 If the error is not applicable, a dataframe is set up
 with columns for radiation type, yield, and energy.
 The dataframe is populated from the icrp-07.json file.
 Finally, we pass on the work to the save_file function.
 """
-def export_data(root, item, rad_types, isotope, error_label, sort_column, sort_order):
+def export_data(root, item, rad_types, isotope, error_label, sort_column, sort_order,
+                yield_min, yield_max, energy_min, energy_max):
     root.focus()
 
     # Gets energy unit from user prefs
@@ -39,6 +46,36 @@ def export_data(root, item, rad_types, isotope, error_label, sort_column, sort_o
         error_label.config(style="Error.TLabel", text="Error: No radiation types selected.")
         return
 
+    # Error-check for non-number yield threshold input
+    if yield_min is None or yield_max is None:
+        error_label.config(style="Error.TLabel", text="Error: Non-number yield threshold input.")
+        return
+
+    # Error-check for non-number energy threshold input
+    if energy_min is None or energy_max is None:
+        error_label.config(style="Error.TLabel", text="Error: Non-number energy threshold input.")
+        return
+
+    # Error-check for negative yield threshold
+    if yield_min < 0 or yield_max < 0:
+        error_label.config(style="Error.TLabel", text="Error: Yield threshold cannot be negative.")
+        return
+
+    # Error-check for negative energy threshold
+    if energy_min < 0 or energy_max < 0:
+        error_label.config(style="Error.TLabel", text="Error: Energy threshold cannot be negative.")
+        return
+
+    # Error-check for minimum yield more than maximum yield
+    if yield_min > yield_max:
+        error_label.config(style="Error.TLabel", text="Error: Yield minimum cannot be more than yield maximum.")
+        return
+
+    # Error-check for minimum energy more than maximum energy
+    if energy_min > energy_max:
+        error_label.config(style="Error.TLabel", text="Error: Energy minimum cannot be more than energy maximum.")
+        return
+
     error_label.config(style="Error.TLabel", text="")
 
     # Sets up columns for dataframe
@@ -48,6 +85,9 @@ def export_data(root, item, rad_types, isotope, error_label, sort_column, sort_o
     cols = [type_col, yield_col, energy_col]
 
     df = pd.DataFrame(columns=cols)
+
+    # Energy unit divisor
+    divisor = energy_units[energy_unit]
 
     db_path = resource_path('Data/Radioactive Decay/icrp-07.json')
     with open(db_path, 'r') as file:
@@ -59,15 +99,15 @@ def export_data(root, item, rad_types, isotope, error_label, sort_column, sort_o
             error_label.config(style="Error.TLabel", text="No data for "+isotope+".")
             return
 
-        # Populates dataframe
+        # Populates dataframe and converts energy to desired energy unit
         for index, rad in enumerate(data["radiations"]):
-            if rad["type"] in rad_types:
+            energy = rad["energy_MeV"] / divisor
+            if rad["type"] in rad_types and \
+               yield_min <= rad["yield"] <= yield_max and \
+               energy_min <= energy <= energy_max:
                 df.loc[index] = {type_col : rad["type"],
                                  yield_col : rad["yield"],
-                                 energy_col : rad["energy_MeV"]}
-
-    # Converts energy column to desired energy unit
-    df[energy_col] /= energy_units[energy_unit]
+                                 energy_col : energy}
 
     # List of radiation types
     rad_types = [
