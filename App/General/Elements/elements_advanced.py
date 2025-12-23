@@ -32,7 +32,7 @@ behaviors.
 The sections and widgets are stored in advanced_list so they can be
 accessed later by clear_advanced.
 """
-def elements_advanced(root, category, mode, common_el, element):
+def elements_advanced(root, category, common_el, element):
     global advanced_list
 
     # Gets atomic mass units from user prefs
@@ -93,63 +93,54 @@ def elements_advanced(root, category, mode, common_el, element):
     empty_frame1 = make_spacer(root)
 
     # Frame for units
-    unit_frame = tk.Frame()
+    unit_frame = SectionFrame(root, title="Select Units")
+    unit_frame.pack()
+    inner_unit_frame = unit_frame.get_inner_frame()
+
+    # Horizontal frame for unit settings
+    unit_side_frame = tk.Frame(inner_unit_frame, bg="#F2F2F2")
+    unit_side_frame.pack(pady=20)
+
+    # Unit label
+    unit_label = ttk.Label(unit_side_frame, text="Atomic Mass Units:", style="Black.TLabel")
+    unit_label.pack(side='left', padx=5)
+
+    # Logic for when a numerator is selected
+    def on_select_num(event):
+        event.widget.selection_clear()
+        root.focus()
+        selection = event.widget.get()
+        with shelve.open(db_path) as shelve_prefs:
+            shelve_prefs["am_num"] = selection
+
+    # Logic for when a denominator is selected
+    def on_select_den(event):
+        event.widget.selection_clear()
+        root.focus()
+        selection = event.widget.get()
+        with shelve.open(db_path) as shelve_prefs:
+            shelve_prefs["am_den"] = selection
+
+    # Stores numerator and sets default
+    var_numerator = tk.StringVar(root)
+    var_numerator.set(am_num)
+
+    # Creates dropdown menu for numerator unit
+    _ = make_unit_dropdown(unit_side_frame, var_numerator, list(atomic_mass_numerator.keys()), on_select_num)
+
+    # / label
+    slash_label = ttk.Label(unit_side_frame, text="/", style="Black.TLabel")
+    slash_label.pack(side='left')
+
+    # Stores denominator and sets default
+    var_denominator = tk.StringVar(root)
+    var_denominator.set(am_den)
+
+    # Creates dropdown menu for denominator unit
+    _ = make_unit_dropdown(unit_side_frame, var_denominator, list(atomic_mass_denominator.keys()), on_select_den)
 
     # Spacer
-    empty_frame2 = tk.Frame()
-
-    # Unit options are only created if
-    # Calculation Mode is Atomic Mass
-    if mode == "Atomic Mass":
-        # Frame for units
-        unit_frame = SectionFrame(root, title="Select Units")
-        unit_frame.pack()
-        inner_unit_frame = unit_frame.get_inner_frame()
-
-        # Horizontal frame for unit settings
-        unit_side_frame = tk.Frame(inner_unit_frame, bg="#F2F2F2")
-        unit_side_frame.pack(pady=20)
-
-        # Unit label
-        unit_label = ttk.Label(unit_side_frame, text=mode + " Units:", style="Black.TLabel")
-        unit_label.pack(side='left', padx=5)
-
-        # Logic for when a numerator is selected
-        def on_select_num(event):
-            event.widget.selection_clear()
-            root.focus()
-            selection = event.widget.get()
-            with shelve.open(db_path) as shelve_prefs:
-                shelve_prefs["am_num"] = selection
-
-        # Logic for when a denominator is selected
-        def on_select_den(event):
-            event.widget.selection_clear()
-            root.focus()
-            selection = event.widget.get()
-            with shelve.open(db_path) as shelve_prefs:
-                shelve_prefs["am_den"] = selection
-
-        # Stores numerator and sets default
-        var_numerator = tk.StringVar(root)
-        var_numerator.set(am_num)
-
-        # Creates dropdown menu for numerator unit
-        _ = make_unit_dropdown(unit_side_frame, var_numerator, list(atomic_mass_numerator.keys()), on_select_num)
-
-        # / label
-        slash_label = ttk.Label(unit_side_frame, text="/", style="Black.TLabel")
-        slash_label.pack(side='left')
-
-        # Stores denominator and sets default
-        var_denominator = tk.StringVar(root)
-        var_denominator.set(am_den)
-
-        # Creates dropdown menu for denominator unit
-        _ = make_unit_dropdown(unit_side_frame, var_denominator, list(atomic_mass_denominator.keys()), on_select_den)
-
-        # Spacer
-        empty_frame2 = make_spacer(root)
+    empty_frame2 = make_spacer(root)
 
     # Frame for References, & Help
     bottom_frame = tk.Frame(root, bg="#F2F2F2")
@@ -172,7 +163,7 @@ def elements_advanced(root, category, mode, common_el, element):
     # Creates Back button to return to elements main screen
     back_button = ttk.Button(root, text="Back", style="Maize.TButton",
                              padding=(0,0),
-                             command=lambda: to_main(root, category, mode, common_el, element))
+                             command=lambda: to_main(root, category, common_el, element))
     back_button.config(width=get_width(["Back"]))
     back_button.pack(pady=5)
 
@@ -205,11 +196,11 @@ elements advanced screen and then creating the
 elements main screen.
 It is called when the Back button is hit.
 """
-def to_main(root, category, mode, common_el, element):
+def to_main(root, category, common_el, element):
     from App.General.Elements.elements_main import elements_main
 
     clear_advanced()
-    elements_main(root, category, mode, common_el, element)
+    elements_main(root, category, common_el, element)
 
 """
 This function opens the elements References.txt file.

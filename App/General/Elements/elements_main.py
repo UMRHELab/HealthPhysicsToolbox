@@ -2,14 +2,12 @@
 import tkinter as tk
 from tkinter import ttk
 from App.style import SectionFrame
+from Utility.Functions.choices import get_choices
 from Utility.Functions.gui_utility import make_exit_button
 from Core.General.Elements.elements import handle_calculation
-from Utility.Functions.gui_utility import make_spacer, get_width
 from Utility.Functions.logic_utility import get_item, valid_saved
-from Utility.Functions.choices import get_choices, read_pt_columns
-from Utility.Functions.gui_utility import make_dropdown, make_result_box
+from Utility.Functions.gui_utility import get_width, basic_label, make_title_frame
 from Utility.Functions.gui_utility import make_item_dropdown, make_category_dropdown
-from Utility.Functions.gui_utility import basic_label, result_label, make_title_frame
 
 # For global access to nodes on elements main screen
 main_list = []
@@ -22,7 +20,6 @@ main_list = []
 This function sets up the general element main screen.
 The following sections and widgets are created:
    Module Title (Element Information)
-   Select Calculation Mode section
    Select Element section
    Result section (title dependent on Calculation Mode)
    Advanced Settings button
@@ -32,8 +29,7 @@ behaviors.
 The sections and widgets are stored in main_list so they can be
 accessed later by clear_main.
 """
-def elements_main(root, category="Common Elements", mode="Atomic Number",
-                  common_el="Ag", element="Ac"):
+def elements_main(root, category="Common Elements", common_el="Ag", element="Ac"):
     global main_list
 
     # Makes title frame
@@ -47,39 +43,6 @@ def elements_main(root, category="Common Elements", mode="Atomic Number",
 
     # Make sure common element is a valid selection
     common_el = valid_saved(common_el, common_elements)
-
-    # Stores mode and sets default
-    var_mode = tk.StringVar(root)
-    var_mode.set(mode)
-
-    # Frame for mode input
-    mode_frame = SectionFrame(root, title="Select Calculation Mode")
-    mode_frame.pack()
-    inner_mode_frame = mode_frame.get_inner_frame()
-
-    # Logic for when a Calculation Mode is selected
-    def select_mode(event):
-        nonlocal mode
-        event.widget.selection_clear()
-
-        # Update mode variable and fixes result section title
-        mode = var_mode.get()
-        result_frame.change_title(mode)
-
-        # Clear result label
-        result_box.config(state="normal")
-        result_box.delete("1.0", tk.END)
-        result_box.config(state="disabled")
-
-        root.focus()
-
-    # Creates dropdown menu for mode
-    mode_choices = []
-    read_pt_columns(mode_choices)
-    _ = make_dropdown(inner_mode_frame, var_mode, mode_choices, select_mode, pady=20)
-
-    # Spacer
-    empty_frame1 = make_spacer(root)
 
     # Frame for element selection
     main_element_frame = SectionFrame(root, title="Select Element")
@@ -146,32 +109,17 @@ def elements_main(root, category="Common Elements", mode="Atomic Number",
     # Creates dropdown menu for element
     element_dropdown = make_item_dropdown(root, element_frame, var_element, choices, on_enter)
 
-    # Spacer
-    empty_frame2 = make_spacer(root)
-
-    # Frame for result
-    result_frame = SectionFrame(root, title=mode)
-    result_frame.pack()
-    inner_result_frame = result_frame.get_inner_frame()
-
-    # Creates Calculate button
-    calc_button = ttk.Button(inner_result_frame, text="Calculate",
+    # Creates Display button
+    display_button = ttk.Button(root, text="Display Info",
                              style="Maize.TButton", padding=(0,0),
-                             command=lambda: handle_calculation(root, mode, var_element.get(),
-                                                                result_box))
-    calc_button.config(width=get_width(["Calculate"]))
-    calc_button.pack(pady=(20,5))
-
-    # Result label
-    result_label(inner_result_frame)
-
-    # Displays the result of calculation
-    result_box = make_result_box(inner_result_frame)
+                             command=lambda: handle_calculation(root, var_element.get()))
+    display_button.config(width=get_width(["Display Info"]))
+    display_button.pack(pady=5)
 
     # Creates Advanced Settings button
     advanced_button = ttk.Button(root, text="Advanced Settings",
                                  style="Maize.TButton", padding=(0,0),
-                                 command=lambda: to_advanced(root, category, mode,
+                                 command=lambda: to_advanced(root, category,
                                                              common_el, element))
     advanced_button.config(width=get_width(["Advanced Settings"]))
     advanced_button.pack(pady=5)
@@ -180,10 +128,8 @@ def elements_main(root, category="Common Elements", mode="Atomic Number",
     exit_button = make_exit_button(root, lambda: exit_to_home(root))
 
     # Stores nodes into global list
-    main_list = [title_frame,
-                 mode_frame, empty_frame1,
-                 main_element_frame, empty_frame2,
-                 result_frame, advanced_button, exit_button]
+    main_list = [title_frame, main_element_frame,
+                 display_button, advanced_button, exit_button]
 
 #####################################################################################
 # NAVIGATION SECTION
@@ -220,9 +166,9 @@ elements main screen and then creating the
 elements advanced screen.
 It is called when the Advanced Settings button is hit.
 """
-def to_advanced(root, category, mode, common_el, element):
+def to_advanced(root, category, common_el, element):
     root.focus()
     from App.General.Elements.elements_advanced import elements_advanced
 
     clear_main()
-    elements_advanced(root, category, mode, common_el, element)
+    elements_advanced(root, category, common_el, element)
