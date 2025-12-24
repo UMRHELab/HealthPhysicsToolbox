@@ -103,7 +103,7 @@ def save_file(obj, choice, error_label, item, name, decay = False):
         if choice == "Plot":
             obj.savefig(file_path)
         else:
-            obj.to_csv(file_path, index=False)
+            obj.to_csv(file_path, encoding="utf-8-sig", index=False)
         if decay:
             edit_result(choice+" exported!", error_label)
         elif error_label:
