@@ -1,0 +1,808 @@
+{
+    "S-35": {
+        "half_life": "87.51d",
+        "radiations": [
+            {
+                "icode": 5,
+                "mnemonic": "B-",
+                "yield": 1.0,
+                "energy_MeV": 0.0487249,
+                "type": "Beta- Particle"
+            }
+        ]
+    },
+    "S-37": {
+        "half_life": "5.05m",
+        "radiations": [
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 3.33349e-18,
+                "energy_MeV": 1.78e-06,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 3.21359e-05,
+                "energy_MeV": 1.48685e-05,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 4.45545e-10,
+                "energy_MeV": 5.857e-05,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 1.14115e-09,
+                "energy_MeV": 6.03499e-05,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 3.092e-09,
+                "energy_MeV": 0.00018286,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 1.67486e-09,
+                "energy_MeV": 0.00018464,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 4.26816e-13,
+                "energy_MeV": 0.00019528,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 4.19604e-13,
+                "energy_MeV": 0.00019541,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 4.66148e-13,
+                "energy_MeV": 0.000197191,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 1.94602e-10,
+                "energy_MeV": 0.00025563,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 3.14886e-10,
+                "energy_MeV": 0.00025576,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 2.25332e-07,
+                "energy_MeV": 0.00259542,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 4.45706e-07,
+                "energy_MeV": 0.0025972,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 1.43602e-08,
+                "energy_MeV": 0.00279248,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 2.8424e-08,
+                "energy_MeV": 0.00279262,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 1,
+                "mnemonic": "G",
+                "yield": 0.0005358,
+                "energy_MeV": 0.90636,
+                "type": "Gamma Ray"
+            },
+            {
+                "icode": 1,
+                "mnemonic": "G",
+                "yield": 0.0003384,
+                "energy_MeV": 1.16907,
+                "type": "Gamma Ray"
+            },
+            {
+                "icode": 1,
+                "mnemonic": "G",
+                "yield": 0.0006204,
+                "energy_MeV": 3.086,
+                "type": "Gamma Ray"
+            },
+            {
+                "icode": 1,
+                "mnemonic": "G",
+                "yield": 0.94,
+                "energy_MeV": 3.10336,
+                "type": "Gamma Ray"
+            },
+            {
+                "icode": 1,
+                "mnemonic": "G",
+                "yield": 0.002632,
+                "energy_MeV": 3.74102,
+                "type": "Gamma Ray"
+            },
+            {
+                "icode": 1,
+                "mnemonic": "G",
+                "yield": 0.0002726,
+                "energy_MeV": 4.00964,
+                "type": "Gamma Ray"
+            },
+            {
+                "icode": 1,
+                "mnemonic": "G",
+                "yield": 3.76e-05,
+                "energy_MeV": 4.396,
+                "type": "Gamma Ray"
+            },
+            {
+                "icode": 5,
+                "mnemonic": "B-",
+                "yield": 3.99772e-05,
+                "energy_MeV": 0.156568,
+                "type": "Beta- Particle"
+            },
+            {
+                "icode": 5,
+                "mnemonic": "B-",
+                "yield": 0.000559681,
+                "energy_MeV": 0.204959,
+                "type": "Beta- Particle"
+            },
+            {
+                "icode": 5,
+                "mnemonic": "B-",
+                "yield": 0.000899487,
+                "energy_MeV": 0.313009,
+                "type": "Beta- Particle"
+            },
+            {
+                "icode": 5,
+                "mnemonic": "B-",
+                "yield": 0.00266848,
+                "energy_MeV": 0.428703,
+                "type": "Beta- Particle"
+            },
+            {
+                "icode": 5,
+                "mnemonic": "B-",
+                "yield": 0.939464,
+                "energy_MeV": 0.717031,
+                "type": "Beta- Particle"
+            },
+            {
+                "icode": 5,
+                "mnemonic": "B-",
+                "yield": 0.000399772,
+                "energy_MeV": 0.725061,
+                "type": "Beta- Particle"
+            },
+            {
+                "icode": 5,
+                "mnemonic": "B-",
+                "yield": 0.0559681,
+                "energy_MeV": 2.22125,
+                "type": "Beta- Particle"
+            },
+            {
+                "icode": 7,
+                "mnemonic": "AE",
+                "yield": 3.24593e-06,
+                "energy_MeV": 4.05815e-05,
+                "type": "Auger Electron"
+            },
+            {
+                "icode": 7,
+                "mnemonic": "AE",
+                "yield": 1.39396e-05,
+                "energy_MeV": 0.000180154,
+                "type": "Auger Electron"
+            },
+            {
+                "icode": 7,
+                "mnemonic": "AE",
+                "yield": 5.88189e-06,
+                "energy_MeV": 0.00236258,
+                "type": "Auger Electron"
+            },
+            {
+                "icode": 7,
+                "mnemonic": "AE",
+                "yield": 8.94479e-07,
+                "energy_MeV": 0.00256578,
+                "type": "Auger Electron"
+            },
+            {
+                "icode": 7,
+                "mnemonic": "AE",
+                "yield": 3.40876e-08,
+                "energy_MeV": 0.00277191,
+                "type": "Auger Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 2.70467e-08,
+                "energy_MeV": 0.903555,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 2.16723e-09,
+                "energy_MeV": 0.906092,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 6.0288e-12,
+                "energy_MeV": 0.906151,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 6.63025e-12,
+                "energy_MeV": 0.906152,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 9.56081e-09,
+                "energy_MeV": 1.16627,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 7.6592e-10,
+                "energy_MeV": 1.1688,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 1.51531e-12,
+                "energy_MeV": 1.16886,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 1.70647e-12,
+                "energy_MeV": 1.16886,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 3.54542e-09,
+                "energy_MeV": 3.0832,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 2.89402e-10,
+                "energy_MeV": 3.08573,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 5.79824e-13,
+                "energy_MeV": 3.08579,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 2.52898e-13,
+                "energy_MeV": 3.08579,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 7.47412e-06,
+                "energy_MeV": 3.10056,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 6.09873e-07,
+                "energy_MeV": 3.10309,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 7.38808e-10,
+                "energy_MeV": 3.10315,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 9.41445e-10,
+                "energy_MeV": 3.10315,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 8.45234e-09,
+                "energy_MeV": 3.73822,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 7.28492e-10,
+                "energy_MeV": 3.74075,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 1.74805e-12,
+                "energy_MeV": 3.74081,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 3.47142e-13,
+                "energy_MeV": 3.74081,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 1.4318e-09,
+                "energy_MeV": 4.00684,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 7.3592e-11,
+                "energy_MeV": 4.00937,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 8.7507e-14,
+                "energy_MeV": 4.00943,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 6.983e-14,
+                "energy_MeV": 4.00943,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 1.26975e-10,
+                "energy_MeV": 4.3932,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 8.23707e-12,
+                "energy_MeV": 4.39573,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 1.32553e-14,
+                "energy_MeV": 4.39579,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 4.9199e-15,
+                "energy_MeV": 4.39579,
+                "type": "Internal Conversion Electron"
+            }
+        ]
+    },
+    "S-38": {
+        "half_life": "170.3m",
+        "radiations": [
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 3.62128e-18,
+                "energy_MeV": 1.78e-06,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 3.49026e-05,
+                "energy_MeV": 1.48671e-05,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 4.82558e-10,
+                "energy_MeV": 5.857e-05,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 1.23595e-09,
+                "energy_MeV": 6.03499e-05,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 3.35941e-09,
+                "energy_MeV": 0.00018286,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 1.81945e-09,
+                "energy_MeV": 0.00018464,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 4.63728e-13,
+                "energy_MeV": 0.00019528,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 4.55893e-13,
+                "energy_MeV": 0.00019541,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 5.06392e-13,
+                "energy_MeV": 0.000197191,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 2.10768e-10,
+                "energy_MeV": 0.00025563,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 3.41045e-10,
+                "energy_MeV": 0.00025576,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 2.44997e-07,
+                "energy_MeV": 0.00259542,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 4.84604e-07,
+                "energy_MeV": 0.0025972,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 1.56135e-08,
+                "energy_MeV": 0.00279248,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 3.09047e-08,
+                "energy_MeV": 0.00279262,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 1,
+                "mnemonic": "G",
+                "yield": 0.00083,
+                "energy_MeV": 0.196187,
+                "type": "Gamma Ray"
+            },
+            {
+                "icode": 1,
+                "mnemonic": "G",
+                "yield": 0.00166,
+                "energy_MeV": 1.69242,
+                "type": "Gamma Ray"
+            },
+            {
+                "icode": 1,
+                "mnemonic": "G",
+                "yield": 0.024402,
+                "energy_MeV": 1.74577,
+                "type": "Gamma Ray"
+            },
+            {
+                "icode": 1,
+                "mnemonic": "G",
+                "yield": 0.83,
+                "energy_MeV": 1.94194,
+                "type": "Gamma Ray"
+            },
+            {
+                "icode": 1,
+                "mnemonic": "G",
+                "yield": 0.013778,
+                "energy_MeV": 2.75097,
+                "type": "Gamma Ray"
+            },
+            {
+                "icode": 5,
+                "mnemonic": "B-",
+                "yield": 0.013811,
+                "energy_MeV": 0.0548606,
+                "type": "Beta- Particle"
+            },
+            {
+                "icode": 5,
+                "mnemonic": "B-",
+                "yield": 0.830665,
+                "energy_MeV": 0.372482,
+                "type": "Beta- Particle"
+            },
+            {
+                "icode": 5,
+                "mnemonic": "B-",
+                "yield": 0.023719,
+                "energy_MeV": 0.458282,
+                "type": "Beta- Particle"
+            },
+            {
+                "icode": 5,
+                "mnemonic": "B-",
+                "yield": 0.00170136,
+                "energy_MeV": 0.481952,
+                "type": "Beta- Particle"
+            },
+            {
+                "icode": 5,
+                "mnemonic": "B-",
+                "yield": 0.130104,
+                "energy_MeV": 1.29105,
+                "type": "Beta- Particle"
+            },
+            {
+                "icode": 7,
+                "mnemonic": "AE",
+                "yield": 3.51558e-06,
+                "energy_MeV": 4.05815e-05,
+                "type": "Auger Electron"
+            },
+            {
+                "icode": 7,
+                "mnemonic": "AE",
+                "yield": 1.5144e-05,
+                "energy_MeV": 0.000180152,
+                "type": "Auger Electron"
+            },
+            {
+                "icode": 7,
+                "mnemonic": "AE",
+                "yield": 6.39522e-06,
+                "energy_MeV": 0.00236258,
+                "type": "Auger Electron"
+            },
+            {
+                "icode": 7,
+                "mnemonic": "AE",
+                "yield": 9.72543e-07,
+                "energy_MeV": 0.00256578,
+                "type": "Auger Electron"
+            },
+            {
+                "icode": 7,
+                "mnemonic": "AE",
+                "yield": 3.70625e-08,
+                "energy_MeV": 0.00277191,
+                "type": "Auger Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 1.36529e-06,
+                "energy_MeV": 0.193382,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 1.08305e-07,
+                "energy_MeV": 0.195919,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 5.98251e-10,
+                "energy_MeV": 0.195978,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 1.13306e-09,
+                "energy_MeV": 0.195979,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 2.43653e-08,
+                "energy_MeV": 1.68962,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 1.94528e-09,
+                "energy_MeV": 1.69215,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 2.74431e-12,
+                "energy_MeV": 1.69221,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 3.931e-12,
+                "energy_MeV": 1.69221,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 3.84072e-07,
+                "energy_MeV": 1.74297,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 3.06481e-08,
+                "energy_MeV": 1.7455,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 8.58612e-11,
+                "energy_MeV": 1.74556,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 5.14336e-11,
+                "energy_MeV": 1.74556,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 6.34214e-06,
+                "energy_MeV": 1.93914,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 5.07098e-07,
+                "energy_MeV": 1.94168,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 4.25743e-10,
+                "energy_MeV": 1.94173,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 1.56013e-09,
+                "energy_MeV": 1.94174,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 6.50831e-08,
+                "energy_MeV": 2.74817,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 5.34001e-09,
+                "energy_MeV": 2.7507,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 1.42549e-11,
+                "energy_MeV": 2.75076,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 3.28811e-12,
+                "energy_MeV": 2.75076,
+                "type": "Internal Conversion Electron"
+            }
+        ]
+    }
+}

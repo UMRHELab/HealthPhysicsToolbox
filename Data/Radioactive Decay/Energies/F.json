@@ -1,0 +1,68 @@
+{
+    "F-17": {
+        "half_life": "64.49s",
+        "radiations": [
+            {
+                "icode": 3,
+                "mnemonic": "AQ",
+                "yield": 1.99708,
+                "energy_MeV": 0.511,
+                "type": "Annihilation Photon"
+            },
+            {
+                "icode": 1,
+                "mnemonic": "G",
+                "yield": 0.000339997,
+                "energy_MeV": 0.87071,
+                "type": "Gamma Ray"
+            },
+            {
+                "icode": 4,
+                "mnemonic": "B+",
+                "yield": 0.000339883,
+                "energy_MeV": 0.379351,
+                "type": "Beta+ Particle"
+            },
+            {
+                "icode": 4,
+                "mnemonic": "B+",
+                "yield": 0.998201,
+                "energy_MeV": 0.73969,
+                "type": "Beta+ Particle"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 3.03575e-09,
+                "energy_MeV": 0.870173,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 1.87083e-10,
+                "energy_MeV": 0.870681,
+                "type": "Internal Conversion Electron"
+            }
+        ]
+    },
+    "F-18": {
+        "half_life": "109.77m",
+        "radiations": [
+            {
+                "icode": 3,
+                "mnemonic": "AQ",
+                "yield": 1.9346,
+                "energy_MeV": 0.511,
+                "type": "Annihilation Photon"
+            },
+            {
+                "icode": 4,
+                "mnemonic": "B+",
+                "yield": 0.9673,
+                "energy_MeV": 0.249776,
+                "type": "Beta+ Particle"
+            }
+        ]
+    }
+}

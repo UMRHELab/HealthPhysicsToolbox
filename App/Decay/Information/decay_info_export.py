@@ -91,9 +91,9 @@ def decay_info_export(root, category, mode, common_el, element, isotope):
 
     # Creates button to set sort to default sort
     default_button = ttk.Button(inner_sort_frame, text="Default",
-                                style="Maize.TButton", padding=(2,0),
+                                style="Maize.TButton", padding=(0,0),
                                 command=lambda: default_sort())
-    default_button.config(width=get_width(["Back"]))
+    default_button.config(width=get_width(["Default"]))
     default_button.pack(pady=(20,0))
 
     # Horizontal frame for column settings

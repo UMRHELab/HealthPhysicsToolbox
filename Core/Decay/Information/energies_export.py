@@ -1,7 +1,9 @@
 ##### IMPORTS #####
+import math
 import json
 import shelve
 import pandas as pd
+import radioactivedecay as rd
 from Utility.Functions.files import get_user_data_path
 from Utility.Functions.gui_utility import no_selection
 from Utility.Functions.math_utility import energy_units
@@ -14,7 +16,8 @@ from Utility.Functions.files import save_file, resource_path
 """
 This function is called when the Export button is hit.
 The function handles the following error:
-   No selected item
+   No selected element
+   Isotope is stable
    No radiation types selected
    Non-number yield threshold input
    Non-number energy threshold input
@@ -24,10 +27,11 @@ The function handles the following error:
    Energy minimum cannot be more than energy maximum
 If the error is not applicable, a dataframe is set up
 with columns for radiation type, yield, and energy.
-The dataframe is populated from the icrp-07.json file.
+The dataframe is populated from the corresponding energies
+.json file.
 Finally, we pass on the work to the save_file function.
 """
-def export_data(root, item, rad_types, isotope, error_label, sort_column, sort_order,
+def export_data(root, element, rad_types, isotope, error_label, sort_column, sort_order,
                 yield_min, yield_max, energy_min, energy_max):
     root.focus()
 
@@ -36,9 +40,14 @@ def export_data(root, item, rad_types, isotope, error_label, sort_column, sort_o
     with shelve.open(db_path) as prefs:
         energy_unit = prefs.get("energy_unit", "MeV")
 
-    # Error-check for no selected item
-    if item == "":
+    # Error-check for no selected element
+    if element == "":
         error_label.config(style="Error.TLabel", text=no_selection)
+        return
+
+    # Error-check for isotope is stable
+    if math.isinf(rd.Nuclide(isotope).half_life('s')):
+        error_label.config(style="Error.TLabel", text=isotope+" is stable.")
         return
 
     # Error-check for no radiation types selected
@@ -89,7 +98,12 @@ def export_data(root, item, rad_types, isotope, error_label, sort_column, sort_o
     # Energy unit divisor
     divisor = energy_units[energy_unit]
 
-    db_path = resource_path('Data/Radioactive Decay/icrp-07.json')
+    db_path = resource_path('Data/Radioactive Decay/Energies/'+element+'.json')
+    import os
+    for entry in os.listdir('Data/Radioactive Decay/Energies/'):
+        full_path = os.path.join('Data/Radioactive Decay/Energies/', entry)
+        if os.path.isfile(full_path):
+            print(entry)
     with open(db_path, 'r') as file:
         # Retrieves data
         data = json.load(file).get(isotope, -1)

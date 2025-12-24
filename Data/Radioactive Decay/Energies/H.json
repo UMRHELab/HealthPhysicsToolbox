@@ -1,0 +1,14 @@
+{
+    "H-3": {
+        "half_life": "12.32y",
+        "radiations": [
+            {
+                "icode": 5,
+                "mnemonic": "B-",
+                "yield": 1.0,
+                "energy_MeV": 0.00567977,
+                "type": "Beta- Particle"
+            }
+        ]
+    }
+}

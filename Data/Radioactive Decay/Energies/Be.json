@@ -1,0 +1,40 @@
+{
+    "Be-10": {
+        "half_life": "1.51E+6y",
+        "radiations": [
+            {
+                "icode": 5,
+                "mnemonic": "B-",
+                "yield": 1.0,
+                "energy_MeV": 0.252473,
+                "type": "Beta- Particle"
+            }
+        ]
+    },
+    "Be-7": {
+        "half_life": "53.22d",
+        "radiations": [
+            {
+                "icode": 1,
+                "mnemonic": "G",
+                "yield": 0.1044,
+                "energy_MeV": 0.477603,
+                "type": "Gamma Ray"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 7.511e-08,
+                "energy_MeV": 0.477544,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 1.10205e-09,
+                "energy_MeV": 0.477598,
+                "type": "Internal Conversion Electron"
+            }
+        ]
+    }
+}

@@ -1,0 +1,208 @@
+{
+    "Si-31": {
+        "half_life": "157.3m",
+        "radiations": [
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 5.67516e-22,
+                "energy_MeV": 9.59999e-07,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 5.13709e-08,
+                "energy_MeV": 1.10815e-05,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 6.50029e-13,
+                "energy_MeV": 4.801e-05,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 1.52587e-12,
+                "energy_MeV": 4.89702e-05,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 1.49266e-12,
+                "energy_MeV": 0.000120969,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 8.0719e-13,
+                "energy_MeV": 0.00012193,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 6.59247e-17,
+                "energy_MeV": 0.0001298,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 6.49851e-17,
+                "energy_MeV": 0.00012985,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 7.15972e-17,
+                "energy_MeV": 0.00013081,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 7.82278e-14,
+                "energy_MeV": 0.00017877,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 1.37059e-13,
+                "energy_MeV": 0.00017882,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 2.35475e-10,
+                "energy_MeV": 0.00199126,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 4.66631e-10,
+                "energy_MeV": 0.00199222,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 7.27267e-12,
+                "energy_MeV": 0.00212202,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 1.44185e-11,
+                "energy_MeV": 0.00212207,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 1,
+                "mnemonic": "G",
+                "yield": 0.0007,
+                "energy_MeV": 1.26615,
+                "type": "Gamma Ray"
+            },
+            {
+                "icode": 5,
+                "mnemonic": "B-",
+                "yield": 0.0007,
+                "energy_MeV": 0.0685745,
+                "type": "Beta- Particle"
+            },
+            {
+                "icode": 5,
+                "mnemonic": "B-",
+                "yield": 0.9993,
+                "energy_MeV": 0.595227,
+                "type": "Beta- Particle"
+            },
+            {
+                "icode": 7,
+                "mnemonic": "AE",
+                "yield": 5.30485e-09,
+                "energy_MeV": 3.40177e-05,
+                "type": "Auger Electron"
+            },
+            {
+                "icode": 7,
+                "mnemonic": "AE",
+                "yield": 2.2504e-08,
+                "energy_MeV": 0.000117573,
+                "type": "Auger Electron"
+            },
+            {
+                "icode": 7,
+                "mnemonic": "AE",
+                "yield": 9.9696e-09,
+                "energy_MeV": 0.00183231,
+                "type": "Auger Electron"
+            },
+            {
+                "icode": 7,
+                "mnemonic": "AE",
+                "yield": 9.8416e-10,
+                "energy_MeV": 0.00196638,
+                "type": "Auger Electron"
+            },
+            {
+                "icode": 7,
+                "mnemonic": "AE",
+                "yield": 2.48239e-11,
+                "energy_MeV": 0.00210436,
+                "type": "Auger Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 1.17024e-08,
+                "energy_MeV": 1.26402,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 8.78398e-10,
+                "energy_MeV": 1.26596,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 1.18912e-12,
+                "energy_MeV": 1.26601,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 1.47371e-12,
+                "energy_MeV": 1.26601,
+                "type": "Internal Conversion Electron"
+            }
+        ]
+    },
+    "Si-32": {
+        "half_life": "132y",
+        "radiations": [
+            {
+                "icode": 5,
+                "mnemonic": "B-",
+                "yield": 1.0,
+                "energy_MeV": 0.0686259,
+                "type": "Beta- Particle"
+            }
+        ]
+    }
+}

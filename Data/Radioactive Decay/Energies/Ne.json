@@ -1,0 +1,285 @@
+{
+    "Ne-19": {
+        "half_life": "17.22s",
+        "radiations": [
+            {
+                "icode": 1,
+                "mnemonic": "G",
+                "yield": 0.00012,
+                "energy_MeV": 0.109894,
+                "type": "Gamma Ray"
+            },
+            {
+                "icode": 1,
+                "mnemonic": "G",
+                "yield": 2.06e-05,
+                "energy_MeV": 0.197142,
+                "type": "Gamma Ray"
+            },
+            {
+                "icode": 3,
+                "mnemonic": "AQ",
+                "yield": 1.998,
+                "energy_MeV": 0.511,
+                "type": "Annihilation Photon"
+            },
+            {
+                "icode": 1,
+                "mnemonic": "G",
+                "yield": 2.06e-05,
+                "energy_MeV": 1.35684,
+                "type": "Gamma Ray"
+            },
+            {
+                "icode": 1,
+                "mnemonic": "G",
+                "yield": 1.08e-06,
+                "energy_MeV": 1.44409,
+                "type": "Gamma Ray"
+            },
+            {
+                "icode": 1,
+                "mnemonic": "G",
+                "yield": 5.7e-07,
+                "energy_MeV": 1.55397,
+                "type": "Gamma Ray"
+            },
+            {
+                "icode": 4,
+                "mnemonic": "B+",
+                "yield": 2.12996e-05,
+                "energy_MeV": 0.262934,
+                "type": "Beta+ Particle"
+            },
+            {
+                "icode": 4,
+                "mnemonic": "B+",
+                "yield": 0.000119998,
+                "energy_MeV": 0.911823,
+                "type": "Beta+ Particle"
+            },
+            {
+                "icode": 4,
+                "mnemonic": "B+",
+                "yield": 0.998861,
+                "energy_MeV": 0.963404,
+                "type": "Beta+ Particle"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 2.28704e-07,
+                "energy_MeV": 0.109206,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 1.36829e-08,
+                "energy_MeV": 0.109858,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 4.57002e-08,
+                "energy_MeV": 0.196454,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 2.74328e-09,
+                "energy_MeV": 0.197106,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 6.6911e-11,
+                "energy_MeV": 1.35615,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 4.0174e-12,
+                "energy_MeV": 1.35681,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 2.11737e-12,
+                "energy_MeV": 1.4434,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 1.27828e-13,
+                "energy_MeV": 1.44405,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 1.47167e-12,
+                "energy_MeV": 1.55328,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 8.83609e-14,
+                "energy_MeV": 1.55393,
+                "type": "Internal Conversion Electron"
+            }
+        ]
+    },
+    "Ne-24": {
+        "half_life": "3.38m",
+        "radiations": [
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 8.5367e-09,
+                "energy_MeV": 2.80599e-05,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 1.75045e-08,
+                "energy_MeV": 2.826e-05,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 0.00112986,
+                "energy_MeV": 2.99341e-05,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 2.96571e-06,
+                "energy_MeV": 0.00102758,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 2,
+                "mnemonic": "X",
+                "yield": 5.89417e-06,
+                "energy_MeV": 0.00102778,
+                "type": "X-Ray"
+            },
+            {
+                "icode": 1,
+                "mnemonic": "G",
+                "yield": 0.99953,
+                "energy_MeV": 0.472202,
+                "type": "Gamma Ray"
+            },
+            {
+                "icode": 1,
+                "mnemonic": "G",
+                "yield": 0.0799989,
+                "energy_MeV": 0.87441,
+                "type": "Gamma Ray"
+            },
+            {
+                "icode": 5,
+                "mnemonic": "B-",
+                "yield": 0.08,
+                "energy_MeV": 0.435871,
+                "type": "Beta- Particle"
+            },
+            {
+                "icode": 5,
+                "mnemonic": "B-",
+                "yield": 0.92,
+                "energy_MeV": 0.835278,
+                "type": "Beta- Particle"
+            },
+            {
+                "icode": 7,
+                "mnemonic": "AE",
+                "yield": 0.00022443,
+                "energy_MeV": 2.30431e-05,
+                "type": "Auger Electron"
+            },
+            {
+                "icode": 7,
+                "mnemonic": "AE",
+                "yield": 0.000428356,
+                "energy_MeV": 0.000978642,
+                "type": "Auger Electron"
+            },
+            {
+                "icode": 7,
+                "mnemonic": "AE",
+                "yield": 6.09175e-06,
+                "energy_MeV": 0.00101079,
+                "type": "Auger Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 0.000442291,
+                "energy_MeV": 0.471138,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 2.76072e-05,
+                "energy_MeV": 0.472138,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 1.24941e-07,
+                "energy_MeV": 0.472166,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 7.04315e-08,
+                "energy_MeV": 0.472166,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 1.01667e-06,
+                "energy_MeV": 0.873346,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 6.34482e-08,
+                "energy_MeV": 0.874346,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 5.22683e-11,
+                "energy_MeV": 0.874374,
+                "type": "Internal Conversion Electron"
+            },
+            {
+                "icode": 6,
+                "mnemonic": "IE",
+                "yield": 5.71442e-11,
+                "energy_MeV": 0.874374,
+                "type": "Internal Conversion Electron"
+            }
+        ]
+    }
+}
