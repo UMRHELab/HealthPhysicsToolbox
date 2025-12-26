@@ -1,3 +1,7 @@
+# Ensures requirements are installed
+from Utility.Functions.requirements import check_requirements
+check_requirements()
+
 ##### IMPORTS #####
 import tkinter as tk
 from App.home import return_home

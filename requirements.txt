@@ -1,0 +1,4 @@
+radioactivedecay
+pandas
+matplotlib
+Pillow
