@@ -8,8 +8,9 @@ from App.style import SectionFrame
 from Utility.Functions.files import get_user_data_path
 from Utility.Functions.math_utility import energy_units
 from Core.Decay.Information.energies_export import export_data
-from Utility.Functions.gui_utility import make_spacer, get_width, make_unit_dropdown
-from Utility.Functions.logic_utility import get_item, get_interactions, get_threshold
+from Utility.Functions.gui_utility import make_spacer, get_width
+from Utility.Functions.logic_utility import get_item, get_interactions
+from Utility.Functions.gui_utility import make_dropdown, make_unit_dropdown
 from Utility.Functions.gui_utility import interaction_checkbox, make_title_frame, basic_label
 
 # For global access to nodes on decay information export screen
@@ -160,85 +161,70 @@ def decay_info_export(root, category, mode, common_el, element, isotope):
     # Spacer
     empty_frame2 = make_spacer(root)
 
-    # Frame for setting thresholds
-    threshold_frame = SectionFrame(root, title="Set Thresholds")
-    threshold_frame.pack()
-    inner_threshold_frame = threshold_frame.get_inner_frame()
-
-    # Stores whether to apply yield threshold
-    var_yield = tk.IntVar()
-    var_yield.set(0)
-
-    # Creates checkbox for using yield threshold
-    yield_threshold = ttk.Checkbutton(inner_threshold_frame, text="Use Yield Threshold", variable=var_yield,
-                                      style="Maize.TCheckbutton", command=lambda: root.focus())
-    yield_threshold.pack(pady=(10,5))
-
-    # Stores whether to apply energy threshold
-    var_energy = tk.IntVar()
-    var_energy.set(0)
-
-    # Creates checkbox for using energy threshold
-    energy_threshold = ttk.Checkbutton(inner_threshold_frame, text="Use Energy Threshold", variable=var_energy,
-                                       style="Maize.TCheckbutton", command=lambda: root.focus())
-    energy_threshold.pack(pady=(0,5))
+    # Frame for setting filters
+    filter_frame = SectionFrame(root, title="Set Filter")
+    filter_frame.pack()
+    inner_filter_frame = filter_frame.get_inner_frame()
 
     # Input box width
-    entry_width = 10 if platform.system() == "Windows" else 12
+    entry_width = 5 if platform.system() == "Windows" else 6
 
-    # Yield label
-    basic_label(inner_threshold_frame, "Yield:")
+    # Clear selection
+    def on_dropdown_change(event):
+        root.focus()
+        event.widget.selection_clear()
 
-    # Horizontal frame for yield threshold settings
-    yield_side_frame = tk.Frame(inner_threshold_frame, bg="#F2F2F2")
-    yield_side_frame.pack(pady=(5,10))
+    # Frame for filter type selection
+    filter_type_frame = tk.Frame(inner_filter_frame, bg="#F2F2F2")
+    filter_type_frame.pack(pady=(15,5))
+
+    # Stores filter type and sets default
+    var_filter = tk.StringVar(root)
+    var_filter.set("Yield")
+
+    # Filter Type label
+    basic_label(filter_type_frame, "Filter Type:")
+
+    # Filter Type dropdown
+    filter_choices = ["Yield", "Energy * Yield"]
+    _ = make_dropdown(filter_type_frame, var_filter, filter_choices, on_dropdown_change)
+
+    # Frame for filter direction selection
+    filter_dir_frame = tk.Frame(inner_filter_frame, bg="#F2F2F2")
+    filter_dir_frame.pack(pady=(5,5))
+
+    # Stores filter direction and sets default
+    var_filter_dir = tk.StringVar(root)
+    var_filter_dir.set("Top")
+
+    # Filter Direction label
+    basic_label(filter_dir_frame, "Filter Direction:")
+
+    # Filter Direction dropdown
+    filter_dir_choices = ["Top", "Bottom"]
+    _ = make_dropdown(filter_dir_frame, var_filter_dir, filter_dir_choices, on_dropdown_change)
+
+    # Frame for filter entry
+    filter_entry_frame = tk.Frame(inner_filter_frame, bg="#F2F2F2")
+    filter_entry_frame.pack(pady=(5,15))
+
+    # Filter label
+    basic_label(filter_entry_frame, "Filter:")
+
+    # Horizontal frame for filter settings
+    filter_side_frame = tk.Frame(filter_entry_frame, bg="#F2F2F2")
+    filter_side_frame.pack(pady=(0,10))
+
+    # Filter entry
+    filter_entry = tk.Entry(filter_side_frame, width=entry_width, insertbackground="black",
+                            background="white", foreground="black", borderwidth=3, bd=3,
+                            highlightthickness=0, relief='solid', font=monospace_font)
+    filter_entry.insert(0, "100")
+    filter_entry.pack(side='left')
 
     # Min label
-    yield_min_label = ttk.Label(yield_side_frame, text="Min:", style="Black.TLabel")
-    yield_min_label.pack(side='left', padx=5)
-
-    # Min entry
-    yield_min_entry = tk.Entry(yield_side_frame, width=entry_width, insertbackground="black",
-                               background="white", foreground="black", borderwidth=3, bd=3,
-                               highlightthickness=0, relief='solid', font=monospace_font)
-    yield_min_entry.pack(side='left', padx=5)
-
-    # Max label
-    yield_max_label = ttk.Label(yield_side_frame, text="Max:", style="Black.TLabel")
-    yield_max_label.pack(side='left', padx=5)
-
-    # Max entry
-    yield_max_entry = tk.Entry(yield_side_frame, width=entry_width, insertbackground="black",
-                               background="white", foreground="black", borderwidth=3, bd=3,
-                               highlightthickness=0, relief='solid', font=monospace_font)
-    yield_max_entry.pack(side='left', padx=5)
-
-    # Energy label
-    energy_label = basic_label(inner_threshold_frame, "Energy ("+energy_unit+"):")
-
-    # Horizontal frame for energy threshold settings
-    energy_side_frame = tk.Frame(inner_threshold_frame, bg="#F2F2F2")
-    energy_side_frame.pack(pady=(5,10))
-
-    # Min label
-    energy_min_label = ttk.Label(energy_side_frame, text="Min:", style="Black.TLabel")
-    energy_min_label.pack(side='left', padx=5)
-
-    # Min entry
-    energy_min_entry = tk.Entry(energy_side_frame, width=entry_width, insertbackground="black",
-                                background="white", foreground="black", borderwidth=3, bd=3,
-                                highlightthickness=0, relief='solid', font=monospace_font)
-    energy_min_entry.pack(side='left', padx=5)
-
-    # Max label
-    energy_max_label = ttk.Label(energy_side_frame, text="Max:", style="Black.TLabel")
-    energy_max_label.pack(side='left', padx=5)
-
-    # Max entry
-    energy_max_entry = tk.Entry(energy_side_frame, width=entry_width, insertbackground="black",
-                                background="white", foreground="black", borderwidth=3, bd=3,
-                                highlightthickness=0, relief='solid', font=monospace_font)
-    energy_max_entry.pack(side='left', padx=5)
+    filter_label = ttk.Label(filter_side_frame, text="%", style="Black.TLabel")
+    filter_label.pack(side='left')
 
     # Spacer
     empty_frame3 = make_spacer(root)
@@ -265,9 +251,6 @@ def decay_info_export(root, category, mode, common_el, element, isotope):
         with shelve.open(db_path) as shelve_prefs:
             shelve_prefs["energy_unit"] = selection
 
-        # Fixes energy threshold label
-        energy_label.config(text="Energy ("+selection+"):")
-
     # Stores energy unit and sets default
     var_unit = tk.StringVar(root)
     var_unit.set(energy_unit)
@@ -288,15 +271,8 @@ def decay_info_export(root, category, mode, common_el, element, isotope):
                                            get_item(category, common_el, "", element, "", ""),
                                            set(get_interactions(rad_types, rad_type_vars)),
                                            isotope, error_label, var_column.get(),
-                                           var_order.get(),
-                                           get_threshold(var_yield.get(),
-                                                         yield_min_entry.get(), True),
-                                           get_threshold(var_yield.get(),
-                                                         yield_max_entry.get(), False),
-                                           get_threshold(var_energy.get(),
-                                                         energy_min_entry.get(), True),
-                                           get_threshold(var_energy.get(),
-                                                         energy_max_entry.get(), False)
+                                           var_order.get(), var_filter.get(),
+                                           var_filter_dir.get(), filter_entry.get()
                                            ))
     export_button.config(width=get_width(["Export"]))
     export_button.pack(pady=(10,5))
@@ -316,7 +292,7 @@ def decay_info_export(root, category, mode, common_el, element, isotope):
     export_list = [title_frame,
                    radiation_types_frame, empty_frame1,
                    sort_frame, empty_frame2,
-                   threshold_frame, empty_frame3,
+                   filter_frame, empty_frame3,
                    options_frame, back_button]
 
 #####################################################################################

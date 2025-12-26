@@ -19,12 +19,8 @@ The function handles the following error:
    No selected element
    Isotope is stable
    No radiation types selected
-   Non-number yield threshold input
-   Non-number energy threshold input
-   Yield threshold cannot be negative
-   Energy threshold cannot be negative
-   Yield minimum cannot be more than yield maximum
-   Energy minimum cannot be more than energy maximum
+   Non-number filter input
+   Filter input must be in range [0, 100]
 If the error is not applicable, a dataframe is set up
 with columns for radiation type, yield, and energy.
 The dataframe is populated from the corresponding energies
@@ -32,7 +28,7 @@ The dataframe is populated from the corresponding energies
 Finally, we pass on the work to the save_file function.
 """
 def export_data(root, element, rad_types, isotope, error_label, sort_column, sort_order,
-                yield_min, yield_max, energy_min, energy_max):
+                filter_type, filter_dir, filter_percentage):
     root.focus()
 
     # Gets energy unit from user prefs
@@ -55,34 +51,16 @@ def export_data(root, element, rad_types, isotope, error_label, sort_column, sor
         error_label.config(style="Error.TLabel", text="Error: No radiation types selected.")
         return
 
-    # Error-check for non-number yield threshold input
-    if yield_min is None or yield_max is None:
-        error_label.config(style="Error.TLabel", text="Error: Non-number yield threshold input.")
+    # Error-check for a non-number filter input
+    try:
+        filter_percentage = float(filter_percentage)
+    except ValueError:
+        error_label.config(style="Error.TLabel", text="Error: Non-number filter input.")
         return
 
-    # Error-check for non-number energy threshold input
-    if energy_min is None or energy_max is None:
-        error_label.config(style="Error.TLabel", text="Error: Non-number energy threshold input.")
-        return
-
-    # Error-check for negative yield threshold
-    if yield_min < 0 or yield_max < 0:
-        error_label.config(style="Error.TLabel", text="Error: Yield threshold cannot be negative.")
-        return
-
-    # Error-check for negative energy threshold
-    if energy_min < 0 or energy_max < 0:
-        error_label.config(style="Error.TLabel", text="Error: Energy threshold cannot be negative.")
-        return
-
-    # Error-check for minimum yield more than maximum yield
-    if yield_min > yield_max:
-        error_label.config(style="Error.TLabel", text="Error: Yield minimum cannot be more than yield maximum.")
-        return
-
-    # Error-check for minimum energy more than maximum energy
-    if energy_min > energy_max:
-        error_label.config(style="Error.TLabel", text="Error: Energy minimum cannot be more than energy maximum.")
+    # Error-check for filter input outside of range [0, 100]
+    if filter_percentage < 0 or filter_percentage > 100:
+        error_label.config(style="Error.TLabel", text="Error: Filter input must be in range [0, 100].")
         return
 
     error_label.config(style="Error.TLabel", text="")
@@ -116,12 +94,25 @@ def export_data(root, element, rad_types, isotope, error_label, sort_column, sor
         # Populates dataframe and converts energy to desired energy unit
         for index, rad in enumerate(data["radiations"]):
             energy = rad["energy_MeV"] / divisor
-            if rad["type"] in rad_types and \
-               yield_min <= rad["yield"] <= yield_max and \
-               energy_min <= energy <= energy_max:
+            if rad["type"] in rad_types:
                 df.loc[index] = {type_col : rad["type"],
                                  yield_col : rad["yield"],
                                  energy_col : energy}
+
+    # Filter by Yield or by Energy * Yield
+    if filter_type == "Yield":
+        series = df[yield_col]
+    else:
+        series = df[yield_col] * df[energy_col]
+
+    # Gets filter quantile
+    filter_quantile = filter_percentage / 100
+
+    # Top N% or Bottom N%
+    if filter_dir == "Top":
+        df = df[series >= series.quantile(1 - filter_quantile)]
+    else:
+        df = df[series <= series.quantile(filter_quantile)]
 
     # List of radiation types
     rad_types = [

@@ -1,6 +1,3 @@
-##### IMPORTS #####
-import math
-
 #####################################################################################
 # LOGIC SECTION
 #####################################################################################
@@ -43,23 +40,3 @@ It is used in two cases:
 """
 def get_unit(units, modes, mode):
     return dict(zip(modes, units))[mode]
-
-"""
-This function returns the threshold for a radiation energy export.
-If we don't want to use the input we return a default which is dependent
-on whether the threshold is a min or a max.
-Otherwise, we attempt to convert the input to a float, and return None if
-conversion fails.
-"""
-def get_threshold(use, inp, is_min):
-    # Returns default value if we don't want to use input
-    if not use:
-        return 0 if is_min else math.inf
-
-    # Attempts float conversion
-    try:
-        val = float(inp)
-    except ValueError:
-        val = None
-
-    return val
