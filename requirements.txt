@@ -2,3 +2,4 @@ radioactivedecay
 pandas
 matplotlib
 Pillow
+PyInstaller

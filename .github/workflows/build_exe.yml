@@ -31,9 +31,9 @@ jobs:
       run: |
         rm -rf dist build __pycache__ *.spec
         if [[ "$RUNNER_OS" == "Windows" ]]; then
-          pyinstaller --onefile --windowed --add-data "Utility/Modules;Utility/Modules" --add-data "Data;Data" --add-data "matplotlib_cache;matplotlib_cache" script.py
+          pyinstaller --onefile --windowed --add-data "Utility/Modules;Utility/Modules" --add-data "Data;Data" --add-data "matplotlib_cache;matplotlib_cache" --additional-hooks-dir=hooks script.py
         else
-          pyinstaller --onefile --windowed --add-data "Utility/Modules:Utility/Modules" --add-data "Data:Data" --add-data "matplotlib_cache:matplotlib_cache" script.py
+          pyinstaller --onefile --windowed --add-data "Utility/Modules:Utility/Modules" --add-data "Data:Data" --add-data "matplotlib_cache:matplotlib_cache" --additional-hooks-dir=hooks script.py
         fi
       shell: bash
 
