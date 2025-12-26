@@ -1,3 +1,15 @@
+##### IMPORTS #####
+import os
+import sys
+from pathlib import Path
+
+# Set working directory
+if getattr(sys, "frozen", False):
+    base_dir = Path(sys.executable).parent
+else:
+    base_dir = Path(__file__).parent
+os.chdir(base_dir)
+
 # Ensures requirements are installed
 from Utility.Functions.requirements import check_requirements
 check_requirements()
