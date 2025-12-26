@@ -34,7 +34,7 @@ jobs:
           pyinstaller --onefile --windowed --add-data "Utility/Modules:Utility/Modules" --add-data "Data:Data" --add-data "matplotlib_cache:matplotlib_cache" script.py
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: myapp-${{ runner.os }}
         path: dist/*
