@@ -5,7 +5,7 @@ from pathlib import Path
 
 # Set working directory
 if getattr(sys, "frozen", False):
-    base_dir = Path(sys.executable).parent
+    base_dir = Path(getattr(sys, "_MEIPASS", "."))
 else:
     base_dir = Path(__file__).parent
 os.chdir(base_dir)
