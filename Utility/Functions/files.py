@@ -62,7 +62,7 @@ def set_mpl_cache_dir():
     if getattr(sys, 'frozen', False):
         # Use a bundled folder inside the executable's directory
         base_dir = Path(sys.executable).parent
-        cache_dir = base_dir / "matplotlib_cache"
+        cache_dir = base_dir / "Data/matplotlib_cache"
     else:
         # When running as script, use normal cache dir
         cache_dir = Path.home() / ".matplotlib"
