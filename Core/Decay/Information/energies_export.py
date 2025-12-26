@@ -77,11 +77,6 @@ def export_data(root, element, rad_types, isotope, error_label, sort_column, sor
     divisor = energy_units[energy_unit]
 
     db_path = resource_path('Data/Radioactive Decay/Energies/'+element+'.json')
-    import os
-    for entry in os.listdir('Data/Radioactive Decay/Energies/'):
-        full_path = os.path.join('Data/Radioactive Decay/Energies/', entry)
-        if os.path.isfile(full_path):
-            print(entry)
     with open(db_path, 'r') as file:
         # Retrieves data
         data = json.load(file).get(isotope, -1)

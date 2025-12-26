@@ -96,7 +96,8 @@ def read_pt_choices(choices):
 Gets all isotopes of an element.
 """
 def get_isotopes(element):
-    with open("Data/Radioactive Decay/Isotopes.json", "r") as f:
+    db_path = resource_path("Data/Radioactive Decay/Isotopes.json")
+    with open(db_path, "r") as f:
         isotopes = json.load(f)
     return isotopes[element]
 
