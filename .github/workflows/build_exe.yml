@@ -32,6 +32,7 @@ jobs:
           pyinstaller --onefile --windowed --add-data "Utility/Modules;Utility/Modules" --add-data "Data;Data" --add-data "matplotlib_cache;matplotlib_cache" script.py
         else
           pyinstaller --onefile --windowed --add-data "Utility/Modules:Utility/Modules" --add-data "Data:Data" --add-data "matplotlib_cache:matplotlib_cache" script.py
+        fi
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
