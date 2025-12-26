@@ -41,15 +41,23 @@ This function is necessary due to potential path differences depending
 on whether you are running in an IDE/terminal or an executable.
 """
 def get_user_data_path(relative_path):
-    # Return a path in a writable location
-    if getattr(sys, 'frozen', False):
-        # If bundled with PyInstaller, get folder of the executable
-        base_dir = Path(sys.executable).parent
+    # Base folder: next to script/executable
+    if getattr(sys, "frozen", False):
+        exe_dir = Path(sys.executable).parent
     else:
-        # If running as script
-        base_dir = Path(sys.argv[0]).resolve().parent
+        exe_dir = Path(__file__).parent
 
-    full_path = base_dir / "UserData" / relative_path
+    user_data_dir = exe_dir / "UserData"
+
+    # On macOS, if the folder is inside the .app bundle, make it writable elsewhere
+    if sys.platform == "darwin" and getattr(sys, "frozen", False):
+        # Check if the parent is inside .app bundle
+        if ".app" in str(exe_dir):
+            user_data_dir = Path.home() / "Library" / "Application Support" / "MyApp" / "UserData"
+
+    user_data_dir.mkdir(parents=True, exist_ok=True)
+
+    full_path = user_data_dir / relative_path
     full_path.parent.mkdir(parents=True, exist_ok=True)  # Ensure subdirectories exist
     return str(full_path)
 
