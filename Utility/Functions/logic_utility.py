@@ -40,3 +40,12 @@ It is used in two cases:
 """
 def get_unit(units, modes, mode):
     return dict(zip(modes, units))[mode]
+
+"""
+Fixes inconsistency in one particular nuclide across
+ICRP-68 files.
+"""
+def icrp_72_nuclide_alias(nuclide):
+    if nuclide == "Nb-98m":
+        return "Nb-98"
+    return nuclide
