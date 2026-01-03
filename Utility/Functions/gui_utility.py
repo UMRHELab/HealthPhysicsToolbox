@@ -61,6 +61,7 @@ def interaction_checkbox(frame, variable, interaction, command):
     check = ttk.Checkbutton(frame, text=interaction, variable=variable,
                             style="Maize.TCheckbutton", command=command)
     check.pack(anchor="w")
+    return check
 
 """
 This function makes a generic Combobox dropdown.

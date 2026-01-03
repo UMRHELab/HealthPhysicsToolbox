@@ -65,8 +65,17 @@ def decay_info_export(root, category, mode, common_el, element, isotope):
         "Fission Fragment",               "Neutron",
     ]
 
+    neutron_relevant_types = [
+        "Prompt Gamma Ray",
+        "Delayed Gamma Ray",
+        "Delayed Beta Particle",
+        "Alpha Recoil Nucleus",
+        "Fission Fragment",
+        "Neutron",
+    ]
+
     # Variables for each radiation type
-    rad_type_vars = [tk.IntVar(value=1) for _ in range(len(rad_types))]
+    rad_type_vars = [tk.IntVar(value=1 if not rad_type in neutron_relevant_types else 0) for rad_type in rad_types]
 
     # Frame for radiation type checkboxes
     checks = tk.Frame(inner_radiation_types_frame, bg="#F2F2F2")
@@ -74,7 +83,46 @@ def decay_info_export(root, category, mode, common_el, element, isotope):
 
     # Checkboxes for each radiation type
     for index, rad_type in enumerate(rad_types):
+        if rad_type in neutron_relevant_types:
+            continue
         interaction_checkbox(checks, rad_type_vars[index], rad_type, on_select)
+
+    # Checkboxes for each neutron relevant radiation type
+    nr_rad_type_checks = []
+
+    # Creates toggle functionality
+    show = False
+    def toggle():
+        nonlocal show, index, rad_type
+        root.focus()
+        show = not show
+        if show:
+            text = "Hide Neutron Relevant Types"
+            toggle_button.config(text=text, width=get_width([text]))
+
+            for index, rad_type in enumerate(rad_types):
+                if rad_type in neutron_relevant_types:
+                    nr_rad_type_checks.append(interaction_checkbox(checks, rad_type_vars[index],
+                                                                   rad_type, on_select))
+        else:
+            text = "Show Neutron Relevant Types"
+            toggle_button.config(text=text, width=get_width([text]))
+
+            for check in nr_rad_type_checks:
+                check.destroy()
+            nr_rad_type_checks.clear()
+
+            # Makes sure we don't include neutron relevant types if they are hidden
+            for index, rad_type in enumerate(rad_types):
+                if rad_type in neutron_relevant_types:
+                    rad_type_vars[index].set(0)
+
+    # Creates toggle button to show/hide neutron relevant radiation types
+    toggle_button = ttk.Button(inner_radiation_types_frame, text="Show Neutron Relevant Types",
+                               style="Maize.TButton", padding=(0,0),
+                               command=toggle)
+    toggle_button.config(width=get_width(["Show Neutron Relevant Types"]))
+    toggle_button.pack(pady=5)
 
     # Spacer
     empty_frame1 = make_spacer(root)
