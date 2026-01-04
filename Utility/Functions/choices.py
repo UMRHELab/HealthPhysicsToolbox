@@ -30,7 +30,7 @@ If the category is Custom Materials, the default list is empty.
 def get_choices(category, module, particle):
     choices = []
 
-    if module == "Dose" and particle == "Photons":
+    if module == "Deposition" and particle == "Photons":
         particle = "Alphas"
 
     if category == "All Materials":

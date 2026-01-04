@@ -5,20 +5,19 @@ from tkinter import ttk
 from App.style import SectionFrame
 from App.add_custom_menu import add_custom_menu
 from Utility.Functions.choices import get_choices
-from App.Dose.Alphas.alphas_export import alphas_export
+from Utility.Functions.logic_utility import get_unit
 from Utility.Functions.math_utility import energy_units
+from Utility.Functions.gui_utility import make_unit_dropdown
 from Utility.Functions.gui_utility import make_vertical_frame
-from Core.Dose.Alphas.alphas_calculations import sp_denominator
 from Utility.Functions.gui_utility import make_spacer, get_width
-from Utility.Functions.logic_utility import get_unit, get_interactions
+from App.Deposition.Photons.photons_export import photons_export
 from Utility.Functions.gui_utility import make_title_frame, basic_label
-from Core.Dose.Alphas.alphas_calculations import sp_e_numerator, sp_l_numerator
 from Utility.Functions.files import resource_path, open_file, get_user_data_path
 from Utility.Functions.math_utility import density_numerator, density_denominator
-from Utility.Functions.gui_utility import make_unit_dropdown, interaction_checkbox
+from Core.Deposition.Photons.photons_calculations import mea_numerator, mea_denominator
 from Utility.Functions.gui_utility import make_action_dropdown, make_customize_category_dropdown
 
-# For global access to nodes on alpha stopping power advanced screen
+# For global access to nodes on photon energy absorption advanced screen
 advanced_list = []
 
 #####################################################################################
@@ -26,10 +25,11 @@ advanced_list = []
 #####################################################################################
 
 """
-This function sets up the alpha stopping power advanced screen.
+This function sets up the photon energy absorption advanced screen.
 The following sections and widgets are created:
-   Module Title (Alpha Stopping Power)
+   Module Title (Photon Energy Absorption)
    Customize Categories section
+   Select Interaction Types section (only when Calculation Mode is not Density)
    Select Units section
    Export Menu button
    References button
@@ -40,35 +40,34 @@ behaviors.
 The sections and widgets are stored in advanced_list so they can be
 accessed later by clear_advanced.
 """
-def alphas_advanced(root, category, mode, interactions, common_el,
-                    common_mat, element, material, custom_mat, linear):
+def photons_advanced(root, category, mode, common_el, common_mat, element,
+                     material, custom_mat):
     global advanced_list
 
     # Gets units from user prefs
-    db_path = get_user_data_path("Settings/Dose/Alphas")
+    db_path = get_user_data_path("Settings/Deposition/Photons")
     with shelve.open(db_path) as prefs:
-        sp_e_num = prefs.get("sp_e_num", "MeV")
-        sp_l_num = prefs.get("sp_l_num", "cm\u00B2")
+        mea_num = prefs.get("mac_num", "cm\u00B2")
         d_num = prefs.get("d_num", "g")
-        sp_den = prefs.get("sp_den", "g")
+        mea_den = prefs.get("mac_den", "g")
         d_den = prefs.get("d_den", "cm\u00B3")
         energy_unit = prefs.get("energy_unit", "MeV")
 
     # Makes title frame
-    title_frame = make_title_frame(root, "Alpha Stopping Power", "Dose/Alphas")
+    title_frame = make_title_frame(root, "Photon Energy Absorption", "Deposition/Photons")
 
     # Gets common and non-common elements
-    elements = get_choices("All Elements", "Dose", "Alphas")
-    common = get_choices("Common Elements", "Dose", "Alphas")
+    elements = get_choices("All Elements", "Deposition", "Photons")
+    common = get_choices("Common Elements", "Deposition", "Photons")
     non_common = [element for element in elements if element not in common]
 
     # Gets common and non-common materials
-    materials = get_choices("All Materials", "Dose", "Alphas")
-    common_m = get_choices("Common Materials", "Dose", "Alphas")
+    materials = get_choices("All Materials", "Deposition", "Photons")
+    common_m = get_choices("Common Materials", "Deposition", "Photons")
     non_common_m = [material for material in materials if material not in common_m]
 
     # Gets custom materials
-    custom = get_choices("Custom Materials", "Dose", "Alphas")
+    custom = get_choices("Custom Materials", "Deposition", "Photons")
 
     # Frame for add/remove settings
     a_r_frame = SectionFrame(root, title="Customize Categories")
@@ -77,33 +76,16 @@ def alphas_advanced(root, category, mode, interactions, common_el,
 
     # Horizontal frame for add/remove settings
     side_frame = tk.Frame(inner_a_r_frame, bg="#F2F2F2")
-    side_frame.pack(pady=(15, 5))
+    side_frame.pack(pady=(15,5))
 
     # Action button
     a_r_button = [ttk.Button()]
 
-    # List of interactions
-    interaction_choices = ["Total Stopping Power",
-                           "Electronic Stopping Power",
-                           "Nuclear Stopping Power"]
-
-    # Variables for each interaction type
-    var0 = tk.IntVar()
-    var1 = tk.IntVar()
-    var2 = tk.IntVar()
-    interaction_vars = [var0, var1, var2]
-
-    # Selects the previously selected interactions
-    for i in range(len(interaction_choices)):
-        if interaction_choices[i] in interactions:
-            interaction_vars[i].set(1)
-
     # Simplifies calls to make_vertical_frame
     def make_v_frame():
         to_custom = lambda: to_custom_menu(root, category, mode,
-                            get_interactions(interaction_choices, interaction_vars),
                                            common_el, common_mat,
-                                           element, material, custom_mat, linear)
+                                           element, material, custom_mat)
         return make_vertical_frame(root, inner_a_r_frame, var_action.get(),
                                    var_customize_category.get(), non_common, common,
                                    non_common_m, common_m, custom, a_r_button,
@@ -151,63 +133,6 @@ def alphas_advanced(root, category, mode, interactions, common_el,
     # Spacer
     empty_frame1 = make_spacer(root)
 
-    # Frame for interaction type
-    interactions_frame = SectionFrame(root, title="Select Interaction Types")
-    inner_interactions_frame = interactions_frame.get_inner_frame()
-    inner_interactions_frame.config(pady=10)
-
-    # Spacer
-    empty_frame2 = tk.Frame()
-
-    # Ensures at least one interaction type is selected
-    # If user tries to select none,
-    # Total Stopping Power
-    # is automatically selected
-    def set_default():
-        safe = False
-        for var in interaction_vars:
-            if var.get() == 1:
-                safe = True
-        if not safe:
-            var0.set(1)
-
-    # Logic for when Total Stopping Power is selected
-    def on_select_total():
-        root.focus()
-        if var0.get() == 1:
-            for var in interaction_vars:
-                if var != var0:
-                    var.set(0)
-        else:
-            set_default()
-
-    # Logic for when any other interaction is selected
-    def on_select(var):
-        root.focus()
-        if var.get() == 1:
-            var0.set(0)
-        else:
-            set_default()
-
-    # Select Interaction Types section is only created if
-    # Calculation Mode is Mass Stopping Power
-    if mode == "Mass Stopping Power":
-        interactions_frame.pack()
-
-        checks = tk.Frame(inner_interactions_frame, bg="#F2F2F2")
-        checks.pack()
-
-        # Checkboxes for each interaction type
-        interaction_checkbox(checks, var0, "Total Stopping Power",
-                             on_select_total)
-        interaction_checkbox(checks, var1, "Electronic Stopping Power",
-                             lambda: on_select(var1))
-        interaction_checkbox(checks, var2, "Nuclear Stopping Power",
-                             lambda: on_select(var2))
-
-        # Spacer
-        empty_frame2 = make_spacer(root)
-
     # Frame for units
     unit_frame = SectionFrame(root, title="Select Units")
     unit_frame.pack()
@@ -215,33 +140,21 @@ def alphas_advanced(root, category, mode, interactions, common_el,
 
     # Horizontal frame for unit settings
     unit_side_frame = tk.Frame(inner_unit_frame, bg="#F2F2F2")
-    unit_side_frame.pack(pady=(20,0) if mode != "Density" else 20)
+    unit_side_frame.pack(pady=20)
 
     # Units label
-    mode_text = mode[5:] if mode == "Mass Stopping Power" else mode
-    unit_label = ttk.Label(unit_side_frame, text=mode_text+" Units:", style="Black.TLabel")
+    unit_label = ttk.Label(unit_side_frame, text=mode+" Units:", style="Black.TLabel")
     unit_label.pack(side='left', padx=5)
 
     # Logic for when a numerator unit is selected
-    def on_select_e_num(event):
+    def on_select_num(event):
         event.widget.selection_clear()
         root.focus()
         selection = event.widget.get()
         with shelve.open(db_path) as shelve_prefs:
-            if mode == "Mass Stopping Power":
-                shelve_prefs["sp_e_num"] = selection
-            elif mode == "Density":
-                shelve_prefs["d_num"] = selection
-
-    # Logic for when a numerator unit is selected
-    def on_select_l_num(event):
-        event.widget.selection_clear()
-        root.focus()
-        selection = event.widget.get()
-        with shelve.open(db_path) as shelve_prefs:
-            if mode == "Mass Stopping Power":
-                shelve_prefs["sp_l_num"] = selection
-            elif mode == "Density":
+            if mode == "Mass Energy-Absorption":
+                shelve_prefs["mea_num"] = selection
+            else:
                 shelve_prefs["d_num"] = selection
 
     # Logic for when a denominator unit is selected
@@ -250,40 +163,26 @@ def alphas_advanced(root, category, mode, interactions, common_el,
         root.focus()
         selection = event.widget.get()
         with shelve.open(db_path) as shelve_prefs:
-            if mode == "Mass Stopping Power":
-                shelve_prefs["sp_den"] = selection
-            elif mode == "Density":
+            if mode == "Mass Energy-Absorption":
+                shelve_prefs["mea_den"] = selection
+            else:
                 shelve_prefs["d_den"] = selection
 
     # Mode choices
-    mode_choices = ["Mass Stopping Power",
+    mode_choices = ["Mass Energy-Absorption",
                     "Density"]
 
     # Possible unit choices
-    num_e_choices = [sp_e_numerator, density_numerator]
-    num_l_choices = [sp_l_numerator, density_numerator]
-    den_choices = [sp_denominator, density_denominator]
+    num_choices = [mea_numerator, density_numerator]
+    den_choices = [mea_denominator, density_denominator]
 
     # Stores numerator and sets default
-    var_numerator_e = tk.StringVar(root)
-    var_numerator_e.set(get_unit([sp_e_num, d_num], mode_choices, mode))
+    var_numerator = tk.StringVar(root)
+    var_numerator.set(get_unit([mea_num, d_num], mode_choices, mode))
 
     # Creates dropdown menu for numerator unit
-    numerator_e_choices = list(get_unit(num_e_choices, mode_choices, mode).keys())
-    _ = make_unit_dropdown(unit_side_frame, var_numerator_e, numerator_e_choices, on_select_e_num)
-
-    if mode == "Mass Stopping Power":
-        # * label
-        slash_label = ttk.Label(unit_side_frame, text="*", style="Black.TLabel")
-        slash_label.pack(side='left')
-
-        # Stores numerator and sets default
-        var_numerator_l = tk.StringVar(root)
-        var_numerator_l.set(get_unit([sp_l_num, d_num], mode_choices, mode))
-
-        # Creates dropdown menu for numerator unit
-        numerator_l_choices = list(get_unit(num_l_choices, mode_choices, mode).keys())
-        _ = make_unit_dropdown(unit_side_frame, var_numerator_l, numerator_l_choices, on_select_l_num)
+    numerator_choices = list(get_unit(num_choices, mode_choices, mode).keys())
+    _ = make_unit_dropdown(unit_side_frame, var_numerator, numerator_choices, on_select_num)
 
     # / label
     slash_label = ttk.Label(unit_side_frame, text="/", style="Black.TLabel")
@@ -291,14 +190,14 @@ def alphas_advanced(root, category, mode, interactions, common_el,
 
     # Stores denominator and sets default
     var_denominator = tk.StringVar(root)
-    var_denominator.set(get_unit([sp_den, d_den], mode_choices, mode))
+    var_denominator.set(get_unit([mea_den, d_den], mode_choices, mode))
 
     # Creates dropdown menu for denominator unit
     denominator_choices = list(get_unit(den_choices, mode_choices, mode).keys())
     _ = make_unit_dropdown(unit_side_frame, var_denominator, denominator_choices, on_select_den)
 
     # Spacer
-    empty_frame3 = make_spacer(root)
+    empty_frame2 = make_spacer(root)
 
     # Frame for Export Menu, References, & Help
     bottom_frame = tk.Frame(root, bg="#F2F2F2")
@@ -309,7 +208,7 @@ def alphas_advanced(root, category, mode, interactions, common_el,
     if mode != "Density":
         # Horizontal frame for energy unit settings
         energy_unit_side_frame = tk.Frame(inner_unit_frame, bg="#F2F2F2")
-        energy_unit_side_frame.pack(pady=20)
+        energy_unit_side_frame.pack(pady=(0,20))
 
         # Energy unit label
         energy_unit_label = ttk.Label(energy_unit_side_frame, text="Energy Unit:",
@@ -336,10 +235,8 @@ def alphas_advanced(root, category, mode, interactions, common_el,
                                    padding=(0,0),
                                    command=lambda:
                                    to_export_menu(root, category, mode,
-                            get_interactions(interaction_choices, interaction_vars),
-                                                  common_el, common_mat,
-                                                  element, material, custom_mat,
-                                                  linear))
+                                                  common_el, common_mat, element,
+                                                  material, custom_mat))
         export_button.config(width=get_width(["Export Menu"]))
         export_button.pack(side='left', padx=5)
 
@@ -357,22 +254,19 @@ def alphas_advanced(root, category, mode, interactions, common_el,
     help_button.config(width=get_width(["Help"]))
     help_button.pack(side='left', padx=5)
 
-    # Creates Back button to return to alpha stopping power main screen
+    # Creates Back button to return to photon energy absorption main screen
     back_button = ttk.Button(root, text="Back", style="Maize.TButton",
                              padding=(0,0),
-                             command=lambda: to_main(root, category, mode,
-                             get_interactions(interaction_choices, interaction_vars),
-                                                     common_el, common_mat,
-                                                     element, material, custom_mat,
-                                                     linear))
+                             command=lambda: to_main(root, category, mode, common_el,
+                                                     common_mat, element, material,
+                                                     custom_mat))
     back_button.config(width=get_width(["Back"]))
     back_button.pack(pady=5)
 
     # Stores nodes into global list
     advanced_list = [title_frame,
                      a_r_frame, a_r_button[0], empty_frame1,
-                     interactions_frame, empty_frame2,
-                     unit_frame, empty_frame3,
+                     unit_frame, empty_frame2,
                      bottom_frame, back_button]
 
 #####################################################################################
@@ -380,47 +274,47 @@ def alphas_advanced(root, category, mode, interactions, common_el,
 #####################################################################################
 
 """
-This function clears the alpha stopping power advanced screen
+This function clears the photon energy absorption advanced screen
 in preparation for opening a different screen.
 """
 def clear_advanced():
     global advanced_list
 
-    # Clears alpha stopping power advanced screen
+    # Clears photon energy absorption advanced screen
     for node in advanced_list:
         node.destroy()
     advanced_list.clear()
 
 """
-This function transitions from the alpha stopping power advanced screen
-to the alpha stopping power main screen by first clearing the
-alpha stopping power advanced screen and then creating the
-alpha stopping power main screen.
+This function transitions from the photon energy absorption advanced screen
+to the photon energy absorption main screen by first clearing the
+photon energy absorption advanced screen and then creating the
+photon energy absorption main screen.
 It is called when the Back button is hit.
 """
-def to_main(root, category, mode, interactions, common_el, common_mat,
-            element, material, custom_mat, linear):
-    from App.Dose.Alphas.alphas_main import alphas_main
+def to_main(root, category, mode, common_el, common_mat, element,
+            material, custom_mat):
+    from App.Deposition.Photons.photons_main import photons_main
 
     clear_advanced()
-    alphas_main(root, category, mode, interactions, common_el, common_mat,
-                element, material, custom_mat, linear)
+    photons_main(root, category, mode, common_el, common_mat, element,
+                 material, custom_mat)
 
 """
-This function transitions from the alpha stopping power advanced screen
+This function transitions from the photon energy absorption advanced screen
 to the add custom materials menu by first clearing the
-alpha stopping power advanced screen and then creating the
+photon energy absorption advanced screen and then creating the
 add custom materials menu.
 It is called when the Add Custom Materials button is hit.
 """
-def to_custom_menu(root, category, mode, interactions, common_el, common_mat,
-                   element, material, custom_mat, linear):
+def to_custom_menu(root, category, mode, common_el, common_mat, element,
+                   material, custom_mat):
     clear_advanced()
-    back = lambda: alphas_advanced(root, category, mode, interactions, common_el,
-                                   common_mat, element, material, custom_mat, linear)
+    back = lambda: photons_advanced(root, category, mode, common_el, common_mat, element,
+                                    material, custom_mat)
 
     # Gets density units from user prefs
-    db_path = get_user_data_path("Settings/Dose/Alphas")
+    db_path = get_user_data_path("Settings/Deposition/Photons")
     with shelve.open(db_path) as prefs:
         d_num = prefs.get("d_num", "g")
         d_den = prefs.get("d_den", "cm\u00B3")
@@ -428,30 +322,30 @@ def to_custom_menu(root, category, mode, interactions, common_el, common_mat,
     add_custom_menu(root, d_num, d_den, back)
 
 """
-This function transitions from the alpha stopping power advanced screen
-to the alpha stopping power export screen by first clearing the
-alpha stopping power advanced screen and then creating the
-alpha stopping power export screen.
+This function transitions from the photon energy absorption advanced screen
+to the photon energy absorption export screen by first clearing the
+photon energy absorption advanced screen and then creating the
+photon energy absorption export screen.
 It is called when the Export Menu button is hit.
 """
-def to_export_menu(root, category, mode, interactions, common_el, common_mat,
-                   element, material, custom_mat, linear):
+def to_export_menu(root, category, mode, common_el, common_mat, element,
+                   material, custom_mat):
     clear_advanced()
-    alphas_export(root, category, mode, interactions, common_el, common_mat,
-                  element, material, custom_mat, linear)
+    photons_export(root, category, mode, common_el, common_mat, element,
+                   material, custom_mat)
 
 """
-This function opens the alpha stopping power References.txt file.
+This function opens the photon energy absorption References.txt file.
 """
 def open_ref(root):
     root.focus()
-    db_path = resource_path('Utility/Modules/Dose/Alphas/References.txt')
+    db_path = resource_path('Utility/Modules/Deposition/Photons/References.txt')
     open_file(db_path)
 
 """
-This function opens the alpha stopping power Help.txt file.
+This function opens the photon energy absorption Help.txt file.
 """
 def open_help(root):
     root.focus()
-    db_path = resource_path('Utility/Modules/Dose/Alphas/Help.txt')
+    db_path = resource_path('Utility/Modules/Deposition/Photons/Help.txt')
     open_file(db_path)

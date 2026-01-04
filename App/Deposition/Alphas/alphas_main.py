@@ -10,8 +10,8 @@ from Utility.Functions.files import get_user_data_path
 from Utility.Functions.gui_utility import make_exit_button
 from Utility.Functions.gui_utility import make_spacer, get_width
 from Utility.Functions.logic_utility import get_item, valid_saved
-from Core.Dose.Alphas.alphas_calculations import handle_calculation
 from Utility.Functions.gui_utility import make_dropdown, make_result_box
+from Core.Deposition.Alphas.alphas_calculations import handle_calculation
 from Utility.Functions.gui_utility import make_category_dropdown, make_item_dropdown
 from Utility.Functions.gui_utility import basic_label, result_label, make_title_frame
 
@@ -45,7 +45,7 @@ def alphas_main(root, category="Common Elements",
     global main_list
 
     # Gets energy unit from user prefs
-    db_path = get_user_data_path("Settings/Dose/Alphas")
+    db_path = get_user_data_path("Settings/Deposition/Alphas")
     with shelve.open(db_path) as prefs:
         energy_unit = prefs.get("energy_unit", "MeV")
 
@@ -54,18 +54,18 @@ def alphas_main(root, category="Common Elements",
         interactions = ["Total Stopping Power"]
 
     # Makes title frame
-    title_frame = make_title_frame(root, "Alpha Stopping Power", "Dose/Alphas")
+    title_frame = make_title_frame(root, "Alpha Stopping Power", "Deposition/Alphas")
 
     # Creates font for result label and energy entry
     monospace_font = font.Font(family="Menlo", size=12)
 
     # Gets the item options
-    choices = get_choices(category, "Dose", "Alphas")
+    choices = get_choices(category, "Deposition", "Alphas")
 
     # Gets customizable categories
-    common_elements = get_choices("Common Elements", "Dose", "Alphas")
-    common_materials = get_choices("Common Materials", "Dose", "Alphas")
-    custom_materials = get_choices("Custom Materials", "Dose", "Alphas")
+    common_elements = get_choices("Common Elements", "Deposition", "Alphas")
+    common_materials = get_choices("Common Materials", "Deposition", "Alphas")
+    custom_materials = get_choices("Custom Materials", "Deposition", "Alphas")
 
     # Make sure default choices are valid selections
     common_el = valid_saved(common_el, common_elements)
@@ -208,7 +208,7 @@ def alphas_main(root, category="Common Elements",
         category = var_category.get()
 
         # Updates item dropdown to match category
-        choices = get_choices(category, "Dose", "Alphas")
+        choices = get_choices(category, "Deposition", "Alphas")
         var.set(get_item(category, common_el, common_mat, element, material, custom_mat))
         item_dropdown.set_completion_list(choices)
         item_dropdown.config(values=choices, width=get_width(choices))
@@ -378,7 +378,7 @@ It is called when the Advanced Settings button is hit.
 def to_advanced(root, category, mode, interactions, common_el,
                 common_mat, element, material, custom_mat, linear):
     root.focus()
-    from App.Dose.Alphas.alphas_advanced import alphas_advanced
+    from App.Deposition.Alphas.alphas_advanced import alphas_advanced
 
     clear_main()
     alphas_advanced(root, category, mode, interactions, common_el,

@@ -1,6 +1,6 @@
 ##### IMPORTS #####
 from tkinter import ttk
-from App.Dose.dose import dose_menu
+from App.Deposition.deposition import deposition_menu
 from App.Decay.decay import decay_menu
 from App.General.general import general_menu
 from App.Shielding.shielding import shielding_menu
@@ -28,12 +28,12 @@ def return_home(root):
     shielding_button.config(width=get_width(["Attenuation and Range Data"]))
     shielding_button.pack(pady=5)
 
-    # Creates button for dose menu
-    dose_button = ttk.Button(root, text="Radiation Dose Data",
-                             command=lambda: dose(root),
-                             style="Maize.TButton", padding=(0,0))
-    dose_button.config(width=get_width(["Radiation Dose Data"]))
-    dose_button.pack(pady=5)
+    # Creates button for deposition menu
+    deposition_button = ttk.Button(root, text="Energy Deposition Data",
+                                   command=lambda: deposition(root),
+                                   style="Maize.TButton", padding=(0,0))
+    deposition_button.config(width=get_width(["Energy Deposition Data"]))
+    deposition_button.pack(pady=5)
 
     # Creates button for decay menu
     decay_button = ttk.Button(root, text="Radioactive Decay Data",
@@ -50,7 +50,7 @@ def return_home(root):
     general_button.pack(pady=5)
 
     # Stores nodes into global list
-    home_list = [title, shielding_button, dose_button, decay_button, general_button]
+    home_list = [title, shielding_button, deposition_button, decay_button, general_button]
 
 #####################################################################################
 # NAVIGATION SECTION
@@ -80,14 +80,14 @@ def shielding(root):
 
 """
 This function transitions from the home screen
-to the dose screen by first clearing the
-home screen and then creating the dose screen.
-It is called when the Radiation Dose Data button is hit.
+to the deposition screen by first clearing the
+home screen and then creating the deposition screen.
+It is called when the Energy Deposition Data button is hit.
 """
-def dose(root):
+def deposition(root):
     root.focus()
     clear_home()
-    dose_menu(root)
+    deposition_menu(root)
 
 """
 This function transitions from the home screen

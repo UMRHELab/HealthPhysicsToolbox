@@ -6,12 +6,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from Utility.Functions.logic_utility import get_unit
 from Utility.Functions.gui_utility import no_selection
-from Core.Dose.Alphas.alphas_calculations import sp_denominator
 from Utility.Functions.choices import element_choices, material_choices
-from Core.Dose.Alphas.alphas_calculations import sp_e_numerator, sp_l_numerator
+from Core.Deposition.Electrons.electrons_calculations import sp_denominator
 from Utility.Functions.files import save_file, resource_path, get_user_data_path
 from Utility.Functions.math_utility import find_data, find_density, energy_units
 from Utility.Functions.math_utility import density_numerator, density_denominator
+from Core.Deposition.Electrons.electrons_calculations import sp_e_numerator, sp_l_numerator
 
 #####################################################################################
 # EXPORT SECTION
@@ -41,7 +41,7 @@ def export_data(root, item, category, mode, interactions, choice, save,
     root.focus()
 
     # Gets units from user prefs
-    db_path = get_user_data_path("Settings/Dose/Alphas")
+    db_path = get_user_data_path("Settings/Deposition/Electrons")
     with shelve.open(db_path) as prefs:
         sp_e_num = prefs.get("sp_e_num", "MeV")
         sp_l_num = prefs.get("sp_l_num", "cm\u00B2")
@@ -51,10 +51,12 @@ def export_data(root, item, category, mode, interactions, choice, save,
         energy_unit = prefs.get("energy_unit", "MeV")
 
     # Gets applicable units
-    num_e_units = [sp_e_num, d_num]
-    num_l_units = [sp_l_num, d_num]
-    den_units = [sp_den, d_den]
+    num_e_units = [sp_e_num, "", "", d_num]
+    num_l_units = [sp_l_num, "", "", d_num]
+    den_units = [sp_den, "", "", d_den]
     mode_choices = ["Mass Stopping Power",
+                    "Radiation Yield",
+                    "Density Effect Delta",
                     "Density"]
     num_e = get_unit(num_e_units, mode_choices, mode)
     num_l = get_unit(num_l_units, mode_choices, mode)
@@ -67,32 +69,38 @@ def export_data(root, item, category, mode, interactions, choice, save,
         return
 
     # Error-check for no interactions selected
-    if len(interactions) == 0:
+    if mode == "Mass Stopping Power" and len(interactions) == 0:
         error_label.config(style="Error.TLabel", text="Error: No interactions selected.")
         return
 
     error_label.config(style="Error.TLabel", text="")
 
     # Sets up columns for dataframe
-    energy_col = "Alpha Energy (" + energy_unit + ")"
+    energy_col = "Electron Energy (" + energy_unit + ")"
     cols = [energy_col]
-    for interaction in interactions:
-        cols.append(interaction)
+    if mode == "Mass Stopping Power":
+        for interaction in interactions:
+            cols.append(interaction)
+    else:
+        cols.append(mode)
 
     df = pd.DataFrame(columns=cols)
     if category in element_choices:
         # Load the CSV file
-        db_path = resource_path('Data/NIST Coefficients/Alphas/Elements/' + item + '.csv')
+        db_path = resource_path('Data/NIST Coefficients/Electrons/Elements/' + item + '.csv')
         df2 = pd.read_csv(db_path)
 
-        df[energy_col] = df2["Alpha Energy"]
+        df[energy_col] = df2["Kinetic Energy"]
 
-        for interaction in interactions:
-            df[interaction] = df2[interaction]
+        if mode == "Mass Stopping Power":
+            for interaction in interactions:
+                df[interaction] = df2[interaction]
+        else:
+            df[mode] = df2[mode]
     elif category in material_choices:
         db_path = resource_path('Data/General Data/Material Composition/' + item + '.csv')
         with open(db_path, 'r') as file:
-            make_df_for_material(file, df, item, category, interactions)
+            make_df_for_material(file, df, item, category, mode, interactions)
     else:
         db_path = get_user_data_path('Custom Materials/_' + item)
         with shelve.open(db_path) as db:
@@ -102,27 +110,30 @@ def export_data(root, item, category, mode, interactions, choice, save,
         # Create file-like object from the stored string
         csv_file_like = io.StringIO(stored_data)
 
-        make_df_for_material(csv_file_like, df, item, category, interactions)
+        make_df_for_material(csv_file_like, df, item, category, mode, interactions)
 
     # Converts energy column to desired energy unit
     df[energy_col] /= energy_units[energy_unit]
 
     # Convert to desired unit
-    density_mult = 1
-    if linear:
-        density_mult = find_density(category, item)
-        density_mult *= density_numerator[den]
-        density_mult /= density_denominator[num_l.split("\u00B2", 1)[0] + "\u00B3"]
-    for interaction in interactions:
-        df[interaction] *= sp_e_numerator[num_e]
-        df[interaction] *= sp_l_numerator[num_l]
-        df[interaction] /= sp_denominator[den]
-        df[interaction] *= density_mult
+    if mode == "Mass Stopping Power":
+        density_mult = 1
+        if linear:
+            density_mult = find_density(category, item)
+            density_mult *= density_numerator[den]
+            density_mult /= density_denominator[num_l.split("\u00B2", 1)[0] + "\u00B3"]
+        for interaction in interactions:
+            df[interaction] *= sp_e_numerator[num_e]
+            df[interaction] *= sp_l_numerator[num_l]
+            df[interaction] /= sp_denominator[den]
+            df[interaction] *= density_mult
 
     unit = " (" + num + "/" + den + ")"
-    if linear:
-        unit = " (" + num_e + "/" + num_l.split("\u00B2", 1)[0] + ")"
-    mode_col = mode + unit
+    mode_col = mode
+    if mode == "Mass Stopping Power":
+        if linear:
+            unit = " (" + num_e + "/" + num_l.split("\u00B2", 1)[0] + ")"
+        mode_col += unit
 
     if choice == "Plot":
         configure_plot(interactions, df, energy_col, mode_col, item)
@@ -132,8 +143,9 @@ def export_data(root, item, category, mode, interactions, choice, save,
             error_label.config(style="Success.TLabel", text=choice + " exported!")
             plt.show()
     else:
-        for interaction in interactions:
-            df.rename(columns={interaction: interaction+unit}, inplace=True)
+        if mode == "Mass Stopping Power":
+            for interaction in interactions:
+                df.rename(columns={interaction: interaction+unit}, inplace=True)
         save_file(df, choice, error_label, item, "stopping")
 
 #####################################################################################
@@ -153,12 +165,17 @@ def configure_plot(interactions, df, energy_col, mode_col, item):
     plt.clf()
 
     # Plot the data
-    for interaction in interactions:
-        plt.plot(df[energy_col], df[interaction], marker='o', label=interaction)
+    if mode_col.split(" ", 2)[1] == "Stopping":
+        for interaction in interactions:
+            plt.plot(df[energy_col], df[interaction], marker='o', label=interaction)
+    else:
+        plt.plot(df[energy_col], df[mode_col], marker='o', label=mode_col)
     plt.title(item + " - " + mode_col, fontsize=8.5)
     plt.xscale('log')
     plt.yscale('log')
     plt.legend()
+    if mode_col.split(" ", 1)[0] == "Stopping":
+        plt.legend()
     plt.xlabel(energy_col)
     plt.ylabel(mode_col)
     plt.grid(True)
@@ -179,14 +196,14 @@ elements. Then, for each energy value, we get the corresponding
 interaction value for the rest of the row by calling the find_data function
 with each interaction.
 """
-def make_df_for_material(file_like, df, material, category, interactions):
+def make_df_for_material(file_like, df, material, category, mode, interactions):
     # Reads in file
     reader = csv.DictReader(file_like)
 
     # Create the dataframe
     vals = []
     for row in reader:
-        db_path = resource_path('Data/NIST Coefficients/Alphas/Elements/' + row['Element'] + '.csv')
+        db_path = resource_path('Data/NIST Coefficients/Electrons/Elements/' + row['Element'] + '.csv')
         if len(vals) == 0:
             with open(db_path, 'r') as file:
                 # Reads in file
@@ -194,7 +211,7 @@ def make_df_for_material(file_like, df, material, category, interactions):
 
                 # Gets energy values to use as dots
                 for row2 in reader2:
-                    vals.append(float(row2["Alpha Energy"]))
+                    vals.append(float(row2["Kinetic Energy"]))
         else:
             with open(db_path, 'r') as file:
                 # Reads in file
@@ -203,7 +220,7 @@ def make_df_for_material(file_like, df, material, category, interactions):
                 new_vals = []
                 # Gets energy values to use as dots
                 for row2 in reader2:
-                    new_vals.append(float(row2["Alpha Energy"]))
+                    new_vals.append(float(row2["Kinetic Energy"]))
                 max_val = max(new_vals)
                 min_val = min(new_vals)
                 vals = [val for val in vals if min_val <= val <= max_val]
@@ -211,7 +228,11 @@ def make_df_for_material(file_like, df, material, category, interactions):
     # Finds the data for mode at each energy value and adds to dataframe
     for index, val in enumerate(vals):
         row = [val]
-        for interaction in interactions:
-            x = find_data(category, interaction, material, val, "Alphas")
+        if mode == "Mass Stopping Power":
+            for interaction in interactions:
+                x = find_data(category, interaction, material, val, "Electrons")
+                row.append(x)
+        else:
+            x = find_data(category, mode, material, val, "Electrons")
             row.append(x)
         df.loc[index] = row

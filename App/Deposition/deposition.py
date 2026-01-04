@@ -1,24 +1,24 @@
 ##### IMPORTS #####
 from tkinter import ttk
-from App.Dose.Alphas.alphas_main import alphas_main
-from App.Dose.Photons.photons_main import photons_main
-from App.Dose.Electrons.electrons_main import electrons_main
+from App.Deposition.Alphas.alphas_main import alphas_main
+from App.Deposition.Photons.photons_main import photons_main
+from App.Deposition.Electrons.electrons_main import electrons_main
 from Utility.Functions.gui_utility import get_width, make_title_frame
 
-# For global access to nodes on dose screen
-dose_list = []
+# For global access to nodes on deposition screen
+deposition_list = []
 
 #####################################################################################
 # MENU SECTION
 #####################################################################################
 
 """
-This function creates the dose screen.
+This function creates the deposition screen.
 """
-def dose_menu(root):
-    global dose_list
+def deposition_menu(root):
+    global deposition_list
 
-    title = make_title_frame(root, "Radiation Dose Data", "Dose")
+    title = make_title_frame(root, "Energy Deposition Data", "Deposition")
 
     # Creates photons button
     photons_button = ttk.Button(root, text="Photons",
@@ -49,68 +49,68 @@ def dose_menu(root):
     exit_button.pack(pady=5)
 
     # Stores nodes into global list
-    dose_list = [title, photons_button, electrons_button, alphas_button,
-                 exit_button]
+    deposition_list = [title, photons_button, electrons_button, alphas_button,
+                       exit_button]
 
 #####################################################################################
 # NAVIGATION SECTION
 #####################################################################################
 
 """
-This function clears the dose screen in preparation
+This function clears the deposition screen in preparation
 for opening a different screen.
 """
-def clear_dose():
-    global dose_list
+def clear_deposition():
+    global deposition_list
 
     # Clears home
-    for node in dose_list:
+    for node in deposition_list:
         node.destroy()
 
 """
-This function transitions from the dose screen
-to the home screen by first clearing the dose screen
+This function transitions from the deposition screen
+to the home screen by first clearing the deposition screen
 and then creating the home screen.
 It is called when the Exit button is hit.
 """
 def exit_to_home(root):
     root.focus()
     from App.home import return_home
-    clear_dose()
+    clear_deposition()
     return_home(root)
 
 """
-This function transitions from the dose screen
+This function transitions from the deposition screen
 to the photon energy absorption main screen by first
-clearing the dose screen and then creating the
+clearing the deposition screen and then creating the
 photon energy absorption main screen.
 It is called when the Photons button is hit.
 """
 def to_photons(root):
     root.focus()
-    clear_dose()
+    clear_deposition()
     photons_main(root)
 
 """
-This function transitions from the dose screen
+This function transitions from the deposition screen
 to the electron stopping power main screen by first
-clearing the dose screen and then creating the
+clearing the deposition screen and then creating the
 electron stopping power main screen.
 It is called when the Electrons button is hit.
 """
 def to_electrons(root):
     root.focus()
-    clear_dose()
+    clear_deposition()
     electrons_main(root)
 
 """
-This function transitions from the dose screen
+This function transitions from the deposition screen
 to the alpha stopping power main screen by first
-clearing the dose screen and then creating the
+clearing the deposition screen and then creating the
 alpha stopping power main screen.
 It is called when the Alphas button is hit.
 """
 def to_alphas(root):
     root.focus()
-    clear_dose()
+    clear_deposition()
     alphas_main(root)

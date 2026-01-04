@@ -11,11 +11,9 @@ from Utility.Functions.math_utility import find_data, find_density, errors, ener
 #####################################################################################
 
 # Unit choices paired with their factor in relation to the default
-sp_e_numerator = {"eV" : 1000 ** 2, "keV" : 1000,
-                  "MeV" : 1, "GeV" : 0.001}
-sp_l_numerator = {"mm\u00B2" : 10 ** 2, "cm\u00B2" : 1,
-                  "m\u00B2" : 0.01 ** 2}
-sp_denominator = {"mg" : 1000, "g" : 1, "kg" : 0.001}
+mea_numerator = {"mm\u00B2" : 10 ** 2, "cm\u00B2" : 1,
+                 "m\u00B2" : 0.01 ** 2}
+mea_denominator = {"mg" : 1000, "g" : 1, "kg" : 0.001}
 
 #####################################################################################
 # CALCULATIONS SECTION
@@ -34,29 +32,24 @@ Finally, if the calculation did not cause an error,
 the result is converted to the desired units, and then
 displayed in the result label.
 """
-def handle_calculation(root, category, mode, interactions, item,
-                       energy_str, result_box, range_result):
+def handle_calculation(root, category, mode, item, energy_str, result_box):
     root.focus()
 
     # Gets units from user prefs
-    db_path = get_user_data_path("Settings/Dose/Alphas")
+    db_path = get_user_data_path("Settings/Deposition/Photons")
     with shelve.open(db_path) as prefs:
-        sp_e_num = prefs.get("sp_e_num", "MeV")
-        sp_l_num = prefs.get("sp_l_num", "cm\u00B2")
+        mea_num = prefs.get("mea_num", "cm\u00B2")
         d_num = prefs.get("d_num", "g")
-        sp_den = prefs.get("sp_den", "g")
+        mea_den = prefs.get("mea_den", "g")
         d_den = prefs.get("d_den", "cm\u00B3")
         energy_unit = prefs.get("energy_unit", "MeV")
 
     # Gets applicable units
-    num_e_units = [sp_e_num, d_num]
-    num_l_units = [sp_l_num, d_num]
-    den_units = [sp_den, d_den]
-    mode_choices = ["Mass Stopping Power",
+    num_units = [mea_num, d_num]
+    den_units = [mea_den, d_den]
+    mode_choices = ["Mass Energy-Absorption",
                     "Density"]
-    num_e = get_unit(num_e_units, mode_choices, mode)
-    num_l = get_unit(num_l_units, mode_choices, mode)
-    num = num_e + " * " + num_l if mode == "Mass Stopping Power" else num_e
+    num = get_unit(num_units, mode_choices, mode)
     den = get_unit(den_units, mode_choices, mode)
 
     # Error-check for no selected item
@@ -77,34 +70,21 @@ def handle_calculation(root, category, mode, interactions, item,
 
     # Converts energy_target to MeV to comply with the raw data
     energy_target *= energy_units[energy_unit]
-    result = 0
 
     if mode == "Density":
         result = find_density(category, item)
-        result2 = 0
     else:
-        for interaction in interactions:
-            datum = find_data(category, interaction, item, energy_target, "Alphas")
-            if datum in errors:
-                result = datum
-                break
-            result += datum
-        result2 = find_density(category, item)
+        result = find_data(category, mode, item, energy_target, "Photons")
 
     # Displays result label
     if not result in errors:
         # Converts result to desired units
-        if mode == "Mass Stopping Power":
-            result *= sp_e_numerator[num_e]
-            result *= sp_l_numerator[num_l]
-            result /= sp_denominator[den]
-            result2 *= density_numerator[den]
-            lin_den = num_l.split("\u00B2", 1)[0]
-            result2 /= density_denominator[lin_den + "\u00B3"]
-            edit_result(f"{(result*result2):.4g} {num_e}/{lin_den}", range_result)
-        else:
+        if mode == "Density":
             result *= density_numerator[num]
             result /= density_denominator[den]
+        else:
+            result *= mea_numerator[num]
+            result /= mea_denominator[den]
         edit_result(f"{result:.4g}", result_box, num=num, den=den)
     else:
         edit_result(result, result_box)

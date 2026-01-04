@@ -39,7 +39,7 @@ def handle_calculation(root, category, mode, interactions, item,
     root.focus()
 
     # Gets units from user prefs
-    db_path = get_user_data_path("Settings/Dose/Electrons")
+    db_path = get_user_data_path("Settings/Deposition/Alphas")
     with shelve.open(db_path) as prefs:
         sp_e_num = prefs.get("sp_e_num", "MeV")
         sp_l_num = prefs.get("sp_l_num", "cm\u00B2")
@@ -49,12 +49,10 @@ def handle_calculation(root, category, mode, interactions, item,
         energy_unit = prefs.get("energy_unit", "MeV")
 
     # Gets applicable units
-    num_e_units = [sp_e_num, "", "", d_num]
-    num_l_units = [sp_l_num, "", "", d_num]
-    den_units = [sp_den, "", "", d_den]
+    num_e_units = [sp_e_num, d_num]
+    num_l_units = [sp_l_num, d_num]
+    den_units = [sp_den, d_den]
     mode_choices = ["Mass Stopping Power",
-                    "Radiation Yield",
-                    "Density Effect Delta",
                     "Density"]
     num_e = get_unit(num_e_units, mode_choices, mode)
     num_l = get_unit(num_l_units, mode_choices, mode)
@@ -81,20 +79,17 @@ def handle_calculation(root, category, mode, interactions, item,
     energy_target *= energy_units[energy_unit]
     result = 0
 
-    if mode == "Mass Stopping Power":
+    if mode == "Density":
+        result = find_density(category, item)
+        result2 = 0
+    else:
         for interaction in interactions:
-            datum = find_data(category, interaction, item, energy_target, "Electrons")
+            datum = find_data(category, interaction, item, energy_target, "Alphas")
             if datum in errors:
                 result = datum
                 break
             result += datum
         result2 = find_density(category, item)
-    elif mode == "Density":
-        result = find_density(category, item)
-        result2 = 0
-    else:
-        result = find_data(category, mode, item, energy_target, "Electrons")
-        result2 = 0
 
     # Displays result label
     if not result in errors:
@@ -107,7 +102,7 @@ def handle_calculation(root, category, mode, interactions, item,
             lin_den = num_l.split("\u00B2", 1)[0]
             result2 /= density_denominator[lin_den + "\u00B3"]
             edit_result(f"{(result*result2):.4g} {num_e}/{lin_den}", range_result)
-        elif mode == "Density":
+        else:
             result *= density_numerator[num]
             result /= density_denominator[den]
         edit_result(f"{result:.4g}", result_box, num=num, den=den)

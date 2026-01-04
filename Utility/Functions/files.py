@@ -45,7 +45,7 @@ def get_user_data_path(relative_path):
     if getattr(sys, "frozen", False):
         exe_dir = Path(sys.executable).parent
     else:
-        exe_dir = Path(__file__).parent
+        exe_dir = Path(sys.argv[0]).parent
 
     user_data_dir = exe_dir / "UserData"
 

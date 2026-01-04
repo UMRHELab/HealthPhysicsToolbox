@@ -2,13 +2,12 @@
 import tkinter as tk
 from tkinter import ttk
 from App.style import SectionFrame
-from Core.Dose.Alphas.alphas_plots import export_data
-from Utility.Functions.gui_utility import make_spacer, get_width
-from Utility.Functions.logic_utility import get_item, get_interactions
+from Utility.Functions.logic_utility import get_item
+from Core.Deposition.Photons.photons_plots import export_data
 from Utility.Functions.gui_utility import make_title_frame, basic_label
-from Utility.Functions.gui_utility import make_export_dropdown, interaction_checkbox
+from Utility.Functions.gui_utility import get_width, make_export_dropdown
 
-# For global access to nodes on alpha stopping power export screen
+# For global access to nodes on photon energy absorption export screen
 export_list = []
 
 #####################################################################################
@@ -16,9 +15,9 @@ export_list = []
 #####################################################################################
 
 """
-This function sets up the alpha stopping power export screen.
+This function sets up the photon energy absorption export screen.
 The following sections and widgets are created:
-   Module Title (Alpha Stopping Power)
+   Module Title (Photon Energy Absorption)
    Select Interaction Types section
    Export Options section
    Back button
@@ -27,40 +26,12 @@ behaviors.
 The sections and widgets are stored in export_list so they can be
 accessed later by clear_export.
 """
-def alphas_export(root, category, mode, interactions, common_el, common_mat,
-                  element, material, custom_mat, linear):
+def photons_export(root, category, mode, common_el, common_mat, element,
+                   material, custom_mat):
     global export_list
 
     # Makes title frame
-    title_frame = make_title_frame(root, "Alpha Stopping Power", "Dose/Alphas")
-
-    # List of interactions
-    interaction_choices = ["Total Stopping Power",
-                           "Electronic Stopping Power",
-                           "Nuclear Stopping Power"]
-
-    # Variables for each interaction type
-    interaction_vars = [tk.IntVar() for _ in range(len(interaction_choices))]
-
-    # Frame for interactions
-    interactions_frame = SectionFrame(root, title="Select Interaction Types")
-    interactions_frame.pack()
-    inner_interactions_frame = interactions_frame.get_inner_frame()
-    inner_interactions_frame.config(pady=10)
-
-    # Logic for when an interaction type is selected
-    on_select = lambda: root.focus()
-
-    # Frame for interaction checkboxes
-    checks = tk.Frame(inner_interactions_frame, bg="#F2F2F2")
-    checks.pack()
-
-    # Checkboxes for each interaction type
-    for index, interaction in enumerate(interaction_choices):
-        interaction_checkbox(checks, interaction_vars[index], interaction, on_select)
-
-    # Spacer
-    empty_frame1 = make_spacer(root)
+    title_frame = make_title_frame(root, "Photon Energy Absorption", "Deposition/Photons")
 
     # Stores whether file is saved and sets default
     var_save = tk.IntVar()
@@ -109,10 +80,8 @@ def alphas_export(root, category, mode, interactions, common_el, common_mat,
                                export_data(root,
                                get_item(category, common_el, common_mat,
                                         element, material, custom_mat),
-                                           category, mode,
-                               get_interactions(interaction_choices, interaction_vars),
-                                           var_export.get(), var_save.get(), error_label,
-                                           linear))
+                                           category, mode, var_export.get(),
+                                           var_save.get(), error_label))
     export_button.config(width=get_width(["Export"]))
     export_button.pack(pady=(10,5))
 
@@ -120,17 +89,17 @@ def alphas_export(root, category, mode, interactions, common_el, common_mat,
     error_label = ttk.Label(inner_options_frame, text="", style="Error.TLabel")
     error_label.pack(pady=(5,10))
 
-    # Creates Back button to return to alpha stopping power advanced screen
+    # Creates Back button to return to photon energy absorption advanced screen
     back_button = ttk.Button(root, text="Back", style="Maize.TButton", padding=(0,0),
-                             command=lambda: advanced_back(root, category, mode, interactions,
-                                                           common_el, common_mat, element,
-                                                           material, custom_mat, linear))
+                             command=lambda: advanced_back(root, category, mode,
+                                                           common_el, common_mat,
+                                                           element, material,
+                                                           custom_mat))
     back_button.config(width=get_width(["Back"]))
     back_button.pack(pady=5)
 
     # Stores nodes into global list
     export_list = [title_frame,
-                   interactions_frame, empty_frame1,
                    options_frame, back_button]
 
 #####################################################################################
@@ -138,28 +107,28 @@ def alphas_export(root, category, mode, interactions, common_el, common_mat,
 #####################################################################################
 
 """
-This function clears the alpha stopping power export screen
+This function clears the photon energy absorption export screen
 in preparation for opening a different screen.
 """
 def clear_export():
     global export_list
 
-    # Clears alpha stopping power export screen
+    # Clears photon energy absorption export screen
     for node in export_list:
         node.destroy()
     export_list.clear()
 
 """
-This function transitions from the alpha stopping power export screen
-to the alpha stopping power advanced screen by first clearing the
-alpha stopping power export screen and then creating the
-alpha stopping power advanced screen.
+This function transitions from the photon energy absorption export screen
+to the photon energy absorption advanced screen by first clearing the
+photon energy absorption export screen and then creating the
+photon energy absorption advanced screen.
 It is called when the Back button is hit.
 """
-def advanced_back(root, category, mode, interactions, common_el, common_mat,
-                  element, material, custom_mat, linear):
-    from App.Dose.Alphas.alphas_advanced import alphas_advanced
+def advanced_back(root, category, mode, common_el, common_mat, element,
+                  material, custom_mat):
+    from App.Deposition.Photons.photons_advanced import photons_advanced
 
     clear_export()
-    alphas_advanced(root, category, mode, interactions, common_el, common_mat,
-                    element, material, custom_mat, linear)
+    photons_advanced(root, category, mode, common_el, common_mat, element,
+                     material, custom_mat)

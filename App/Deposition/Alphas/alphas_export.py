@@ -2,13 +2,13 @@
 import tkinter as tk
 from tkinter import ttk
 from App.style import SectionFrame
-from Core.Dose.Electrons.electrons_plots import export_data
+from Core.Deposition.Alphas.alphas_plots import export_data
 from Utility.Functions.gui_utility import make_spacer, get_width
 from Utility.Functions.logic_utility import get_item, get_interactions
 from Utility.Functions.gui_utility import make_title_frame, basic_label
 from Utility.Functions.gui_utility import make_export_dropdown, interaction_checkbox
 
-# For global access to nodes on electron stopping power export screen
+# For global access to nodes on alpha stopping power export screen
 export_list = []
 
 #####################################################################################
@@ -16,9 +16,9 @@ export_list = []
 #####################################################################################
 
 """
-This function sets up the electron stopping power export screen.
+This function sets up the alpha stopping power export screen.
 The following sections and widgets are created:
-   Module Title (Electron Stopping Power)
+   Module Title (Alpha Stopping Power)
    Select Interaction Types section
    Export Options section
    Back button
@@ -27,47 +27,40 @@ behaviors.
 The sections and widgets are stored in export_list so they can be
 accessed later by clear_export.
 """
-def electrons_export(root, category, mode, interactions, common_el, common_mat,
-                     element, material, custom_mat, linear):
+def alphas_export(root, category, mode, interactions, common_el, common_mat,
+                  element, material, custom_mat, linear):
     global export_list
 
     # Makes title frame
-    title_frame = make_title_frame(root, "Electron Stopping Power", "Dose/Electrons")
-
-    # Select Interaction Types frame
-    interactions_frame = tk.Frame()
-
-    # Spacer
-    empty_frame1 = tk.Frame()
+    title_frame = make_title_frame(root, "Alpha Stopping Power", "Deposition/Alphas")
 
     # List of interactions
-    interaction_choices = ["Stopping Power - Total",
-                           "Stopping Power - Collision",
-                           "Stopping Power - Radiative"]
+    interaction_choices = ["Total Stopping Power",
+                           "Electronic Stopping Power",
+                           "Nuclear Stopping Power"]
 
     # Variables for each interaction type
     interaction_vars = [tk.IntVar() for _ in range(len(interaction_choices))]
 
-    if mode == "Mass Stopping Power":
-        # Frame for interactions
-        interactions_frame = SectionFrame(root, title="Select Interaction Types")
-        interactions_frame.pack()
-        inner_interactions_frame = interactions_frame.get_inner_frame()
-        inner_interactions_frame.config(pady=10)
+    # Frame for interactions
+    interactions_frame = SectionFrame(root, title="Select Interaction Types")
+    interactions_frame.pack()
+    inner_interactions_frame = interactions_frame.get_inner_frame()
+    inner_interactions_frame.config(pady=10)
 
-        # Logic for when an interaction type is selected
-        on_select = lambda: root.focus()
+    # Logic for when an interaction type is selected
+    on_select = lambda: root.focus()
 
-        # Frame for interaction checkboxes
-        checks = tk.Frame(inner_interactions_frame, bg="#F2F2F2")
-        checks.pack()
+    # Frame for interaction checkboxes
+    checks = tk.Frame(inner_interactions_frame, bg="#F2F2F2")
+    checks.pack()
 
-        # Checkboxes for each interaction type
-        for index, interaction in enumerate(interaction_choices):
-            interaction_checkbox(checks, interaction_vars[index], interaction, on_select)
+    # Checkboxes for each interaction type
+    for index, interaction in enumerate(interaction_choices):
+        interaction_checkbox(checks, interaction_vars[index], interaction, on_select)
 
-        # Spacer
-        empty_frame1 = make_spacer(root)
+    # Spacer
+    empty_frame1 = make_spacer(root)
 
     # Stores whether file is saved and sets default
     var_save = tk.IntVar()
@@ -127,7 +120,7 @@ def electrons_export(root, category, mode, interactions, common_el, common_mat,
     error_label = ttk.Label(inner_options_frame, text="", style="Error.TLabel")
     error_label.pack(pady=(5,10))
 
-    # Creates Back button to return to electron stopping power advanced screen
+    # Creates Back button to return to alpha stopping power advanced screen
     back_button = ttk.Button(root, text="Back", style="Maize.TButton", padding=(0,0),
                              command=lambda: advanced_back(root, category, mode, interactions,
                                                            common_el, common_mat, element,
@@ -145,28 +138,28 @@ def electrons_export(root, category, mode, interactions, common_el, common_mat,
 #####################################################################################
 
 """
-This function clears the electron stopping power export screen
+This function clears the alpha stopping power export screen
 in preparation for opening a different screen.
 """
 def clear_export():
     global export_list
 
-    # Clears electron stopping power export screen
+    # Clears alpha stopping power export screen
     for node in export_list:
         node.destroy()
     export_list.clear()
 
 """
-This function transitions from the electron stopping power export screen
-to the electron stopping power advanced screen by first clearing the
-electron stopping power export screen and then creating the
-electron stopping power advanced screen.
+This function transitions from the alpha stopping power export screen
+to the alpha stopping power advanced screen by first clearing the
+alpha stopping power export screen and then creating the
+alpha stopping power advanced screen.
 It is called when the Back button is hit.
 """
 def advanced_back(root, category, mode, interactions, common_el, common_mat,
                   element, material, custom_mat, linear):
-    from App.Dose.Electrons.electrons_advanced import electrons_advanced
+    from App.Deposition.Alphas.alphas_advanced import alphas_advanced
 
     clear_export()
-    electrons_advanced(root, category, mode, interactions, common_el, common_mat,
-                       element, material, custom_mat, linear)
+    alphas_advanced(root, category, mode, interactions, common_el, common_mat,
+                    element, material, custom_mat, linear)
