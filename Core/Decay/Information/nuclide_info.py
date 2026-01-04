@@ -102,7 +102,7 @@ def nuclide_decay_scheme_tabular(isotope, result_box):
                              }
             index += 1
 
-    save_file(df, "Data", result_box, isotope, "decay_scheme", decay=True)
+    save_file(df, "Data", result_box, isotope, "decay_scheme", True)
 
 """
 This function retrieves the half-life

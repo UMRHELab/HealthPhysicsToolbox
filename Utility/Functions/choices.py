@@ -43,7 +43,8 @@ def get_choices(category, module, particle):
 
     if category == "All Elements":
         # Obtains list of items from csv file
-        db_path = resource_path('Data/NIST Coefficients/' + particle + '/Elements.csv')
+        data = "ICRP Coefficients" if module == "Dose" else "NIST Coefficients"
+        db_path = resource_path('Data/' + data + '/' + particle + '/Elements.csv')
         if module == "Decay":
             db_path = resource_path('Data/Radioactive Decay/Elements.csv')
         if module == "General":
@@ -97,6 +98,15 @@ Gets all isotopes of an element.
 """
 def get_isotopes(element):
     db_path = resource_path("Data/Radioactive Decay/Isotopes.json")
+    with open(db_path, "r") as f:
+        isotopes = json.load(f)
+    return isotopes[element]
+
+"""
+Gets all isotopes of an element for a particular ICRP publication.
+"""
+def get_icrp_isotopes(element, publication):
+    db_path = resource_path("Data/ICRP Coefficients/"+publication+"/Isotopes.json")
     with open(db_path, "r") as f:
         isotopes = json.load(f)
     return isotopes[element]
