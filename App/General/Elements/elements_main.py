@@ -3,11 +3,15 @@ import tkinter as tk
 from tkinter import ttk
 from App.style import SectionFrame
 from Utility.Functions.choices import get_choices
-from Utility.Functions.gui_utility import make_exit_button
 from Core.General.Elements.elements import handle_action
 from Utility.Functions.logic_utility import get_item, valid_saved
-from Utility.Functions.gui_utility import get_width, basic_label, make_title_frame
-from Utility.Functions.gui_utility import make_item_dropdown, make_category_dropdown
+from Utility.Functions.gui_utility import (
+    get_width,
+    basic_label,
+    make_title_frame,
+    make_exit_button, make_advanced_button,
+    make_category_dropdown, make_item_dropdown
+)
 
 # For global access to nodes on elements main screen
 main_list = []
@@ -128,12 +132,8 @@ def elements_main(root, category="Common Elements", common_el="Ag", element="Ac"
     export_button.pack(side='left', padx=5)
 
     # Creates Advanced Settings button
-    advanced_button = ttk.Button(root, text="Advanced Settings",
-                                 style="Maize.TButton", padding=(0,0),
-                                 command=lambda: to_advanced(root, category,
-                                                             common_el, element))
-    advanced_button.config(width=get_width(["Advanced Settings"]))
-    advanced_button.pack(pady=5)
+    advanced_button = make_advanced_button(root, lambda: to_advanced(root, category,
+                                                                     common_el, element))
 
     # Creates Exit button to return to home screen
     exit_button = make_exit_button(root, lambda: exit_to_home(root))

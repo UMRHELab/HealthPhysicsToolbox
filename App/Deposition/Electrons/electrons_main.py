@@ -7,13 +7,15 @@ import tkinter.font as font
 from App.style import SectionFrame
 from Utility.Functions.choices import get_choices
 from Utility.Functions.files import get_user_data_path
-from Utility.Functions.gui_utility import make_exit_button
-from Utility.Functions.gui_utility import make_spacer, get_width
 from Utility.Functions.logic_utility import get_item, valid_saved
-from Utility.Functions.gui_utility import make_dropdown, make_result_box
 from Core.Deposition.Electrons.electrons_calculations import handle_calculation
-from Utility.Functions.gui_utility import make_category_dropdown, make_item_dropdown
-from Utility.Functions.gui_utility import basic_label, result_label, make_title_frame
+from Utility.Functions.gui_utility import (
+    make_spacer, get_width,
+    basic_label, result_label,
+    make_title_frame, make_result_box,
+    make_exit_button, make_advanced_button,
+    make_dropdown, make_category_dropdown, make_item_dropdown
+)
 
 # For global access to nodes on electron stopping power main screen
 main_list = []
@@ -323,14 +325,10 @@ def electrons_main(root, category="Common Elements",
         range_result.pack(pady=(1,20))
 
     # Creates Advanced Settings button
-    advanced_button = ttk.Button(root, text="Advanced Settings",
-                                 style="Maize.TButton", padding=(0,0),
-                                 command=lambda: to_advanced(root, category,
-                                                             mode, interactions, common_el,
-                                                             common_mat, element, material,
-                                                             custom_mat, linear))
-    advanced_button.config(width=get_width(["Advanced Settings"]))
-    advanced_button.pack(pady=5)
+    advanced_button = make_advanced_button(root, lambda: to_advanced(root, category, mode,
+                                                                     interactions, common_el,
+                                                                     common_mat, element, material,
+                                                                     custom_mat, linear))
 
     # Creates Exit button to return to home screen
     exit_button = make_exit_button(root, lambda: exit_to_home(root))

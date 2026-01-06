@@ -8,10 +8,14 @@ from App.style import SectionFrame
 from Utility.Functions.files import get_user_data_path
 from Utility.Functions.math_utility import energy_units
 from Core.Decay.Information.energies_export import export_data
-from Utility.Functions.gui_utility import make_spacer, get_width
 from Utility.Functions.logic_utility import get_item, get_interactions
-from Utility.Functions.gui_utility import make_dropdown, make_unit_dropdown
-from Utility.Functions.gui_utility import interaction_checkbox, make_title_frame, basic_label
+from Utility.Functions.gui_utility import (
+    basic_label,
+    make_title_frame,
+    make_back_button,
+    make_spacer, get_width,
+    make_dropdown, make_unit_dropdown, interaction_checkbox
+)
 
 # For global access to nodes on decay information export screen
 export_list = []
@@ -330,11 +334,8 @@ def decay_info_export(root, category, mode, common_el, element, isotope):
     error_label.pack(pady=(5,10))
 
     # Creates Back button to return to decay information advanced screen
-    back_button = ttk.Button(root, text="Back", style="Maize.TButton", padding=(0,0),
-                             command=lambda: advanced_back(root, category, mode,
-                                                           common_el, element, isotope))
-    back_button.config(width=get_width(["Back"]))
-    back_button.pack(pady=5)
+    back_button = make_back_button(root, lambda: advanced_back(root, category, mode,
+                                                               common_el, element, isotope))
 
     # Stores nodes into global list
     export_list = [title_frame,

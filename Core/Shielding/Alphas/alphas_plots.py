@@ -8,9 +8,11 @@ from Utility.Functions.logic_utility import get_unit
 from Utility.Functions.gui_utility import no_selection
 from Utility.Functions.choices import element_choices, material_choices
 from Utility.Functions.files import save_file, resource_path, get_user_data_path
-from Utility.Functions.math_utility import find_data, find_density, energy_units
-from Utility.Functions.math_utility import density_numerator, density_denominator
 from Core.Shielding.Alphas.alphas_calculations import csda_numerator, csda_denominator
+from Utility.Functions.math_utility import (
+    density_numerator, density_denominator,
+    find_data, find_density, energy_units
+)
 
 #####################################################################################
 # EXPORT SECTION

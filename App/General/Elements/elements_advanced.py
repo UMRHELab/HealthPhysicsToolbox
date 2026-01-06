@@ -4,12 +4,15 @@ import tkinter as tk
 from tkinter import ttk
 from App.style import SectionFrame
 from Utility.Functions.choices import get_choices
-from Utility.Functions.gui_utility import make_vertical_frame
-from Utility.Functions.gui_utility import make_spacer, get_width
-from Utility.Functions.gui_utility import make_title_frame, basic_label
 from Utility.Functions.files import resource_path, open_file, get_user_data_path
-from Utility.Functions.gui_utility import make_unit_dropdown, make_action_dropdown
 from Utility.Functions.math_utility import atomic_mass_numerator, atomic_mass_denominator
+from Utility.Functions.gui_utility import (
+    basic_label,
+    make_back_button,
+    make_spacer, get_width,
+    make_title_frame, make_vertical_frame,
+    make_unit_dropdown, make_action_dropdown
+)
 
 # For global access to nodes on elements advanced screen
 advanced_list = []
@@ -161,11 +164,7 @@ def elements_advanced(root, category, common_el, element):
     help_button.pack(side='left', padx=5)
 
     # Creates Back button to return to elements main screen
-    back_button = ttk.Button(root, text="Back", style="Maize.TButton",
-                             padding=(0,0),
-                             command=lambda: to_main(root, category, common_el, element))
-    back_button.config(width=get_width(["Back"]))
-    back_button.pack(pady=5)
+    back_button = make_back_button(root, lambda: to_main(root, category, common_el, element))
 
     # Stores nodes into global list
     advanced_list = [title_frame,

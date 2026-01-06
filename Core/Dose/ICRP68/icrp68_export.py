@@ -1,9 +1,8 @@
 ##### IMPORTS #####
 import csv
 import pandas as pd
-from Utility.Functions.gui_utility import edit_result
-from Utility.Functions.gui_utility import no_selection
 from Utility.Functions.files import save_file, resource_path
+from Utility.Functions.gui_utility import edit_result, no_selection
 
 #####################################################################################
 # EXPORT SECTION

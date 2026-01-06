@@ -3,13 +3,16 @@ import shelve
 import tkinter as tk
 from tkinter import ttk
 from App.style import SectionFrame
-from Utility.Functions.gui_utility import make_vertical_frame
-from Utility.Functions.gui_utility import interaction_checkbox
-from Utility.Functions.gui_utility import make_spacer, get_width
 from Utility.Functions.choices import get_choices, get_successors
-from Utility.Functions.gui_utility import make_title_frame, basic_label
 from Utility.Functions.files import resource_path, open_file, get_user_data_path
-from Utility.Functions.gui_utility import make_action_dropdown, make_unit_dropdown
+from Utility.Functions.gui_utility import (
+    basic_label,
+    make_back_button,
+    interaction_checkbox,
+    make_spacer, get_width,
+    make_title_frame, make_vertical_frame,
+    make_unit_dropdown, make_action_dropdown
+)
 
 # For global access to nodes on decay calculator advanced screen
 advanced_list = []
@@ -270,12 +273,8 @@ def decay_calc_advanced(root, category, mode, common_el, element, isotope,
     help_button.pack(side='left', padx=5)
 
     # Creates Back button to return to decay calculator main screen
-    back_button = ttk.Button(root, text="Back", style="Maize.TButton",
-                             padding=(0,0),
-                             command=lambda: to_main(root, category, mode, common_el, element,
-                                                     isotope, dates, nuclide_vars))
-    back_button.config(width=get_width(["Back"]))
-    back_button.pack(pady=5)
+    back_button = make_back_button(root, lambda: to_main(root, category, mode, common_el,
+                                                         element, isotope, dates, nuclide_vars))
 
     # Stores nodes into global list
     advanced_list = [title_frame,

@@ -6,9 +6,8 @@ from PIL import Image
 from collections import deque
 import radioactivedecay as rd
 import matplotlib.pyplot as plt
-from Utility.Functions.files import save_file
 from Utility.Functions.gui_utility import edit_result
-from Utility.Functions.files import get_user_data_path
+from Utility.Functions.files import save_file, get_user_data_path
 
 #####################################################################################
 # UNITS SECTION

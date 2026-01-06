@@ -3,10 +3,14 @@ import tkinter as tk
 from tkinter import ttk
 from App.style import SectionFrame
 from Core.Shielding.Photons.photons_plots import export_data
-from Utility.Functions.gui_utility import make_spacer, get_width
 from Utility.Functions.logic_utility import get_item, get_interactions
-from Utility.Functions.gui_utility import make_title_frame, basic_label
-from Utility.Functions.gui_utility import make_export_dropdown, interaction_checkbox
+from Utility.Functions.gui_utility import (
+    basic_label,
+    make_title_frame,
+    make_back_button,
+    make_spacer, get_width,
+    make_export_dropdown, interaction_checkbox
+)
 
 # For global access to nodes on photon attenuation export screen
 export_list = []
@@ -124,13 +128,10 @@ def photons_export(root, category, mode, interactions, common_el, common_mat,
     error_label.pack(pady=(5,10))
 
     # Creates Back button to return to photon attenuation advanced screen
-    back_button = ttk.Button(root, text="Back", style="Maize.TButton", padding=(0,0),
-                             command=lambda: advanced_back(root, category, mode,
-                                                           interactions, common_el,
-                                                           common_mat, element,
-                                                           material, custom_mat))
-    back_button.config(width=get_width(["Back"]))
-    back_button.pack(pady=5)
+    back_button = make_back_button(root, lambda: advanced_back(root, category, mode,
+                                                               interactions, common_el,
+                                                               common_mat, element,
+                                                               material, custom_mat))
 
     # Stores nodes into global list
     export_list = [title_frame,

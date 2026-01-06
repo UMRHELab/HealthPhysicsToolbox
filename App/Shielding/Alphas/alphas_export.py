@@ -4,8 +4,13 @@ from tkinter import ttk
 from App.style import SectionFrame
 from Utility.Functions.logic_utility import get_item
 from Core.Shielding.Alphas.alphas_plots import export_data
-from Utility.Functions.gui_utility import make_title_frame, basic_label
-from Utility.Functions.gui_utility import get_width, make_export_dropdown
+from Utility.Functions.gui_utility import (
+    get_width,
+    basic_label,
+    make_title_frame,
+    make_back_button,
+    make_export_dropdown
+)
 
 # For global access to nodes on alpha range export screen
 export_list = []
@@ -89,12 +94,9 @@ def alphas_export(root, category, mode, common_el, common_mat, element,
     error_label.pack(pady=(5,10))
 
     # Creates Back button to return to alpha range advanced screen
-    back_button = ttk.Button(root, text="Back", style="Maize.TButton", padding=(0,0),
-                             command=lambda: advanced_back(root, category, mode,
-                                                           common_el, common_mat, element,
-                                                           material, custom_mat, linear))
-    back_button.config(width=get_width(["Back"]))
-    back_button.pack(pady=5)
+    back_button = make_back_button(root, lambda: advanced_back(root, category, mode,
+                                                               common_el, common_mat, element,
+                                                               material, custom_mat, linear))
 
     # Stores nodes into global list
     export_list = [title_frame,

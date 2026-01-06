@@ -9,8 +9,10 @@ from Utility.Functions.gui_utility import no_selection
 from Utility.Functions.choices import element_choices, material_choices
 from Utility.Functions.files import save_file, resource_path, get_user_data_path
 from Utility.Functions.math_utility import find_data, find_density, energy_units
-from Core.Shielding.Photons.photons_calculations import mac_numerator, mac_denominator
-from Core.Shielding.Photons.photons_calculations import lac_numerator, lac_denominator
+from Core.Shielding.Photons.photons_calculations import (
+    mac_numerator, mac_denominator,
+    lac_numerator, lac_denominator
+)
 
 #####################################################################################
 # EXPORT SECTION

@@ -2,14 +2,16 @@
 import tkinter as tk
 from tkinter import ttk
 from App.style import SectionFrame
-from Utility.Functions.gui_utility import make_exit_button
 from Core.General.Isotopes.isotopes import handle_calculation
 from Utility.Functions.choices import get_choices, get_isotopes
-from Utility.Functions.gui_utility import make_spacer, get_width
 from Utility.Functions.logic_utility import get_item, valid_saved
-from Utility.Functions.gui_utility import make_dropdown, make_result_box
-from Utility.Functions.gui_utility import make_item_dropdown, make_category_dropdown
-from Utility.Functions.gui_utility import basic_label, result_label, make_title_frame
+from Utility.Functions.gui_utility import (
+    make_spacer, get_width,
+    basic_label, result_label,
+    make_title_frame, make_result_box,
+    make_exit_button, make_advanced_button,
+    make_dropdown, make_category_dropdown, make_item_dropdown
+)
 
 # For global access to nodes on isotopes main screen
 main_list = []
@@ -244,12 +246,8 @@ def isotopes_main(root, category="Common Elements", mode="Proton Number",
     result_box = make_result_box(inner_result_frame)
 
     # Creates Advanced Settings button
-    advanced_button = ttk.Button(root, text="Advanced Settings",
-                                 style="Maize.TButton", padding=(0, 0),
-                                 command=lambda: to_advanced(root, category, mode,
-                                                             common_el, element))
-    advanced_button.config(width=get_width(["Advanced Settings"]))
-    advanced_button.pack(pady=5)
+    advanced_button = make_advanced_button(root, lambda: to_advanced(root, category, mode,
+                                                                     common_el, element))
 
     # Creates Exit button to return to home screen
     exit_button = make_exit_button(root, lambda: exit_to_home(root))

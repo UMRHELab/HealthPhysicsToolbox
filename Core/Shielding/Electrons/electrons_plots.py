@@ -7,11 +7,15 @@ import matplotlib.pyplot as plt
 from Utility.Functions.logic_utility import get_unit
 from Utility.Functions.gui_utility import no_selection
 from Utility.Functions.choices import element_choices, material_choices
-from Core.Shielding.Electrons.electrons_calculations import range_energy_curve
 from Utility.Functions.files import save_file, resource_path, get_user_data_path
-from Utility.Functions.math_utility import find_data, find_density, energy_units
-from Utility.Functions.math_utility import density_numerator, density_denominator
-from Core.Shielding.Electrons.electrons_calculations import csda_numerator, csda_denominator
+from Utility.Functions.math_utility import (
+    density_numerator, density_denominator,
+    find_data, find_density, energy_units
+)
+from Core.Shielding.Electrons.electrons_calculations import (
+    range_energy_curve,
+    csda_numerator, csda_denominator
+)
 
 #####################################################################################
 # EXPORT SECTION

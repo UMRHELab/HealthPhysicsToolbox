@@ -3,8 +3,10 @@ import tkinter as tk
 from tkinter import ttk
 from App.style import SectionFrame
 from Utility.Functions.custom import add_custom
-from Utility.Functions.gui_utility import make_spacer, get_width
-from Utility.Functions.gui_utility import make_title_frame, make_entry_line, make_weights_line
+from Utility.Functions.gui_utility import (
+    make_spacer, get_width,
+    make_title_frame, make_entry_line, make_weights_line
+)
 
 # For global access to nodes on add custom menu
 add_custom_list = []

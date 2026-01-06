@@ -6,16 +6,20 @@ from App.style import SectionFrame
 from App.add_custom_menu import add_custom_menu
 from Utility.Functions.choices import get_choices
 from Utility.Functions.logic_utility import get_unit
-from Utility.Functions.math_utility import energy_units
-from Utility.Functions.gui_utility import make_unit_dropdown
-from Utility.Functions.gui_utility import make_vertical_frame
-from Utility.Functions.gui_utility import make_spacer, get_width
 from App.Deposition.Photons.photons_export import photons_export
-from Utility.Functions.gui_utility import make_title_frame, basic_label
 from Utility.Functions.files import resource_path, open_file, get_user_data_path
-from Utility.Functions.math_utility import density_numerator, density_denominator
 from Core.Deposition.Photons.photons_calculations import mea_numerator, mea_denominator
-from Utility.Functions.gui_utility import make_action_dropdown, make_customize_category_dropdown
+from Utility.Functions.math_utility import (
+    energy_units,
+    density_numerator, density_denominator
+)
+from Utility.Functions.gui_utility import (
+    basic_label,
+    make_back_button,
+    make_spacer, get_width,
+    make_title_frame, make_vertical_frame,
+    make_unit_dropdown, make_action_dropdown, make_customize_category_dropdown
+)
 
 # For global access to nodes on photon energy absorption advanced screen
 advanced_list = []
@@ -255,13 +259,9 @@ def photons_advanced(root, category, mode, common_el, common_mat, element,
     help_button.pack(side='left', padx=5)
 
     # Creates Back button to return to photon energy absorption main screen
-    back_button = ttk.Button(root, text="Back", style="Maize.TButton",
-                             padding=(0,0),
-                             command=lambda: to_main(root, category, mode, common_el,
-                                                     common_mat, element, material,
-                                                     custom_mat))
-    back_button.config(width=get_width(["Back"]))
-    back_button.pack(pady=5)
+    back_button = make_back_button(root, lambda: to_main(root, category, mode,
+                                                         common_el, common_mat, element,
+                                                         material, custom_mat))
 
     # Stores nodes into global list
     advanced_list = [title_frame,

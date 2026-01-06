@@ -4,10 +4,9 @@ import json
 import shelve
 import pandas as pd
 import radioactivedecay as rd
-from Utility.Functions.files import get_user_data_path
 from Utility.Functions.gui_utility import no_selection
 from Utility.Functions.math_utility import energy_units
-from Utility.Functions.files import save_file, resource_path
+from Utility.Functions.files import save_file, get_user_data_path, resource_path
 
 #####################################################################################
 # EXPORT SECTION

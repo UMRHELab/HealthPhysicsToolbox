@@ -5,18 +5,26 @@ from tkinter import ttk
 from App.style import SectionFrame
 from App.add_custom_menu import add_custom_menu
 from Utility.Functions.choices import get_choices
-from Utility.Functions.math_utility import energy_units
-from Utility.Functions.gui_utility import make_vertical_frame
-from Utility.Functions.gui_utility import make_spacer, get_width
 from Utility.Functions.logic_utility import get_unit, get_interactions
 from App.Deposition.Electrons.electrons_export import electrons_export
-from Utility.Functions.gui_utility import make_title_frame, basic_label
-from Core.Deposition.Electrons.electrons_calculations import sp_denominator
 from Utility.Functions.files import resource_path, open_file, get_user_data_path
-from Utility.Functions.math_utility import density_numerator, density_denominator
-from Utility.Functions.gui_utility import make_unit_dropdown, interaction_checkbox
-from Core.Deposition.Electrons.electrons_calculations import sp_e_numerator, sp_l_numerator
-from Utility.Functions.gui_utility import make_action_dropdown, make_customize_category_dropdown
+from Core.Deposition.Electrons.electrons_calculations import (
+    sp_e_numerator,
+    sp_l_numerator,
+    sp_denominator
+)
+from Utility.Functions.math_utility import (
+    energy_units,
+    density_numerator, density_denominator
+)
+from Utility.Functions.gui_utility import (
+    basic_label,
+    make_back_button,
+    interaction_checkbox,
+    make_spacer, get_width,
+    make_title_frame, make_vertical_frame,
+    make_unit_dropdown, make_action_dropdown, make_customize_category_dropdown
+)
 
 # For global access to nodes on electron stopping power advanced screen
 advanced_list = []
@@ -362,15 +370,10 @@ def electrons_advanced(root, category, mode, interactions, common_el,
     help_button.pack(side='left', padx=5)
 
     # Creates Back button to return to electron stopping power main screen
-    back_button = ttk.Button(root, text="Back", style="Maize.TButton",
-                             padding=(0,0),
-                             command=lambda: to_main(root, category, mode,
-                             get_interactions(interaction_choices, interaction_vars),
-                                                     common_el, common_mat,
-                                                     element, material, custom_mat,
-                                                     linear))
-    back_button.config(width=get_width(["Back"]))
-    back_button.pack(pady=5)
+    back_button = make_back_button(root, lambda: to_main(root, category, mode,
+                                                get_interactions(interaction_choices, interaction_vars),
+                                                         common_el, common_mat, element,
+                                                         material, custom_mat, linear))
 
     # Stores nodes into global list
     advanced_list = [title_frame,
