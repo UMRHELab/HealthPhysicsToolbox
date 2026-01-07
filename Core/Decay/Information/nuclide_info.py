@@ -1,7 +1,6 @@
 ##### IMPORTS #####
 import io
 import math
-import json
 import shelve
 import pandas as pd
 import tkinter as tk
@@ -9,9 +8,9 @@ from PIL import Image
 from collections import deque
 import radioactivedecay as rd
 import matplotlib.pyplot as plt
-from Utility.Functions.math_utility import energy_units
 from Utility.Functions.gui_utility import edit_result, window
-from Utility.Functions.files import save_file, get_user_data_path, resource_path
+from Utility.Functions.files import save_file, get_user_data_path
+from Core.Decay.Information.energies_dataframe import create_energies_dataframe
 
 #####################################################################################
 # UNITS SECTION
@@ -150,35 +149,23 @@ def nuclide_energies(isotope, result_box):
     # Gets element
     element = isotope.split('-')[0]
 
-    # Energy unit divisor
-    divisor = energy_units[energy_unit]
-
-    radiations = []
-
-    db_path = resource_path('Data/Radioactive Decay/Energies/' + element + '.json')
-    with open(db_path, 'r') as file:
-        # Retrieves data
-        data = json.load(file).get(isotope, -1)
-
-        # Error-check for missing data
-        if data == -1:
-            edit_result("No data for " + isotope + ".", result_box)
-            return
-
-        # Populates dataframe and converts energy to desired energy unit
-        for index, rad in enumerate(data["radiations"]):
-            energy = rad["energy_MeV"] / divisor
-            radiations.append((rad["type"], rad["yield"], energy))
+    # Creates dataframe
+    df = create_energies_dataframe(element, isotope, result_box, True)
+    if df is None:
+        return
 
     # Header
     row = tk.Frame(scroll_frame)
     row.pack(fill="x", padx=10)
-    tk.Label(row, text=f"Radiation Type", width=30, anchor="w", font=("Arial", 10, "bold")).pack(side="left")
+    tk.Label(row, text="Radiation Type", width=30, anchor="w", font=("Arial", 10, "bold")).pack(side="left")
     tk.Label(row, text="Yield", width=20, anchor="w").pack(side="left")
     tk.Label(row, text=f"Energy ({energy_unit})", anchor="w").pack(side="left")
 
     # Populate fields
-    for type_val, yield_val, energy in radiations:
+    for _, row in df.iterrows():
+        type_val = row["Radiation Type"]
+        yield_val = row["Yield"]
+        energy = row[f"Energy ({energy_unit})"]
         row = tk.Frame(scroll_frame)
         row.pack(fill="x", padx=10)
 

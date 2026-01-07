@@ -1,12 +1,10 @@
 ##### IMPORTS #####
 import math
-import json
 import shelve
-import pandas as pd
 import radioactivedecay as rd
 from Utility.Functions.gui_utility import no_selection
-from Utility.Functions.math_utility import energy_units
-from Utility.Functions.files import save_file, get_user_data_path, resource_path
+from Utility.Functions.files import save_file, get_user_data_path
+from Core.Decay.Information.energies_dataframe import create_energies_dataframe
 
 #####################################################################################
 # EXPORT SECTION
@@ -20,21 +18,28 @@ The function handles the following errors:
    No radiation types selected
    Non-number filter input
    Filter input must be in range [0, 100]
-   No data for isotope
 If the error is not applicable, a dataframe is set up
 with columns for radiation type, yield, and energy.
 The dataframe is populated from the corresponding energies
 .json file.
 Finally, we pass on the work to the save_file function.
 """
-def export_data(root, element, rad_types, isotope, error_label, sort_column, sort_order,
-                filter_type, filter_dir, filter_percentage):
+def export_data(root, element, isotope, error_label):
     root.focus()
 
-    # Gets energy unit from user prefs
+    # List of neutron irrelevant radiation types
+    neutron_irrelevant_types = [
+        "Gamma Ray", "Annihilation Photon",
+        "X-Ray", "Beta- Particle", "Beta+ Particle",
+        "Internal Conversion Electron", "Auger Electron",
+        "Alpha Particle"
+    ]
+
+    # Gets radiation types and filter percentage from user prefs
     db_path = get_user_data_path("Settings/Decay/Information")
     with shelve.open(db_path) as prefs:
-        energy_unit = prefs.get("energy_unit", "MeV")
+        rad_types = prefs.get("rad_types", [rad_type for rad_type in neutron_irrelevant_types])
+        filter_percentage = prefs.get("filter_percentage", "100")
 
     # Error-check for no selected element
     if element == "":
@@ -65,85 +70,9 @@ def export_data(root, element, rad_types, isotope, error_label, sort_column, sor
 
     error_label.config(style="Error.TLabel", text="")
 
-    # Sets up columns for dataframe
-    type_col = "Radiation Type"
-    yield_col = "Yield"
-    energy_col = "Energy (" + energy_unit + ")"
-    cols = [type_col, yield_col, energy_col]
-
-    df = pd.DataFrame(columns=cols)
-
-    # Energy unit divisor
-    divisor = energy_units[energy_unit]
-
-    db_path = resource_path('Data/Radioactive Decay/Energies/'+element+'.json')
-    with open(db_path, 'r') as file:
-        # Retrieves data
-        data = json.load(file).get(isotope, -1)
-
-        # Error-check for missing data
-        if data == -1:
-            error_label.config(style="Error.TLabel", text="No data for "+isotope+".")
-            return
-
-        # Populates dataframe and converts energy to desired energy unit
-        for index, rad in enumerate(data["radiations"]):
-            energy = rad["energy_MeV"] / divisor
-            if rad["type"] in rad_types:
-                df.loc[index] = {type_col : rad["type"],
-                                 yield_col : rad["yield"],
-                                 energy_col : energy}
-
-    # Filter by Yield or by Energy * Yield
-    if filter_type == "Yield":
-        series = df[yield_col]
-    else:
-        series = df[yield_col] * df[energy_col]
-
-    # Gets filter quantile
-    filter_quantile = filter_percentage / 100
-
-    # Top N% or Bottom N%
-    if filter_dir == "Top":
-        df = df[series >= series.quantile(1 - filter_quantile)]
-    else:
-        df = df[series <= series.quantile(filter_quantile)]
-
-    # List of radiation types
-    rad_types = [
-        "Gamma Ray",                      "Prompt Gamma Ray",
-        "Delayed Gamma Ray",              "Annihilation Photon",
-        "X-Ray",                          "Beta- Particle",
-        "Delayed Beta Particle",          "Beta+ Particle",
-        "Internal Conversion Electron",   "Auger Electron",
-        "Alpha Particle",                 "Alpha Recoil Nucleus",
-        "Fission Fragment",               "Neutron",
-    ]
-
-
-    # Create temporary column for radiation type sorting
-    rad_order = {rad: i for i, rad in enumerate(rad_types)}
-    temp_col = "rad_order"
-    df[temp_col] = df[type_col].map(rad_order)
-
-    # Configure sort order
-    by = []
-    ascending = []
-    sort_order = sort_order == "Ascending"
-    if sort_column == type_col:
-        by = [temp_col, yield_col, energy_col]
-        ascending = [sort_order, False, True]
-    elif sort_column == yield_col:
-        by = [yield_col, temp_col, energy_col]
-        ascending = [sort_order, True, True]
-    elif sort_column == energy_col.split(' ')[0]:
-        by = [energy_col, temp_col, yield_col]
-        ascending = [sort_order, True, False]
-
-    # Sort dataframe
-    df.sort_values(by=by, ascending=ascending, inplace=True)
-
-    # Drop temporary column
-    df.drop(columns=[temp_col], inplace=True)
+    # Creates dataframe
+    df = create_energies_dataframe(element, isotope, error_label)
+    if df is None:
+        return
 
     save_file(df, "Data", error_label, isotope, "energies")

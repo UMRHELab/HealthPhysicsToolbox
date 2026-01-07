@@ -73,6 +73,7 @@ def make_dropdown(frame, var, choices, on_select, **pack_args):
     dropdown.config(width=get_width(choices))
     dropdown.pack(**pack_args)
     dropdown.bind("<<ComboboxSelected>>", on_select)
+    load_default(dropdown, var, choices)
     return dropdown
 
 """
@@ -88,18 +89,14 @@ def load_default(dropdown, var, choices):
 This function makes a Combobox dropdown for unit options.
 """
 def make_unit_dropdown(frame, var, choices, on_select):
-    dropdown = make_dropdown(frame, var, choices, on_select, side='left', padx=5)
-    load_default(dropdown, var, choices)
-    return dropdown
+    return make_dropdown(frame, var, choices, on_select, side='left', padx=5)
 
 """
 This function makes a Combobox dropdown for export options.
 """
 def make_export_dropdown(frame, var, on_select):
     export_choices = ["Plot", "Data"]
-    dropdown = make_dropdown(frame, var, export_choices, on_select)
-    load_default(dropdown, var, export_choices)
-    return dropdown
+    return make_dropdown(frame, var, export_choices, on_select)
 
 """
 This function makes a Combobox dropdown for category options.
@@ -114,7 +111,7 @@ def make_category_dropdown(frame, var, select_category, materials=True):
         choices = ["Common Elements", "All Elements"]
 
     # Creates dropdown menu for category selection
-    _ = make_dropdown(frame, var, choices, select_category)
+    return make_dropdown(frame, var, choices, select_category)
 
 """
 This function makes an AutocompleteCombobox dropdown for item options.
@@ -147,7 +144,7 @@ This function makes a Combobox dropdown for action options.
 def make_action_dropdown(frame, var, on_select):
     # Creates dropdown menu for action
     action_choices = ["Add", "Remove"]
-    _ = make_dropdown(frame, var, action_choices, on_select)
+    return make_dropdown(frame, var, action_choices, on_select)
 
 """
 This function makes a Combobox dropdown for customize category options.
@@ -155,7 +152,7 @@ This function makes a Combobox dropdown for customize category options.
 def make_customize_category_dropdown(frame, var, on_select):
     # Creates dropdown menu for customize category
     category_choices = ["Common Elements", "Common Materials", "Custom Materials"]
-    _ = make_dropdown(frame, var, category_choices, on_select)
+    return make_dropdown(frame, var, category_choices, on_select)
 
 """
 This function is used to make an overall module title.
