@@ -1,13 +1,17 @@
 ##### IMPORTS #####
 import io
+import math
+import json
 import shelve
 import pandas as pd
+import tkinter as tk
 from PIL import Image
 from collections import deque
 import radioactivedecay as rd
 import matplotlib.pyplot as plt
-from Utility.Functions.gui_utility import edit_result
-from Utility.Functions.files import save_file, get_user_data_path
+from Utility.Functions.math_utility import energy_units
+from Utility.Functions.gui_utility import edit_result, window
+from Utility.Functions.files import save_file, get_user_data_path, resource_path
 
 #####################################################################################
 # UNITS SECTION
@@ -34,6 +38,8 @@ def handle_calculation(root, mode, isotope, result_box, save):
             nuclide_decay_scheme_tabular(isotope, result_box)
         case "Half Life":
             nuclide_half_life(isotope, result_box)
+        case "Energies":
+            nuclide_energies(isotope, result_box)
 
 """
 This function retrieves the decay scheme plot
@@ -119,3 +125,65 @@ def nuclide_half_life(isotope, result_box):
         edit_result(result, result_box)
     else:
         edit_result(f"{result} {unit}", result_box)
+
+"""
+This function creates a pop-up window displaying
+the energies of the provided isotope.
+The function handles the following errors:
+   Isotope is stable
+   No data for isotope
+"""
+def nuclide_energies(isotope, result_box):
+    # Error-check for isotope is stable
+    if math.isinf(rd.Nuclide(isotope).half_life('s')):
+        edit_result(isotope + " is stable.", result_box)
+        return
+
+    # Gets energy unit from user prefs
+    db_path = get_user_data_path("Settings/Decay/Information")
+    with shelve.open(db_path) as prefs:
+        energy_unit = prefs.get("energy_unit", "MeV")
+
+    # Create pop-up window
+    popup, scroll_frame = window(isotope+" Energies", "600x600")
+
+    # Gets element
+    element = isotope.split('-')[0]
+
+    # Energy unit divisor
+    divisor = energy_units[energy_unit]
+
+    radiations = []
+
+    db_path = resource_path('Data/Radioactive Decay/Energies/' + element + '.json')
+    with open(db_path, 'r') as file:
+        # Retrieves data
+        data = json.load(file).get(isotope, -1)
+
+        # Error-check for missing data
+        if data == -1:
+            edit_result("No data for " + isotope + ".", result_box)
+            return
+
+        # Populates dataframe and converts energy to desired energy unit
+        for index, rad in enumerate(data["radiations"]):
+            energy = rad["energy_MeV"] / divisor
+            radiations.append((rad["type"], rad["yield"], energy))
+
+    # Header
+    row = tk.Frame(scroll_frame)
+    row.pack(fill="x", padx=10)
+    tk.Label(row, text=f"Radiation Type", width=30, anchor="w", font=("Arial", 10, "bold")).pack(side="left")
+    tk.Label(row, text="Yield", width=20, anchor="w").pack(side="left")
+    tk.Label(row, text=f"Energy ({energy_unit})", anchor="w").pack(side="left")
+
+    # Populate fields
+    for type_val, yield_val, energy in radiations:
+        row = tk.Frame(scroll_frame)
+        row.pack(fill="x", padx=10)
+
+        tk.Label(row, text=f"{type_val}:", width=30, anchor="w", font=("Arial", 10, "bold")).pack(side="left")
+        tk.Label(row, text=str(yield_val), width=20, anchor="w").pack(side="left")
+        tk.Label(row, text=str(energy), anchor="w").pack(side="left")
+
+    tk.Button(popup, text="Close", command=popup.destroy).pack(pady=10)

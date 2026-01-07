@@ -1,12 +1,9 @@
 ##### IMPORTS #####
-import shelve
 import platform
 import tkinter as tk
 from tkinter import ttk
 import tkinter.font as font
 from App.style import SectionFrame
-from Utility.Functions.files import get_user_data_path
-from Utility.Functions.math_utility import energy_units
 from Core.Decay.Information.energies_export import export_data
 from Utility.Functions.logic_utility import get_item, get_interactions
 from Utility.Functions.gui_utility import (
@@ -37,11 +34,6 @@ accessed later by clear_export.
 """
 def decay_info_export(root, category, mode, common_el, element, isotope):
     global export_list
-
-    # Gets energy unit from user prefs
-    db_path = get_user_data_path("Settings/Decay/Information")
-    with shelve.open(db_path) as prefs:
-        energy_unit = prefs.get("energy_unit", "MeV")
 
     # Makes title frame
     title_frame = make_title_frame(root, "Decay Information", "Decay/Information")
@@ -286,35 +278,6 @@ def decay_info_export(root, category, mode, common_el, element, isotope):
     options_frame.pack()
     inner_options_frame = options_frame.get_inner_frame()
 
-    # Horizontal frame for unit settings
-    unit_side_frame = tk.Frame(inner_options_frame, bg="#F2F2F2")
-    unit_side_frame.pack(pady=(20,0))
-
-    # Unit label
-    unit_label = ttk.Label(unit_side_frame, text="Energy Unit:",
-                           style="Black.TLabel")
-    unit_label.pack(side='left', padx=5)
-
-    # Logic for when an energy unit is selected
-    def on_select_unit(event):
-        event.widget.selection_clear()
-        root.focus()
-        selection = event.widget.get()
-        with shelve.open(db_path) as shelve_prefs:
-            shelve_prefs["energy_unit"] = selection
-
-    # Stores energy unit and sets default
-    var_unit = tk.StringVar(root)
-    var_unit.set(energy_unit)
-
-    # Creates dropdown menu for unit
-    energy_choices = list(energy_units.keys())
-    _ = make_unit_dropdown(unit_side_frame, var_unit, energy_choices, on_select_unit)
-
-    # Frame for export type
-    export_frame = tk.Frame(inner_options_frame, bg="#F2F2F2")
-    export_frame.pack(pady=5)
-
     # Creates Export button
     export_button = ttk.Button(inner_options_frame, text="Export", style="Maize.TButton",
                                padding=(0,0),
@@ -327,7 +290,7 @@ def decay_info_export(root, category, mode, common_el, element, isotope):
                                            var_filter_dir.get(), filter_entry.get()
                                            ))
     export_button.config(width=get_width(["Export"]))
-    export_button.pack(pady=(10,5))
+    export_button.pack(pady=(20,5))
 
     # Creates error label for bad input
     error_label = ttk.Label(inner_options_frame, text="", style="Error.TLabel")

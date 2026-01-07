@@ -4,6 +4,7 @@ import tkinter as tk
 from tkinter import ttk
 from App.style import SectionFrame
 from Utility.Functions.choices import get_choices
+from Utility.Functions.math_utility import energy_units
 from Core.Decay.Information.nuclide_info import half_life_units
 from App.Decay.Information.decay_info_export import decay_info_export
 from Utility.Functions.files import get_user_data_path, resource_path, open_file
@@ -44,6 +45,7 @@ def decay_info_advanced(root, category, mode, common_el, element, isotope):
     db_path = get_user_data_path("Settings/Decay/Information")
     with shelve.open(db_path) as prefs:
         half_life_unit = prefs.get("hl_unit", "s")
+        energy_unit = prefs.get("energy_unit", "MeV")
 
     # Makes title frame
     title_frame = make_title_frame(root, "Decay Information", "Decay/Information")
@@ -104,7 +106,7 @@ def decay_info_advanced(root, category, mode, common_el, element, isotope):
 
     # Unit options are only created if
     # Calculation Mode is Half Life
-    if mode == "Half Life":
+    if mode == "Half Life" or mode == "Energies":
         # Frame for units
         unit_frame = SectionFrame(root, title="Select Units")
         unit_frame.pack()
@@ -114,25 +116,35 @@ def decay_info_advanced(root, category, mode, common_el, element, isotope):
         unit_side_frame = tk.Frame(inner_unit_frame, bg="#F2F2F2")
         unit_side_frame.pack(pady=20)
 
+        if mode == "Half Life":
+            text = "Half Life Unit:"
+            shelf_name = "hl_unit"
+            default = half_life_unit
+            units = half_life_units
+        else:
+            text = "Energy Unit:"
+            shelf_name = "energy_unit"
+            default = energy_unit
+            units = list(energy_units.keys())
+
         # Unit label
-        unit_label = ttk.Label(unit_side_frame, text=mode + " Unit:",
-                               style="Black.TLabel")
+        unit_label = ttk.Label(unit_side_frame, text=text, style="Black.TLabel")
         unit_label.pack(side='left', padx=5)
 
-        # Logic for when a half-life unit is selected
+        # Logic for when a unit is selected
         def on_select_unit(event):
             event.widget.selection_clear()
             root.focus()
             selection = event.widget.get()
             with shelve.open(db_path) as shelve_prefs:
-                shelve_prefs["hl_unit"] = selection
+                shelve_prefs[shelf_name] = selection
 
-        # Stores half life unit and sets default
+        # Stores unit and sets default
         var_unit = tk.StringVar(root)
-        var_unit.set(half_life_unit)
+        var_unit.set(default)
 
         # Creates dropdown menu for unit
-        _ = make_unit_dropdown(unit_side_frame, var_unit, half_life_units, on_select_unit)
+        _ = make_unit_dropdown(unit_side_frame, var_unit, units, on_select_unit)
 
         # Spacer
         empty_frame2 = make_spacer(root)
@@ -141,13 +153,14 @@ def decay_info_advanced(root, category, mode, common_el, element, isotope):
     bottom_frame = tk.Frame(root, bg="#F2F2F2")
     bottom_frame.pack(pady=5)
 
-    # Creates Export Menu button
-    export_button = ttk.Button(bottom_frame, text="Export Menu", style="Maize.TButton",
-                               padding=(0,0),
-                               command=lambda:
-                               to_export_menu(root, category, mode, common_el, element, isotope))
-    export_button.config(width=get_width(["Export Menu"]))
-    export_button.pack(side='left', padx=5)
+    if mode == "Energies":
+        # Creates Export Menu button
+        export_button = ttk.Button(bottom_frame, text="Export Menu", style="Maize.TButton",
+                                   padding=(0,0),
+                                   command=lambda:
+                                   to_export_menu(root, category, mode, common_el, element, isotope))
+        export_button.config(width=get_width(["Export Menu"]))
+        export_button.pack(side='left', padx=5)
 
     # Creates References button
     references_button = ttk.Button(bottom_frame, text="References", style="Maize.TButton",

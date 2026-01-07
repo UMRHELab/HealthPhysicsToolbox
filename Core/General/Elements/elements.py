@@ -3,6 +3,7 @@ import csv
 import shelve
 import pandas as pd
 import tkinter as tk
+from Utility.Functions.gui_utility import window
 from Utility.Functions.files import save_file, resource_path, get_user_data_path
 from Utility.Functions.math_utility import atomic_mass_numerator, atomic_mass_denominator
 
@@ -40,7 +41,7 @@ def handle_action(root, element, export = False):
 
     if not export:
         # Create pop-up window
-        popup, scroll_frame = window(element)
+        popup, scroll_frame = window(element+" Information", "400x600")
 
         # Convert atomic mass to desired unit
         information["Atomic Mass"] = float(information["Atomic Mass"])
@@ -69,35 +70,3 @@ def handle_action(root, element, export = False):
 
             df.rename(columns={'Atomic Mass': f'Atomic Mass ({num}/{den})'}, inplace=True)
             save_file(df.loc[[index]], "", None, element, "information")
-
-#####################################################################################
-# ACTIONS SECTION
-#####################################################################################
-
-"""
-This function creates the pop-up window to display the element information.
-This includes a title and making the window scrollable.
-"""
-def window(element):
-    popup = tk.Toplevel()
-    popup.title(element+" Information")
-    popup.geometry("400x600")
-    popup.transient()
-
-    # Scrollable frame
-    canvas = tk.Canvas(popup)
-    scrollbar = tk.Scrollbar(popup, orient="vertical", command=canvas.yview)
-    scroll_frame = tk.Frame(canvas)
-
-    scroll_frame.bind(
-        "<Configure>",
-        lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
-    )
-
-    canvas.create_window((0,0), window=scroll_frame, anchor="nw")
-    canvas.configure(yscrollcommand=scrollbar.set)
-
-    canvas.pack(side="left", fill="both", expand=True)
-    scrollbar.pack(side="right", fill="y")
-
-    return popup, scroll_frame

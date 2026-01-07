@@ -314,6 +314,38 @@ def make_weights_line(frame):
     return entry
 
 #####################################################################################
+# POP-UP WINDOW SECTION
+#####################################################################################
+
+"""
+This function creates a pop-up window.
+This includes a title and making the window scrollable.
+"""
+def window(title, geometry = "400x600"):
+    popup = tk.Toplevel()
+    popup.title(title)
+    popup.geometry(geometry)
+    popup.transient()
+
+    # Scrollable frame
+    canvas = tk.Canvas(popup)
+    scrollbar = tk.Scrollbar(popup, orient="vertical", command=canvas.yview)
+    scroll_frame = tk.Frame(canvas)
+
+    scroll_frame.bind(
+        "<Configure>",
+        lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
+    )
+
+    canvas.create_window((0,0), window=scroll_frame, anchor="nw")
+    canvas.configure(yscrollcommand=scrollbar.set)
+
+    canvas.pack(side="left", fill="both", expand=True)
+    scrollbar.pack(side="right", fill="y")
+
+    return popup, scroll_frame
+
+#####################################################################################
 # VERTICAL FRAME SECTION
 #####################################################################################
 

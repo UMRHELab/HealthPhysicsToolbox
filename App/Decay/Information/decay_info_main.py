@@ -96,7 +96,8 @@ def decay_info_main(root, category="Common Elements", mode="Decay Scheme (Plot)"
     # Creates dropdown menu for mode
     mode_choices = ["Decay Scheme (Plot)",
                     "Decay Scheme (Tabular)",
-                    "Half Life"]
+                    "Half Life",
+                    "Energies"]
     _ = make_dropdown(inner_mode_frame, var_mode, mode_choices, select_mode, pady=20)
 
     # Spacer

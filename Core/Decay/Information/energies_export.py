@@ -14,12 +14,13 @@ from Utility.Functions.files import save_file, get_user_data_path, resource_path
 
 """
 This function is called when the Export button is hit.
-The function handles the following error:
+The function handles the following errors:
    No selected element
    Isotope is stable
    No radiation types selected
    Non-number filter input
    Filter input must be in range [0, 100]
+   No data for isotope
 If the error is not applicable, a dataframe is set up
 with columns for radiation type, yield, and energy.
 The dataframe is populated from the corresponding energies
