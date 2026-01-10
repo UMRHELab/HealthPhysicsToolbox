@@ -1,12 +1,10 @@
 ##### IMPORTS #####
-#import shelve
 import tkinter as tk
 from tkinter import ttk
 from App.style import SectionFrame
-#from Utility.Functions.files import get_user_data_path
-from Core.Dose.ICRP68.icrp68_export import export_data
 from Utility.Functions.logic_utility import get_item, valid_saved
-from Utility.Functions.choices import get_choices, get_icrp_isotopes
+from Core.Dose.ICRP68.icrp68_calculations import handle_calculation
+from Utility.Functions.choices import get_choices, get_icrp_isotopes, read_dose_columns
 from Utility.Functions.gui_utility import (
     make_spacer, get_width,
     basic_label, result_label,
@@ -25,7 +23,7 @@ main_list = []
 """
 This function sets up the ICRP68 main screen.
 The following sections and widgets are created:
-   Module Title (ICRP68)
+   Module Title (ICRP68 Coefficients)
    Select Intake Mode section
    Select Nuclide section
    Result section (title dependent on Calculation Mode)
@@ -37,12 +35,8 @@ The sections and widgets are stored in main_list so they can be
 accessed later by clear_main.
 """
 def icrp68_main(root, category="Common Elements", mode="Ingestion",
-                common_el="Ag", element="Ac", isotope=None):
+                coefficient="Half Life", common_el="Ag", element="Ac", isotope=None):
     global main_list
-
-    # Gets _ from user prefs
-    #db_path = get_user_data_path("Settings/Dose/ICRP68")
-    #with shelve.open(db_path) as prefs:
 
     # Makes title frame
     title_frame = make_title_frame(root, "ICRP68 Coefficients", "Dose/ICRP68")
@@ -77,7 +71,7 @@ def icrp68_main(root, category="Common Elements", mode="Ingestion",
         # Clear result label
         result_box.config(state="normal")
         result_box.delete("1.0", tk.END)
-        result_box.config(state="disabled")
+        result_box.config(state="disabled", height=1)
 
         root.focus()
 
@@ -88,6 +82,34 @@ def icrp68_main(root, category="Common Elements", mode="Ingestion",
 
     # Spacer
     empty_frame1 = make_spacer(root)
+
+    # Creates list of coefficients
+    coefficient_choices = []
+    read_dose_columns(coefficient_choices, "ICRP68")
+
+    # Frame for coefficient selection
+    coefficient_frame = SectionFrame(root, title="Select Coefficient")
+    coefficient_frame.pack()
+    inner_coefficient_frame = coefficient_frame.get_inner_frame()
+
+    # Stores coefficient and sets default
+    var_coefficient = tk.StringVar(root)
+    var_coefficient.set(coefficient)
+
+    # Logic for when a coefficient is selected
+    def on_select_coefficient(event):
+        nonlocal coefficient
+
+        event.widget.selection_clear()
+        coefficient = var_coefficient.get()
+        root.focus()
+
+    # Creates dropdown menu for coefficient
+    _ = make_dropdown(inner_coefficient_frame, var_coefficient, coefficient_choices,
+                      on_select_coefficient, pady=20)
+
+    # Spacer
+    empty_frame2 = make_spacer(root)
 
     # Frame for nuclide selection
     nuclide_frame = SectionFrame(root, title="Select Nuclide")
@@ -231,7 +253,7 @@ def icrp68_main(root, category="Common Elements", mode="Ingestion",
                                      on_select_isotope)
 
     # Spacer
-    empty_frame2 = make_spacer(root)
+    empty_frame3 = make_spacer(root)
 
     # Frame for result
     result_frame = SectionFrame(root, title=mode)
@@ -241,7 +263,8 @@ def icrp68_main(root, category="Common Elements", mode="Ingestion",
     # Creates Calculate button
     calc_button = ttk.Button(inner_result_frame, text="Calculate",
                              style="Maize.TButton", padding=(0,0),
-                             command=lambda: export_data(root, mode, element, isotope, result_box))
+                             command=lambda: handle_calculation(root, mode, coefficient, element,
+                                                                isotope, result_box))
     calc_button.config(width=get_width(["Calculate"]))
     calc_button.pack(pady=(20,5))
 
@@ -252,7 +275,8 @@ def icrp68_main(root, category="Common Elements", mode="Ingestion",
     result_box = make_result_box(inner_result_frame)
 
     # Creates Advanced Settings button
-    advanced_button = make_advanced_button(root, root.focus)
+    advanced_button = make_advanced_button(root, lambda: to_advanced(root, category, mode,
+                                                                     common_el, element, isotope))
 
     # Creates Exit button to return to home screen
     exit_button = make_exit_button(root, lambda: exit_to_home(root))
@@ -260,7 +284,8 @@ def icrp68_main(root, category="Common Elements", mode="Ingestion",
     # Stores nodes into global list
     main_list = [title_frame,
                  mode_frame, empty_frame1,
-                 nuclide_frame, empty_frame2,
+                 coefficient_frame, empty_frame2,
+                 nuclide_frame, empty_frame3,
                  result_frame, advanced_button, exit_button]
 
 #####################################################################################
@@ -290,3 +315,17 @@ def exit_to_home(root):
     from App.home import return_home
     clear_main()
     return_home(root)
+
+"""
+This function transitions from the ICRP68 main screen
+to the ICRP68 advanced screen by first clearing the
+ICRP68 main screen and then creating the
+ICRP68 advanced screen.
+It is called when the Advanced Settings button is hit.
+"""
+def to_advanced(root, category, mode, common_el, element, isotope):
+    root.focus()
+    from App.Dose.ICRP68.icrp68_advanced import icrp68_advanced
+
+    clear_main()
+    icrp68_advanced(root, category, mode, common_el, element, isotope)

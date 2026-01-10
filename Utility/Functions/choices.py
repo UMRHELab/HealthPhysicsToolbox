@@ -167,3 +167,15 @@ def read_pt_columns(choices):
         for row in reader:
             if row and row[0] != 'Column' and row[0] != 'Symbol':
                 choices.append(row[0])
+
+"""
+This function reads the list of columns for dose coefficients
+from a csv data file.
+"""
+def read_dose_columns(choices, publication):
+    path = resource_path(f'Data/ICRP Coefficients/{publication}/Columns.csv')
+    with open(path, 'r') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            if row and row[0] != 'Nuclide' and row[0] != 'Type':
+                choices.append(row[0])

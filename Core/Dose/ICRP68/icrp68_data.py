@@ -48,4 +48,4 @@ def export_data(root, mode, element, isotope, result_box):
                     df.insert(len(df.columns), isotope+'_', pd.Series(list(row.values())[1:]))
                     df.columns = list(df.columns[:-1]) + [isotope]
 
-    save_file(df, "Data", result_box, isotope, mode.lower(), True)
+    save_file(df, "Data", result_box, isotope, mode.lower(), False)
