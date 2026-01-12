@@ -100,7 +100,7 @@ def get_isotopes(element):
     db_path = resource_path("Data/Radioactive Decay/Isotopes.json")
     with open(db_path, "r") as f:
         isotopes = json.load(f)
-    return isotopes[element]
+    return isotopes.get(element, [])
 
 """
 Gets all isotopes of an element for a particular ICRP publication.
@@ -109,13 +109,13 @@ def get_icrp_isotopes(element, publication):
     db_path = resource_path("Data/ICRP Coefficients/"+publication+"/Isotopes.json")
     with open(db_path, "r") as f:
         isotopes = json.load(f)
-    return isotopes[element]
+    return isotopes.get(element, [])
 
 """
 Gets all successors of an isotope in a decay chain.
 """
 def get_successors(isotope):
-    if math.isinf(rd.Nuclide(isotope).half_life()):
+    if not isotope or math.isinf(rd.Nuclide(isotope).half_life()):
         return []
     t0 = rd.Inventory({isotope: 0})
     t1 = t0.decay(0)

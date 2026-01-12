@@ -132,10 +132,10 @@ def decay_info_main(root, category="Common Elements", mode="Decay Scheme (Plot)"
         isotopes = get_isotopes(selected_element)
         if category == "Common Elements":
             if common_el != previous_element:
-                isotope = isotopes[0]
+                isotope = isotopes[0] if isotopes else ""
         elif category == "All Elements":
             if element != previous_element:
-                isotope = isotopes[0]
+                isotope = isotopes[0] if isotopes else ""
         var_isotope.set(isotope)
         isotope_dropdown.config(values=isotopes, width=get_width(isotopes))
 
@@ -168,11 +168,11 @@ def decay_info_main(root, category="Common Elements", mode="Decay Scheme (Plot)"
             isotopes = get_isotopes(value)
             if category == "All Elements":
                 if element != value:
-                    isotope = isotopes[0]
+                    isotope = isotopes[0] if isotopes else ""
                     element = value
             else:
                 if common_el != value:
-                    isotope = isotopes[0]
+                    isotope = isotopes[0] if isotopes else ""
                     common_el = value
             var_isotope.set(isotope)
             isotope_dropdown.config(values=isotopes, width=get_width(isotopes))
@@ -191,11 +191,11 @@ def decay_info_main(root, category="Common Elements", mode="Decay Scheme (Plot)"
         isotopes = get_isotopes(value)
         if category == "All Elements":
             if element != value:
-                isotope = isotopes[0]
+                isotope = isotopes[0] if isotopes else ""
                 element = value
         else:
             if common_el != value:
-                isotope = isotopes[0]
+                isotope = isotopes[0] if isotopes else ""
                 common_el = value
         var_isotope.set(isotope)
         isotope_dropdown.config(values=isotopes, width=get_width(isotopes))
@@ -235,7 +235,7 @@ def decay_info_main(root, category="Common Elements", mode="Decay Scheme (Plot)"
     # Retrieves isotopes for current element
     isotope_choices = get_isotopes(get_item(category, common_el, "", element, "", ""))
     if not isotope:
-        isotope = isotope_choices[0]
+        isotope = isotope_choices[0] if isotope_choices else ""
 
     # Stores isotope and sets default
     var_isotope = tk.StringVar(root)

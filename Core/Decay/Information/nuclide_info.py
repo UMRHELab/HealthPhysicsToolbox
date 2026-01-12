@@ -8,8 +8,8 @@ from PIL import Image
 from collections import deque
 import radioactivedecay as rd
 import matplotlib.pyplot as plt
-from Utility.Functions.gui_utility import edit_result, window
 from Utility.Functions.files import save_file, get_user_data_path
+from Utility.Functions.gui_utility import edit_result, window, no_selection
 from Core.Decay.Information.energies_dataframe import create_energies_dataframe
 
 #####################################################################################
@@ -25,11 +25,19 @@ half_life_units = ['μs', 'ms', 's', 'm', 'h', 'd', 'y', 'readable']
 
 """
 This function is called when the Calculate button is hit.
+The function handles the following errors:
+   No selected element
 The function decides what calculation to perform
 based on the selected calculation mode.
 """
 def handle_calculation(root, mode, isotope, result_box, save):
     root.focus()
+
+    # Error-check for no selected element
+    if isotope == "":
+        edit_result(no_selection, result_box)
+        return
+
     match mode:
         case "Decay Scheme (Plot)":
             nuclide_decay_scheme(isotope, result_box, save)
@@ -130,18 +138,48 @@ This function creates a pop-up window displaying
 the energies of the provided isotope.
 The function handles the following errors:
    Isotope is stable
+   No radiation types selected
+   Non-number filter input
+   Filter input must be in range [0, 100]
    No data for isotope
 """
 def nuclide_energies(isotope, result_box):
-    # Error-check for isotope is stable
-    if math.isinf(rd.Nuclide(isotope).half_life('s')):
-        edit_result(isotope + " is stable.", result_box)
-        return
+    # List of neutron irrelevant radiation types
+    neutron_irrelevant_types = [
+        "Gamma Ray", "Annihilation Photon",
+        "X-Ray", "Beta- Particle", "Beta+ Particle",
+        "Internal Conversion Electron", "Auger Electron",
+        "Alpha Particle"
+    ]
 
-    # Gets energy unit from user prefs
+    # Gets radiation types, filter percentage, and energy unit from user prefs
     db_path = get_user_data_path("Settings/Decay/Information")
     with shelve.open(db_path) as prefs:
+        rad_types = prefs.get("rad_types", [rad_type for rad_type in neutron_irrelevant_types])
+        filter_percentage = prefs.get("filter_percentage", "100")
         energy_unit = prefs.get("energy_unit", "MeV")
+
+    # Error-check for isotope is stable
+    if math.isinf(rd.Nuclide(isotope).half_life('s')):
+        edit_result("Error: "+isotope+" is stable.", result_box)
+        return
+
+    # Error-check for no radiation types selected
+    if len(rad_types) == 0:
+        edit_result("Error: No radiations selected.", result_box)
+        return
+
+    # Error-check for a non-number filter input
+    try:
+        filter_percentage = float(filter_percentage)
+    except ValueError:
+        edit_result("Error: Non-number filter input.", result_box)
+        return
+
+    # Error-check for filter input outside of range [0, 100]
+    if filter_percentage < 0 or filter_percentage > 100:
+        edit_result("Error: Filter must be [0, 100].", result_box)
+        return
 
     # Create pop-up window
     popup, scroll_frame = window(isotope+" Energies", "600x600")

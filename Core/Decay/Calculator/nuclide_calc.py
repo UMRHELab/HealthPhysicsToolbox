@@ -4,9 +4,9 @@ import shelve
 import tkinter as tk
 import radioactivedecay as rd
 import matplotlib.pyplot as plt
-from Utility.Functions.gui_utility import edit_result
 from Utility.Functions.choices import get_chosen_nuclides
 from Utility.Functions.files import save_file, get_user_data_path
+from Utility.Functions.gui_utility import edit_result, no_selection
 
 #####################################################################################
 # CALCULATIONS SECTION
@@ -15,6 +15,8 @@ from Utility.Functions.files import save_file, get_user_data_path
 """
 This function is called when the Calculate button is hit.
 The function checks if the time already has an error.
+The function also handles the following errors:
+   No selected element
 If not, the function decides what calculation to
 perform based on the selected calculation mode.
 """
@@ -27,6 +29,11 @@ def handle_calculation(root, mode, isotope, initial_amount, time, dates,
         if isinstance(time, str) and time[0:5] == "Error":
             edit_result(time, result_box)
             return
+
+    # Error-check for no selected element
+    if isotope == "":
+        edit_result(no_selection, result_box)
+        return
 
     match mode:
         case "Activities":

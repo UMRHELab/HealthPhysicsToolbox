@@ -147,6 +147,7 @@ def decay_calc_advanced(root, category, mode, common_el, element, isotope,
     time_choices = ['μs', 'ms', 's', 'm', 'h', 'd', 'y']
     time_unit_dropdown = make_unit_dropdown(time_unit_side_frame, var_time, time_choices,
                                             on_select_time_unit)
+    on_use_dates()
 
     # Horizontal frame for amount unit settings
     amount_unit_side_frame = tk.Frame(inner_unit_frame, bg="#F2F2F2")

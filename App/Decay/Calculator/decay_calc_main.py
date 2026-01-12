@@ -45,11 +45,6 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
                     nuclide_vars=None):
     global main_list
 
-    # Retrieves isotopes for current element
-    isotope_choices = get_isotopes(get_item(category, common_el, "", element, "", ""))
-    if not isotope:
-        isotope = isotope_choices[0]
-
     # Initializes nuclide selectors if necessary
     if not nuclide_vars:
         nuclide_vars = get_nuclide_vars(isotope)
@@ -74,6 +69,11 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
 
     # Make sure common element is a valid selection
     common_el = valid_saved(common_el, common_elements)
+
+    # Retrieves isotopes for current element
+    isotope_choices = get_isotopes(get_item(category, common_el, "", element, "", ""))
+    if not isotope:
+        isotope = isotope_choices[0] if isotope_choices else ""
 
     # Stores mode and sets default
     var_mode = tk.StringVar(root)
@@ -155,10 +155,10 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
         isotopes = get_isotopes(selected_element)
         if category == "Common Elements":
             if common_el != previous_element:
-                isotope = isotopes[0]
+                isotope = isotopes[0] if isotopes else ""
         elif category == "All Elements":
             if element != previous_element:
-                isotope = isotopes[0]
+                isotope = isotopes[0] if isotopes else ""
         var_isotope.set(isotope)
         isotope_dropdown.config(values=isotopes, width=get_width(isotopes))
 
@@ -194,11 +194,11 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
             isotopes = get_isotopes(value)
             if category == "All Elements":
                 if element != value:
-                    isotope = isotopes[0]
+                    isotope = isotopes[0] if isotopes else ""
                     element = value
             else:
                 if common_el != value:
-                    isotope = isotopes[0]
+                    isotope = isotopes[0] if isotopes else ""
                     common_el = value
             var_isotope.set(isotope)
             isotope_dropdown.config(values=isotopes, width=get_width(isotopes))
@@ -220,11 +220,11 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
         isotopes = get_isotopes(value)
         if category == "All Elements":
             if element != value:
-                isotope = isotopes[0]
+                isotope = isotopes[0] if isotopes else ""
                 element = value
         else:
             if common_el != value:
-                isotope = isotopes[0]
+                isotope = isotopes[0] if isotopes else ""
                 common_el = value
         var_isotope.set(isotope)
         isotope_dropdown.config(values=isotopes, width=get_width(isotopes))
