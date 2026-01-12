@@ -1,6 +1,5 @@
 ##### IMPORTS #####
 import tkinter as tk
-from tkinter import ttk
 from App.style import SectionFrame
 from App.scroll import scroll_to_top
 from Utility.Functions.logic_utility import get_item, valid_saved
@@ -10,8 +9,8 @@ from Utility.Functions.gui_utility import (
     make_spacer, get_width,
     basic_label, result_label,
     make_title_frame, make_result_box,
-    make_exit_button, make_advanced_button,
-    make_dropdown, make_category_dropdown, make_item_dropdown
+    make_dropdown, make_category_dropdown, make_item_dropdown,
+    make_exit_button, make_advanced_button, make_calculate_button
 )
 
 # For global access to nodes on ICRP68 main screen
@@ -140,10 +139,10 @@ def icrp68_main(root, category="Common Elements", mode="Ingestion",
         isotopes = get_icrp_isotopes(selected_element, "ICRP68")
         if category == "Common Elements":
             if common_el != previous_element:
-                isotope = isotopes[0]
+                isotope = isotopes[0] if isotopes else ""
         elif category == "All Elements":
             if element != previous_element:
-                isotope = isotopes[0]
+                isotope = isotopes[0] if isotopes else ""
         var_isotope.set(isotope)
         isotope_dropdown.config(values=isotopes, width=get_width(isotopes))
 
@@ -176,11 +175,11 @@ def icrp68_main(root, category="Common Elements", mode="Ingestion",
             isotopes = get_icrp_isotopes(value, "ICRP68")
             if category == "All Elements":
                 if element != value:
-                    isotope = isotopes[0]
+                    isotope = isotopes[0] if isotopes else ""
                     element = value
             else:
                 if common_el != value:
-                    isotope = isotopes[0]
+                    isotope = isotopes[0] if isotopes else ""
                     common_el = value
             var_isotope.set(isotope)
             isotope_dropdown.config(values=isotopes, width=get_width(isotopes))
@@ -199,11 +198,11 @@ def icrp68_main(root, category="Common Elements", mode="Ingestion",
         isotopes = get_icrp_isotopes(value, "ICRP68")
         if category == "All Elements":
             if element != value:
-                isotope = isotopes[0]
+                isotope = isotopes[0] if isotopes else ""
                 element = value
         else:
             if common_el != value:
-                isotope = isotopes[0]
+                isotope = isotopes[0] if isotopes else ""
                 common_el = value
         var_isotope.set(isotope)
         isotope_dropdown.config(values=isotopes, width=get_width(isotopes))
@@ -243,7 +242,7 @@ def icrp68_main(root, category="Common Elements", mode="Ingestion",
     # Retrieves isotopes for current element
     isotope_choices = get_icrp_isotopes(get_item(category, common_el, "", element, "", ""), "ICRP68")
     if not isotope:
-        isotope = isotope_choices[0]
+        isotope = isotope_choices[0] if isotope_choices else ""
 
     # Stores isotope and sets default
     var_isotope = tk.StringVar(root)
@@ -262,12 +261,8 @@ def icrp68_main(root, category="Common Elements", mode="Ingestion",
     inner_result_frame = result_frame.get_inner_frame()
 
     # Creates Calculate button
-    calc_button = ttk.Button(inner_result_frame, text="Calculate",
-                             style="Maize.TButton", padding=(0,0),
-                             command=lambda: handle_calculation(root, mode, coefficient, element,
-                                                                isotope, result_box))
-    calc_button.config(width=get_width(["Calculate"]))
-    calc_button.pack(pady=(20,5))
+    make_calculate_button(inner_result_frame, lambda: handle_calculation(root, mode, coefficient, element,
+                                                                         isotope, result_box))
 
     # Result label
     result_label(inner_result_frame)
@@ -276,7 +271,7 @@ def icrp68_main(root, category="Common Elements", mode="Ingestion",
     result_box = make_result_box(inner_result_frame)
 
     # Creates Advanced Settings button
-    advanced_button = make_advanced_button(root, lambda: to_advanced(root, category, mode,
+    advanced_button = make_advanced_button(root, lambda: to_advanced(root, category, mode, coefficient,
                                                                      common_el, element, isotope))
 
     # Creates Exit button to return to home screen
@@ -325,10 +320,10 @@ ICRP68 main screen and then creating the
 ICRP68 advanced screen.
 It is called when the Advanced Settings button is hit.
 """
-def to_advanced(root, category, mode, common_el, element, isotope):
+def to_advanced(root, category, mode, coefficient, common_el, element, isotope):
     root.focus()
     from App.Dose.ICRP68.icrp68_advanced import icrp68_advanced
 
     clear_main()
-    icrp68_advanced(root, category, mode, common_el, element, isotope)
+    icrp68_advanced(root, category, mode, coefficient, common_el, element, isotope)
     scroll_to_top()

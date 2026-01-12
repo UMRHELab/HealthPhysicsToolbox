@@ -35,7 +35,7 @@ behaviors.
 The sections and widgets are stored in advanced_list so they can be
 accessed later by clear_advanced.
 """
-def icrp68_advanced(root, category, mode, common_el, element, isotope):
+def icrp68_advanced(root, category, mode, coefficient, common_el, element, isotope):
     global advanced_list
 
     # Makes title frame
@@ -97,7 +97,7 @@ def icrp68_advanced(root, category, mode, common_el, element, isotope):
     export_button = ttk.Button(bottom_frame, text="Export Menu", style="Maize.TButton",
                                padding=(0,0),
                                command=lambda:
-                               to_export_menu(root, category, mode, common_el, element, isotope))
+                               to_export_menu(root, category, mode, coefficient, common_el, element, isotope))
     export_button.config(width=get_width(["Export Menu"]))
     export_button.pack(side='left', padx=5)
 
@@ -116,7 +116,8 @@ def icrp68_advanced(root, category, mode, common_el, element, isotope):
     help_button.pack(side='left', padx=5)
 
     # Creates Back button to return to ICRP68 main screen
-    back_button = make_back_button(root, lambda: to_main(root, category, mode, common_el, element, isotope))
+    back_button = make_back_button(root, lambda: to_main(root, category, mode, coefficient,
+                                                         common_el, element, isotope))
 
     # Stores nodes into global list
     advanced_list = [title_frame,
@@ -146,11 +147,11 @@ ICRP68 advanced screen and then creating the
 ICRP68 main screen.
 It is called when the Back button is hit.
 """
-def to_main(root, category, mode, common_el, element, isotope):
+def to_main(root, category, mode, coefficient, common_el, element, isotope):
     from App.Dose.ICRP68.icrp68_main import icrp68_main
 
     clear_advanced()
-    icrp68_main(root, category, mode, common_el, element, isotope)
+    icrp68_main(root, category, mode, coefficient, common_el, element, isotope)
     scroll_to_top()
 
 """
@@ -160,9 +161,9 @@ ICRP68 advanced screen and then creating the
 ICRP68 export screen.
 It is called when the Export Menu button is hit.
 """
-def to_export_menu(root, category, mode, common_el, element, isotope):
+def to_export_menu(root, category, mode, coefficient, common_el, element, isotope):
     clear_advanced()
-    icrp68_export(root, category, mode, common_el, element, isotope)
+    icrp68_export(root, category, mode, coefficient, common_el, element, isotope)
     scroll_to_top()
 
 """

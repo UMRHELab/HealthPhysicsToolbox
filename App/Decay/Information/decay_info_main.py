@@ -10,8 +10,8 @@ from Utility.Functions.gui_utility import (
     make_spacer, get_width,
     basic_label, result_label,
     make_title_frame, make_result_box,
-    make_exit_button, make_advanced_button,
-    make_dropdown, make_category_dropdown, make_item_dropdown
+    make_dropdown, make_category_dropdown, make_item_dropdown,
+    make_exit_button, make_advanced_button, make_calculate_button
 )
 
 # For global access to nodes on decay information main screen
@@ -267,12 +267,8 @@ def decay_info_main(root, category="Common Elements", mode="Decay Scheme (Plot)"
         save.pack(pady=(20,0))
 
     # Creates Calculate button
-    calc_button = ttk.Button(inner_result_frame, text="Calculate",
-                             style="Maize.TButton", padding=(0,0),
-                             command=lambda: handle_calculation(root, mode, isotope,
-                                                                result_box, var_save.get()))
-    calc_button.config(width=get_width(["Calculate"]))
-    calc_button.pack(pady=(20,5))
+    calc_button = make_calculate_button(inner_result_frame, lambda: handle_calculation(root, mode, isotope,
+                                                                                       result_box, var_save.get()))
 
     # Result label
     result = result_label(inner_result_frame)

@@ -1,6 +1,5 @@
 ##### IMPORTS #####
 import tkinter as tk
-from tkinter import ttk
 from App.style import SectionFrame
 from App.scroll import scroll_to_top
 from Core.General.Isotopes.isotopes import handle_calculation
@@ -10,8 +9,8 @@ from Utility.Functions.gui_utility import (
     make_spacer, get_width,
     basic_label, result_label,
     make_title_frame, make_result_box,
-    make_exit_button, make_advanced_button,
-    make_dropdown, make_category_dropdown, make_item_dropdown
+    make_dropdown, make_category_dropdown, make_item_dropdown,
+    make_exit_button, make_advanced_button, make_calculate_button
 )
 
 # For global access to nodes on isotopes main screen
@@ -113,10 +112,10 @@ def isotopes_main(root, category="Common Elements", mode="Proton Number",
         isotopes = get_isotopes(selected_element)
         if category == "Common Elements":
             if common_el != previous_element:
-                isotope = isotopes[0]
+                isotope = isotopes[0] if isotopes else ""
         elif category == "All Elements":
             if element != previous_element:
-                isotope = isotopes[0]
+                isotope = isotopes[0] if isotopes else ""
         var_isotope.set(isotope)
         isotope_dropdown.config(values=isotopes, width=get_width(isotopes))
 
@@ -149,11 +148,11 @@ def isotopes_main(root, category="Common Elements", mode="Proton Number",
             isotopes = get_isotopes(value)
             if category == "All Elements":
                 if element != value:
-                    isotope = isotopes[0]
+                    isotope = isotopes[0] if isotopes else ""
                     element = value
             else:
                 if common_el != value:
-                    isotope = isotopes[0]
+                    isotope = isotopes[0] if isotopes else ""
                     common_el = value
             var_isotope.set(isotope)
             isotope_dropdown.config(values=isotopes, width=get_width(isotopes))
@@ -172,11 +171,11 @@ def isotopes_main(root, category="Common Elements", mode="Proton Number",
         isotopes = get_isotopes(value)
         if category == "All Elements":
             if element != value:
-                isotope = isotopes[0]
+                isotope = isotopes[0] if isotopes else ""
                 element = value
         else:
             if common_el != value:
-                isotope = isotopes[0]
+                isotope = isotopes[0] if isotopes else ""
                 common_el = value
         var_isotope.set(isotope)
         isotope_dropdown.config(values=isotopes, width=get_width(isotopes))
@@ -215,7 +214,7 @@ def isotopes_main(root, category="Common Elements", mode="Proton Number",
 
     # Retrieves isotopes for current element
     isotope_choices = get_isotopes(get_item(category, common_el, "", element, "", ""))
-    isotope = isotope_choices[0]
+    isotope = isotope_choices[0] if isotope_choices else ""
 
     # Stores isotope and sets default
     var_isotope = tk.StringVar(root)
@@ -234,11 +233,7 @@ def isotopes_main(root, category="Common Elements", mode="Proton Number",
     inner_result_frame = result_frame.get_inner_frame()
 
     # Creates Calculate button
-    calc_button = ttk.Button(inner_result_frame, text="Calculate",
-                             style="Maize.TButton", padding=(0,0),
-                             command=lambda: handle_calculation(root, mode, isotope, result_box))
-    calc_button.config(width=get_width(["Calculate"]))
-    calc_button.pack(pady=(20,5))
+    make_calculate_button(inner_result_frame, lambda: handle_calculation(root, mode, isotope, result_box))
 
     # Result label
     result_label(inner_result_frame)

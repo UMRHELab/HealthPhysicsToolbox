@@ -237,19 +237,25 @@ def make_button(root, text, command, **pack_args):
     return button
 
 """
-This function creates an exit button to return to the home screen.
+This function creates an Exit button to return to the home screen.
 """
 def make_exit_button(root, command):
     return make_button(root, "Exit", command, pady=5)
 
 """
-This function creates a back button to return from an advanced settings menu or export menu.
+This function creates a Calculate button.
+"""
+def make_calculate_button(root, command):
+    return make_button(root, "Calculate", command, pady=(20,5))
+
+"""
+This function creates a Back button to return from an advanced settings menu or export menu.
 """
 def make_back_button(root, command):
     return make_button(root, "Back", command, pady=5)
 
 """
-This function creates an advanced settings button to
+This function creates an Advanced Settings button to
 go to the advanced settings menu.
 """
 def make_advanced_button(root, command):

@@ -14,8 +14,8 @@ from Utility.Functions.gui_utility import (
     make_spacer, get_width,
     basic_label, result_label,
     make_title_frame, make_result_box,
-    make_exit_button, make_advanced_button,
-    make_dropdown, make_category_dropdown, make_item_dropdown
+    make_dropdown, make_category_dropdown, make_item_dropdown,
+    make_exit_button, make_advanced_button, make_calculate_button
 )
 
 # For global access to nodes on photon energy absorption main screen
@@ -240,13 +240,9 @@ def photons_main(root, category="Common Elements",
     result_frame.pack()
 
     # Creates Calculate button
-    calc_button = ttk.Button(inner_result_frame, text="Calculate",
-                             style="Maize.TButton", padding=(0,0),
-                             command=lambda: handle_calculation(root, category, mode,
-                                                                var.get(), energy_entry.get(),
-                                                                result_box))
-    calc_button.config(width=get_width(["Calculate"]))
-    calc_button.pack(pady=(20,5))
+    make_calculate_button(inner_result_frame, lambda: handle_calculation(root, category, mode,
+                                                                         var.get(), energy_entry.get(),
+                                                                         result_box))
 
     # Result label
     result_label(inner_result_frame)

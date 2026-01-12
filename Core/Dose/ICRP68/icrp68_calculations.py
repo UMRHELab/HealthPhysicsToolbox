@@ -47,7 +47,6 @@ def handle_calculation(root, mode, coefficient, element, isotope, result_box):
         results = [results[0]]
 
     # Fills result box
-    print(results)
     if results:
         if coefficient == "Half Life" or coefficient == "f1":
             for result in results:
