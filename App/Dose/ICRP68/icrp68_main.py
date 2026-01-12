@@ -2,6 +2,7 @@
 import tkinter as tk
 from tkinter import ttk
 from App.style import SectionFrame
+from App.scroll import scroll_to_top
 from Utility.Functions.logic_utility import get_item, valid_saved
 from Core.Dose.ICRP68.icrp68_calculations import handle_calculation
 from Utility.Functions.choices import get_choices, get_icrp_isotopes, read_dose_columns
@@ -315,6 +316,7 @@ def exit_to_home(root):
     from App.home import return_home
     clear_main()
     return_home(root)
+    scroll_to_top()
 
 """
 This function transitions from the ICRP68 main screen
@@ -329,3 +331,4 @@ def to_advanced(root, category, mode, common_el, element, isotope):
 
     clear_main()
     icrp68_advanced(root, category, mode, common_el, element, isotope)
+    scroll_to_top()

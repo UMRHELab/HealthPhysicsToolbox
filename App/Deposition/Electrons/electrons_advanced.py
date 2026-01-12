@@ -3,6 +3,7 @@ import shelve
 import tkinter as tk
 from tkinter import ttk
 from App.style import SectionFrame
+from App.scroll import scroll_to_top
 from App.add_custom_menu import add_custom_menu
 from Utility.Functions.choices import get_choices
 from Utility.Functions.logic_utility import get_unit, get_interactions
@@ -412,6 +413,7 @@ def to_main(root, category, mode, interactions, common_el, common_mat,
     clear_advanced()
     electrons_main(root, category, mode, interactions, common_el, common_mat,
                    element, material, custom_mat, linear)
+    scroll_to_top()
 
 """
 This function transitions from the electron stopping power advanced screen
@@ -433,6 +435,7 @@ def to_custom_menu(root, category, mode, interactions, common_el, common_mat,
         d_den = prefs.get("d_den", "cm\u00B3")
 
     add_custom_menu(root, d_num, d_den, back)
+    scroll_to_top()
 
 """
 This function transitions from the electron stopping power advanced screen
@@ -446,6 +449,7 @@ def to_export_menu(root, category, mode, interactions, common_el, common_mat,
     clear_advanced()
     electrons_export(root, category, mode, interactions, common_el, common_mat,
                      element, material, custom_mat, linear)
+    scroll_to_top()
 
 """
 This function opens the electron stopping power References.txt file.

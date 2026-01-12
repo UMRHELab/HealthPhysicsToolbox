@@ -3,6 +3,7 @@ import shelve
 import tkinter as tk
 from tkinter import ttk
 from App.style import SectionFrame
+from App.scroll import scroll_to_top
 from App.add_custom_menu import add_custom_menu
 from Utility.Functions.choices import get_choices
 from Utility.Functions.logic_utility import get_unit
@@ -299,6 +300,7 @@ def to_main(root, category, mode, common_el, common_mat, element,
     clear_advanced()
     alphas_main(root, category, mode, common_el, common_mat, element,
                 material, custom_mat, linear)
+    scroll_to_top()
 
 """
 This function transitions from the alpha range advanced screen
@@ -320,6 +322,7 @@ def to_custom_menu(root, category, mode, common_el, common_mat, element,
         d_den = prefs.get("d_den", "cm\u00B3")
 
     add_custom_menu(root, d_num, d_den, back)
+    scroll_to_top()
 
 """
 This function transitions from the alpha range advanced screen
@@ -333,6 +336,7 @@ def to_export_menu(root, category, mode, common_el, common_mat, element,
     clear_advanced()
     alphas_export(root, category, mode, common_el, common_mat, element,
                   material, custom_mat, linear)
+    scroll_to_top()
 
 """
 This function opens the alpha range References.txt file.

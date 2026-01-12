@@ -2,6 +2,7 @@
 import tkinter as tk
 from tkinter import ttk
 from App.style import SectionFrame
+from App.scroll import scroll_to_top
 from Core.General.Isotopes.isotopes import handle_calculation
 from Utility.Functions.choices import get_choices, get_isotopes
 from Utility.Functions.logic_utility import get_item, valid_saved
@@ -285,6 +286,7 @@ def exit_to_home(root):
     from App.home import return_home
     clear_main()
     return_home(root)
+    scroll_to_top()
 
 """
 This function transitions from the isotopes main screen
@@ -299,3 +301,4 @@ def to_advanced(root, category, mode, common_el, element):
 
     clear_main()
     isotopes_advanced(root, category, mode, common_el, element)
+    scroll_to_top()

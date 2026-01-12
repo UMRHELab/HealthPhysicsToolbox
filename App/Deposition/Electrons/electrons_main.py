@@ -5,6 +5,7 @@ import tkinter as tk
 from tkinter import ttk
 import tkinter.font as font
 from App.style import SectionFrame
+from App.scroll import scroll_to_top
 from Utility.Functions.choices import get_choices
 from Utility.Functions.files import get_user_data_path
 from Utility.Functions.logic_utility import get_item, valid_saved
@@ -367,6 +368,7 @@ def exit_to_home(root):
     from App.home import return_home
     clear_main()
     return_home(root)
+    scroll_to_top()
 
 """
 This function transitions from the electron stopping power main screen
@@ -383,3 +385,4 @@ def to_advanced(root, category, mode, interactions, common_el,
     clear_main()
     electrons_advanced(root, category, mode, interactions, common_el,
                        common_mat, element, material, custom_mat, linear)
+    scroll_to_top()

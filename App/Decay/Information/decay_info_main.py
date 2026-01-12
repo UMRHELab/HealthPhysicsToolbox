@@ -2,6 +2,7 @@
 import tkinter as tk
 from tkinter import ttk
 from App.style import SectionFrame
+from App.scroll import scroll_to_top
 from Utility.Functions.choices import get_choices, get_isotopes
 from Utility.Functions.logic_utility import get_item, valid_saved
 from Core.Decay.Information.nuclide_info import handle_calculation
@@ -319,6 +320,7 @@ def exit_to_home(root):
     from App.home import return_home
     clear_main()
     return_home(root)
+    scroll_to_top()
 
 """
 This function transitions from the decay information main screen
@@ -333,3 +335,4 @@ def to_advanced(root, category, mode, common_el, element, isotope):
 
     clear_main()
     decay_info_advanced(root, category, mode, common_el, element, isotope)
+    scroll_to_top()

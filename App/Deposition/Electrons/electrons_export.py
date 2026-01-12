@@ -2,6 +2,7 @@
 import tkinter as tk
 from tkinter import ttk
 from App.style import SectionFrame
+from App.scroll import scroll_to_top
 from Core.Deposition.Electrons.electrons_plots import export_data
 from Utility.Functions.logic_utility import get_item, get_interactions
 from Utility.Functions.gui_utility import (
@@ -171,3 +172,4 @@ def advanced_back(root, category, mode, interactions, common_el, common_mat,
     clear_export()
     electrons_advanced(root, category, mode, interactions, common_el, common_mat,
                        element, material, custom_mat, linear)
+    scroll_to_top()

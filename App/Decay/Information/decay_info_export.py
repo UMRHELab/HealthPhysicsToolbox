@@ -1,6 +1,7 @@
 ##### IMPORTS #####
 from tkinter import ttk
 from App.style import SectionFrame
+from App.scroll import scroll_to_top
 from Utility.Functions.logic_utility import get_item
 from Core.Decay.Information.energies_export import export_data
 from Utility.Functions.gui_utility import (
@@ -87,3 +88,4 @@ def advanced_back(root, category, mode, common_el, element, isotope):
 
     clear_export()
     decay_info_advanced(root, category, mode, common_el, element, isotope)
+    scroll_to_top()

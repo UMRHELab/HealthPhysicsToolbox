@@ -2,6 +2,7 @@
 import tkinter as tk
 from tkinter import ttk
 from App.style import SectionFrame
+from App.scroll import scroll_to_top
 from Utility.Functions.custom import add_custom
 from Utility.Functions.gui_utility import (
     make_spacer, get_width,
@@ -133,3 +134,4 @@ It is called when the Back button is hit.
 def advanced_back(back):
     clear_add_custom()
     back()
+    scroll_to_top()

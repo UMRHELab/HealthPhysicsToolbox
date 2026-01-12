@@ -1,5 +1,6 @@
 ##### IMPORTS #####
 from tkinter import ttk
+from App.scroll import scroll_to_top
 from App.Dose.ICRP68.icrp68_main import icrp68_main
 from Utility.Functions.gui_utility import get_width, make_title_frame
 
@@ -62,6 +63,7 @@ def exit_to_home(root):
     from App.home import return_home
     clear_dose()
     return_home(root)
+    scroll_to_top()
 
 """
 This function transitions from the dose screen
@@ -74,3 +76,4 @@ def to_icrp68(root):
     root.focus()
     clear_dose()
     icrp68_main(root)
+    scroll_to_top()

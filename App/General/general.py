@@ -1,5 +1,6 @@
 ##### IMPORTS #####
 from tkinter import ttk
+from App.scroll import scroll_to_top
 from App.General.Elements.elements_main import elements_main
 from App.General.Isotopes.isotopes_main import isotopes_main
 from Utility.Functions.gui_utility import get_width, make_title_frame
@@ -71,6 +72,7 @@ def exit_to_home(root):
     from App.home import return_home
     clear_general()
     return_home(root)
+    scroll_to_top()
 
 """
 This function transitions from the general screen
@@ -82,6 +84,7 @@ def to_elements(root):
     root.focus()
     clear_general()
     elements_main(root)
+    scroll_to_top()
 
 """
 This function transitions from the general screen
@@ -93,3 +96,4 @@ def to_isotopes(root):
     root.focus()
     clear_general()
     isotopes_main(root)
+    scroll_to_top()

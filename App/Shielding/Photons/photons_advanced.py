@@ -3,6 +3,7 @@ import shelve
 import tkinter as tk
 from tkinter import ttk
 from App.style import SectionFrame
+from App.scroll import scroll_to_top
 from App.add_custom_menu import add_custom_menu
 from Utility.Functions.choices import get_choices
 from App.Shielding.Photons.photons_export import photons_export
@@ -424,6 +425,7 @@ def to_main(root, category, mode, interactions, common_el, common_mat,
     clear_advanced()
     photons_main(root, category, mode, interactions, common_el, common_mat,
                  element, material, custom_mat)
+    scroll_to_top()
 
 """
 This function transitions from the photon attenuation advanced screen
@@ -445,6 +447,7 @@ def to_custom_menu(root, category, mode, interactions, common_el, common_mat,
         d_den = prefs.get("d_den", "cm\u00B3")
 
     add_custom_menu(root, d_num, d_den, back)
+    scroll_to_top()
 
 """
 This function transitions from the photon attenuation advanced screen
@@ -458,6 +461,7 @@ def to_export_menu(root, category, mode, interactions, common_el, common_mat,
     clear_advanced()
     photons_export(root, category, mode, interactions, common_el, common_mat,
                    element, material, custom_mat)
+    scroll_to_top()
 
 """
 This function opens the photon attenuation References.txt file.

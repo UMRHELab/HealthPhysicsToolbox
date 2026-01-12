@@ -229,31 +229,31 @@ def make_result_box(frame, pady=(1,20)):
 """
 This function creates a generic button.
 """
-def make_button(root, text, command):
+def make_button(root, text, command, **pack_args):
     button = ttk.Button(root, text=text, style="Maize.TButton",
                         padding=(0,0), command=command)
     button.config(width=get_width([text]))
-    button.pack(pady=5)
+    button.pack(**pack_args)
     return button
 
 """
 This function creates an exit button to return to the home screen.
 """
 def make_exit_button(root, command):
-    return make_button(root, "Exit", command)
+    return make_button(root, "Exit", command, pady=5)
 
 """
 This function creates a back button to return from an advanced settings menu or export menu.
 """
 def make_back_button(root, command):
-    return make_button(root, "Back", command)
+    return make_button(root, "Back", command, pady=5)
 
 """
 This function creates an advanced settings button to
 go to the advanced settings menu.
 """
 def make_advanced_button(root, command):
-    return make_button(root, "Advanced Settings", command)
+    return make_button(root, "Advanced Settings", command, pady=5)
 
 """
 This function makes a horizontal frame with a label and an entry.

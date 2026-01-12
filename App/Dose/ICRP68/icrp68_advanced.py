@@ -2,6 +2,7 @@
 import tkinter as tk
 from tkinter import ttk
 from App.style import SectionFrame
+from App.scroll import scroll_to_top
 from Utility.Functions.choices import get_choices
 from App.Dose.ICRP68.icrp68_export import icrp68_export
 from Utility.Functions.files import resource_path, open_file
@@ -150,6 +151,7 @@ def to_main(root, category, mode, common_el, element, isotope):
 
     clear_advanced()
     icrp68_main(root, category, mode, common_el, element, isotope)
+    scroll_to_top()
 
 """
 This function transitions from the ICRP68 advanced screen
@@ -161,6 +163,7 @@ It is called when the Export Menu button is hit.
 def to_export_menu(root, category, mode, common_el, element, isotope):
     clear_advanced()
     icrp68_export(root, category, mode, common_el, element, isotope)
+    scroll_to_top()
 
 """
 This function opens the ICRP68 References.txt file.

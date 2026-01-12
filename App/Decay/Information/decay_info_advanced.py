@@ -5,6 +5,7 @@ import tkinter as tk
 from tkinter import ttk
 import tkinter.font as font
 from App.style import SectionFrame
+from App.scroll import scroll_to_top
 from Utility.Functions.choices import get_choices
 from Utility.Functions.math_utility import energy_units
 from Utility.Functions.logic_utility import get_interactions
@@ -513,6 +514,7 @@ def to_main(root, category, mode, common_el, element, isotope):
 
     clear_advanced()
     decay_info_main(root, category, mode, common_el, element, isotope)
+    scroll_to_top()
 
 """
 This function transitions from the decay information advanced screen
@@ -524,6 +526,7 @@ It is called when the Export Menu button is hit.
 def to_export_menu(root, category, mode, common_el, element, isotope):
     clear_advanced()
     decay_info_export(root, category, mode, common_el, element, isotope)
+    scroll_to_top()
 
 """
 This function opens the decay information References.txt file.

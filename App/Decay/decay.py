@@ -1,5 +1,6 @@
 ##### IMPORTS #####
 from tkinter import ttk
+from App.scroll import scroll_to_top
 from App.Decay.Calculator.decay_calc_main import decay_calc_main
 from App.Decay.Information.decay_info_main import decay_info_main
 from Utility.Functions.gui_utility import get_width, make_title_frame
@@ -70,6 +71,7 @@ def exit_to_home(root):
     from App.home import return_home
     clear_decay()
     return_home(root)
+    scroll_to_top()
 
 """
 This function transitions from the decay screen
@@ -82,6 +84,7 @@ def to_info(root):
     root.focus()
     clear_decay()
     decay_info_main(root)
+    scroll_to_top()
 
 """
 This function transitions from the decay screen
@@ -94,3 +97,4 @@ def to_calc(root):
     root.focus()
     clear_decay()
     decay_calc_main(root)
+    scroll_to_top()

@@ -3,6 +3,7 @@ import shelve
 import tkinter as tk
 from tkinter import ttk
 from App.style import SectionFrame
+from App.scroll import scroll_to_top
 from Utility.Functions.choices import get_choices
 from Utility.Functions.files import resource_path, open_file, get_user_data_path
 from Utility.Functions.math_utility import atomic_mass_numerator, atomic_mass_denominator
@@ -209,6 +210,7 @@ def to_main(root, category, mode, common_el, element):
 
     clear_advanced()
     isotopes_main(root, category, mode, common_el, element)
+    scroll_to_top()
 
 """
 This function opens the isotopes References.txt file.

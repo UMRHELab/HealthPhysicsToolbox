@@ -1,6 +1,7 @@
 ##### IMPORTS #####
 from tkinter import ttk
 from App.Dose.dose import dose_menu
+from App.scroll import scroll_to_top
 from App.Decay.decay import decay_menu
 from App.General.general import general_menu
 from App.Shielding.shielding import shielding_menu
@@ -86,6 +87,7 @@ def shielding(root):
     root.focus()
     clear_home()
     shielding_menu(root)
+    scroll_to_top()
 
 """
 This function transitions from the home screen
@@ -97,6 +99,7 @@ def deposition(root):
     root.focus()
     clear_home()
     deposition_menu(root)
+    scroll_to_top()
 
 """
 This function transitions from the home screen
@@ -108,6 +111,7 @@ def decay(root):
     root.focus()
     clear_home()
     decay_menu(root)
+    scroll_to_top()
 
 """
 This function transitions from the home screen
@@ -119,6 +123,7 @@ def dose(root):
     root.focus()
     clear_home()
     dose_menu(root)
+    scroll_to_top()
 
 """
 This function transitions from the home screen
@@ -130,3 +135,4 @@ def general(root):
     root.focus()
     clear_home()
     general_menu(root)
+    scroll_to_top()

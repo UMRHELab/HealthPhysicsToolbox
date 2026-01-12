@@ -2,6 +2,7 @@
 import tkinter as tk
 from tkinter import ttk
 from App.style import SectionFrame
+from App.scroll import scroll_to_top
 from Utility.Functions.choices import get_choices
 from Core.General.Elements.elements import handle_action
 from Utility.Functions.logic_utility import get_item, valid_saved
@@ -169,6 +170,7 @@ def exit_to_home(root):
     from App.home import return_home
     clear_main()
     return_home(root)
+    scroll_to_top()
 
 """
 This function transitions from the elements main screen
@@ -183,3 +185,4 @@ def to_advanced(root, category, common_el, element):
 
     clear_main()
     elements_advanced(root, category, common_el, element)
+    scroll_to_top()

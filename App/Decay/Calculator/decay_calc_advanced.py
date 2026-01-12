@@ -3,6 +3,7 @@ import shelve
 import tkinter as tk
 from tkinter import ttk
 from App.style import SectionFrame
+from App.scroll import scroll_to_top
 from Utility.Functions.choices import get_choices, get_successors
 from Utility.Functions.files import resource_path, open_file, get_user_data_path
 from Utility.Functions.gui_utility import (
@@ -311,6 +312,7 @@ def to_main(root, category, mode, common_el, element, isotope, dates, nuclide_va
 
     clear_advanced()
     decay_calc_main(root, category, mode, common_el, element, isotope, dates, nuclide_vars)
+    scroll_to_top()
 
 """
 This function opens the decay calculator References.txt file.

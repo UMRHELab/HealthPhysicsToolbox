@@ -1,5 +1,6 @@
 ##### IMPORTS #####
 from tkinter import ttk
+from App.scroll import scroll_to_top
 from App.Shielding.Alphas.alphas_main import alphas_main
 from App.Shielding.Photons.photons_main import photons_main
 from App.Shielding.Electrons.electrons_main import electrons_main
@@ -78,6 +79,7 @@ def exit_to_home(root):
     from App.home import return_home
     clear_shielding()
     return_home(root)
+    scroll_to_top()
 
 """
 This function transitions from the shielding screen
@@ -90,6 +92,7 @@ def to_photons(root):
     root.focus()
     clear_shielding()
     photons_main(root)
+    scroll_to_top()
 
 """
 This function transitions from the shielding screen
@@ -102,6 +105,7 @@ def to_electrons(root):
     root.focus()
     clear_shielding()
     electrons_main(root)
+    scroll_to_top()
 
 """
 This function transitions from the shielding screen
@@ -114,3 +118,4 @@ def to_alphas(root):
     root.focus()
     clear_shielding()
     alphas_main(root)
+    scroll_to_top()
