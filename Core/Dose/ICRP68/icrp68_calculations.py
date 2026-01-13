@@ -11,12 +11,12 @@ from Utility.Functions.gui_utility import edit_result, no_selection
 """
 This function is called when the Calculate button is hit.
 The function handles the following error:
-   No selected item
+   No selected element
 If the error is not applicable, the coefficient
 is retrieved from the database, and then
 displayed in the result label.
 """
-def handle_calculation(root, mode, coefficient, element, isotope, result_box):
+def handle_calculation(root, mode, coefficient, isotope, result_box):
     root.focus()
 
     # Clears result box
@@ -24,7 +24,7 @@ def handle_calculation(root, mode, coefficient, element, isotope, result_box):
     result_box.delete("1.0", END)
 
     # Error-check for no selected element
-    if element == "":
+    if isotope == "":
         edit_result(no_selection, result_box)
         return
 
@@ -56,4 +56,4 @@ def handle_calculation(root, mode, coefficient, element, isotope, result_box):
                 result_box.insert(END, f"{result:.4g} Sv/Bq\n")
         result_box.config(state="disabled", height=len(results))
     else:
-        edit_result("Error: Invalid coefficient request.", result_box)
+        edit_result("Error: Invalid request.", result_box)

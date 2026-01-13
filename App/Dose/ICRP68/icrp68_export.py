@@ -3,7 +3,6 @@ from tkinter import ttk
 from App.style import SectionFrame
 from App.scroll import scroll_to_top
 from Core.Dose.ICRP68.icrp68_data import export_data
-from Utility.Functions.logic_utility import get_item
 from Utility.Functions.gui_utility import (
     get_width,
     make_title_frame,
@@ -43,8 +42,7 @@ def icrp68_export(root, category, mode, coefficient, common_el, element, isotope
     export_button = ttk.Button(inner_options_frame, text="Export", style="Maize.TButton",
                                padding=(0,0),
                                command=lambda:
-                               export_data(root, mode, get_item(category, common_el, "", element, "", ""),
-                                           isotope, error_label))
+                               export_data(root, mode, isotope, error_label))
     export_button.config(width=get_width(["Export"]))
     export_button.pack(pady=(20,5))
 

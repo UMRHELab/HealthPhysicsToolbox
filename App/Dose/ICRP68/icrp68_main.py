@@ -261,7 +261,7 @@ def icrp68_main(root, category="Common Elements", mode="Ingestion",
     inner_result_frame = result_frame.get_inner_frame()
 
     # Creates Calculate button
-    make_calculate_button(inner_result_frame, lambda: handle_calculation(root, mode, coefficient, element,
+    make_calculate_button(inner_result_frame, lambda: handle_calculation(root, mode, coefficient,
                                                                          isotope, result_box))
 
     # Result label

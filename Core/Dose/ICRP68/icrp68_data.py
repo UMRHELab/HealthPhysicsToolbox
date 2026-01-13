@@ -1,8 +1,8 @@
 ##### IMPORTS #####
 import csv
 import pandas as pd
+from Utility.Functions.gui_utility import no_selection
 from Utility.Functions.files import save_file, resource_path
-from Utility.Functions.gui_utility import edit_result, no_selection
 
 #####################################################################################
 # EXPORT SECTION
@@ -17,13 +17,15 @@ with the ICRP68 coefficients for the selected nuclide.
 The dataframe is populated from the corresponding ICRP68 file.
 Finally, we pass on the work to the save_file function.
 """
-def export_data(root, mode, element, isotope, result_box):
+def export_data(root, mode, isotope, error_label):
     root.focus()
 
     # Error-check for no selected element
-    if element == "":
-        edit_result(no_selection, result_box)
+    if isotope == "":
+        error_label.config(style="Error.TLabel", text=no_selection)
         return
+
+    error_label.config(text="")
 
     # Sets up columns for dataframe
     names_col = "Nuclide"
@@ -48,4 +50,4 @@ def export_data(root, mode, element, isotope, result_box):
                     df.insert(len(df.columns), isotope+'_', pd.Series(list(row.values())[1:]))
                     df.columns = list(df.columns[:-1]) + [isotope]
 
-    save_file(df, "Data", result_box, isotope, mode.lower(), False)
+    save_file(df, "Data", error_label, isotope, mode.lower(), False)
