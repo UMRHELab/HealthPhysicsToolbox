@@ -25,7 +25,7 @@ half_life_units = ['μs', 'ms', 's', 'm', 'h', 'd', 'y', 'readable']
 
 """
 This function is called when the Calculate button is hit.
-The function handles the following errors:
+The function handles the following error:
    No selected element
 The function decides what calculation to perform
 based on the selected calculation mode.

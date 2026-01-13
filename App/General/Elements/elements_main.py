@@ -10,8 +10,8 @@ from Utility.Functions.gui_utility import (
     get_width,
     basic_label,
     make_title_frame,
-    make_exit_button, make_advanced_button,
-    make_category_dropdown, make_item_dropdown
+    make_category_dropdown, make_item_dropdown,
+    make_exit_button, make_advanced_button, make_display_button, make_export_button
 )
 
 # For global access to nodes on elements main screen
@@ -114,23 +114,19 @@ def elements_main(root, category="Common Elements", common_el="Ag", element="Ac"
     # Creates dropdown menu for element
     element_dropdown = make_item_dropdown(root, element_frame, var_element, choices, on_enter)
 
+    # Creates warning label for bad input
+    error_label = ttk.Label(root, text="", style="Error.TLabel")
+    error_label.pack(pady=5)
+
     # Frame for Display & Export buttons
     action_frame = tk.Frame(root, bg="#F2F2F2")
     action_frame.pack(pady=5)
 
     # Creates Display button
-    display_button = ttk.Button(action_frame, text="Display Info",
-                                style="Maize.TButton", padding=(0,0),
-                                command=lambda: handle_action(root, var_element.get(), False))
-    display_button.config(width=get_width(["Display Info"]))
-    display_button.pack(side='left', padx=5)
+    make_display_button(action_frame, lambda: handle_action(root, var_element.get(), error_label, False))
 
     # Creates Export button
-    export_button = ttk.Button(action_frame, text="Export Info", style="Maize.TButton",
-                               padding=(0,0),
-                               command=lambda: handle_action(root, var_element.get(), True))
-    export_button.config(width=get_width(["Export Info"]))
-    export_button.pack(side='left', padx=5)
+    make_export_button(action_frame, lambda: handle_action(root, var_element.get(), error_label, True))
 
     # Creates Advanced Settings button
     advanced_button = make_advanced_button(root, lambda: to_advanced(root, category,
@@ -141,7 +137,8 @@ def elements_main(root, category="Common Elements", common_el="Ag", element="Ac"
 
     # Stores nodes into global list
     main_list = [title_frame, main_element_frame,
-                 action_frame, advanced_button, exit_button]
+                 action_frame,
+                 error_label, advanced_button, exit_button]
 
 #####################################################################################
 # NAVIGATION SECTION

@@ -36,7 +36,7 @@ behaviors.
 The sections and widgets are stored in advanced_list so they can be
 accessed later by clear_advanced.
 """
-def isotopes_advanced(root, category, mode, common_el, element):
+def isotopes_advanced(root, category, mode, common_el, element, isotope):
     global advanced_list
 
     # Gets atomic mass units from user prefs
@@ -174,7 +174,7 @@ def isotopes_advanced(root, category, mode, common_el, element):
     help_button.pack(side='left', padx=5)
 
     # Creates Back button to return to isotopes main screen
-    back_button = make_back_button(root, lambda: to_main(root, category, mode, common_el, element))
+    back_button = make_back_button(root, lambda: to_main(root, category, mode, common_el, element, isotope))
 
     # Stores nodes into global list
     advanced_list = [title_frame,
@@ -205,11 +205,11 @@ isotopes advanced screen and then creating the
 isotopes main screen.
 It is called when the Back button is hit.
 """
-def to_main(root, category, mode, common_el, element):
+def to_main(root, category, mode, common_el, element, isotope):
     from App.General.Isotopes.isotopes_main import isotopes_main
 
     clear_advanced()
-    isotopes_main(root, category, mode, common_el, element)
+    isotopes_main(root, category, mode, common_el, element, isotope)
     scroll_to_top()
 
 """

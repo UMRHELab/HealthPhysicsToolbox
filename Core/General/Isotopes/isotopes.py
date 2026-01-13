@@ -1,8 +1,8 @@
 ##### IMPORTS #####
 import shelve
 import radioactivedecay as rd
-from Utility.Functions.gui_utility import edit_result
 from Utility.Functions.files import get_user_data_path
+from Utility.Functions.gui_utility import edit_result, no_selection
 from Utility.Functions.math_utility import atomic_mass_numerator, atomic_mass_denominator
 
 #####################################################################################
@@ -11,11 +11,19 @@ from Utility.Functions.math_utility import atomic_mass_numerator, atomic_mass_de
 
 """
 This function is called when the Calculate button is hit.
+The function handles the following error:
+   No selected element
 The function decides what calculation to perform
 based on the selected calculation mode.
 """
 def handle_calculation(root, mode, isotope, result_box):
     root.focus()
+
+    # Error-check for no selected element
+    if isotope == "":
+        edit_result(no_selection, result_box)
+        return
+
     match mode:
         case "Proton Number":
             nuclide_proton_number(isotope, result_box)

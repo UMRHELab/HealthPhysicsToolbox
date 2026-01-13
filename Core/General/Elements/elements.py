@@ -3,7 +3,7 @@ import csv
 import shelve
 import pandas as pd
 import tkinter as tk
-from Utility.Functions.gui_utility import window
+from Utility.Functions.gui_utility import window, no_selection
 from Utility.Functions.files import save_file, resource_path, get_user_data_path
 from Utility.Functions.math_utility import atomic_mass_numerator, atomic_mass_denominator
 
@@ -12,14 +12,22 @@ from Utility.Functions.math_utility import atomic_mass_numerator, atomic_mass_de
 #####################################################################################
 
 """
-This function is called when the Display Info button
-or Export Info button is hit.
+This function is called when the Display button or Export button is hit.
+The function handles the following error:
+   No selected element
 The Atomic Mass column is converted to the desired units.
 The information is then either displayed in a pop-up window
 or exported to a csv file.
 """
-def handle_action(root, element, export = False):
+def handle_action(root, element, error_label, export = False):
     root.focus()
+
+    # Error-check for no selected element
+    if element == "":
+        error_label.config(style="Error.TLabel", text=no_selection)
+        return
+
+    error_label.config(text="")
 
     # Gets atomic mass units from user prefs
     db_path = get_user_data_path("Settings/General/Elements")
@@ -69,4 +77,4 @@ def handle_action(root, element, export = False):
             df.at[index, 'Atomic Mass'] /= atomic_mass_denominator[den]
 
             df.rename(columns={'Atomic Mass': f'Atomic Mass ({num}/{den})'}, inplace=True)
-            save_file(df.loc[[index]], "", None, element, "information")
+            save_file(df.loc[[index]], "", error_label, element, "information")

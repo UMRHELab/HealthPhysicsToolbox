@@ -262,6 +262,19 @@ def make_advanced_button(root, command):
     return make_button(root, "Advanced Settings", command, pady=5)
 
 """
+This function creates a Display Info button to create a
+pop-up window with information.
+"""
+def make_display_button(root, command):
+    return make_button(root, "Display", command, side='left', padx=5)
+
+"""
+This function creates an Export button to set an export into action.
+"""
+def make_export_button(root, command):
+    return make_button(root, "Export", command, side='left', padx=5)
+
+"""
 This function makes a horizontal frame with a label and an entry.
 It is used for both the Enter Material Name and Enter Density sections
 in Export menus.

@@ -35,7 +35,7 @@ The sections and widgets are stored in main_list so they can be
 accessed later by clear_main.
 """
 def isotopes_main(root, category="Common Elements", mode="Proton Number",
-                  common_el="Ag", element="Ac"):
+                  common_el="Ag", element="Ac", isotope=None):
     global main_list
 
     # Makes title frame
@@ -214,7 +214,8 @@ def isotopes_main(root, category="Common Elements", mode="Proton Number",
 
     # Retrieves isotopes for current element
     isotope_choices = get_isotopes(get_item(category, common_el, "", element, "", ""))
-    isotope = isotope_choices[0] if isotope_choices else ""
+    if not isotope:
+        isotope = isotope_choices[0] if isotope_choices else ""
 
     # Stores isotope and sets default
     var_isotope = tk.StringVar(root)
@@ -243,7 +244,7 @@ def isotopes_main(root, category="Common Elements", mode="Proton Number",
 
     # Creates Advanced Settings button
     advanced_button = make_advanced_button(root, lambda: to_advanced(root, category, mode,
-                                                                     common_el, element))
+                                                                     common_el, element, isotope))
 
     # Creates Exit button to return to home screen
     exit_button = make_exit_button(root, lambda: exit_to_home(root))
@@ -290,10 +291,10 @@ isotopes main screen and then creating the
 isotopes advanced screen.
 It is called when the Advanced Settings button is hit.
 """
-def to_advanced(root, category, mode, common_el, element):
+def to_advanced(root, category, mode, common_el, element, isotope):
     root.focus()
     from App.General.Isotopes.isotopes_advanced import isotopes_advanced
 
     clear_main()
-    isotopes_advanced(root, category, mode, common_el, element)
+    isotopes_advanced(root, category, mode, common_el, element, isotope)
     scroll_to_top()

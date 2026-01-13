@@ -112,10 +112,12 @@ def save_file(obj, choice, error_label, item, name, box = False):
             obj.savefig(file_path)
         else:
             obj.to_csv(file_path, encoding="utf-8-sig", index=False)
+        if not choice:
+            choice = item
         if box:
             edit_result(choice+" exported!", error_label)
         elif error_label:
-            error_label.config(style="Success.TLabel", text=choice + " exported!")
+            error_label.config(style="Success.TLabel", text=choice+" exported!")
         open_file(file_path)
     else:
         if box:

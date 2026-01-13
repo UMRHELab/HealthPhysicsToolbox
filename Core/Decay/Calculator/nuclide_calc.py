@@ -15,7 +15,7 @@ from Utility.Functions.gui_utility import edit_result, no_selection
 """
 This function is called when the Calculate button is hit.
 The function checks if the time already has an error.
-The function also handles the following errors:
+The function also handles the following error:
    No selected element
 If not, the function decides what calculation to
 perform based on the selected calculation mode.
