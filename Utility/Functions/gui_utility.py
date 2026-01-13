@@ -271,8 +271,8 @@ def make_display_button(root, command):
 """
 This function creates an Export button to set an export into action.
 """
-def make_export_button(root, command):
-    return make_button(root, "Export", command, side='left', padx=5)
+def make_export_button(root, command, **pack_args):
+    return make_button(root, "Export", command, **pack_args)
 
 """
 This function makes a horizontal frame with a label and an entry.

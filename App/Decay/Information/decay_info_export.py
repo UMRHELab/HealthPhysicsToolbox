@@ -5,9 +5,8 @@ from App.scroll import scroll_to_top
 from Utility.Functions.logic_utility import get_item
 from Core.Decay.Information.energies_export import export_data
 from Utility.Functions.gui_utility import (
-    get_width,
     make_title_frame,
-    make_back_button,
+    make_back_button, make_export_button
 )
 
 # For global access to nodes on decay information export screen
@@ -40,13 +39,10 @@ def decay_info_export(root, category, mode, common_el, element, isotope):
     inner_options_frame = options_frame.get_inner_frame()
 
     # Creates Export button
-    export_button = ttk.Button(inner_options_frame, text="Export", style="Maize.TButton",
-                               padding=(0,0),
-                               command=lambda:
-                               export_data(root, get_item(category, common_el, "", element, "", ""),
-                                           isotope, error_label))
-    export_button.config(width=get_width(["Export"]))
-    export_button.pack(pady=(20,5))
+    make_export_button(inner_options_frame, lambda:
+                                    export_data(root, get_item(category, common_el, "", element, "", ""),
+                                                isotope, error_label),
+                       pady=(20,5))
 
     # Creates error label for bad input
     error_label = ttk.Label(inner_options_frame, text="", style="Error.TLabel")

@@ -114,7 +114,7 @@ def elements_main(root, category="Common Elements", common_el="Ag", element="Ac"
     # Creates dropdown menu for element
     element_dropdown = make_item_dropdown(root, element_frame, var_element, choices, on_enter)
 
-    # Creates warning label for bad input
+    # Creates error label for bad input
     error_label = ttk.Label(root, text="", style="Error.TLabel")
     error_label.pack(pady=5)
 
@@ -126,7 +126,8 @@ def elements_main(root, category="Common Elements", common_el="Ag", element="Ac"
     make_display_button(action_frame, lambda: handle_action(root, var_element.get(), error_label, False))
 
     # Creates Export button
-    make_export_button(action_frame, lambda: handle_action(root, var_element.get(), error_label, True))
+    make_export_button(action_frame, lambda: handle_action(root, var_element.get(), error_label, True),
+                       side='left', padx=5)
 
     # Creates Advanced Settings button
     advanced_button = make_advanced_button(root, lambda: to_advanced(root, category,

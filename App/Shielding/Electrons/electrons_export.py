@@ -6,11 +6,10 @@ from App.scroll import scroll_to_top
 from Utility.Functions.logic_utility import get_item
 from Core.Shielding.Electrons.electrons_plots import export_data
 from Utility.Functions.gui_utility import (
-    get_width,
     basic_label,
     make_title_frame,
-    make_back_button,
-    make_export_dropdown
+    make_export_dropdown,
+    make_back_button, make_export_button
 )
 
 # For global access to nodes on electron range export screen
@@ -79,16 +78,11 @@ def electrons_export(root, category, mode, common_el, common_mat, element,
     _ = make_export_dropdown(export_type_frame, var_export, on_select_export)
 
     # Creates Export button
-    export_button = ttk.Button(inner_options_frame, text="Export", style="Maize.TButton",
-                               padding=(0,0),
-                               command=lambda:
-                               export_data(root,
-                               get_item(category, common_el, common_mat,
-                                        element, material, custom_mat),
-                                           category, mode, var_export.get(),
-                                           var_save.get(), error_label, linear))
-    export_button.config(width=get_width(["Export"]))
-    export_button.pack(pady=(10,5))
+    make_export_button(inner_options_frame, lambda: export_data(root, get_item(category, common_el, common_mat,
+                                                                               element, material, custom_mat),
+                                                                category, mode, var_export.get(),
+                                                                var_save.get(), error_label, linear),
+                       pady=(10,5))
 
     # Creates error label for bad input
     error_label = ttk.Label(inner_options_frame, text="", style="Error.TLabel")
