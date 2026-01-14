@@ -8,11 +8,11 @@ from Utility.Functions.choices import get_choices
 from Utility.Functions.files import resource_path, open_file, get_user_data_path
 from Utility.Functions.math_utility import atomic_mass_numerator, atomic_mass_denominator
 from Utility.Functions.gui_utility import (
-    basic_label,
     make_back_button,
-    make_spacer, get_width,
+    basic_label, make_spacer,
     make_title_frame, make_vertical_frame,
-    make_unit_dropdown, make_action_dropdown
+    make_unit_dropdown, make_action_dropdown,
+    make_references_button, make_help_button
 )
 
 # For global access to nodes on isotopes advanced screen
@@ -159,19 +159,9 @@ def isotopes_advanced(root, category, mode, common_el, element, isotope):
     bottom_frame = tk.Frame(root, bg="#F2F2F2")
     bottom_frame.pack(pady=5)
 
-    # Creates References button
-    references_button = ttk.Button(bottom_frame, text="References", style="Maize.TButton",
-                                   padding=(0,0),
-                                   command=lambda: open_ref(root))
-    references_button.config(width=get_width(["References"]))
-    references_button.pack(side='left', padx=5)
-
-    # Creates Help button
-    help_button = ttk.Button(bottom_frame, text="Help", style="Maize.TButton",
-                             padding=(0,0),
-                             command=lambda: open_help(root))
-    help_button.config(width=get_width(["Help"]))
-    help_button.pack(side='left', padx=5)
+    # Creates References & Help buttons
+    make_references_button(bottom_frame, lambda: open_ref(root))
+    make_help_button(bottom_frame, lambda: open_help(root))
 
     # Creates Back button to return to isotopes main screen
     back_button = make_back_button(root, lambda: to_main(root, category, mode, common_el, element, isotope))

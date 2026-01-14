@@ -275,6 +275,25 @@ def make_export_button(root, command, **pack_args):
     return make_button(root, "Export", command, **pack_args)
 
 """
+This function creates an Export Menu button to transition from an
+Advanced Settings menu to an Export Menu.
+"""
+def make_export_menu_button(root, command):
+    return make_button(root, "Export Menu", command, side='left', padx=5)
+
+"""
+This function creates a References button to open the module's References.txt file.
+"""
+def make_references_button(root, command):
+    return make_button(root, "References", command, side='left', padx=5)
+
+"""
+This function creates a Help button to open the module's Help.txt file.
+"""
+def make_help_button(root, command):
+    return make_button(root, "Help", command, side='left', padx=5)
+
+"""
 This function makes a horizontal frame with a label and an entry.
 It is used for both the Enter Material Name and Enter Density sections
 in Export menus.

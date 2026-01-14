@@ -18,11 +18,11 @@ from Utility.Functions.math_utility import (
     density_numerator, density_denominator
 )
 from Utility.Functions.gui_utility import (
-    basic_label,
     make_back_button,
     interaction_checkbox,
-    make_spacer, get_width,
+    basic_label, make_spacer,
     make_title_frame, make_vertical_frame,
+    make_export_menu_button, make_references_button, make_help_button,
     make_unit_dropdown, make_action_dropdown, make_customize_category_dropdown
 )
 
@@ -358,29 +358,15 @@ def photons_advanced(root, category, mode, interactions, common_el, common_mat,
         _ = make_unit_dropdown(energy_unit_side_frame, var_energy, energy_choices, on_select_energy)
 
         # Creates Export Menu button
-        export_button = ttk.Button(bottom_frame, text="Export Menu", style="Maize.TButton",
-                                   padding=(0,0),
-                                   command=lambda:
-                                   to_export_menu(root, category, mode,
-                                   get_interactions(interaction_choices, interaction_vars),
-                                                  common_el, common_mat, element, material,
-                                                  custom_mat))
-        export_button.config(width=get_width(["Export Menu"]))
-        export_button.pack(side='left', padx=5)
+        make_export_menu_button(bottom_frame, lambda: to_export_menu(root, category, mode,
+                                                                     get_interactions(interaction_choices,
+                                                                                      interaction_vars),
+                                                                     common_el, common_mat, element, material,
+                                                                     custom_mat))
 
-    # Creates References button
-    references_button = ttk.Button(bottom_frame, text="References", style="Maize.TButton",
-                                   padding=(0,0),
-                                   command=lambda: open_ref(root))
-    references_button.config(width=get_width(["References"]))
-    references_button.pack(side='left', padx=5)
-
-    # Creates Help button
-    help_button = ttk.Button(bottom_frame, text="Help", style="Maize.TButton",
-                             padding=(0,0),
-                             command=lambda: open_help(root))
-    help_button.config(width=get_width(["Help"]))
-    help_button.pack(side='left', padx=5)
+    # Creates References & Help buttons
+    make_references_button(bottom_frame, lambda: open_ref(root))
+    make_help_button(bottom_frame, lambda: open_help(root))
 
     # Creates Back button to return to photon attenuation main screen
     back_button = make_back_button(root, lambda: to_main(root, category, mode,

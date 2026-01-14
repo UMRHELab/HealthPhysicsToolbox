@@ -7,11 +7,11 @@ from Utility.Functions.choices import get_choices
 from App.Dose.ICRP68.icrp68_export import icrp68_export
 from Utility.Functions.files import resource_path, open_file
 from Utility.Functions.gui_utility import (
-    basic_label,
     make_back_button,
     make_action_dropdown,
-    make_spacer, get_width,
+    basic_label, make_spacer,
     make_title_frame, make_vertical_frame,
+    make_export_menu_button, make_references_button, make_help_button
 )
 
 # For global access to nodes on ICRP68 advanced screen
@@ -94,26 +94,12 @@ def icrp68_advanced(root, category, mode, coefficient, common_el, element, isoto
     bottom_frame.pack(pady=5)
 
     # Creates Export Menu button
-    export_button = ttk.Button(bottom_frame, text="Export Menu", style="Maize.TButton",
-                               padding=(0,0),
-                               command=lambda:
-                               to_export_menu(root, category, mode, coefficient, common_el, element, isotope))
-    export_button.config(width=get_width(["Export Menu"]))
-    export_button.pack(side='left', padx=5)
+    make_export_menu_button(bottom_frame, lambda: to_export_menu(root, category, mode, coefficient,
+                                                                 common_el, element, isotope))
 
-    # Creates References button
-    references_button = ttk.Button(bottom_frame, text="References", style="Maize.TButton",
-                                   padding=(0,0),
-                                   command=lambda: open_ref(root))
-    references_button.config(width=get_width(["References"]))
-    references_button.pack(side='left', padx=5)
-
-    # Creates Help button
-    help_button = ttk.Button(bottom_frame, text="Help", style="Maize.TButton",
-                             padding=(0,0),
-                             command=lambda: open_help(root))
-    help_button.config(width=get_width(["Help"]))
-    help_button.pack(side='left', padx=5)
+    # Creates References & Help buttons
+    make_references_button(bottom_frame, lambda: open_ref(root))
+    make_help_button(bottom_frame, lambda: open_help(root))
 
     # Creates Back button to return to ICRP68 main screen
     back_button = make_back_button(root, lambda: to_main(root, category, mode, coefficient,
