@@ -160,6 +160,10 @@ def make_mouse_scroll():
     canvas.bind("<Enter>", lambda e: canvas.bind_all("<MouseWheel>", _on_mousewheel))
     canvas.bind("<Leave>", lambda e: canvas.unbind_all("<MouseWheel>"))
 
+    # Linux bindings
+    canvas.bind("<Button-4>", _on_mousewheel)
+    canvas.bind("<Button-5>", _on_mousewheel)
+
 """
 This function configures arrow keys to scroll the app.
 """

@@ -378,6 +378,28 @@ def window(title, geometry = "400x600"):
     canvas.pack(side="left", fill="both", expand=True)
     scrollbar.pack(side="right", fill="y")
 
+    # Makes Canvas scrollable with mouse/pad
+    def _on_mousewheel(event):
+        canvas.yview_scroll(-1 * int(event.delta), "units")
+
+    canvas.bind("<Enter>", lambda e: canvas.bind_all("<MouseWheel>", _on_mousewheel))
+    canvas.bind("<Leave>", lambda e: canvas.unbind_all("<MouseWheel>"))
+
+    # Linux bindings
+    canvas.bind("<Button-4>", _on_mousewheel)
+    canvas.bind("<Button-5>", _on_mousewheel)
+
+    # Makes Canvas scrollable with up key
+    def on_up(_):
+        canvas.yview_scroll(-1, "units")
+
+    # Makes Canvas scrollable with down key
+    def on_down(_):
+        canvas.yview_scroll(1, "units")
+
+    popup.bind_all("<KeyPress-Up>", on_up)
+    popup.bind_all("<KeyPress-Down>", on_down)
+
     return popup, scroll_frame
 
 #####################################################################################
