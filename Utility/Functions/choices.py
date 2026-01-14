@@ -27,24 +27,24 @@ a default list is read from a Data file which is used
 if no user shelve data is stored.
 If the category is Custom Materials, the default list is empty.
 """
-def get_choices(category, module, particle):
+def get_choices(category, module, submodule):
     choices = []
 
-    if module == "Deposition" and particle == "Photons":
-        particle = "Alphas"
+    if module == "Deposition" and submodule == "Photons":
+        submodule = "Alphas"
 
     if category == "All Materials":
         # Obtains list of items from csv file
         db_path = resource_path('Data/General Data/Density/Materials.csv')
         read_choices(choices, db_path)
-        if particle == "Alphas":
+        if submodule == "Alphas":
             return [choice for choice in choices if "Plutonium" not in choice]
         return choices
 
     if category == "All Elements":
         # Obtains list of items from csv file
         data = "ICRP Coefficients" if module == "Dose" else "NIST Coefficients"
-        db_path = resource_path('Data/' + data + '/' + particle + '/Elements.csv')
+        db_path = resource_path('Data/' + data + '/' + submodule + '/Elements.csv')
         if module == "Decay":
             db_path = resource_path('Data/Radioactive Decay/Elements.csv')
         if module == "General":

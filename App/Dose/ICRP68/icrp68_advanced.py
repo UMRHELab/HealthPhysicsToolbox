@@ -1,16 +1,13 @@
 ##### IMPORTS #####
 import tkinter as tk
-from tkinter import ttk
-from App.style import SectionFrame
 from App.scroll import scroll_to_top
-from Utility.Functions.choices import get_choices
 from App.Dose.ICRP68.icrp68_export import icrp68_export
 from Utility.Functions.files import resource_path, open_file
 from Utility.Functions.gui_utility import (
+    make_spacer,
     make_back_button,
-    make_action_dropdown,
-    basic_label, make_spacer,
-    make_title_frame, make_vertical_frame,
+    make_title_frame,
+    make_customize_common_elements_frame,
     make_export_menu_button, make_references_button, make_help_button
 )
 
@@ -41,50 +38,8 @@ def icrp68_advanced(root, category, mode, coefficient, common_el, element, isoto
     # Makes title frame
     title_frame = make_title_frame(root, "ICRP68 Coefficients", "Dose/ICRP68")
 
-    # Gets common and non-common elements
-    elements = get_choices("All Elements", "Dose", "ICRP68")
-    common = get_choices("Common Elements", "Dose", "ICRP68")
-    non_common = [element for element in elements if element not in common]
-
     # Frame for add/remove settings
-    a_r_frame = SectionFrame(root, title="Customize Common Elements")
-    a_r_frame.pack()
-    inner_a_r_frame = a_r_frame.get_inner_frame()
-
-    # Action button
-    a_r_button = [ttk.Button()]
-
-    # Simplifies calls to make_vertical_frame
-    def make_v_frame():
-        to_custom = lambda: root.focus()
-        return make_vertical_frame(root, inner_a_r_frame, var_action.get(),
-                                   "Common Elements", non_common, common,
-                                   [], [], [], a_r_button, to_custom)
-
-    # Logic for when an action is selected
-    def on_select_action(event):
-        nonlocal vertical_frame
-        event.widget.selection_clear()
-        root.focus()
-        vertical_frame.destroy()
-        vertical_frame = make_v_frame()
-
-    # Frame for action selection
-    action_frame = tk.Frame(inner_a_r_frame, bg="#F2F2F2")
-    action_frame.pack(pady=(15,5))
-
-    # Action label
-    basic_label(action_frame, "Action:")
-
-    # Stores action and sets default
-    var_action = tk.StringVar(root)
-    var_action.set("Add")
-
-    # Creates dropdown menu for action
-    _ = make_action_dropdown(action_frame, var_action, on_select_action)
-
-    # Frame for specific add/remove settings
-    vertical_frame = make_v_frame()
+    a_r_frame = make_customize_common_elements_frame(root, "Dose", "ICRP68")
 
     # Spacer
     empty_frame1 = make_spacer(root)

@@ -403,8 +403,62 @@ def window(title, geometry = "400x600"):
     return popup, scroll_frame
 
 #####################################################################################
-# VERTICAL FRAME SECTION
+# CUSTOMIZATION SECTION
 #####################################################################################
+
+"""
+This function makes the Customize Common Elements frame in an Advanced Settings page.
+"""
+def make_customize_common_elements_frame(root, module, submodule):
+    from App.style import SectionFrame
+    from Utility.Functions.choices import get_choices
+
+    # Gets common and non-common elements
+    elements = get_choices("All Elements", module, submodule)
+    common = get_choices("Common Elements", module, submodule)
+    non_common = [element for element in elements if element not in common]
+
+    # Frame for add/remove settings
+    a_r_frame = SectionFrame(root, title="Customize Common Elements")
+    a_r_frame.pack()
+    inner_a_r_frame = a_r_frame.get_inner_frame()
+
+    # Action button
+    a_r_button = [ttk.Button()]
+
+    # Simplifies calls to make_vertical_frame
+    def make_v_frame():
+        to_custom = lambda: root.focus()
+        return make_vertical_frame(root, inner_a_r_frame, var_action.get(),
+                                   "Common Elements", non_common, common,
+                                   [], [], [], a_r_button, to_custom)
+
+    # Logic for when an action is selected
+    def on_select_action(event):
+        nonlocal vertical_frame
+        event.widget.selection_clear()
+        root.focus()
+        vertical_frame.destroy()
+        vertical_frame = make_v_frame()
+
+    # Frame for action selection
+    action_frame = tk.Frame(inner_a_r_frame, bg="#F2F2F2")
+    action_frame.pack(pady=(15, 5))
+
+    # Action label
+    basic_label(action_frame, "Action:")
+
+    # Stores action and sets default
+    var_action = tk.StringVar(root)
+    var_action.set("Add")
+
+    # Creates dropdown menu for action
+    _ = make_action_dropdown(action_frame, var_action, on_select_action)
+
+    # Frame for specific add/remove settings
+    vertical_frame = make_v_frame()
+
+    return a_r_frame
 
 """
 This function creates a vertical frame dependent on the

@@ -45,10 +45,6 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
                     nuclide_vars=None):
     global main_list
 
-    # Initializes nuclide selectors if necessary
-    if not nuclide_vars:
-        nuclide_vars = get_nuclide_vars(isotope)
-
     # Gets units from user prefs
     db_path = get_user_data_path("Settings/Decay/Calculator")
     with shelve.open(db_path) as prefs:
@@ -74,6 +70,10 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
     isotope_choices = get_isotopes(get_item(category, common_el, "", element, "", ""))
     if not isotope:
         isotope = isotope_choices[0] if isotope_choices else ""
+
+    # Initializes nuclide selectors if necessary
+    if not nuclide_vars:
+        nuclide_vars = get_nuclide_vars(isotope)
 
     # Stores mode and sets default
     var_mode = tk.StringVar(root)
