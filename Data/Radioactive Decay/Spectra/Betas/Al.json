@@ -1,0 +1,1432 @@
+{
+    "Al-26": [
+        {
+            "energy_MeV": "0.00000",
+            "electrons": "0.000E+00"
+        },
+        {
+            "energy_MeV": "0.00010",
+            "electrons": "6.050E-13"
+        },
+        {
+            "energy_MeV": "0.00011",
+            "electrons": "2.207E-12"
+        },
+        {
+            "energy_MeV": "0.00012",
+            "electrons": "6.823E-12"
+        },
+        {
+            "energy_MeV": "0.00013",
+            "electrons": "1.847E-11"
+        },
+        {
+            "energy_MeV": "0.00014",
+            "electrons": "4.484E-11"
+        },
+        {
+            "energy_MeV": "0.00015",
+            "electrons": "9.949E-11"
+        },
+        {
+            "energy_MeV": "0.00016",
+            "electrons": "2.046E-10"
+        },
+        {
+            "energy_MeV": "0.00018",
+            "electrons": "7.192E-10"
+        },
+        {
+            "energy_MeV": "0.00020",
+            "electrons": "2.083E-09"
+        },
+        {
+            "energy_MeV": "0.00022",
+            "electrons": "5.201E-09"
+        },
+        {
+            "energy_MeV": "0.00024",
+            "electrons": "1.155E-08"
+        },
+        {
+            "energy_MeV": "0.00026",
+            "electrons": "2.336E-08"
+        },
+        {
+            "energy_MeV": "0.00028",
+            "electrons": "4.375E-08"
+        },
+        {
+            "energy_MeV": "0.00030",
+            "electrons": "7.688E-08"
+        },
+        {
+            "energy_MeV": "0.00032",
+            "electrons": "1.281E-07"
+        },
+        {
+            "energy_MeV": "0.00036",
+            "electrons": "3.124E-07"
+        },
+        {
+            "energy_MeV": "0.00040",
+            "electrons": "6.663E-07"
+        },
+        {
+            "energy_MeV": "0.00045",
+            "electrons": "1.492E-06"
+        },
+        {
+            "energy_MeV": "0.00050",
+            "electrons": "2.974E-06"
+        },
+        {
+            "energy_MeV": "0.00055",
+            "electrons": "5.426E-06"
+        },
+        {
+            "energy_MeV": "0.00060",
+            "electrons": "9.236E-06"
+        },
+        {
+            "energy_MeV": "0.00065",
+            "electrons": "1.486E-05"
+        },
+        {
+            "energy_MeV": "0.00070",
+            "electrons": "2.284E-05"
+        },
+        {
+            "energy_MeV": "0.00075",
+            "electrons": "3.374E-05"
+        },
+        {
+            "energy_MeV": "0.00080",
+            "electrons": "4.817E-05"
+        },
+        {
+            "energy_MeV": "0.00085",
+            "electrons": "6.676E-05"
+        },
+        {
+            "energy_MeV": "0.00090",
+            "electrons": "9.013E-05"
+        },
+        {
+            "energy_MeV": "0.00100",
+            "electrons": "1.535E-04"
+        },
+        {
+            "energy_MeV": "0.00110",
+            "electrons": "2.425E-04"
+        },
+        {
+            "energy_MeV": "0.00120",
+            "electrons": "3.603E-04"
+        },
+        {
+            "energy_MeV": "0.00130",
+            "electrons": "5.089E-04"
+        },
+        {
+            "energy_MeV": "0.00140",
+            "electrons": "6.894E-04"
+        },
+        {
+            "energy_MeV": "0.00150",
+            "electrons": "9.020E-04"
+        },
+        {
+            "energy_MeV": "0.00160",
+            "electrons": "1.146E-03"
+        },
+        {
+            "energy_MeV": "0.00180",
+            "electrons": "1.725E-03"
+        },
+        {
+            "energy_MeV": "0.00200",
+            "electrons": "2.414E-03"
+        },
+        {
+            "energy_MeV": "0.00220",
+            "electrons": "3.200E-03"
+        },
+        {
+            "energy_MeV": "0.00240",
+            "electrons": "4.071E-03"
+        },
+        {
+            "energy_MeV": "0.00260",
+            "electrons": "5.014E-03"
+        },
+        {
+            "energy_MeV": "0.00280",
+            "electrons": "6.019E-03"
+        },
+        {
+            "energy_MeV": "0.00300",
+            "electrons": "7.077E-03"
+        },
+        {
+            "energy_MeV": "0.00320",
+            "electrons": "8.181E-03"
+        },
+        {
+            "energy_MeV": "0.00360",
+            "electrons": "1.050E-02"
+        },
+        {
+            "energy_MeV": "0.00400",
+            "electrons": "1.294E-02"
+        },
+        {
+            "energy_MeV": "0.00450",
+            "electrons": "1.612E-02"
+        },
+        {
+            "energy_MeV": "0.00500",
+            "electrons": "1.940E-02"
+        },
+        {
+            "energy_MeV": "0.00550",
+            "electrons": "2.276E-02"
+        },
+        {
+            "energy_MeV": "0.00600",
+            "electrons": "2.617E-02"
+        },
+        {
+            "energy_MeV": "0.00650",
+            "electrons": "2.963E-02"
+        },
+        {
+            "energy_MeV": "0.00700",
+            "electrons": "3.311E-02"
+        },
+        {
+            "energy_MeV": "0.00750",
+            "electrons": "3.661E-02"
+        },
+        {
+            "energy_MeV": "0.00800",
+            "electrons": "4.012E-02"
+        },
+        {
+            "energy_MeV": "0.00850",
+            "electrons": "4.363E-02"
+        },
+        {
+            "energy_MeV": "0.00900",
+            "electrons": "4.715E-02"
+        },
+        {
+            "energy_MeV": "0.01000",
+            "electrons": "5.417E-02"
+        },
+        {
+            "energy_MeV": "0.01100",
+            "electrons": "6.116E-02"
+        },
+        {
+            "energy_MeV": "0.01200",
+            "electrons": "6.810E-02"
+        },
+        {
+            "energy_MeV": "0.01300",
+            "electrons": "7.497E-02"
+        },
+        {
+            "energy_MeV": "0.01400",
+            "electrons": "8.178E-02"
+        },
+        {
+            "energy_MeV": "0.01500",
+            "electrons": "8.851E-02"
+        },
+        {
+            "energy_MeV": "0.01600",
+            "electrons": "9.516E-02"
+        },
+        {
+            "energy_MeV": "0.01800",
+            "electrons": "1.082E-01"
+        },
+        {
+            "energy_MeV": "0.02000",
+            "electrons": "1.210E-01"
+        },
+        {
+            "energy_MeV": "0.02200",
+            "electrons": "1.334E-01"
+        },
+        {
+            "energy_MeV": "0.02400",
+            "electrons": "1.455E-01"
+        },
+        {
+            "energy_MeV": "0.02600",
+            "electrons": "1.573E-01"
+        },
+        {
+            "energy_MeV": "0.02800",
+            "electrons": "1.689E-01"
+        },
+        {
+            "energy_MeV": "0.03000",
+            "electrons": "1.801E-01"
+        },
+        {
+            "energy_MeV": "0.03200",
+            "electrons": "1.912E-01"
+        },
+        {
+            "energy_MeV": "0.03600",
+            "electrons": "2.125E-01"
+        },
+        {
+            "energy_MeV": "0.04000",
+            "electrons": "2.329E-01"
+        },
+        {
+            "energy_MeV": "0.04500",
+            "electrons": "2.572E-01"
+        },
+        {
+            "energy_MeV": "0.05000",
+            "electrons": "2.805E-01"
+        },
+        {
+            "energy_MeV": "0.05500",
+            "electrons": "3.027E-01"
+        },
+        {
+            "energy_MeV": "0.06000",
+            "electrons": "3.240E-01"
+        },
+        {
+            "energy_MeV": "0.06500",
+            "electrons": "3.445E-01"
+        },
+        {
+            "energy_MeV": "0.07000",
+            "electrons": "3.643E-01"
+        },
+        {
+            "energy_MeV": "0.07500",
+            "electrons": "3.833E-01"
+        },
+        {
+            "energy_MeV": "0.08000",
+            "electrons": "4.017E-01"
+        },
+        {
+            "energy_MeV": "0.08500",
+            "electrons": "4.194E-01"
+        },
+        {
+            "energy_MeV": "0.09000",
+            "electrons": "4.367E-01"
+        },
+        {
+            "energy_MeV": "0.10000",
+            "electrons": "4.696E-01"
+        },
+        {
+            "energy_MeV": "0.11000",
+            "electrons": "5.008E-01"
+        },
+        {
+            "energy_MeV": "0.12000",
+            "electrons": "5.303E-01"
+        },
+        {
+            "energy_MeV": "0.13000",
+            "electrons": "5.583E-01"
+        },
+        {
+            "energy_MeV": "0.14000",
+            "electrons": "5.850E-01"
+        },
+        {
+            "energy_MeV": "0.15000",
+            "electrons": "6.106E-01"
+        },
+        {
+            "energy_MeV": "0.16000",
+            "electrons": "6.350E-01"
+        },
+        {
+            "energy_MeV": "0.18000",
+            "electrons": "6.808E-01"
+        },
+        {
+            "energy_MeV": "0.20000",
+            "electrons": "7.230E-01"
+        },
+        {
+            "energy_MeV": "0.22000",
+            "electrons": "7.619E-01"
+        },
+        {
+            "energy_MeV": "0.24000",
+            "electrons": "7.978E-01"
+        },
+        {
+            "energy_MeV": "0.26000",
+            "electrons": "8.309E-01"
+        },
+        {
+            "energy_MeV": "0.28000",
+            "electrons": "8.614E-01"
+        },
+        {
+            "energy_MeV": "0.30000",
+            "electrons": "8.894E-01"
+        },
+        {
+            "energy_MeV": "0.32000",
+            "electrons": "9.150E-01"
+        },
+        {
+            "energy_MeV": "0.36000",
+            "electrons": "9.591E-01"
+        },
+        {
+            "energy_MeV": "0.40000",
+            "electrons": "9.941E-01"
+        },
+        {
+            "energy_MeV": "0.45000",
+            "electrons": "1.025E+00"
+        },
+        {
+            "energy_MeV": "0.50000",
+            "electrons": "1.043E+00"
+        },
+        {
+            "energy_MeV": "0.55000",
+            "electrons": "1.047E+00"
+        },
+        {
+            "energy_MeV": "0.60000",
+            "electrons": "1.038E+00"
+        },
+        {
+            "energy_MeV": "0.65000",
+            "electrons": "1.015E+00"
+        },
+        {
+            "energy_MeV": "0.70000",
+            "electrons": "9.772E-01"
+        },
+        {
+            "energy_MeV": "0.75000",
+            "electrons": "9.236E-01"
+        },
+        {
+            "energy_MeV": "0.80000",
+            "electrons": "8.526E-01"
+        },
+        {
+            "energy_MeV": "0.85000",
+            "electrons": "7.627E-01"
+        },
+        {
+            "energy_MeV": "0.90000",
+            "electrons": "6.530E-01"
+        },
+        {
+            "energy_MeV": "1.00000",
+            "electrons": "3.815E-01"
+        },
+        {
+            "energy_MeV": "1.10000",
+            "electrons": "1.004E-01"
+        },
+        {
+            "energy_MeV": "1.17342",
+            "electrons": "0.000E+00"
+        }
+    ],
+    "Al-28": [
+        {
+            "energy_MeV": "0.00000",
+            "electrons": "7.827E-02"
+        },
+        {
+            "energy_MeV": "0.00010",
+            "electrons": "7.828E-02"
+        },
+        {
+            "energy_MeV": "0.00011",
+            "electrons": "7.828E-02"
+        },
+        {
+            "energy_MeV": "0.00012",
+            "electrons": "7.828E-02"
+        },
+        {
+            "energy_MeV": "0.00013",
+            "electrons": "7.828E-02"
+        },
+        {
+            "energy_MeV": "0.00014",
+            "electrons": "7.828E-02"
+        },
+        {
+            "energy_MeV": "0.00015",
+            "electrons": "7.829E-02"
+        },
+        {
+            "energy_MeV": "0.00016",
+            "electrons": "7.829E-02"
+        },
+        {
+            "energy_MeV": "0.00018",
+            "electrons": "7.829E-02"
+        },
+        {
+            "energy_MeV": "0.00020",
+            "electrons": "7.829E-02"
+        },
+        {
+            "energy_MeV": "0.00022",
+            "electrons": "7.829E-02"
+        },
+        {
+            "energy_MeV": "0.00024",
+            "electrons": "7.829E-02"
+        },
+        {
+            "energy_MeV": "0.00026",
+            "electrons": "7.830E-02"
+        },
+        {
+            "energy_MeV": "0.00028",
+            "electrons": "7.830E-02"
+        },
+        {
+            "energy_MeV": "0.00030",
+            "electrons": "7.830E-02"
+        },
+        {
+            "energy_MeV": "0.00032",
+            "electrons": "7.830E-02"
+        },
+        {
+            "energy_MeV": "0.00036",
+            "electrons": "7.831E-02"
+        },
+        {
+            "energy_MeV": "0.00040",
+            "electrons": "7.831E-02"
+        },
+        {
+            "energy_MeV": "0.00045",
+            "electrons": "7.831E-02"
+        },
+        {
+            "energy_MeV": "0.00050",
+            "electrons": "7.832E-02"
+        },
+        {
+            "energy_MeV": "0.00055",
+            "electrons": "7.832E-02"
+        },
+        {
+            "energy_MeV": "0.00060",
+            "electrons": "7.833E-02"
+        },
+        {
+            "energy_MeV": "0.00065",
+            "electrons": "7.833E-02"
+        },
+        {
+            "energy_MeV": "0.00070",
+            "electrons": "7.834E-02"
+        },
+        {
+            "energy_MeV": "0.00075",
+            "electrons": "7.834E-02"
+        },
+        {
+            "energy_MeV": "0.00080",
+            "electrons": "7.835E-02"
+        },
+        {
+            "energy_MeV": "0.00085",
+            "electrons": "7.835E-02"
+        },
+        {
+            "energy_MeV": "0.00090",
+            "electrons": "7.836E-02"
+        },
+        {
+            "energy_MeV": "0.00100",
+            "electrons": "7.837E-02"
+        },
+        {
+            "energy_MeV": "0.00110",
+            "electrons": "7.838E-02"
+        },
+        {
+            "energy_MeV": "0.00120",
+            "electrons": "7.839E-02"
+        },
+        {
+            "energy_MeV": "0.00130",
+            "electrons": "7.840E-02"
+        },
+        {
+            "energy_MeV": "0.00140",
+            "electrons": "7.841E-02"
+        },
+        {
+            "energy_MeV": "0.00150",
+            "electrons": "7.844E-02"
+        },
+        {
+            "energy_MeV": "0.00160",
+            "electrons": "7.846E-02"
+        },
+        {
+            "energy_MeV": "0.00180",
+            "electrons": "7.850E-02"
+        },
+        {
+            "energy_MeV": "0.00200",
+            "electrons": "7.855E-02"
+        },
+        {
+            "energy_MeV": "0.00220",
+            "electrons": "7.859E-02"
+        },
+        {
+            "energy_MeV": "0.00240",
+            "electrons": "7.864E-02"
+        },
+        {
+            "energy_MeV": "0.00260",
+            "electrons": "7.869E-02"
+        },
+        {
+            "energy_MeV": "0.00280",
+            "electrons": "7.874E-02"
+        },
+        {
+            "energy_MeV": "0.00300",
+            "electrons": "7.879E-02"
+        },
+        {
+            "energy_MeV": "0.00320",
+            "electrons": "7.885E-02"
+        },
+        {
+            "energy_MeV": "0.00360",
+            "electrons": "7.898E-02"
+        },
+        {
+            "energy_MeV": "0.00400",
+            "electrons": "7.913E-02"
+        },
+        {
+            "energy_MeV": "0.00450",
+            "electrons": "7.933E-02"
+        },
+        {
+            "energy_MeV": "0.00500",
+            "electrons": "7.956E-02"
+        },
+        {
+            "energy_MeV": "0.00550",
+            "electrons": "7.982E-02"
+        },
+        {
+            "energy_MeV": "0.00600",
+            "electrons": "8.009E-02"
+        },
+        {
+            "energy_MeV": "0.00650",
+            "electrons": "8.038E-02"
+        },
+        {
+            "energy_MeV": "0.00700",
+            "electrons": "8.068E-02"
+        },
+        {
+            "energy_MeV": "0.00750",
+            "electrons": "8.100E-02"
+        },
+        {
+            "energy_MeV": "0.00800",
+            "electrons": "8.133E-02"
+        },
+        {
+            "energy_MeV": "0.00850",
+            "electrons": "8.167E-02"
+        },
+        {
+            "energy_MeV": "0.00900",
+            "electrons": "8.201E-02"
+        },
+        {
+            "energy_MeV": "0.01000",
+            "electrons": "8.273E-02"
+        },
+        {
+            "energy_MeV": "0.01100",
+            "electrons": "8.347E-02"
+        },
+        {
+            "energy_MeV": "0.01200",
+            "electrons": "8.423E-02"
+        },
+        {
+            "energy_MeV": "0.01300",
+            "electrons": "8.499E-02"
+        },
+        {
+            "energy_MeV": "0.01400",
+            "electrons": "8.577E-02"
+        },
+        {
+            "energy_MeV": "0.01500",
+            "electrons": "8.656E-02"
+        },
+        {
+            "energy_MeV": "0.01600",
+            "electrons": "8.734E-02"
+        },
+        {
+            "energy_MeV": "0.01800",
+            "electrons": "8.893E-02"
+        },
+        {
+            "energy_MeV": "0.02000",
+            "electrons": "9.052E-02"
+        },
+        {
+            "energy_MeV": "0.02200",
+            "electrons": "9.211E-02"
+        },
+        {
+            "energy_MeV": "0.02400",
+            "electrons": "9.369E-02"
+        },
+        {
+            "energy_MeV": "0.02600",
+            "electrons": "9.527E-02"
+        },
+        {
+            "energy_MeV": "0.02800",
+            "electrons": "9.683E-02"
+        },
+        {
+            "energy_MeV": "0.03000",
+            "electrons": "9.839E-02"
+        },
+        {
+            "energy_MeV": "0.03200",
+            "electrons": "9.994E-02"
+        },
+        {
+            "energy_MeV": "0.03600",
+            "electrons": "1.030E-01"
+        },
+        {
+            "energy_MeV": "0.04000",
+            "electrons": "1.060E-01"
+        },
+        {
+            "energy_MeV": "0.04500",
+            "electrons": "1.098E-01"
+        },
+        {
+            "energy_MeV": "0.05000",
+            "electrons": "1.134E-01"
+        },
+        {
+            "energy_MeV": "0.05500",
+            "electrons": "1.171E-01"
+        },
+        {
+            "energy_MeV": "0.06000",
+            "electrons": "1.207E-01"
+        },
+        {
+            "energy_MeV": "0.06500",
+            "electrons": "1.242E-01"
+        },
+        {
+            "energy_MeV": "0.07000",
+            "electrons": "1.277E-01"
+        },
+        {
+            "energy_MeV": "0.07500",
+            "electrons": "1.312E-01"
+        },
+        {
+            "energy_MeV": "0.08000",
+            "electrons": "1.347E-01"
+        },
+        {
+            "energy_MeV": "0.08500",
+            "electrons": "1.381E-01"
+        },
+        {
+            "energy_MeV": "0.09000",
+            "electrons": "1.415E-01"
+        },
+        {
+            "energy_MeV": "0.10000",
+            "electrons": "1.483E-01"
+        },
+        {
+            "energy_MeV": "0.11000",
+            "electrons": "1.550E-01"
+        },
+        {
+            "energy_MeV": "0.12000",
+            "electrons": "1.616E-01"
+        },
+        {
+            "energy_MeV": "0.13000",
+            "electrons": "1.682E-01"
+        },
+        {
+            "energy_MeV": "0.14000",
+            "electrons": "1.747E-01"
+        },
+        {
+            "energy_MeV": "0.15000",
+            "electrons": "1.812E-01"
+        },
+        {
+            "energy_MeV": "0.16000",
+            "electrons": "1.876E-01"
+        },
+        {
+            "energy_MeV": "0.18000",
+            "electrons": "2.004E-01"
+        },
+        {
+            "energy_MeV": "0.20000",
+            "electrons": "2.131E-01"
+        },
+        {
+            "energy_MeV": "0.22000",
+            "electrons": "2.256E-01"
+        },
+        {
+            "energy_MeV": "0.24000",
+            "electrons": "2.381E-01"
+        },
+        {
+            "energy_MeV": "0.26000",
+            "electrons": "2.504E-01"
+        },
+        {
+            "energy_MeV": "0.28000",
+            "electrons": "2.626E-01"
+        },
+        {
+            "energy_MeV": "0.30000",
+            "electrons": "2.747E-01"
+        },
+        {
+            "energy_MeV": "0.32000",
+            "electrons": "2.867E-01"
+        },
+        {
+            "energy_MeV": "0.36000",
+            "electrons": "3.102E-01"
+        },
+        {
+            "energy_MeV": "0.40000",
+            "electrons": "3.332E-01"
+        },
+        {
+            "energy_MeV": "0.45000",
+            "electrons": "3.611E-01"
+        },
+        {
+            "energy_MeV": "0.50000",
+            "electrons": "3.878E-01"
+        },
+        {
+            "energy_MeV": "0.55000",
+            "electrons": "4.133E-01"
+        },
+        {
+            "energy_MeV": "0.60000",
+            "electrons": "4.374E-01"
+        },
+        {
+            "energy_MeV": "0.65000",
+            "electrons": "4.601E-01"
+        },
+        {
+            "energy_MeV": "0.70000",
+            "electrons": "4.811E-01"
+        },
+        {
+            "energy_MeV": "0.75000",
+            "electrons": "5.004E-01"
+        },
+        {
+            "energy_MeV": "0.80000",
+            "electrons": "5.179E-01"
+        },
+        {
+            "energy_MeV": "0.85000",
+            "electrons": "5.335E-01"
+        },
+        {
+            "energy_MeV": "0.90000",
+            "electrons": "5.472E-01"
+        },
+        {
+            "energy_MeV": "1.00000",
+            "electrons": "5.684E-01"
+        },
+        {
+            "energy_MeV": "1.10000",
+            "electrons": "5.812E-01"
+        },
+        {
+            "energy_MeV": "1.20000",
+            "electrons": "5.854E-01"
+        },
+        {
+            "energy_MeV": "1.30000",
+            "electrons": "5.810E-01"
+        },
+        {
+            "energy_MeV": "1.40000",
+            "electrons": "5.681E-01"
+        },
+        {
+            "energy_MeV": "1.50000",
+            "electrons": "5.470E-01"
+        },
+        {
+            "energy_MeV": "1.60000",
+            "electrons": "5.183E-01"
+        },
+        {
+            "energy_MeV": "1.80000",
+            "electrons": "4.410E-01"
+        },
+        {
+            "energy_MeV": "2.00000",
+            "electrons": "3.436E-01"
+        },
+        {
+            "energy_MeV": "2.20000",
+            "electrons": "2.365E-01"
+        },
+        {
+            "energy_MeV": "2.40000",
+            "electrons": "1.330E-01"
+        },
+        {
+            "energy_MeV": "2.60000",
+            "electrons": "4.902E-02"
+        },
+        {
+            "energy_MeV": "2.80000",
+            "electrons": "3.177E-03"
+        },
+        {
+            "energy_MeV": "2.86289",
+            "electrons": "0.000E+00"
+        }
+    ],
+    "Al-29": [
+        {
+            "energy_MeV": "0.00000",
+            "electrons": "1.469E-01"
+        },
+        {
+            "energy_MeV": "0.00010",
+            "electrons": "1.469E-01"
+        },
+        {
+            "energy_MeV": "0.00011",
+            "electrons": "1.469E-01"
+        },
+        {
+            "energy_MeV": "0.00012",
+            "electrons": "1.469E-01"
+        },
+        {
+            "energy_MeV": "0.00013",
+            "electrons": "1.469E-01"
+        },
+        {
+            "energy_MeV": "0.00014",
+            "electrons": "1.469E-01"
+        },
+        {
+            "energy_MeV": "0.00015",
+            "electrons": "1.469E-01"
+        },
+        {
+            "energy_MeV": "0.00016",
+            "electrons": "1.469E-01"
+        },
+        {
+            "energy_MeV": "0.00018",
+            "electrons": "1.469E-01"
+        },
+        {
+            "energy_MeV": "0.00020",
+            "electrons": "1.469E-01"
+        },
+        {
+            "energy_MeV": "0.00022",
+            "electrons": "1.469E-01"
+        },
+        {
+            "energy_MeV": "0.00024",
+            "electrons": "1.469E-01"
+        },
+        {
+            "energy_MeV": "0.00026",
+            "electrons": "1.470E-01"
+        },
+        {
+            "energy_MeV": "0.00028",
+            "electrons": "1.470E-01"
+        },
+        {
+            "energy_MeV": "0.00030",
+            "electrons": "1.470E-01"
+        },
+        {
+            "energy_MeV": "0.00032",
+            "electrons": "1.470E-01"
+        },
+        {
+            "energy_MeV": "0.00036",
+            "electrons": "1.470E-01"
+        },
+        {
+            "energy_MeV": "0.00040",
+            "electrons": "1.470E-01"
+        },
+        {
+            "energy_MeV": "0.00045",
+            "electrons": "1.470E-01"
+        },
+        {
+            "energy_MeV": "0.00050",
+            "electrons": "1.470E-01"
+        },
+        {
+            "energy_MeV": "0.00055",
+            "electrons": "1.470E-01"
+        },
+        {
+            "energy_MeV": "0.00060",
+            "electrons": "1.470E-01"
+        },
+        {
+            "energy_MeV": "0.00065",
+            "electrons": "1.470E-01"
+        },
+        {
+            "energy_MeV": "0.00070",
+            "electrons": "1.470E-01"
+        },
+        {
+            "energy_MeV": "0.00075",
+            "electrons": "1.470E-01"
+        },
+        {
+            "energy_MeV": "0.00080",
+            "electrons": "1.470E-01"
+        },
+        {
+            "energy_MeV": "0.00085",
+            "electrons": "1.470E-01"
+        },
+        {
+            "energy_MeV": "0.00090",
+            "electrons": "1.470E-01"
+        },
+        {
+            "energy_MeV": "0.00100",
+            "electrons": "1.471E-01"
+        },
+        {
+            "energy_MeV": "0.00110",
+            "electrons": "1.471E-01"
+        },
+        {
+            "energy_MeV": "0.00120",
+            "electrons": "1.471E-01"
+        },
+        {
+            "energy_MeV": "0.00130",
+            "electrons": "1.471E-01"
+        },
+        {
+            "energy_MeV": "0.00140",
+            "electrons": "1.471E-01"
+        },
+        {
+            "energy_MeV": "0.00150",
+            "electrons": "1.472E-01"
+        },
+        {
+            "energy_MeV": "0.00160",
+            "electrons": "1.472E-01"
+        },
+        {
+            "energy_MeV": "0.00180",
+            "electrons": "1.473E-01"
+        },
+        {
+            "energy_MeV": "0.00200",
+            "electrons": "1.473E-01"
+        },
+        {
+            "energy_MeV": "0.00220",
+            "electrons": "1.474E-01"
+        },
+        {
+            "energy_MeV": "0.00240",
+            "electrons": "1.475E-01"
+        },
+        {
+            "energy_MeV": "0.00260",
+            "electrons": "1.476E-01"
+        },
+        {
+            "energy_MeV": "0.00280",
+            "electrons": "1.477E-01"
+        },
+        {
+            "energy_MeV": "0.00300",
+            "electrons": "1.478E-01"
+        },
+        {
+            "energy_MeV": "0.00320",
+            "electrons": "1.479E-01"
+        },
+        {
+            "energy_MeV": "0.00360",
+            "electrons": "1.481E-01"
+        },
+        {
+            "energy_MeV": "0.00400",
+            "electrons": "1.483E-01"
+        },
+        {
+            "energy_MeV": "0.00450",
+            "electrons": "1.487E-01"
+        },
+        {
+            "energy_MeV": "0.00500",
+            "electrons": "1.491E-01"
+        },
+        {
+            "energy_MeV": "0.00550",
+            "electrons": "1.495E-01"
+        },
+        {
+            "energy_MeV": "0.00600",
+            "electrons": "1.500E-01"
+        },
+        {
+            "energy_MeV": "0.00650",
+            "electrons": "1.505E-01"
+        },
+        {
+            "energy_MeV": "0.00700",
+            "electrons": "1.511E-01"
+        },
+        {
+            "energy_MeV": "0.00750",
+            "electrons": "1.517E-01"
+        },
+        {
+            "energy_MeV": "0.00800",
+            "electrons": "1.523E-01"
+        },
+        {
+            "energy_MeV": "0.00850",
+            "electrons": "1.529E-01"
+        },
+        {
+            "energy_MeV": "0.00900",
+            "electrons": "1.535E-01"
+        },
+        {
+            "energy_MeV": "0.01000",
+            "electrons": "1.548E-01"
+        },
+        {
+            "energy_MeV": "0.01100",
+            "electrons": "1.561E-01"
+        },
+        {
+            "energy_MeV": "0.01200",
+            "electrons": "1.575E-01"
+        },
+        {
+            "energy_MeV": "0.01300",
+            "electrons": "1.589E-01"
+        },
+        {
+            "energy_MeV": "0.01400",
+            "electrons": "1.603E-01"
+        },
+        {
+            "energy_MeV": "0.01500",
+            "electrons": "1.617E-01"
+        },
+        {
+            "energy_MeV": "0.01600",
+            "electrons": "1.631E-01"
+        },
+        {
+            "energy_MeV": "0.01800",
+            "electrons": "1.659E-01"
+        },
+        {
+            "energy_MeV": "0.02000",
+            "electrons": "1.688E-01"
+        },
+        {
+            "energy_MeV": "0.02200",
+            "electrons": "1.716E-01"
+        },
+        {
+            "energy_MeV": "0.02400",
+            "electrons": "1.745E-01"
+        },
+        {
+            "energy_MeV": "0.02600",
+            "electrons": "1.773E-01"
+        },
+        {
+            "energy_MeV": "0.02800",
+            "electrons": "1.801E-01"
+        },
+        {
+            "energy_MeV": "0.03000",
+            "electrons": "1.829E-01"
+        },
+        {
+            "energy_MeV": "0.03200",
+            "electrons": "1.856E-01"
+        },
+        {
+            "energy_MeV": "0.03600",
+            "electrons": "1.911E-01"
+        },
+        {
+            "energy_MeV": "0.04000",
+            "electrons": "1.964E-01"
+        },
+        {
+            "energy_MeV": "0.04500",
+            "electrons": "2.030E-01"
+        },
+        {
+            "energy_MeV": "0.05000",
+            "electrons": "2.094E-01"
+        },
+        {
+            "energy_MeV": "0.05500",
+            "electrons": "2.158E-01"
+        },
+        {
+            "energy_MeV": "0.06000",
+            "electrons": "2.220E-01"
+        },
+        {
+            "energy_MeV": "0.06500",
+            "electrons": "2.282E-01"
+        },
+        {
+            "energy_MeV": "0.07000",
+            "electrons": "2.342E-01"
+        },
+        {
+            "energy_MeV": "0.07500",
+            "electrons": "2.402E-01"
+        },
+        {
+            "energy_MeV": "0.08000",
+            "electrons": "2.461E-01"
+        },
+        {
+            "energy_MeV": "0.08500",
+            "electrons": "2.520E-01"
+        },
+        {
+            "energy_MeV": "0.09000",
+            "electrons": "2.577E-01"
+        },
+        {
+            "energy_MeV": "0.10000",
+            "electrons": "2.691E-01"
+        },
+        {
+            "energy_MeV": "0.11000",
+            "electrons": "2.802E-01"
+        },
+        {
+            "energy_MeV": "0.12000",
+            "electrons": "2.912E-01"
+        },
+        {
+            "energy_MeV": "0.13000",
+            "electrons": "3.019E-01"
+        },
+        {
+            "energy_MeV": "0.14000",
+            "electrons": "3.125E-01"
+        },
+        {
+            "energy_MeV": "0.15000",
+            "electrons": "3.230E-01"
+        },
+        {
+            "energy_MeV": "0.16000",
+            "electrons": "3.332E-01"
+        },
+        {
+            "energy_MeV": "0.18000",
+            "electrons": "3.533E-01"
+        },
+        {
+            "energy_MeV": "0.20000",
+            "electrons": "3.729E-01"
+        },
+        {
+            "energy_MeV": "0.22000",
+            "electrons": "3.918E-01"
+        },
+        {
+            "energy_MeV": "0.24000",
+            "electrons": "4.103E-01"
+        },
+        {
+            "energy_MeV": "0.26000",
+            "electrons": "4.282E-01"
+        },
+        {
+            "energy_MeV": "0.28000",
+            "electrons": "4.456E-01"
+        },
+        {
+            "energy_MeV": "0.30000",
+            "electrons": "4.624E-01"
+        },
+        {
+            "energy_MeV": "0.32000",
+            "electrons": "4.786E-01"
+        },
+        {
+            "energy_MeV": "0.36000",
+            "electrons": "5.095E-01"
+        },
+        {
+            "energy_MeV": "0.40000",
+            "electrons": "5.380E-01"
+        },
+        {
+            "energy_MeV": "0.45000",
+            "electrons": "5.703E-01"
+        },
+        {
+            "energy_MeV": "0.50000",
+            "electrons": "5.988E-01"
+        },
+        {
+            "energy_MeV": "0.55000",
+            "electrons": "6.233E-01"
+        },
+        {
+            "energy_MeV": "0.60000",
+            "electrons": "6.439E-01"
+        },
+        {
+            "energy_MeV": "0.65000",
+            "electrons": "6.604E-01"
+        },
+        {
+            "energy_MeV": "0.70000",
+            "electrons": "6.728E-01"
+        },
+        {
+            "energy_MeV": "0.75000",
+            "electrons": "6.812E-01"
+        },
+        {
+            "energy_MeV": "0.80000",
+            "electrons": "6.857E-01"
+        },
+        {
+            "energy_MeV": "0.85000",
+            "electrons": "6.864E-01"
+        },
+        {
+            "energy_MeV": "0.90000",
+            "electrons": "6.835E-01"
+        },
+        {
+            "energy_MeV": "1.00000",
+            "electrons": "6.680E-01"
+        },
+        {
+            "energy_MeV": "1.10000",
+            "electrons": "6.414E-01"
+        },
+        {
+            "energy_MeV": "1.20000",
+            "electrons": "6.071E-01"
+        },
+        {
+            "energy_MeV": "1.30000",
+            "electrons": "5.680E-01"
+        },
+        {
+            "energy_MeV": "1.40000",
+            "electrons": "5.204E-01"
+        },
+        {
+            "energy_MeV": "1.50000",
+            "electrons": "4.650E-01"
+        },
+        {
+            "energy_MeV": "1.60000",
+            "electrons": "4.041E-01"
+        },
+        {
+            "energy_MeV": "1.80000",
+            "electrons": "2.742E-01"
+        },
+        {
+            "energy_MeV": "2.00000",
+            "electrons": "1.456E-01"
+        },
+        {
+            "energy_MeV": "2.20000",
+            "electrons": "4.378E-02"
+        },
+        {
+            "energy_MeV": "2.40000",
+            "electrons": "4.710E-05"
+        },
+        {
+            "energy_MeV": "2.40630",
+            "electrons": "0.000E+00"
+        }
+    ]
+}
