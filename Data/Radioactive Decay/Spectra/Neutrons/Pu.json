@@ -1,0 +1,1327 @@
+{
+    "Pu-236": {
+        "branching_fraction": "1.37E-09",
+        "records": [
+            {
+                "floor_energy_MeV": "4.14E-07",
+                "ceiling_energy_MeV": "1.00E-06",
+                "neutrons": "4.79650E-19"
+            },
+            {
+                "floor_energy_MeV": "1.00E-06",
+                "ceiling_energy_MeV": "1.00E-05",
+                "neutrons": "3.00712E-17"
+            },
+            {
+                "floor_energy_MeV": "1.00E-05",
+                "ceiling_energy_MeV": "5.00E-05",
+                "neutrons": "3.30997E-16"
+            },
+            {
+                "floor_energy_MeV": "5.00E-05",
+                "ceiling_energy_MeV": "1.00E-04",
+                "neutrons": "6.68524E-16"
+            },
+            {
+                "floor_energy_MeV": "1.00E-04",
+                "ceiling_energy_MeV": "2.00E-04",
+                "neutrons": "1.89407E-15"
+            },
+            {
+                "floor_energy_MeV": "2.00E-04",
+                "ceiling_energy_MeV": "4.00E-04",
+                "neutrons": "5.36147E-15"
+            },
+            {
+                "floor_energy_MeV": "4.00E-04",
+                "ceiling_energy_MeV": "7.00E-04",
+                "neutrons": "1.09095E-14"
+            },
+            {
+                "floor_energy_MeV": "7.00E-04",
+                "ceiling_energy_MeV": "1.00E-03",
+                "neutrons": "1.36127E-14"
+            },
+            {
+                "floor_energy_MeV": "1.00E-03",
+                "ceiling_energy_MeV": "3.00E-03",
+                "neutrons": "1.37536E-13"
+            },
+            {
+                "floor_energy_MeV": "3.00E-03",
+                "ceiling_energy_MeV": "6.00E-03",
+                "neutrons": "3.11058E-13"
+            },
+            {
+                "floor_energy_MeV": "6.00E-03",
+                "ceiling_energy_MeV": "1.00E-02",
+                "neutrons": "5.53217E-13"
+            },
+            {
+                "floor_energy_MeV": "1.00E-02",
+                "ceiling_energy_MeV": "2.00E-02",
+                "neutrons": "1.88320E-12"
+            },
+            {
+                "floor_energy_MeV": "2.00E-02",
+                "ceiling_energy_MeV": "4.00E-02",
+                "neutrons": "5.28616E-12"
+            },
+            {
+                "floor_energy_MeV": "4.00E-02",
+                "ceiling_energy_MeV": "6.00E-02",
+                "neutrons": "6.77818E-12"
+            },
+            {
+                "floor_energy_MeV": "6.00E-02",
+                "ceiling_energy_MeV": "8.00E-02",
+                "neutrons": "7.94705E-12"
+            },
+            {
+                "floor_energy_MeV": "8.00E-02",
+                "ceiling_energy_MeV": "1.00E-01",
+                "neutrons": "8.92418E-12"
+            },
+            {
+                "floor_energy_MeV": "1.00E-01",
+                "ceiling_energy_MeV": "1.50E-01",
+                "neutrons": "2.57936E-11"
+            },
+            {
+                "floor_energy_MeV": "1.50E-01",
+                "ceiling_energy_MeV": "2.00E-01",
+                "neutrons": "2.97793E-11"
+            },
+            {
+                "floor_energy_MeV": "2.00E-01",
+                "ceiling_energy_MeV": "2.50E-01",
+                "neutrons": "3.29219E-11"
+            },
+            {
+                "floor_energy_MeV": "2.50E-01",
+                "ceiling_energy_MeV": "3.00E-01",
+                "neutrons": "3.54709E-11"
+            },
+            {
+                "floor_energy_MeV": "3.00E-01",
+                "ceiling_energy_MeV": "3.50E-01",
+                "neutrons": "3.75684E-11"
+            },
+            {
+                "floor_energy_MeV": "3.50E-01",
+                "ceiling_energy_MeV": "4.00E-01",
+                "neutrons": "3.93058E-11"
+            },
+            {
+                "floor_energy_MeV": "4.00E-01",
+                "ceiling_energy_MeV": "4.50E-01",
+                "neutrons": "4.07464E-11"
+            },
+            {
+                "floor_energy_MeV": "4.50E-01",
+                "ceiling_energy_MeV": "5.00E-01",
+                "neutrons": "4.19370E-11"
+            },
+            {
+                "floor_energy_MeV": "5.00E-01",
+                "ceiling_energy_MeV": "5.50E-01",
+                "neutrons": "4.29133E-11"
+            },
+            {
+                "floor_energy_MeV": "5.50E-01",
+                "ceiling_energy_MeV": "6.00E-01",
+                "neutrons": "4.37036E-11"
+            },
+            {
+                "floor_energy_MeV": "6.00E-01",
+                "ceiling_energy_MeV": "7.00E-01",
+                "neutrons": "8.91452E-11"
+            },
+            {
+                "floor_energy_MeV": "7.00E-01",
+                "ceiling_energy_MeV": "8.00E-01",
+                "neutrons": "9.05818E-11"
+            },
+            {
+                "floor_energy_MeV": "8.00E-01",
+                "ceiling_energy_MeV": "9.00E-01",
+                "neutrons": "9.11512E-11"
+            },
+            {
+                "floor_energy_MeV": "9.00E-01",
+                "ceiling_energy_MeV": "1.00E+00",
+                "neutrons": "9.10226E-11"
+            },
+            {
+                "floor_energy_MeV": "1.00E+00",
+                "ceiling_energy_MeV": "1.20E+00",
+                "neutrons": "1.79504E-10"
+            },
+            {
+                "floor_energy_MeV": "1.20E+00",
+                "ceiling_energy_MeV": "1.40E+00",
+                "neutrons": "1.73474E-10"
+            },
+            {
+                "floor_energy_MeV": "1.40E+00",
+                "ceiling_energy_MeV": "1.60E+00",
+                "neutrons": "1.65263E-10"
+            },
+            {
+                "floor_energy_MeV": "1.60E+00",
+                "ceiling_energy_MeV": "1.80E+00",
+                "neutrons": "1.55701E-10"
+            },
+            {
+                "floor_energy_MeV": "1.80E+00",
+                "ceiling_energy_MeV": "2.00E+00",
+                "neutrons": "1.45387E-10"
+            },
+            {
+                "floor_energy_MeV": "2.00E+00",
+                "ceiling_energy_MeV": "2.30E+00",
+                "neutrons": "1.98135E-10"
+            },
+            {
+                "floor_energy_MeV": "2.30E+00",
+                "ceiling_energy_MeV": "2.60E+00",
+                "neutrons": "1.74453E-10"
+            },
+            {
+                "floor_energy_MeV": "2.60E+00",
+                "ceiling_energy_MeV": "3.00E+00",
+                "neutrons": "1.97843E-10"
+            },
+            {
+                "floor_energy_MeV": "3.00E+00",
+                "ceiling_energy_MeV": "3.50E+00",
+                "neutrons": "1.97449E-10"
+            },
+            {
+                "floor_energy_MeV": "3.50E+00",
+                "ceiling_energy_MeV": "4.00E+00",
+                "neutrons": "1.50857E-10"
+            },
+            {
+                "floor_energy_MeV": "4.00E+00",
+                "ceiling_energy_MeV": "4.50E+00",
+                "neutrons": "1.13472E-10"
+            },
+            {
+                "floor_energy_MeV": "4.50E+00",
+                "ceiling_energy_MeV": "5.00E+00",
+                "neutrons": "8.42630E-11"
+            },
+            {
+                "floor_energy_MeV": "5.00E+00",
+                "ceiling_energy_MeV": "6.00E+00",
+                "neutrons": "1.06951E-10"
+            },
+            {
+                "floor_energy_MeV": "6.00E+00",
+                "ceiling_energy_MeV": "7.00E+00",
+                "neutrons": "5.58418E-11"
+            },
+            {
+                "floor_energy_MeV": "7.00E+00",
+                "ceiling_energy_MeV": "8.00E+00",
+                "neutrons": "2.83729E-11"
+            },
+            {
+                "floor_energy_MeV": "8.00E+00",
+                "ceiling_energy_MeV": "9.00E+00",
+                "neutrons": "1.41042E-11"
+            },
+            {
+                "floor_energy_MeV": "9.00E+00",
+                "ceiling_energy_MeV": "1.00E+01",
+                "neutrons": "6.88572E-12"
+            },
+            {
+                "floor_energy_MeV": "1.00E+01",
+                "ceiling_energy_MeV": "1.10E+01",
+                "neutrons": "3.31074E-12"
+            },
+            {
+                "floor_energy_MeV": "1.10E+01",
+                "ceiling_energy_MeV": "1.20E+01",
+                "neutrons": "1.57112E-12"
+            },
+            {
+                "floor_energy_MeV": "1.20E+01",
+                "ceiling_energy_MeV": "1.30E+01",
+                "neutrons": "7.37115E-13"
+            },
+            {
+                "floor_energy_MeV": "1.30E+01",
+                "ceiling_energy_MeV": "1.40E+01",
+                "neutrons": "3.42365E-13"
+            },
+            {
+                "floor_energy_MeV": "1.40E+01",
+                "ceiling_energy_MeV": "1.50E+01",
+                "neutrons": "1.57599E-13"
+            }
+        ]
+    },
+    "Pu-238": {
+        "branching_fraction": "1.85E-09",
+        "records": [
+            {
+                "floor_energy_MeV": "4.14E-07",
+                "ceiling_energy_MeV": "1.00E-06",
+                "neutrons": "5.63532E-19"
+            },
+            {
+                "floor_energy_MeV": "1.00E-06",
+                "ceiling_energy_MeV": "1.00E-05",
+                "neutrons": "4.62208E-17"
+            },
+            {
+                "floor_energy_MeV": "1.00E-05",
+                "ceiling_energy_MeV": "5.00E-05",
+                "neutrons": "5.19485E-16"
+            },
+            {
+                "floor_energy_MeV": "5.00E-05",
+                "ceiling_energy_MeV": "1.00E-04",
+                "neutrons": "1.05190E-15"
+            },
+            {
+                "floor_energy_MeV": "1.00E-04",
+                "ceiling_energy_MeV": "2.00E-04",
+                "neutrons": "2.98250E-15"
+            },
+            {
+                "floor_energy_MeV": "2.00E-04",
+                "ceiling_energy_MeV": "4.00E-04",
+                "neutrons": "8.44560E-15"
+            },
+            {
+                "floor_energy_MeV": "4.00E-04",
+                "ceiling_energy_MeV": "7.00E-04",
+                "neutrons": "1.71881E-14"
+            },
+            {
+                "floor_energy_MeV": "7.00E-04",
+                "ceiling_energy_MeV": "1.00E-03",
+                "neutrons": "2.14090E-14"
+            },
+            {
+                "floor_energy_MeV": "1.00E-03",
+                "ceiling_energy_MeV": "3.00E-03",
+                "neutrons": "2.16802E-13"
+            },
+            {
+                "floor_energy_MeV": "3.00E-03",
+                "ceiling_energy_MeV": "6.00E-03",
+                "neutrons": "4.90228E-13"
+            },
+            {
+                "floor_energy_MeV": "6.00E-03",
+                "ceiling_energy_MeV": "1.00E-02",
+                "neutrons": "8.71913E-13"
+            },
+            {
+                "floor_energy_MeV": "1.00E-02",
+                "ceiling_energy_MeV": "2.00E-02",
+                "neutrons": "2.96803E-12"
+            },
+            {
+                "floor_energy_MeV": "2.00E-02",
+                "ceiling_energy_MeV": "4.00E-02",
+                "neutrons": "8.33253E-12"
+            },
+            {
+                "floor_energy_MeV": "4.00E-02",
+                "ceiling_energy_MeV": "6.00E-02",
+                "neutrons": "1.06857E-11"
+            },
+            {
+                "floor_energy_MeV": "6.00E-02",
+                "ceiling_energy_MeV": "8.00E-02",
+                "neutrons": "1.25297E-11"
+            },
+            {
+                "floor_energy_MeV": "8.00E-02",
+                "ceiling_energy_MeV": "1.00E-01",
+                "neutrons": "1.40712E-11"
+            },
+            {
+                "floor_energy_MeV": "1.00E-01",
+                "ceiling_energy_MeV": "1.50E-01",
+                "neutrons": "4.06715E-11"
+            },
+            {
+                "floor_energy_MeV": "1.50E-01",
+                "ceiling_energy_MeV": "2.00E-01",
+                "neutrons": "4.69514E-11"
+            },
+            {
+                "floor_energy_MeV": "2.00E-01",
+                "ceiling_energy_MeV": "2.50E-01",
+                "neutrons": "5.18916E-11"
+            },
+            {
+                "floor_energy_MeV": "2.50E-01",
+                "ceiling_energy_MeV": "3.00E-01",
+                "neutrons": "5.58841E-11"
+            },
+            {
+                "floor_energy_MeV": "3.00E-01",
+                "ceiling_energy_MeV": "3.50E-01",
+                "neutrons": "5.91523E-11"
+            },
+            {
+                "floor_energy_MeV": "3.50E-01",
+                "ceiling_energy_MeV": "4.00E-01",
+                "neutrons": "6.18400E-11"
+            },
+            {
+                "floor_energy_MeV": "4.00E-01",
+                "ceiling_energy_MeV": "4.50E-01",
+                "neutrons": "6.40475E-11"
+            },
+            {
+                "floor_energy_MeV": "4.50E-01",
+                "ceiling_energy_MeV": "5.00E-01",
+                "neutrons": "6.58487E-11"
+            },
+            {
+                "floor_energy_MeV": "5.00E-01",
+                "ceiling_energy_MeV": "5.50E-01",
+                "neutrons": "6.73007E-11"
+            },
+            {
+                "floor_energy_MeV": "5.50E-01",
+                "ceiling_energy_MeV": "6.00E-01",
+                "neutrons": "6.84488E-11"
+            },
+            {
+                "floor_energy_MeV": "6.00E-01",
+                "ceiling_energy_MeV": "7.00E-01",
+                "neutrons": "1.39306E-10"
+            },
+            {
+                "floor_energy_MeV": "7.00E-01",
+                "ceiling_energy_MeV": "8.00E-01",
+                "neutrons": "1.41072E-10"
+            },
+            {
+                "floor_energy_MeV": "8.00E-01",
+                "ceiling_energy_MeV": "9.00E-01",
+                "neutrons": "1.41416E-10"
+            },
+            {
+                "floor_energy_MeV": "9.00E-01",
+                "ceiling_energy_MeV": "1.00E+00",
+                "neutrons": "1.40621E-10"
+            },
+            {
+                "floor_energy_MeV": "1.00E+00",
+                "ceiling_energy_MeV": "1.20E+00",
+                "neutrons": "2.75363E-10"
+            },
+            {
+                "floor_energy_MeV": "1.20E+00",
+                "ceiling_energy_MeV": "1.40E+00",
+                "neutrons": "2.63323E-10"
+            },
+            {
+                "floor_energy_MeV": "1.40E+00",
+                "ceiling_energy_MeV": "1.60E+00",
+                "neutrons": "2.47935E-10"
+            },
+            {
+                "floor_energy_MeV": "1.60E+00",
+                "ceiling_energy_MeV": "1.80E+00",
+                "neutrons": "2.30628E-10"
+            },
+            {
+                "floor_energy_MeV": "1.80E+00",
+                "ceiling_energy_MeV": "2.00E+00",
+                "neutrons": "2.12422E-10"
+            },
+            {
+                "floor_energy_MeV": "2.00E+00",
+                "ceiling_energy_MeV": "2.30E+00",
+                "neutrons": "2.84281E-10"
+            },
+            {
+                "floor_energy_MeV": "2.30E+00",
+                "ceiling_energy_MeV": "2.60E+00",
+                "neutrons": "2.44523E-10"
+            },
+            {
+                "floor_energy_MeV": "2.60E+00",
+                "ceiling_energy_MeV": "3.00E+00",
+                "neutrons": "2.69437E-10"
+            },
+            {
+                "floor_energy_MeV": "3.00E+00",
+                "ceiling_energy_MeV": "3.50E+00",
+                "neutrons": "2.58543E-10"
+            },
+            {
+                "floor_energy_MeV": "3.50E+00",
+                "ceiling_energy_MeV": "4.00E+00",
+                "neutrons": "1.88543E-10"
+            },
+            {
+                "floor_energy_MeV": "4.00E+00",
+                "ceiling_energy_MeV": "4.50E+00",
+                "neutrons": "1.35053E-10"
+            },
+            {
+                "floor_energy_MeV": "4.50E+00",
+                "ceiling_energy_MeV": "5.00E+00",
+                "neutrons": "9.53192E-11"
+            },
+            {
+                "floor_energy_MeV": "5.00E+00",
+                "ceiling_energy_MeV": "6.00E+00",
+                "neutrons": "1.12261E-10"
+            },
+            {
+                "floor_energy_MeV": "6.00E+00",
+                "ceiling_energy_MeV": "7.00E+00",
+                "neutrons": "5.25161E-11"
+            },
+            {
+                "floor_energy_MeV": "7.00E+00",
+                "ceiling_energy_MeV": "8.00E+00",
+                "neutrons": "2.38039E-11"
+            },
+            {
+                "floor_energy_MeV": "8.00E+00",
+                "ceiling_energy_MeV": "9.00E+00",
+                "neutrons": "1.05194E-11"
+            },
+            {
+                "floor_energy_MeV": "9.00E+00",
+                "ceiling_energy_MeV": "1.00E+01",
+                "neutrons": "4.55234E-12"
+            },
+            {
+                "floor_energy_MeV": "1.00E+01",
+                "ceiling_energy_MeV": "1.10E+01",
+                "neutrons": "1.93549E-12"
+            },
+            {
+                "floor_energy_MeV": "1.10E+01",
+                "ceiling_energy_MeV": "1.20E+01",
+                "neutrons": "8.10486E-13"
+            },
+            {
+                "floor_energy_MeV": "1.20E+01",
+                "ceiling_energy_MeV": "1.30E+01",
+                "neutrons": "3.34924E-13"
+            },
+            {
+                "floor_energy_MeV": "1.30E+01",
+                "ceiling_energy_MeV": "1.40E+01",
+                "neutrons": "1.36797E-13"
+            },
+            {
+                "floor_energy_MeV": "1.40E+01",
+                "ceiling_energy_MeV": "1.50E+01",
+                "neutrons": "5.52956E-14"
+            }
+        ]
+    },
+    "Pu-240": {
+        "branching_fraction": "5.75E-08",
+        "records": [
+            {
+                "floor_energy_MeV": "4.14E-07",
+                "ceiling_energy_MeV": "1.00E-06",
+                "neutrons": "1.21221E-17"
+            },
+            {
+                "floor_energy_MeV": "1.00E-06",
+                "ceiling_energy_MeV": "1.00E-05",
+                "neutrons": "1.43217E-15"
+            },
+            {
+                "floor_energy_MeV": "1.00E-05",
+                "ceiling_energy_MeV": "5.00E-05",
+                "neutrons": "1.64262E-14"
+            },
+            {
+                "floor_energy_MeV": "5.00E-05",
+                "ceiling_energy_MeV": "1.00E-04",
+                "neutrons": "3.33418E-14"
+            },
+            {
+                "floor_energy_MeV": "1.00E-04",
+                "ceiling_energy_MeV": "2.00E-04",
+                "neutrons": "9.46030E-14"
+            },
+            {
+                "floor_energy_MeV": "2.00E-04",
+                "ceiling_energy_MeV": "4.00E-04",
+                "neutrons": "2.69504E-13"
+            },
+            {
+                "floor_energy_MeV": "4.00E-04",
+                "ceiling_energy_MeV": "7.00E-04",
+                "neutrons": "5.45705E-13"
+            },
+            {
+                "floor_energy_MeV": "7.00E-04",
+                "ceiling_energy_MeV": "1.00E-03",
+                "neutrons": "6.79686E-13"
+            },
+            {
+                "floor_energy_MeV": "1.00E-03",
+                "ceiling_energy_MeV": "3.00E-03",
+                "neutrons": "6.88065E-12"
+            },
+            {
+                "floor_energy_MeV": "3.00E-03",
+                "ceiling_energy_MeV": "6.00E-03",
+                "neutrons": "1.55616E-11"
+            },
+            {
+                "floor_energy_MeV": "6.00E-03",
+                "ceiling_energy_MeV": "1.00E-02",
+                "neutrons": "2.76775E-11"
+            },
+            {
+                "floor_energy_MeV": "1.00E-02",
+                "ceiling_energy_MeV": "2.00E-02",
+                "neutrons": "9.42263E-11"
+            },
+            {
+                "floor_energy_MeV": "2.00E-02",
+                "ceiling_energy_MeV": "4.00E-02",
+                "neutrons": "2.64554E-10"
+            },
+            {
+                "floor_energy_MeV": "4.00E-02",
+                "ceiling_energy_MeV": "6.00E-02",
+                "neutrons": "3.39312E-10"
+            },
+            {
+                "floor_energy_MeV": "6.00E-02",
+                "ceiling_energy_MeV": "8.00E-02",
+                "neutrons": "3.97903E-10"
+            },
+            {
+                "floor_energy_MeV": "8.00E-02",
+                "ceiling_energy_MeV": "1.00E-01",
+                "neutrons": "4.46895E-10"
+            },
+            {
+                "floor_energy_MeV": "1.00E-01",
+                "ceiling_energy_MeV": "1.50E-01",
+                "neutrons": "1.29184E-09"
+            },
+            {
+                "floor_energy_MeV": "1.50E-01",
+                "ceiling_energy_MeV": "2.00E-01",
+                "neutrons": "1.49139E-09"
+            },
+            {
+                "floor_energy_MeV": "2.00E-01",
+                "ceiling_energy_MeV": "2.50E-01",
+                "neutrons": "1.64824E-09"
+            },
+            {
+                "floor_energy_MeV": "2.50E-01",
+                "ceiling_energy_MeV": "3.00E-01",
+                "neutrons": "1.77480E-09"
+            },
+            {
+                "floor_energy_MeV": "3.00E-01",
+                "ceiling_energy_MeV": "3.50E-01",
+                "neutrons": "1.87815E-09"
+            },
+            {
+                "floor_energy_MeV": "3.50E-01",
+                "ceiling_energy_MeV": "4.00E-01",
+                "neutrons": "1.96286E-09"
+            },
+            {
+                "floor_energy_MeV": "4.00E-01",
+                "ceiling_energy_MeV": "4.50E-01",
+                "neutrons": "2.03210E-09"
+            },
+            {
+                "floor_energy_MeV": "4.50E-01",
+                "ceiling_energy_MeV": "5.00E-01",
+                "neutrons": "2.08824E-09"
+            },
+            {
+                "floor_energy_MeV": "5.00E-01",
+                "ceiling_energy_MeV": "5.50E-01",
+                "neutrons": "2.13309E-09"
+            },
+            {
+                "floor_energy_MeV": "5.50E-01",
+                "ceiling_energy_MeV": "6.00E-01",
+                "neutrons": "2.16811E-09"
+            },
+            {
+                "floor_energy_MeV": "6.00E-01",
+                "ceiling_energy_MeV": "7.00E-01",
+                "neutrons": "4.40772E-09"
+            },
+            {
+                "floor_energy_MeV": "7.00E-01",
+                "ceiling_energy_MeV": "8.00E-01",
+                "neutrons": "4.45627E-09"
+            },
+            {
+                "floor_energy_MeV": "8.00E-01",
+                "ceiling_energy_MeV": "9.00E-01",
+                "neutrons": "4.45879E-09"
+            },
+            {
+                "floor_energy_MeV": "9.00E-01",
+                "ceiling_energy_MeV": "1.00E+00",
+                "neutrons": "4.42446E-09"
+            },
+            {
+                "floor_energy_MeV": "1.00E+00",
+                "ceiling_energy_MeV": "1.20E+00",
+                "neutrons": "8.63372E-09"
+            },
+            {
+                "floor_energy_MeV": "1.20E+00",
+                "ceiling_energy_MeV": "1.40E+00",
+                "neutrons": "8.21314E-09"
+            },
+            {
+                "floor_energy_MeV": "1.40E+00",
+                "ceiling_energy_MeV": "1.60E+00",
+                "neutrons": "7.68832E-09"
+            },
+            {
+                "floor_energy_MeV": "1.60E+00",
+                "ceiling_energy_MeV": "1.80E+00",
+                "neutrons": "7.10647E-09"
+            },
+            {
+                "floor_energy_MeV": "1.80E+00",
+                "ceiling_energy_MeV": "2.00E+00",
+                "neutrons": "6.50125E-09"
+            },
+            {
+                "floor_energy_MeV": "2.00E+00",
+                "ceiling_energy_MeV": "2.30E+00",
+                "neutrons": "8.62285E-09"
+            },
+            {
+                "floor_energy_MeV": "2.30E+00",
+                "ceiling_energy_MeV": "2.60E+00",
+                "neutrons": "7.33196E-09"
+            },
+            {
+                "floor_energy_MeV": "2.60E+00",
+                "ceiling_energy_MeV": "3.00E+00",
+                "neutrons": "7.96558E-09"
+            },
+            {
+                "floor_energy_MeV": "3.00E+00",
+                "ceiling_energy_MeV": "3.50E+00",
+                "neutrons": "7.49804E-09"
+            },
+            {
+                "floor_energy_MeV": "3.50E+00",
+                "ceiling_energy_MeV": "4.00E+00",
+                "neutrons": "5.34505E-09"
+            },
+            {
+                "floor_energy_MeV": "4.00E+00",
+                "ceiling_energy_MeV": "4.50E+00",
+                "neutrons": "3.73870E-09"
+            },
+            {
+                "floor_energy_MeV": "4.50E+00",
+                "ceiling_energy_MeV": "5.00E+00",
+                "neutrons": "2.57449E-09"
+            },
+            {
+                "floor_energy_MeV": "5.00E+00",
+                "ceiling_energy_MeV": "6.00E+00",
+                "neutrons": "2.92501E-09"
+            },
+            {
+                "floor_energy_MeV": "6.00E+00",
+                "ceiling_energy_MeV": "7.00E+00",
+                "neutrons": "1.29777E-09"
+            },
+            {
+                "floor_energy_MeV": "7.00E+00",
+                "ceiling_energy_MeV": "8.00E+00",
+                "neutrons": "5.56827E-10"
+            },
+            {
+                "floor_energy_MeV": "8.00E+00",
+                "ceiling_energy_MeV": "9.00E+00",
+                "neutrons": "2.32572E-10"
+            },
+            {
+                "floor_energy_MeV": "9.00E+00",
+                "ceiling_energy_MeV": "1.00E+01",
+                "neutrons": "9.50027E-11"
+            },
+            {
+                "floor_energy_MeV": "1.00E+01",
+                "ceiling_energy_MeV": "1.10E+01",
+                "neutrons": "3.80855E-11"
+            },
+            {
+                "floor_energy_MeV": "1.10E+01",
+                "ceiling_energy_MeV": "1.20E+01",
+                "neutrons": "1.50237E-11"
+            },
+            {
+                "floor_energy_MeV": "1.20E+01",
+                "ceiling_energy_MeV": "1.30E+01",
+                "neutrons": "5.84370E-12"
+            },
+            {
+                "floor_energy_MeV": "1.30E+01",
+                "ceiling_energy_MeV": "1.40E+01",
+                "neutrons": "2.24501E-12"
+            },
+            {
+                "floor_energy_MeV": "1.40E+01",
+                "ceiling_energy_MeV": "1.50E+01",
+                "neutrons": "8.53019E-13"
+            }
+        ]
+    },
+    "Pu-242": {
+        "branching_fraction": "5.54E-06",
+        "records": [
+            {
+                "floor_energy_MeV": "4.14E-07",
+                "ceiling_energy_MeV": "1.00E-06",
+                "neutrons": "1.64438E-15"
+            },
+            {
+                "floor_energy_MeV": "1.00E-06",
+                "ceiling_energy_MeV": "1.00E-05",
+                "neutrons": "1.39318E-13"
+            },
+            {
+                "floor_energy_MeV": "1.00E-05",
+                "ceiling_energy_MeV": "5.00E-05",
+                "neutrons": "1.56917E-12"
+            },
+            {
+                "floor_energy_MeV": "5.00E-05",
+                "ceiling_energy_MeV": "1.00E-04",
+                "neutrons": "3.17821E-12"
+            },
+            {
+                "floor_energy_MeV": "1.00E-04",
+                "ceiling_energy_MeV": "2.00E-04",
+                "neutrons": "9.01199E-12"
+            },
+            {
+                "floor_energy_MeV": "2.00E-04",
+                "ceiling_energy_MeV": "4.00E-04",
+                "neutrons": "2.55204E-11"
+            },
+            {
+                "floor_energy_MeV": "4.00E-04",
+                "ceiling_energy_MeV": "7.00E-04",
+                "neutrons": "5.19387E-11"
+            },
+            {
+                "floor_energy_MeV": "7.00E-04",
+                "ceiling_energy_MeV": "1.00E-03",
+                "neutrons": "6.46938E-11"
+            },
+            {
+                "floor_energy_MeV": "1.00E-03",
+                "ceiling_energy_MeV": "3.00E-03",
+                "neutrons": "6.55147E-10"
+            },
+            {
+                "floor_energy_MeV": "3.00E-03",
+                "ceiling_energy_MeV": "6.00E-03",
+                "neutrons": "1.48135E-09"
+            },
+            {
+                "floor_energy_MeV": "6.00E-03",
+                "ceiling_energy_MeV": "1.00E-02",
+                "neutrons": "2.63463E-09"
+            },
+            {
+                "floor_energy_MeV": "1.00E-02",
+                "ceiling_energy_MeV": "2.00E-02",
+                "neutrons": "8.96781E-09"
+            },
+            {
+                "floor_energy_MeV": "2.00E-02",
+                "ceiling_energy_MeV": "4.00E-02",
+                "neutrons": "2.51732E-08"
+            },
+            {
+                "floor_energy_MeV": "4.00E-02",
+                "ceiling_energy_MeV": "6.00E-02",
+                "neutrons": "3.22764E-08"
+            },
+            {
+                "floor_energy_MeV": "6.00E-02",
+                "ceiling_energy_MeV": "8.00E-02",
+                "neutrons": "3.78393E-08"
+            },
+            {
+                "floor_energy_MeV": "8.00E-02",
+                "ceiling_energy_MeV": "1.00E-01",
+                "neutrons": "4.24860E-08"
+            },
+            {
+                "floor_energy_MeV": "1.00E-01",
+                "ceiling_energy_MeV": "1.50E-01",
+                "neutrons": "1.22757E-07"
+            },
+            {
+                "floor_energy_MeV": "1.50E-01",
+                "ceiling_energy_MeV": "2.00E-01",
+                "neutrons": "1.41634E-07"
+            },
+            {
+                "floor_energy_MeV": "2.00E-01",
+                "ceiling_energy_MeV": "2.50E-01",
+                "neutrons": "1.56445E-07"
+            },
+            {
+                "floor_energy_MeV": "2.50E-01",
+                "ceiling_energy_MeV": "3.00E-01",
+                "neutrons": "1.68376E-07"
+            },
+            {
+                "floor_energy_MeV": "3.00E-01",
+                "ceiling_energy_MeV": "3.50E-01",
+                "neutrons": "1.78106E-07"
+            },
+            {
+                "floor_energy_MeV": "3.50E-01",
+                "ceiling_energy_MeV": "4.00E-01",
+                "neutrons": "1.86071E-07"
+            },
+            {
+                "floor_energy_MeV": "4.00E-01",
+                "ceiling_energy_MeV": "4.50E-01",
+                "neutrons": "1.92574E-07"
+            },
+            {
+                "floor_energy_MeV": "4.50E-01",
+                "ceiling_energy_MeV": "5.00E-01",
+                "neutrons": "1.97842E-07"
+            },
+            {
+                "floor_energy_MeV": "5.00E-01",
+                "ceiling_energy_MeV": "5.50E-01",
+                "neutrons": "2.02047E-07"
+            },
+            {
+                "floor_energy_MeV": "5.50E-01",
+                "ceiling_energy_MeV": "6.00E-01",
+                "neutrons": "2.05329E-07"
+            },
+            {
+                "floor_energy_MeV": "6.00E-01",
+                "ceiling_energy_MeV": "7.00E-01",
+                "neutrons": "4.17356E-07"
+            },
+            {
+                "floor_energy_MeV": "7.00E-01",
+                "ceiling_energy_MeV": "8.00E-01",
+                "neutrons": "4.21908E-07"
+            },
+            {
+                "floor_energy_MeV": "8.00E-01",
+                "ceiling_energy_MeV": "9.00E-01",
+                "neutrons": "4.22162E-07"
+            },
+            {
+                "floor_energy_MeV": "9.00E-01",
+                "ceiling_energy_MeV": "1.00E+00",
+                "neutrons": "4.18983E-07"
+            },
+            {
+                "floor_energy_MeV": "1.00E+00",
+                "ceiling_energy_MeV": "1.20E+00",
+                "neutrons": "8.17987E-07"
+            },
+            {
+                "floor_energy_MeV": "1.20E+00",
+                "ceiling_energy_MeV": "1.40E+00",
+                "neutrons": "7.78918E-07"
+            },
+            {
+                "floor_energy_MeV": "1.40E+00",
+                "ceiling_energy_MeV": "1.60E+00",
+                "neutrons": "7.30142E-07"
+            },
+            {
+                "floor_energy_MeV": "1.60E+00",
+                "ceiling_energy_MeV": "1.80E+00",
+                "neutrons": "6.76021E-07"
+            },
+            {
+                "floor_energy_MeV": "1.80E+00",
+                "ceiling_energy_MeV": "2.00E+00",
+                "neutrons": "6.19661E-07"
+            },
+            {
+                "floor_energy_MeV": "2.00E+00",
+                "ceiling_energy_MeV": "2.30E+00",
+                "neutrons": "8.24165E-07"
+            },
+            {
+                "floor_energy_MeV": "2.30E+00",
+                "ceiling_energy_MeV": "2.60E+00",
+                "neutrons": "7.03433E-07"
+            },
+            {
+                "floor_energy_MeV": "2.60E+00",
+                "ceiling_energy_MeV": "3.00E+00",
+                "neutrons": "7.67953E-07"
+            },
+            {
+                "floor_energy_MeV": "3.00E+00",
+                "ceiling_energy_MeV": "3.50E+00",
+                "neutrons": "7.27888E-07"
+            },
+            {
+                "floor_energy_MeV": "3.50E+00",
+                "ceiling_energy_MeV": "4.00E+00",
+                "neutrons": "5.23297E-07"
+            },
+            {
+                "floor_energy_MeV": "4.00E+00",
+                "ceiling_energy_MeV": "4.50E+00",
+                "neutrons": "3.69380E-07"
+            },
+            {
+                "floor_energy_MeV": "4.50E+00",
+                "ceiling_energy_MeV": "5.00E+00",
+                "neutrons": "2.56823E-07"
+            },
+            {
+                "floor_energy_MeV": "5.00E+00",
+                "ceiling_energy_MeV": "6.00E+00",
+                "neutrons": "2.96003E-07"
+            },
+            {
+                "floor_energy_MeV": "6.00E+00",
+                "ceiling_energy_MeV": "7.00E+00",
+                "neutrons": "1.34192E-07"
+            },
+            {
+                "floor_energy_MeV": "7.00E+00",
+                "ceiling_energy_MeV": "8.00E+00",
+                "neutrons": "5.89007E-08"
+            },
+            {
+                "floor_energy_MeV": "8.00E+00",
+                "ceiling_energy_MeV": "9.00E+00",
+                "neutrons": "2.51907E-08"
+            },
+            {
+                "floor_energy_MeV": "9.00E+00",
+                "ceiling_energy_MeV": "1.00E+01",
+                "neutrons": "1.05449E-08"
+            },
+            {
+                "floor_energy_MeV": "1.00E+01",
+                "ceiling_energy_MeV": "1.10E+01",
+                "neutrons": "4.33486E-09"
+            },
+            {
+                "floor_energy_MeV": "1.10E+01",
+                "ceiling_energy_MeV": "1.20E+01",
+                "neutrons": "1.75448E-09"
+            },
+            {
+                "floor_energy_MeV": "1.20E+01",
+                "ceiling_energy_MeV": "1.30E+01",
+                "neutrons": "7.00540E-10"
+            },
+            {
+                "floor_energy_MeV": "1.30E+01",
+                "ceiling_energy_MeV": "1.40E+01",
+                "neutrons": "2.76392E-10"
+            },
+            {
+                "floor_energy_MeV": "1.40E+01",
+                "ceiling_energy_MeV": "1.50E+01",
+                "neutrons": "1.07894E-10"
+            }
+        ]
+    },
+    "Pu-244": {
+        "branching_fraction": "1.21E-03",
+        "records": [
+            {
+                "floor_energy_MeV": "4.14E-07",
+                "ceiling_energy_MeV": "1.00E-06",
+                "neutrons": "6.32117E-13"
+            },
+            {
+                "floor_energy_MeV": "1.00E-06",
+                "ceiling_energy_MeV": "1.00E-05",
+                "neutrons": "3.71897E-11"
+            },
+            {
+                "floor_energy_MeV": "1.00E-05",
+                "ceiling_energy_MeV": "5.00E-05",
+                "neutrons": "4.06948E-10"
+            },
+            {
+                "floor_energy_MeV": "5.00E-05",
+                "ceiling_energy_MeV": "1.00E-04",
+                "neutrons": "8.21326E-10"
+            },
+            {
+                "floor_energy_MeV": "1.00E-04",
+                "ceiling_energy_MeV": "2.00E-04",
+                "neutrons": "2.32650E-09"
+            },
+            {
+                "floor_energy_MeV": "2.00E-04",
+                "ceiling_energy_MeV": "4.00E-04",
+                "neutrons": "6.58487E-09"
+            },
+            {
+                "floor_energy_MeV": "4.00E-04",
+                "ceiling_energy_MeV": "7.00E-04",
+                "neutrons": "1.33984E-08"
+            },
+            {
+                "floor_energy_MeV": "7.00E-04",
+                "ceiling_energy_MeV": "1.00E-03",
+                "neutrons": "1.67185E-08"
+            },
+            {
+                "floor_energy_MeV": "1.00E-03",
+                "ceiling_energy_MeV": "3.00E-03",
+                "neutrons": "1.68919E-07"
+            },
+            {
+                "floor_energy_MeV": "3.00E-03",
+                "ceiling_energy_MeV": "6.00E-03",
+                "neutrons": "3.82088E-07"
+            },
+            {
+                "floor_energy_MeV": "6.00E-03",
+                "ceiling_energy_MeV": "1.00E-02",
+                "neutrons": "6.79726E-07"
+            },
+            {
+                "floor_energy_MeV": "1.00E-02",
+                "ceiling_energy_MeV": "2.00E-02",
+                "neutrons": "2.31450E-06"
+            },
+            {
+                "floor_energy_MeV": "2.00E-02",
+                "ceiling_energy_MeV": "4.00E-02",
+                "neutrons": "6.50186E-06"
+            },
+            {
+                "floor_energy_MeV": "4.00E-02",
+                "ceiling_energy_MeV": "6.00E-02",
+                "neutrons": "8.34419E-06"
+            },
+            {
+                "floor_energy_MeV": "6.00E-02",
+                "ceiling_energy_MeV": "8.00E-02",
+                "neutrons": "9.79071E-06"
+            },
+            {
+                "floor_energy_MeV": "8.00E-02",
+                "ceiling_energy_MeV": "1.00E-01",
+                "neutrons": "1.10018E-05"
+            },
+            {
+                "floor_energy_MeV": "1.00E-01",
+                "ceiling_energy_MeV": "1.50E-01",
+                "neutrons": "3.18276E-05"
+            },
+            {
+                "floor_energy_MeV": "1.50E-01",
+                "ceiling_energy_MeV": "2.00E-01",
+                "neutrons": "3.67744E-05"
+            },
+            {
+                "floor_energy_MeV": "2.00E-01",
+                "ceiling_energy_MeV": "2.50E-01",
+                "neutrons": "4.06633E-05"
+            },
+            {
+                "floor_energy_MeV": "2.50E-01",
+                "ceiling_energy_MeV": "3.00E-01",
+                "neutrons": "4.37963E-05"
+            },
+            {
+                "floor_energy_MeV": "3.00E-01",
+                "ceiling_energy_MeV": "3.50E-01",
+                "neutrons": "4.63458E-05"
+            },
+            {
+                "floor_energy_MeV": "3.50E-01",
+                "ceiling_energy_MeV": "4.00E-01",
+                "neutrons": "4.84231E-05"
+            },
+            {
+                "floor_energy_MeV": "4.00E-01",
+                "ceiling_energy_MeV": "4.50E-01",
+                "neutrons": "5.01062E-05"
+            },
+            {
+                "floor_energy_MeV": "4.50E-01",
+                "ceiling_energy_MeV": "5.00E-01",
+                "neutrons": "5.14534E-05"
+            },
+            {
+                "floor_energy_MeV": "5.00E-01",
+                "ceiling_energy_MeV": "5.50E-01",
+                "neutrons": "5.25100E-05"
+            },
+            {
+                "floor_energy_MeV": "5.50E-01",
+                "ceiling_energy_MeV": "6.00E-01",
+                "neutrons": "5.33123E-05"
+            },
+            {
+                "floor_energy_MeV": "6.00E-01",
+                "ceiling_energy_MeV": "7.00E-01",
+                "neutrons": "1.08161E-04"
+            },
+            {
+                "floor_energy_MeV": "7.00E-01",
+                "ceiling_energy_MeV": "8.00E-01",
+                "neutrons": "1.08994E-04"
+            },
+            {
+                "floor_energy_MeV": "8.00E-01",
+                "ceiling_energy_MeV": "9.00E-01",
+                "neutrons": "1.08632E-04"
+            },
+            {
+                "floor_energy_MeV": "9.00E-01",
+                "ceiling_energy_MeV": "1.00E+00",
+                "neutrons": "1.07318E-04"
+            },
+            {
+                "floor_energy_MeV": "1.00E+00",
+                "ceiling_energy_MeV": "1.20E+00",
+                "neutrons": "2.07825E-04"
+            },
+            {
+                "floor_energy_MeV": "1.20E+00",
+                "ceiling_energy_MeV": "1.40E+00",
+                "neutrons": "1.95416E-04"
+            },
+            {
+                "floor_energy_MeV": "1.40E+00",
+                "ceiling_energy_MeV": "1.60E+00",
+                "neutrons": "1.80546E-04"
+            },
+            {
+                "floor_energy_MeV": "1.60E+00",
+                "ceiling_energy_MeV": "1.80E+00",
+                "neutrons": "1.64498E-04"
+            },
+            {
+                "floor_energy_MeV": "1.80E+00",
+                "ceiling_energy_MeV": "2.00E+00",
+                "neutrons": "1.48175E-04"
+            },
+            {
+                "floor_energy_MeV": "2.00E+00",
+                "ceiling_energy_MeV": "2.30E+00",
+                "neutrons": "1.92531E-04"
+            },
+            {
+                "floor_energy_MeV": "2.30E+00",
+                "ceiling_energy_MeV": "2.60E+00",
+                "neutrons": "1.59426E-04"
+            },
+            {
+                "floor_energy_MeV": "2.60E+00",
+                "ceiling_energy_MeV": "3.00E+00",
+                "neutrons": "1.67653E-04"
+            },
+            {
+                "floor_energy_MeV": "3.00E+00",
+                "ceiling_energy_MeV": "3.50E+00",
+                "neutrons": "1.50969E-04"
+            },
+            {
+                "floor_energy_MeV": "3.50E+00",
+                "ceiling_energy_MeV": "4.00E+00",
+                "neutrons": "1.02109E-04"
+            },
+            {
+                "floor_energy_MeV": "4.00E+00",
+                "ceiling_energy_MeV": "4.50E+00",
+                "neutrons": "6.75994E-05"
+            },
+            {
+                "floor_energy_MeV": "4.50E+00",
+                "ceiling_energy_MeV": "5.00E+00",
+                "neutrons": "4.39680E-05"
+            },
+            {
+                "floor_energy_MeV": "5.00E+00",
+                "ceiling_energy_MeV": "6.00E+00",
+                "neutrons": "4.59958E-05"
+            },
+            {
+                "floor_energy_MeV": "6.00E+00",
+                "ceiling_energy_MeV": "7.00E+00",
+                "neutrons": "1.80544E-05"
+            },
+            {
+                "floor_energy_MeV": "7.00E+00",
+                "ceiling_energy_MeV": "8.00E+00",
+                "neutrons": "6.82279E-06"
+            },
+            {
+                "floor_energy_MeV": "8.00E+00",
+                "ceiling_energy_MeV": "9.00E+00",
+                "neutrons": "2.50089E-06"
+            },
+            {
+                "floor_energy_MeV": "9.00E+00",
+                "ceiling_energy_MeV": "1.00E+01",
+                "neutrons": "8.93889E-07"
+            },
+            {
+                "floor_energy_MeV": "1.00E+01",
+                "ceiling_energy_MeV": "1.10E+01",
+                "neutrons": "3.12774E-07"
+            },
+            {
+                "floor_energy_MeV": "1.10E+01",
+                "ceiling_energy_MeV": "1.20E+01",
+                "neutrons": "1.07458E-07"
+            },
+            {
+                "floor_energy_MeV": "1.20E+01",
+                "ceiling_energy_MeV": "1.30E+01",
+                "neutrons": "3.63352E-08"
+            },
+            {
+                "floor_energy_MeV": "1.30E+01",
+                "ceiling_energy_MeV": "1.40E+01",
+                "neutrons": "1.21150E-08"
+            },
+            {
+                "floor_energy_MeV": "1.40E+01",
+                "ceiling_energy_MeV": "1.50E+01",
+                "neutrons": "3.98925E-09"
+            }
+        ]
+    }
+}

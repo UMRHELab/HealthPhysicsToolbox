@@ -1,0 +1,1446 @@
+[
+    {
+        "Ga-67": {
+            "half_life": "3.2612d",
+            "records": [
+                {
+                    "energy_eV": "1.07493E-02",
+                    "yield": "1.58900E+01",
+                    "orbital_transition": "L2 L3 N1"
+                },
+                {
+                    "energy_eV": "3.72704E-02",
+                    "yield": "2.09700E+01",
+                    "orbital_transition": "L1 L3 M1"
+                },
+                {
+                    "energy_eV": "2.05972E-02",
+                    "yield": "2.68400E+01",
+                    "orbital_transition": "M1 M2 M4"
+                },
+                {
+                    "energy_eV": "4.23412E-02",
+                    "yield": "2.72300E+01",
+                    "orbital_transition": "M1 M2 M5"
+                },
+                {
+                    "energy_eV": "6.21583E-02",
+                    "yield": "2.99900E+01",
+                    "orbital_transition": "M1 M3 M4"
+                },
+                {
+                    "energy_eV": "8.05082E-02",
+                    "yield": "3.03800E+01",
+                    "orbital_transition": "M1 M3 M5"
+                },
+                {
+                    "energy_eV": "1.31175E-02",
+                    "yield": "3.50800E+01",
+                    "orbital_transition": "M1 M2 N1"
+                },
+                {
+                    "energy_eV": "2.42094E-02",
+                    "yield": "3.82300E+01",
+                    "orbital_transition": "M1 M3 N1"
+                },
+                {
+                    "energy_eV": "1.78676E-02",
+                    "yield": "4.01600E+01",
+                    "orbital_transition": "L1 L2 M2"
+                },
+                {
+                    "energy_eV": "2.57422E-02",
+                    "yield": "4.33100E+01",
+                    "orbital_transition": "L1 L2 M3"
+                },
+                {
+                    "energy_eV": "3.13988E-02",
+                    "yield": "5.68900E+01",
+                    "orbital_transition": "M3 M4 M4"
+                },
+                {
+                    "energy_eV": "7.14252E-01",
+                    "yield": "5.72800E+01",
+                    "orbital_transition": "M3 M4 M5"
+                },
+                {
+                    "energy_eV": "5.07676E-01",
+                    "yield": "5.76700E+01",
+                    "orbital_transition": "M3 M5 M5"
+                },
+                {
+                    "energy_eV": "9.96552E-02",
+                    "yield": "6.00400E+01",
+                    "orbital_transition": "M2 M4 M4"
+                },
+                {
+                    "energy_eV": "5.15119E-01",
+                    "yield": "6.04300E+01",
+                    "orbital_transition": "M2 M4 M5"
+                },
+                {
+                    "energy_eV": "1.50994E-02",
+                    "yield": "6.08200E+01",
+                    "orbital_transition": "M2 M5 M5"
+                },
+                {
+                    "energy_eV": "2.18913E-02",
+                    "yield": "6.46600E+01",
+                    "orbital_transition": "L1 L3 M2"
+                },
+                {
+                    "energy_eV": "1.31582E-02",
+                    "yield": "6.51300E+01",
+                    "orbital_transition": "M3 M4 N1"
+                },
+                {
+                    "energy_eV": "6.34364E-02",
+                    "yield": "6.55200E+01",
+                    "orbital_transition": "M3 M5 N1"
+                },
+                {
+                    "energy_eV": "4.67137E-02",
+                    "yield": "6.78100E+01",
+                    "orbital_transition": "L1 L3 M3"
+                },
+                {
+                    "energy_eV": "2.91602E-02",
+                    "yield": "6.82800E+01",
+                    "orbital_transition": "M2 M4 N1"
+                },
+                {
+                    "energy_eV": "5.64675E-03",
+                    "yield": "6.86700E+01",
+                    "orbital_transition": "M2 M5 N1"
+                },
+                {
+                    "energy_eV": "1.97552E-06",
+                    "yield": "7.33700E+01",
+                    "orbital_transition": "M3 N1 N1"
+                },
+                {
+                    "energy_eV": "7.23004E-06",
+                    "yield": "7.65200E+01",
+                    "orbital_transition": "M2 N1 N1"
+                },
+                {
+                    "energy_eV": "1.18372E-03",
+                    "yield": "1.03730E+02",
+                    "orbital_transition": "M1 M4 M4"
+                },
+                {
+                    "energy_eV": "1.28567E-02",
+                    "yield": "1.04120E+02",
+                    "orbital_transition": "M1 M4 M5"
+                },
+                {
+                    "energy_eV": "5.17460E-03",
+                    "yield": "1.04510E+02",
+                    "orbital_transition": "M1 M5 M5"
+                },
+                {
+                    "energy_eV": "9.53123E-03",
+                    "yield": "1.11970E+02",
+                    "orbital_transition": "M1 M4 N1"
+                },
+                {
+                    "energy_eV": "1.50002E-02",
+                    "yield": "1.12360E+02",
+                    "orbital_transition": "M1 M5 N1"
+                },
+                {
+                    "energy_eV": "1.75326E-02",
+                    "yield": "1.17050E+02",
+                    "orbital_transition": "L1 L2 M4"
+                },
+                {
+                    "energy_eV": "2.81495E-02",
+                    "yield": "1.17440E+02",
+                    "orbital_transition": "L1 L2 M5"
+                },
+                {
+                    "energy_eV": "2.07916E-04",
+                    "yield": "1.20210E+02",
+                    "orbital_transition": "M1 N1 N1"
+                },
+                {
+                    "energy_eV": "1.68362E-03",
+                    "yield": "1.25290E+02",
+                    "orbital_transition": "L1 L2 N1"
+                },
+                {
+                    "energy_eV": "4.39543E-02",
+                    "yield": "1.41550E+02",
+                    "orbital_transition": "L1 L3 M4"
+                },
+                {
+                    "energy_eV": "6.25053E-02",
+                    "yield": "1.41940E+02",
+                    "orbital_transition": "L1 L3 M5"
+                },
+                {
+                    "energy_eV": "2.96012E-03",
+                    "yield": "1.49790E+02",
+                    "orbital_transition": "L1 L3 N1"
+                },
+                {
+                    "energy_eV": "3.84089E-03",
+                    "yield": "7.51140E+02",
+                    "orbital_transition": "L3 M1 M1"
+                },
+                {
+                    "energy_eV": "1.85090E-03",
+                    "yield": "7.75640E+02",
+                    "orbital_transition": "L2 M1 M1"
+                },
+                {
+                    "energy_eV": "2.71287E-03",
+                    "yield": "7.94830E+02",
+                    "orbital_transition": "L3 M1 M2"
+                },
+                {
+                    "energy_eV": "7.19432E-02",
+                    "yield": "7.97980E+02",
+                    "orbital_transition": "L3 M1 M3"
+                },
+                {
+                    "energy_eV": "3.44802E-02",
+                    "yield": "8.19330E+02",
+                    "orbital_transition": "L2 M1 M2"
+                },
+                {
+                    "energy_eV": "2.93171E-03",
+                    "yield": "8.22480E+02",
+                    "orbital_transition": "L2 M1 M3"
+                },
+                {
+                    "energy_eV": "1.02062E-03",
+                    "yield": "8.38520E+02",
+                    "orbital_transition": "L3 M2 M2"
+                },
+                {
+                    "energy_eV": "1.10317E-01",
+                    "yield": "8.41670E+02",
+                    "orbital_transition": "L3 M2 M3"
+                },
+                {
+                    "energy_eV": "1.61749E-01",
+                    "yield": "8.44820E+02",
+                    "orbital_transition": "L3 M3 M3"
+                },
+                {
+                    "energy_eV": "3.00918E-02",
+                    "yield": "8.63020E+02",
+                    "orbital_transition": "L2 M2 M2"
+                },
+                {
+                    "energy_eV": "1.02891E-01",
+                    "yield": "8.66170E+02",
+                    "orbital_transition": "L2 M2 M3"
+                },
+                {
+                    "energy_eV": "2.86842E-03",
+                    "yield": "8.69320E+02",
+                    "orbital_transition": "L2 M3 M3"
+                },
+                {
+                    "energy_eV": "5.15267E-03",
+                    "yield": "8.71720E+02",
+                    "orbital_transition": "L3 M1 M4"
+                },
+                {
+                    "energy_eV": "6.17328E-03",
+                    "yield": "8.72110E+02",
+                    "orbital_transition": "L3 M1 M5"
+                },
+                {
+                    "energy_eV": "5.05853E-04",
+                    "yield": "8.79960E+02",
+                    "orbital_transition": "L3 M1 N1"
+                },
+                {
+                    "energy_eV": "1.63697E-03",
+                    "yield": "8.96220E+02",
+                    "orbital_transition": "L2 M1 M4"
+                },
+                {
+                    "energy_eV": "3.77161E-03",
+                    "yield": "8.96610E+02",
+                    "orbital_transition": "L2 M1 M5"
+                },
+                {
+                    "energy_eV": "2.45439E-04",
+                    "yield": "9.04460E+02",
+                    "orbital_transition": "L2 M1 N1"
+                },
+                {
+                    "energy_eV": "3.93233E-03",
+                    "yield": "9.09540E+02",
+                    "orbital_transition": "L1 M1 M1"
+                },
+                {
+                    "energy_eV": "5.16139E-03",
+                    "yield": "9.15410E+02",
+                    "orbital_transition": "L3 M2 M4"
+                },
+                {
+                    "energy_eV": "4.89408E-02",
+                    "yield": "9.15800E+02",
+                    "orbital_transition": "L3 M2 M5"
+                },
+                {
+                    "energy_eV": "1.13815E-01",
+                    "yield": "9.18560E+02",
+                    "orbital_transition": "L3 M3 M4"
+                },
+                {
+                    "energy_eV": "1.71376E-01",
+                    "yield": "9.18950E+02",
+                    "orbital_transition": "L3 M3 M5"
+                },
+                {
+                    "energy_eV": "1.83531E-04",
+                    "yield": "9.23650E+02",
+                    "orbital_transition": "L3 M2 N1"
+                },
+                {
+                    "energy_eV": "5.49722E-03",
+                    "yield": "9.26800E+02",
+                    "orbital_transition": "L3 M3 N1"
+                },
+                {
+                    "energy_eV": "3.86239E-02",
+                    "yield": "9.39910E+02",
+                    "orbital_transition": "L2 M2 M4"
+                },
+                {
+                    "energy_eV": "7.31923E-02",
+                    "yield": "9.40300E+02",
+                    "orbital_transition": "L2 M2 M5"
+                },
+                {
+                    "energy_eV": "4.64565E-02",
+                    "yield": "9.43060E+02",
+                    "orbital_transition": "L2 M3 M4"
+                },
+                {
+                    "energy_eV": "6.79959E-03",
+                    "yield": "9.43450E+02",
+                    "orbital_transition": "L2 M3 M5"
+                },
+                {
+                    "energy_eV": "2.65026E-03",
+                    "yield": "9.48150E+02",
+                    "orbital_transition": "L2 M2 N1"
+                },
+                {
+                    "energy_eV": "2.00394E-04",
+                    "yield": "9.51300E+02",
+                    "orbital_transition": "L2 M3 N1"
+                },
+                {
+                    "energy_eV": "7.18485E-03",
+                    "yield": "9.53230E+02",
+                    "orbital_transition": "L1 M1 M2"
+                },
+                {
+                    "energy_eV": "1.39446E-02",
+                    "yield": "9.56380E+02",
+                    "orbital_transition": "L1 M1 M3"
+                },
+                {
+                    "energy_eV": "1.16437E-02",
+                    "yield": "9.92300E+02",
+                    "orbital_transition": "L3 M4 M4"
+                },
+                {
+                    "energy_eV": "2.34969E-01",
+                    "yield": "9.92690E+02",
+                    "orbital_transition": "L3 M4 M5"
+                },
+                {
+                    "energy_eV": "1.58608E-01",
+                    "yield": "9.93080E+02",
+                    "orbital_transition": "L3 M5 M5"
+                },
+                {
+                    "energy_eV": "9.73470E-05",
+                    "yield": "9.96920E+02",
+                    "orbital_transition": "L1 M2 M2"
+                },
+                {
+                    "energy_eV": "2.44792E-04",
+                    "yield": "1.00007E+03",
+                    "orbital_transition": "L1 M2 M3"
+                },
+                {
+                    "energy_eV": "3.76030E-04",
+                    "yield": "1.00054E+03",
+                    "orbital_transition": "L3 M4 N1"
+                },
+                {
+                    "energy_eV": "4.61098E-04",
+                    "yield": "1.00093E+03",
+                    "orbital_transition": "L3 M5 N1"
+                },
+                {
+                    "energy_eV": "3.63134E-04",
+                    "yield": "1.00322E+03",
+                    "orbital_transition": "L1 M3 M3"
+                },
+                {
+                    "energy_eV": "1.79068E-05",
+                    "yield": "1.00878E+03",
+                    "orbital_transition": "L3 N1 N1"
+                },
+                {
+                    "energy_eV": "3.40745E-02",
+                    "yield": "1.01680E+03",
+                    "orbital_transition": "L2 M4 M4"
+                },
+                {
+                    "energy_eV": "1.54146E-01",
+                    "yield": "1.01719E+03",
+                    "orbital_transition": "L2 M4 M5"
+                },
+                {
+                    "energy_eV": "7.13332E-03",
+                    "yield": "1.01758E+03",
+                    "orbital_transition": "L2 M5 M5"
+                },
+                {
+                    "energy_eV": "1.31663E-04",
+                    "yield": "1.02504E+03",
+                    "orbital_transition": "L2 M4 N1"
+                },
+                {
+                    "energy_eV": "2.72459E-04",
+                    "yield": "1.02543E+03",
+                    "orbital_transition": "L2 M5 N1"
+                },
+                {
+                    "energy_eV": "7.94329E-03",
+                    "yield": "1.03012E+03",
+                    "orbital_transition": "L1 M1 M4"
+                },
+                {
+                    "energy_eV": "1.16347E-02",
+                    "yield": "1.03051E+03",
+                    "orbital_transition": "L1 M1 M5"
+                },
+                {
+                    "energy_eV": "9.00686E-06",
+                    "yield": "1.03328E+03",
+                    "orbital_transition": "L2 N1 N1"
+                },
+                {
+                    "energy_eV": "5.39866E-04",
+                    "yield": "1.03836E+03",
+                    "orbital_transition": "L1 M1 N1"
+                },
+                {
+                    "energy_eV": "1.22600E-04",
+                    "yield": "1.07381E+03",
+                    "orbital_transition": "L1 M2 M4"
+                },
+                {
+                    "energy_eV": "2.41861E-03",
+                    "yield": "1.07420E+03",
+                    "orbital_transition": "L1 M2 M5"
+                },
+                {
+                    "energy_eV": "2.58749E-03",
+                    "yield": "1.07696E+03",
+                    "orbital_transition": "L1 M3 M4"
+                },
+                {
+                    "energy_eV": "1.84411E-03",
+                    "yield": "1.07735E+03",
+                    "orbital_transition": "L1 M3 M5"
+                },
+                {
+                    "energy_eV": "4.40715E-04",
+                    "yield": "1.08205E+03",
+                    "orbital_transition": "L1 M2 N1"
+                },
+                {
+                    "energy_eV": "8.95453E-04",
+                    "yield": "1.08520E+03",
+                    "orbital_transition": "L1 M3 N1"
+                },
+                {
+                    "energy_eV": "2.40730E-04",
+                    "yield": "1.15070E+03",
+                    "orbital_transition": "L1 M4 M4"
+                },
+                {
+                    "energy_eV": "1.20170E-02",
+                    "yield": "1.15109E+03",
+                    "orbital_transition": "L1 M4 M5"
+                },
+                {
+                    "energy_eV": "3.36406E-03",
+                    "yield": "1.15148E+03",
+                    "orbital_transition": "L1 M5 M5"
+                },
+                {
+                    "energy_eV": "4.56961E-04",
+                    "yield": "1.15894E+03",
+                    "orbital_transition": "L1 M4 N1"
+                },
+                {
+                    "energy_eV": "6.81399E-04",
+                    "yield": "1.15933E+03",
+                    "orbital_transition": "L1 M5 N1"
+                },
+                {
+                    "energy_eV": "1.80904E-05",
+                    "yield": "1.16718E+03",
+                    "orbital_transition": "L1 N1 N1"
+                },
+                {
+                    "energy_eV": "4.34650E-02",
+                    "yield": "7.25360E+03",
+                    "orbital_transition": "K L1 L1"
+                },
+                {
+                    "energy_eV": "4.83253E-02",
+                    "yield": "7.38750E+03",
+                    "orbital_transition": "K L1 L2"
+                },
+                {
+                    "energy_eV": "8.51681E-02",
+                    "yield": "7.41200E+03",
+                    "orbital_transition": "K L1 L3"
+                },
+                {
+                    "energy_eV": "8.50758E-03",
+                    "yield": "7.52140E+03",
+                    "orbital_transition": "K L2 L2"
+                },
+                {
+                    "energy_eV": "2.00543E-01",
+                    "yield": "7.54590E+03",
+                    "orbital_transition": "K L2 L3"
+                },
+                {
+                    "energy_eV": "1.10547E-01",
+                    "yield": "7.57040E+03",
+                    "orbital_transition": "K L3 L3"
+                },
+                {
+                    "energy_eV": "1.18012E-02",
+                    "yield": "8.30057E+03",
+                    "orbital_transition": "K L1 M1"
+                },
+                {
+                    "energy_eV": "6.37693E-03",
+                    "yield": "8.34426E+03",
+                    "orbital_transition": "K L1 M2"
+                },
+                {
+                    "energy_eV": "1.11315E-02",
+                    "yield": "8.34741E+03",
+                    "orbital_transition": "K L1 M3"
+                },
+                {
+                    "energy_eV": "3.50631E-04",
+                    "yield": "8.42115E+03",
+                    "orbital_transition": "K L1 M4"
+                },
+                {
+                    "energy_eV": "4.73130E-04",
+                    "yield": "8.42154E+03",
+                    "orbital_transition": "K L1 M5"
+                },
+                {
+                    "energy_eV": "9.04014E-04",
+                    "yield": "8.42939E+03",
+                    "orbital_transition": "K L1 N1"
+                },
+                {
+                    "energy_eV": "5.54900E-03",
+                    "yield": "8.43447E+03",
+                    "orbital_transition": "K L2 M1"
+                },
+                {
+                    "energy_eV": "9.82179E-03",
+                    "yield": "8.45897E+03",
+                    "orbital_transition": "K L3 M1"
+                },
+                {
+                    "energy_eV": "2.09952E-03",
+                    "yield": "8.47816E+03",
+                    "orbital_transition": "K L2 M2"
+                },
+                {
+                    "energy_eV": "2.25667E-02",
+                    "yield": "8.48131E+03",
+                    "orbital_transition": "K L2 M3"
+                },
+                {
+                    "energy_eV": "2.26005E-02",
+                    "yield": "8.50266E+03",
+                    "orbital_transition": "K L3 M2"
+                },
+                {
+                    "energy_eV": "2.53116E-02",
+                    "yield": "8.50581E+03",
+                    "orbital_transition": "K L3 M3"
+                },
+                {
+                    "energy_eV": "4.83712E-04",
+                    "yield": "8.55505E+03",
+                    "orbital_transition": "K L2 M4"
+                },
+                {
+                    "energy_eV": "1.77850E-03",
+                    "yield": "8.55544E+03",
+                    "orbital_transition": "K L2 M5"
+                },
+                {
+                    "energy_eV": "4.16110E-04",
+                    "yield": "8.56329E+03",
+                    "orbital_transition": "K L2 N1"
+                },
+                {
+                    "energy_eV": "2.20726E-03",
+                    "yield": "8.57955E+03",
+                    "orbital_transition": "K L3 M4"
+                },
+                {
+                    "energy_eV": "2.14817E-03",
+                    "yield": "8.57994E+03",
+                    "orbital_transition": "K L3 M5"
+                },
+                {
+                    "energy_eV": "7.37188E-04",
+                    "yield": "8.58779E+03",
+                    "orbital_transition": "K L3 N1"
+                },
+                {
+                    "energy_eV": "8.56897E-04",
+                    "yield": "9.34754E+03",
+                    "orbital_transition": "K M1 M1"
+                },
+                {
+                    "energy_eV": "7.99584E-04",
+                    "yield": "9.39123E+03",
+                    "orbital_transition": "K M1 M2"
+                },
+                {
+                    "energy_eV": "1.39988E-03",
+                    "yield": "9.39438E+03",
+                    "orbital_transition": "K M1 M3"
+                },
+                {
+                    "energy_eV": "1.39080E-04",
+                    "yield": "9.43492E+03",
+                    "orbital_transition": "K M2 M2"
+                },
+                {
+                    "energy_eV": "2.86420E-03",
+                    "yield": "9.43807E+03",
+                    "orbital_transition": "K M2 M3"
+                },
+                {
+                    "energy_eV": "1.72186E-03",
+                    "yield": "9.44122E+03",
+                    "orbital_transition": "K M3 M3"
+                },
+                {
+                    "energy_eV": "4.12387E-05",
+                    "yield": "9.46812E+03",
+                    "orbital_transition": "K M1 M4"
+                },
+                {
+                    "energy_eV": "5.49853E-05",
+                    "yield": "9.46851E+03",
+                    "orbital_transition": "K M1 M5"
+                },
+                {
+                    "energy_eV": "1.30585E-04",
+                    "yield": "9.47636E+03",
+                    "orbital_transition": "K M1 N1"
+                },
+                {
+                    "energy_eV": "4.71474E-05",
+                    "yield": "9.51181E+03",
+                    "orbital_transition": "K M2 M4"
+                },
+                {
+                    "energy_eV": "1.81513E-04",
+                    "yield": "9.51220E+03",
+                    "orbital_transition": "K M2 M5"
+                },
+                {
+                    "energy_eV": "2.43469E-04",
+                    "yield": "9.51496E+03",
+                    "orbital_transition": "K M3 M4"
+                },
+                {
+                    "energy_eV": "2.30922E-04",
+                    "yield": "9.51535E+03",
+                    "orbital_transition": "K M3 M5"
+                },
+                {
+                    "energy_eV": "6.12907E-05",
+                    "yield": "9.52005E+03",
+                    "orbital_transition": "K M2 N1"
+                },
+                {
+                    "energy_eV": "1.15461E-04",
+                    "yield": "9.52320E+03",
+                    "orbital_transition": "K M3 N1"
+                },
+                {
+                    "energy_eV": "1.59682E-05",
+                    "yield": "9.58909E+03",
+                    "orbital_transition": "K M4 M5"
+                },
+                {
+                    "energy_eV": "6.36641E-06",
+                    "yield": "9.58948E+03",
+                    "orbital_transition": "K M5 M5"
+                },
+                {
+                    "energy_eV": "2.66165E-06",
+                    "yield": "9.59694E+03",
+                    "orbital_transition": "K M4 N1"
+                },
+                {
+                    "energy_eV": "6.36641E-06",
+                    "yield": "9.59733E+03",
+                    "orbital_transition": "K M5 N1"
+                },
+                {
+                    "energy_eV": "4.22454E-06",
+                    "yield": "9.60518E+03",
+                    "orbital_transition": "K N1 N1"
+                }
+            ]
+        }
+    },
+    {
+        "Ga-68": {
+            "half_life": "67.71m",
+            "records": [
+                {
+                    "energy_eV": "8.86280E-04",
+                    "yield": "1.58900E+01",
+                    "orbital_transition": "L2 L3 N1"
+                },
+                {
+                    "energy_eV": "3.12716E-03",
+                    "yield": "2.09700E+01",
+                    "orbital_transition": "L1 L3 M1"
+                },
+                {
+                    "energy_eV": "1.71781E-03",
+                    "yield": "2.68400E+01",
+                    "orbital_transition": "M1 M2 M4"
+                },
+                {
+                    "energy_eV": "3.53126E-03",
+                    "yield": "2.72300E+01",
+                    "orbital_transition": "M1 M2 M5"
+                },
+                {
+                    "energy_eV": "5.18401E-03",
+                    "yield": "2.99900E+01",
+                    "orbital_transition": "M1 M3 M4"
+                },
+                {
+                    "energy_eV": "6.71439E-03",
+                    "yield": "3.03800E+01",
+                    "orbital_transition": "M1 M3 M5"
+                },
+                {
+                    "energy_eV": "1.09400E-03",
+                    "yield": "3.50800E+01",
+                    "orbital_transition": "M1 M2 N1"
+                },
+                {
+                    "energy_eV": "2.01907E-03",
+                    "yield": "3.82300E+01",
+                    "orbital_transition": "M1 M3 N1"
+                },
+                {
+                    "energy_eV": "1.49917E-03",
+                    "yield": "4.01600E+01",
+                    "orbital_transition": "L1 L2 M2"
+                },
+                {
+                    "energy_eV": "2.15989E-03",
+                    "yield": "4.33100E+01",
+                    "orbital_transition": "L1 L2 M3"
+                },
+                {
+                    "energy_eV": "2.59821E-03",
+                    "yield": "5.68900E+01",
+                    "orbital_transition": "M3 M4 M4"
+                },
+                {
+                    "energy_eV": "5.91035E-02",
+                    "yield": "5.72800E+01",
+                    "orbital_transition": "M3 M4 M5"
+                },
+                {
+                    "energy_eV": "4.20096E-02",
+                    "yield": "5.76700E+01",
+                    "orbital_transition": "M3 M5 M5"
+                },
+                {
+                    "energy_eV": "8.23904E-03",
+                    "yield": "6.00400E+01",
+                    "orbital_transition": "M2 M4 M4"
+                },
+                {
+                    "energy_eV": "4.25877E-02",
+                    "yield": "6.04300E+01",
+                    "orbital_transition": "M2 M4 M5"
+                },
+                {
+                    "energy_eV": "1.24835E-03",
+                    "yield": "6.08200E+01",
+                    "orbital_transition": "M2 M5 M5"
+                },
+                {
+                    "energy_eV": "1.83677E-03",
+                    "yield": "6.46600E+01",
+                    "orbital_transition": "L1 L3 M2"
+                },
+                {
+                    "energy_eV": "1.08883E-03",
+                    "yield": "6.51300E+01",
+                    "orbital_transition": "M3 M4 N1"
+                },
+                {
+                    "energy_eV": "5.24928E-03",
+                    "yield": "6.55200E+01",
+                    "orbital_transition": "M3 M5 N1"
+                },
+                {
+                    "energy_eV": "3.91949E-03",
+                    "yield": "6.78100E+01",
+                    "orbital_transition": "L1 L3 M3"
+                },
+                {
+                    "energy_eV": "2.41083E-03",
+                    "yield": "6.82800E+01",
+                    "orbital_transition": "M2 M4 N1"
+                },
+                {
+                    "energy_eV": "4.66848E-04",
+                    "yield": "6.86700E+01",
+                    "orbital_transition": "M2 M5 N1"
+                },
+                {
+                    "energy_eV": "1.63472E-07",
+                    "yield": "7.33700E+01",
+                    "orbital_transition": "M3 N1 N1"
+                },
+                {
+                    "energy_eV": "5.97747E-07",
+                    "yield": "7.65200E+01",
+                    "orbital_transition": "M2 N1 N1"
+                },
+                {
+                    "energy_eV": "9.87225E-05",
+                    "yield": "1.03730E+02",
+                    "orbital_transition": "M1 M4 M4"
+                },
+                {
+                    "energy_eV": "1.07225E-03",
+                    "yield": "1.04120E+02",
+                    "orbital_transition": "M1 M4 M5"
+                },
+                {
+                    "energy_eV": "4.31562E-04",
+                    "yield": "1.04510E+02",
+                    "orbital_transition": "M1 M5 M5"
+                },
+                {
+                    "energy_eV": "7.94905E-04",
+                    "yield": "1.11970E+02",
+                    "orbital_transition": "M1 M4 N1"
+                },
+                {
+                    "energy_eV": "1.25102E-03",
+                    "yield": "1.12360E+02",
+                    "orbital_transition": "M1 M5 N1"
+                },
+                {
+                    "energy_eV": "1.47106E-03",
+                    "yield": "1.17050E+02",
+                    "orbital_transition": "L1 L2 M4"
+                },
+                {
+                    "energy_eV": "2.36187E-03",
+                    "yield": "1.17440E+02",
+                    "orbital_transition": "L1 L2 M5"
+                },
+                {
+                    "energy_eV": "1.73402E-05",
+                    "yield": "1.20210E+02",
+                    "orbital_transition": "M1 N1 N1"
+                },
+                {
+                    "energy_eV": "1.41263E-04",
+                    "yield": "1.25290E+02",
+                    "orbital_transition": "L1 L2 N1"
+                },
+                {
+                    "energy_eV": "3.68796E-03",
+                    "yield": "1.41550E+02",
+                    "orbital_transition": "L1 L3 M4"
+                },
+                {
+                    "energy_eV": "5.24448E-03",
+                    "yield": "1.41940E+02",
+                    "orbital_transition": "L1 L3 M5"
+                },
+                {
+                    "energy_eV": "2.48368E-04",
+                    "yield": "1.49790E+02",
+                    "orbital_transition": "L1 L3 N1"
+                },
+                {
+                    "energy_eV": "3.17316E-04",
+                    "yield": "7.51140E+02",
+                    "orbital_transition": "L3 M1 M1"
+                },
+                {
+                    "energy_eV": "1.52607E-04",
+                    "yield": "7.75640E+02",
+                    "orbital_transition": "L2 M1 M1"
+                },
+                {
+                    "energy_eV": "2.24125E-04",
+                    "yield": "7.94830E+02",
+                    "orbital_transition": "L3 M1 M2"
+                },
+                {
+                    "energy_eV": "5.94362E-03",
+                    "yield": "7.97980E+02",
+                    "orbital_transition": "L3 M1 M3"
+                },
+                {
+                    "energy_eV": "2.84291E-03",
+                    "yield": "8.19330E+02",
+                    "orbital_transition": "L2 M1 M2"
+                },
+                {
+                    "energy_eV": "2.41720E-04",
+                    "yield": "8.22480E+02",
+                    "orbital_transition": "L2 M1 M3"
+                },
+                {
+                    "energy_eV": "8.43192E-05",
+                    "yield": "8.38520E+02",
+                    "orbital_transition": "L3 M2 M2"
+                },
+                {
+                    "energy_eV": "9.11387E-03",
+                    "yield": "8.41670E+02",
+                    "orbital_transition": "L3 M2 M3"
+                },
+                {
+                    "energy_eV": "1.33629E-02",
+                    "yield": "8.44820E+02",
+                    "orbital_transition": "L3 M3 M3"
+                },
+                {
+                    "energy_eV": "2.48108E-03",
+                    "yield": "8.63020E+02",
+                    "orbital_transition": "L2 M2 M2"
+                },
+                {
+                    "energy_eV": "8.48344E-03",
+                    "yield": "8.66170E+02",
+                    "orbital_transition": "L2 M2 M3"
+                },
+                {
+                    "energy_eV": "2.36502E-04",
+                    "yield": "8.69320E+02",
+                    "orbital_transition": "L2 M3 M3"
+                },
+                {
+                    "energy_eV": "4.25690E-04",
+                    "yield": "8.71720E+02",
+                    "orbital_transition": "L3 M1 M4"
+                },
+                {
+                    "energy_eV": "5.10008E-04",
+                    "yield": "8.72110E+02",
+                    "orbital_transition": "L3 M1 M5"
+                },
+                {
+                    "energy_eV": "4.17913E-05",
+                    "yield": "8.79960E+02",
+                    "orbital_transition": "L3 M1 N1"
+                },
+                {
+                    "energy_eV": "1.34969E-04",
+                    "yield": "8.96220E+02",
+                    "orbital_transition": "L2 M1 M4"
+                },
+                {
+                    "energy_eV": "3.10971E-04",
+                    "yield": "8.96610E+02",
+                    "orbital_transition": "L2 M1 M5"
+                },
+                {
+                    "energy_eV": "2.02366E-05",
+                    "yield": "9.04460E+02",
+                    "orbital_transition": "L2 M1 N1"
+                },
+                {
+                    "energy_eV": "3.29940E-04",
+                    "yield": "9.09540E+02",
+                    "orbital_transition": "L1 M1 M1"
+                },
+                {
+                    "energy_eV": "4.26410E-04",
+                    "yield": "9.15410E+02",
+                    "orbital_transition": "L3 M2 M4"
+                },
+                {
+                    "energy_eV": "4.04327E-03",
+                    "yield": "9.15800E+02",
+                    "orbital_transition": "L3 M2 M5"
+                },
+                {
+                    "energy_eV": "9.40290E-03",
+                    "yield": "9.18560E+02",
+                    "orbital_transition": "L3 M3 M4"
+                },
+                {
+                    "energy_eV": "1.41583E-02",
+                    "yield": "9.18950E+02",
+                    "orbital_transition": "L3 M3 M5"
+                },
+                {
+                    "energy_eV": "1.51625E-05",
+                    "yield": "9.23650E+02",
+                    "orbital_transition": "L3 M2 N1"
+                },
+                {
+                    "energy_eV": "4.54155E-04",
+                    "yield": "9.26800E+02",
+                    "orbital_transition": "L3 M3 N1"
+                },
+                {
+                    "energy_eV": "3.18456E-03",
+                    "yield": "9.39910E+02",
+                    "orbital_transition": "L2 M2 M4"
+                },
+                {
+                    "energy_eV": "6.03474E-03",
+                    "yield": "9.40300E+02",
+                    "orbital_transition": "L2 M2 M5"
+                },
+                {
+                    "energy_eV": "3.83036E-03",
+                    "yield": "9.43060E+02",
+                    "orbital_transition": "L2 M3 M4"
+                },
+                {
+                    "energy_eV": "5.60629E-04",
+                    "yield": "9.43450E+02",
+                    "orbital_transition": "L2 M3 M5"
+                },
+                {
+                    "energy_eV": "2.18515E-04",
+                    "yield": "9.48150E+02",
+                    "orbital_transition": "L2 M2 N1"
+                },
+                {
+                    "energy_eV": "1.65226E-05",
+                    "yield": "9.51300E+02",
+                    "orbital_transition": "L2 M3 N1"
+                },
+                {
+                    "energy_eV": "6.02842E-04",
+                    "yield": "9.53230E+02",
+                    "orbital_transition": "L1 M1 M2"
+                },
+                {
+                    "energy_eV": "1.17001E-03",
+                    "yield": "9.56380E+02",
+                    "orbital_transition": "L1 M1 M3"
+                },
+                {
+                    "energy_eV": "9.61945E-04",
+                    "yield": "9.92300E+02",
+                    "orbital_transition": "L3 M4 M4"
+                },
+                {
+                    "energy_eV": "1.94120E-02",
+                    "yield": "9.92690E+02",
+                    "orbital_transition": "L3 M4 M5"
+                },
+                {
+                    "energy_eV": "1.31035E-02",
+                    "yield": "9.93080E+02",
+                    "orbital_transition": "L3 M5 M5"
+                },
+                {
+                    "energy_eV": "8.16785E-06",
+                    "yield": "9.96920E+02",
+                    "orbital_transition": "L1 M2 M2"
+                },
+                {
+                    "energy_eV": "2.05391E-05",
+                    "yield": "1.00007E+03",
+                    "orbital_transition": "L1 M2 M3"
+                },
+                {
+                    "energy_eV": "3.10659E-05",
+                    "yield": "1.00054E+03",
+                    "orbital_transition": "L3 M4 N1"
+                },
+                {
+                    "energy_eV": "3.80938E-05",
+                    "yield": "1.00093E+03",
+                    "orbital_transition": "L3 M5 N1"
+                },
+                {
+                    "energy_eV": "3.04686E-05",
+                    "yield": "1.00322E+03",
+                    "orbital_transition": "L1 M3 M3"
+                },
+                {
+                    "energy_eV": "1.47938E-06",
+                    "yield": "1.00878E+03",
+                    "orbital_transition": "L3 N1 N1"
+                },
+                {
+                    "energy_eV": "2.80946E-03",
+                    "yield": "1.01680E+03",
+                    "orbital_transition": "L2 M4 M4"
+                },
+                {
+                    "energy_eV": "1.27094E-02",
+                    "yield": "1.01719E+03",
+                    "orbital_transition": "L2 M4 M5"
+                },
+                {
+                    "energy_eV": "5.88145E-04",
+                    "yield": "1.01758E+03",
+                    "orbital_transition": "L2 M5 M5"
+                },
+                {
+                    "energy_eV": "1.08557E-05",
+                    "yield": "1.02504E+03",
+                    "orbital_transition": "L2 M4 N1"
+                },
+                {
+                    "energy_eV": "2.24644E-05",
+                    "yield": "1.02543E+03",
+                    "orbital_transition": "L2 M5 N1"
+                },
+                {
+                    "energy_eV": "6.66478E-04",
+                    "yield": "1.03012E+03",
+                    "orbital_transition": "L1 M1 M4"
+                },
+                {
+                    "energy_eV": "9.76208E-04",
+                    "yield": "1.03051E+03",
+                    "orbital_transition": "L1 M1 M5"
+                },
+                {
+                    "energy_eV": "7.42619E-07",
+                    "yield": "1.03328E+03",
+                    "orbital_transition": "L2 N1 N1"
+                },
+                {
+                    "energy_eV": "4.52972E-05",
+                    "yield": "1.03836E+03",
+                    "orbital_transition": "L1 M1 N1"
+                },
+                {
+                    "energy_eV": "1.02867E-05",
+                    "yield": "1.07381E+03",
+                    "orbital_transition": "L1 M2 M4"
+                },
+                {
+                    "energy_eV": "2.02932E-04",
+                    "yield": "1.07420E+03",
+                    "orbital_transition": "L1 M2 M5"
+                },
+                {
+                    "energy_eV": "2.17102E-04",
+                    "yield": "1.07696E+03",
+                    "orbital_transition": "L1 M3 M4"
+                },
+                {
+                    "energy_eV": "1.54729E-04",
+                    "yield": "1.07735E+03",
+                    "orbital_transition": "L1 M3 M5"
+                },
+                {
+                    "energy_eV": "3.69780E-05",
+                    "yield": "1.08205E+03",
+                    "orbital_transition": "L1 M2 N1"
+                },
+                {
+                    "energy_eV": "7.51326E-05",
+                    "yield": "1.08520E+03",
+                    "orbital_transition": "L1 M3 N1"
+                },
+                {
+                    "energy_eV": "2.01983E-05",
+                    "yield": "1.15070E+03",
+                    "orbital_transition": "L1 M4 M4"
+                },
+                {
+                    "energy_eV": "1.00828E-03",
+                    "yield": "1.15109E+03",
+                    "orbital_transition": "L1 M4 M5"
+                },
+                {
+                    "energy_eV": "2.82260E-04",
+                    "yield": "1.15148E+03",
+                    "orbital_transition": "L1 M5 M5"
+                },
+                {
+                    "energy_eV": "3.83411E-05",
+                    "yield": "1.15894E+03",
+                    "orbital_transition": "L1 M4 N1"
+                },
+                {
+                    "energy_eV": "5.71724E-05",
+                    "yield": "1.15933E+03",
+                    "orbital_transition": "L1 M5 N1"
+                },
+                {
+                    "energy_eV": "1.51786E-06",
+                    "yield": "1.16718E+03",
+                    "orbital_transition": "L1 N1 N1"
+                },
+                {
+                    "energy_eV": "3.60231E-03",
+                    "yield": "7.25360E+03",
+                    "orbital_transition": "K L1 L1"
+                },
+                {
+                    "energy_eV": "4.00512E-03",
+                    "yield": "7.38750E+03",
+                    "orbital_transition": "K L1 L2"
+                },
+                {
+                    "energy_eV": "7.05860E-03",
+                    "yield": "7.41200E+03",
+                    "orbital_transition": "K L1 L3"
+                },
+                {
+                    "energy_eV": "7.05095E-04",
+                    "yield": "7.52140E+03",
+                    "orbital_transition": "K L2 L2"
+                },
+                {
+                    "energy_eV": "1.66207E-02",
+                    "yield": "7.54590E+03",
+                    "orbital_transition": "K L2 L3"
+                },
+                {
+                    "energy_eV": "9.16192E-03",
+                    "yield": "7.57040E+03",
+                    "orbital_transition": "K L3 L3"
+                },
+                {
+                    "energy_eV": "9.78063E-04",
+                    "yield": "8.30057E+03",
+                    "orbital_transition": "K L1 M1"
+                },
+                {
+                    "energy_eV": "5.28510E-04",
+                    "yield": "8.34426E+03",
+                    "orbital_transition": "K L1 M2"
+                },
+                {
+                    "energy_eV": "9.22558E-04",
+                    "yield": "8.34741E+03",
+                    "orbital_transition": "K L1 M3"
+                },
+                {
+                    "energy_eV": "2.90597E-05",
+                    "yield": "8.42115E+03",
+                    "orbital_transition": "K L1 M4"
+                },
+                {
+                    "energy_eV": "3.92122E-05",
+                    "yield": "8.42154E+03",
+                    "orbital_transition": "K L1 M5"
+                },
+                {
+                    "energy_eV": "7.49233E-05",
+                    "yield": "8.42939E+03",
+                    "orbital_transition": "K L1 N1"
+                },
+                {
+                    "energy_eV": "4.59892E-04",
+                    "yield": "8.43447E+03",
+                    "orbital_transition": "K L2 M1"
+                },
+                {
+                    "energy_eV": "8.14014E-04",
+                    "yield": "8.45897E+03",
+                    "orbital_transition": "K L3 M1"
+                },
+                {
+                    "energy_eV": "1.74005E-04",
+                    "yield": "8.47816E+03",
+                    "orbital_transition": "K L2 M2"
+                },
+                {
+                    "energy_eV": "1.87030E-03",
+                    "yield": "8.48131E+03",
+                    "orbital_transition": "K L2 M3"
+                },
+                {
+                    "energy_eV": "1.87309E-03",
+                    "yield": "8.50266E+03",
+                    "orbital_transition": "K L3 M2"
+                },
+                {
+                    "energy_eV": "2.09778E-03",
+                    "yield": "8.50581E+03",
+                    "orbital_transition": "K L3 M3"
+                },
+                {
+                    "energy_eV": "4.00893E-05",
+                    "yield": "8.55505E+03",
+                    "orbital_transition": "K L2 M4"
+                },
+                {
+                    "energy_eV": "1.47399E-04",
+                    "yield": "8.55544E+03",
+                    "orbital_transition": "K L2 M5"
+                },
+                {
+                    "energy_eV": "3.44865E-05",
+                    "yield": "8.56329E+03",
+                    "orbital_transition": "K L2 N1"
+                },
+                {
+                    "energy_eV": "1.82934E-04",
+                    "yield": "8.57955E+03",
+                    "orbital_transition": "K L3 M4"
+                },
+                {
+                    "energy_eV": "1.78037E-04",
+                    "yield": "8.57994E+03",
+                    "orbital_transition": "K L3 M5"
+                },
+                {
+                    "energy_eV": "6.10969E-05",
+                    "yield": "8.58779E+03",
+                    "orbital_transition": "K L3 N1"
+                },
+                {
+                    "energy_eV": "7.10182E-05",
+                    "yield": "9.34754E+03",
+                    "orbital_transition": "K M1 M1"
+                },
+                {
+                    "energy_eV": "6.62682E-05",
+                    "yield": "9.39123E+03",
+                    "orbital_transition": "K M1 M2"
+                },
+                {
+                    "energy_eV": "1.16020E-04",
+                    "yield": "9.39438E+03",
+                    "orbital_transition": "K M1 M3"
+                },
+                {
+                    "energy_eV": "1.15267E-05",
+                    "yield": "9.43492E+03",
+                    "orbital_transition": "K M2 M2"
+                },
+                {
+                    "energy_eV": "2.37380E-04",
+                    "yield": "9.43807E+03",
+                    "orbital_transition": "K M2 M3"
+                },
+                {
+                    "energy_eV": "1.42705E-04",
+                    "yield": "9.44122E+03",
+                    "orbital_transition": "K M3 M3"
+                },
+                {
+                    "energy_eV": "3.41780E-06",
+                    "yield": "9.46812E+03",
+                    "orbital_transition": "K M1 M4"
+                },
+                {
+                    "energy_eV": "4.55709E-06",
+                    "yield": "9.46851E+03",
+                    "orbital_transition": "K M1 M5"
+                },
+                {
+                    "energy_eV": "1.08227E-05",
+                    "yield": "9.47636E+03",
+                    "orbital_transition": "K M1 N1"
+                },
+                {
+                    "energy_eV": "3.90750E-06",
+                    "yield": "9.51181E+03",
+                    "orbital_transition": "K M2 M4"
+                },
+                {
+                    "energy_eV": "1.50435E-05",
+                    "yield": "9.51220E+03",
+                    "orbital_transition": "K M2 M5"
+                },
+                {
+                    "energy_eV": "2.01783E-05",
+                    "yield": "9.51496E+03",
+                    "orbital_transition": "K M3 M4"
+                },
+                {
+                    "energy_eV": "1.91384E-05",
+                    "yield": "9.51535E+03",
+                    "orbital_transition": "K M3 M5"
+                },
+                {
+                    "energy_eV": "5.07968E-06",
+                    "yield": "9.52005E+03",
+                    "orbital_transition": "K M2 N1"
+                },
+                {
+                    "energy_eV": "9.56921E-06",
+                    "yield": "9.52320E+03",
+                    "orbital_transition": "K M3 N1"
+                },
+                {
+                    "energy_eV": "1.32342E-06",
+                    "yield": "9.58909E+03",
+                    "orbital_transition": "K M4 M5"
+                },
+                {
+                    "energy_eV": "5.27638E-07",
+                    "yield": "9.58948E+03",
+                    "orbital_transition": "K M5 M5"
+                },
+                {
+                    "energy_eV": "2.20593E-07",
+                    "yield": "9.59694E+03",
+                    "orbital_transition": "K M4 N1"
+                },
+                {
+                    "energy_eV": "5.27638E-07",
+                    "yield": "9.59733E+03",
+                    "orbital_transition": "K M5 N1"
+                },
+                {
+                    "energy_eV": "3.50123E-07",
+                    "yield": "9.60518E+03",
+                    "orbital_transition": "K N1 N1"
+                }
+            ]
+        }
+    }
+]
