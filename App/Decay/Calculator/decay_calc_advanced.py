@@ -39,15 +39,16 @@ The sections and widgets are stored in advanced_list so they can be
 accessed later by clear_advanced.
 """
 def decay_calc_advanced(root, category, mode, common_el, element, isotope,
-                        dates, nuclide_vars):
+                        nuclide_vars):
     global advanced_list
 
-    # Gets units from user prefs
+    # Gets units and dates selector from user prefs
     db_path = get_user_data_path("Settings/Decay/Calculator")
     with shelve.open(db_path) as prefs:
         amount_type = prefs.get("amount_type", "Activity (Bq)")
         amount_unit = prefs.get("amount_unit", "Bq")
         time_unit = prefs.get("time_unit", "s")
+        dates = prefs.get("dates", False)
 
     # Makes title frame
     title_frame = make_title_frame(root, "Decay Calculator", "Decay/Calculator")
@@ -67,9 +68,12 @@ def decay_calc_advanced(root, category, mode, common_el, element, isotope,
     var_dates = tk.IntVar()
     var_dates.set(dates)
 
+    # Logic for when use dates is selected/deselected
     def on_use_dates():
         nonlocal dates
         dates = var_dates.get()
+        with shelve.open(db_path) as shelve_prefs:
+            shelve_prefs["dates"] = dates
         if dates:
             time_unit_dropdown.config(state='disabled')
         else:
@@ -225,7 +229,7 @@ def decay_calc_advanced(root, category, mode, common_el, element, isotope,
 
     # Creates Back button to return to decay calculator main screen
     back_button = make_back_button(root, lambda: to_main(root, category, mode, common_el,
-                                                         element, isotope, dates, nuclide_vars))
+                                                         element, isotope, nuclide_vars))
 
     # Stores nodes into global list
     advanced_list = [title_frame,
@@ -257,11 +261,11 @@ decay calculator advanced screen and then creating the
 decay calculator main screen.
 It is called when the Back button is hit.
 """
-def to_main(root, category, mode, common_el, element, isotope, dates, nuclide_vars):
+def to_main(root, category, mode, common_el, element, isotope, nuclide_vars):
     from App.Decay.Calculator.decay_calc_main import decay_calc_main
 
     clear_advanced()
-    decay_calc_main(root, category, mode, common_el, element, isotope, dates, nuclide_vars)
+    decay_calc_main(root, category, mode, common_el, element, isotope, nuclide_vars)
     scroll_to_top()
 
 """

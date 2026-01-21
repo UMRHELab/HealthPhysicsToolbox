@@ -20,9 +20,14 @@ The function also handles the following error:
 If not, the function decides what calculation to
 perform based on the selected calculation mode.
 """
-def handle_calculation(root, mode, isotope, initial_amount, time, dates,
+def handle_calculation(root, mode, isotope, initial_amount, time,
                        result_box, nuclide_vars, save):
     root.focus()
+
+    # Gets dates selector from user prefs
+    db_path = get_user_data_path("Settings/Decay/Calculator")
+    with shelve.open(db_path) as prefs:
+        dates = prefs.get("dates", False)
 
     # Error-check for invalid time inputs
     if dates:
@@ -37,23 +42,22 @@ def handle_calculation(root, mode, isotope, initial_amount, time, dates,
 
     match mode:
         case "Activities":
-            nuclide_activities(isotope, initial_amount, time, dates, result_box,
-                               nuclide_vars)
+            nuclide_activities(isotope, initial_amount, time, result_box, nuclide_vars)
         case "Plot":
-            nuclide_plot(isotope, initial_amount, time, dates, result_box,
-                         nuclide_vars, save)
+            nuclide_plot(isotope, initial_amount, time, result_box, nuclide_vars, save)
 
 """
 This function retrieves the activities
 given a particular isotope, initial amount, and time.
 """
-def nuclide_activities(isotope, initial_amount, time, dates, result_box, nuclide_vars):
+def nuclide_activities(isotope, initial_amount, time, result_box, nuclide_vars):
     # Gets units from user prefs
     db_path = get_user_data_path("Settings/Decay/Calculator")
     with shelve.open(db_path) as prefs:
         amount_type = prefs.get("amount_type", "Activity (Bq)")
         amount_unit = prefs.get("amount_unit", "Bq")
         time_unit = prefs.get("time_unit", "s")
+        dates = prefs.get("dates", False)
     if dates:
         time_unit = "d"
 
@@ -93,13 +97,13 @@ def nuclide_activities(isotope, initial_amount, time, dates, result_box, nuclide
 This function retrieves the activities plot
 given a particular isotope, initial amount, and time.
 """
-def nuclide_plot(isotope, initial_amount, time, dates, result_box,
-                 nuclide_vars, save):
+def nuclide_plot(isotope, initial_amount, time, result_box, nuclide_vars, save):
     # Gets units from user prefs
     db_path = get_user_data_path("Settings/Decay/Calculator")
     with shelve.open(db_path) as prefs:
         amount_unit = prefs.get("amount_unit", "Bq")
         time_unit = prefs.get("time_unit", "s")
+        dates = prefs.get("dates", False)
     if dates:
         time_unit = "d"
 

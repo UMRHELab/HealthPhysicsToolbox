@@ -41,15 +41,15 @@ The sections and widgets are stored in main_list so they can be
 accessed later by clear_main.
 """
 def decay_calc_main(root, category="Common Elements", mode="Activities",
-                    common_el="Ag", element="Ac", isotope=None, dates=False,
-                    nuclide_vars=None):
+                    common_el="Ag", element="Ac", isotope=None, nuclide_vars=None):
     global main_list
 
-    # Gets units from user prefs
+    # Gets units and dates selector from user prefs
     db_path = get_user_data_path("Settings/Decay/Calculator")
     with shelve.open(db_path) as prefs:
         amount_unit = prefs.get("amount_unit", "Bq")
         time_unit = prefs.get("time_unit", "s")
+        dates = prefs.get("dates", False)
 
     # Makes title frame
     title_frame = make_title_frame(root, "Decay Calculator", "Decay/Calculator")
@@ -379,7 +379,7 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
     calc_button = make_calculate_button(inner_result_frame, lambda: handle_calculation(root, mode, isotope,
                                                                                        initial_input.get(),
                             get_time(dates, time_input.get(), start_date_input.get(), end_date_input.get()),
-                                                                                       dates, result_box,
+                                                                                       result_box,
                                                                                        nuclide_vars,
                                                                                        var_save.get()))
 
@@ -392,7 +392,7 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
     # Creates Advanced Settings button
     advanced_button = make_advanced_button(root, lambda: to_advanced(root, category, mode,
                                                                      common_el, element, isotope,
-                                                                     dates, nuclide_vars))
+                                                                     nuclide_vars))
 
     # Creates Exit button to return to home screen
     exit_button = make_exit_button(root, lambda: exit_to_home(root))
@@ -443,12 +443,10 @@ decay calculator main screen and then creating the
 decay calculator advanced screen.
 It is called when the Advanced Settings button is hit.
 """
-def to_advanced(root, category, mode, common_el, element, isotope,
-                dates, nuclide_vars):
+def to_advanced(root, category, mode, common_el, element, isotope, nuclide_vars):
     root.focus()
     from App.Decay.Calculator.decay_calc_advanced import decay_calc_advanced
 
     clear_main()
-    decay_calc_advanced(root, category, mode, common_el, element, isotope,
-                        dates, nuclide_vars)
+    decay_calc_advanced(root, category, mode, common_el, element, isotope, nuclide_vars)
     scroll_to_top()
