@@ -45,7 +45,7 @@ The sections and widgets are stored in advanced_list so they can be
 accessed later by clear_advanced.
 """
 def electrons_advanced(root, category, mode, common_el, common_mat, element,
-                       material, custom_mat, linear):
+                       material, custom_mat):
     global advanced_list
 
     # Gets units from user prefs
@@ -91,7 +91,7 @@ def electrons_advanced(root, category, mode, common_el, common_mat, element,
     def make_v_frame():
         to_custom = lambda: to_custom_menu(root, category, mode,
                                            common_el, common_mat,
-                                           element, material, custom_mat, linear)
+                                           element, material, custom_mat)
         return make_vertical_frame(root, inner_a_r_frame, var_action.get(),
                                    var_customize_category.get(), non_common, common,
                                    non_common_m, common_m, custom, a_r_button,
@@ -247,7 +247,7 @@ def electrons_advanced(root, category, mode, common_el, common_mat, element,
         # Creates Export Menu button
         make_export_menu_button(bottom_frame, lambda: to_export_menu(root, category, mode,
                                                                      common_el, common_mat, element, material,
-                                                                     custom_mat, linear))
+                                                                     custom_mat))
 
     # Creates References & Help buttons
     make_references_button(bottom_frame, lambda: open_ref(root))
@@ -256,7 +256,7 @@ def electrons_advanced(root, category, mode, common_el, common_mat, element,
     # Creates Back button to return to electron range main screen
     back_button = make_back_button(root, lambda: to_main(root, category, mode,
                                                          common_el, common_mat, element,
-                                                         material, custom_mat, linear))
+                                                         material, custom_mat))
 
     # Stores nodes into global list
     advanced_list = [title_frame,
@@ -288,12 +288,12 @@ electron range main screen.
 It is called when the Back button is hit.
 """
 def to_main(root, category, mode, common_el, common_mat, element,
-            material, custom_mat, linear):
+            material, custom_mat):
     from App.Shielding.Electrons.electrons_main import electrons_main
 
     clear_advanced()
     electrons_main(root, category, mode, common_el, common_mat, element,
-                   material, custom_mat, linear)
+                   material, custom_mat)
     scroll_to_top()
 
 """
@@ -304,10 +304,10 @@ add custom materials menu.
 It is called when the Add Custom Materials button is hit.
 """
 def to_custom_menu(root, category, mode, common_el, common_mat, element,
-                   material, custom_mat, linear):
+                   material, custom_mat):
     clear_advanced()
     back = lambda: electrons_advanced(root, category, mode, common_el, common_mat, element,
-                                      material, custom_mat, linear)
+                                      material, custom_mat)
 
     # Gets density units from user prefs
     db_path = get_user_data_path("Settings/Shielding/Electrons")
@@ -326,10 +326,10 @@ electron range export screen.
 It is called when the Export Menu button is hit.
 """
 def to_export_menu(root, category, mode, common_el, common_mat, element,
-                   material, custom_mat, linear):
+                   material, custom_mat):
     clear_advanced()
     electrons_export(root, category, mode, common_el, common_mat, element,
-                     material, custom_mat, linear)
+                     material, custom_mat)
     scroll_to_top()
 
 """

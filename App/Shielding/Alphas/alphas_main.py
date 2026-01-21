@@ -44,13 +44,14 @@ def alphas_main(root, category="Common Elements",
                 mode="CSDA Range", common_el="Ag",
                 common_mat="Air (dry, near sea level)", element="Ac",
                 material="A-150 Tissue-Equivalent Plastic (A150TEP)",
-                custom_mat="", linear=False):
+                custom_mat=""):
     global main_list
 
-    # Gets energy unit from user prefs
+    # Gets energy unit and linear selector from user prefs
     db_path = get_user_data_path("Settings/Shielding/Alphas")
     with shelve.open(db_path) as prefs:
         energy_unit = prefs.get("energy_unit", "MeV")
+        linear = prefs.get("linear", False)
 
     # Makes title frame
     title_frame = make_title_frame(root, "Alpha Range", "Shielding/Alphas")
@@ -172,6 +173,8 @@ def alphas_main(root, category="Common Elements",
             range_result.pack_forget()
 
         linear = bool(var_range.get())
+        with shelve.open(db_path) as shelve_prefs:
+            shelve_prefs["linear"] = linear
 
     # Creates checkbox for finding range
     range_check = ttk.Checkbutton(inner_mode_frame, text="Find Linear Range?",
@@ -318,7 +321,7 @@ def alphas_main(root, category="Common Elements",
     advanced_button = make_advanced_button(root, lambda: to_advanced(root, category, mode,
                                                                      common_el, common_mat,
                                                                      element, material,
-                                                                     custom_mat, linear))
+                                                                     custom_mat))
 
     # Creates Exit button to return to home screen
     exit_button = make_exit_button(root, lambda: exit_to_home(root))
@@ -367,11 +370,11 @@ alpha range advanced screen.
 It is called when the Advanced Settings button is hit.
 """
 def to_advanced(root, category, mode, common_el, common_mat, element,
-                material, custom_mat, linear):
+                material, custom_mat):
     root.focus()
     from App.Shielding.Alphas.alphas_advanced import alphas_advanced
 
     clear_main()
     alphas_advanced(root, category, mode, common_el, common_mat, element,
-                    material, custom_mat, linear)
+                    material, custom_mat)
     scroll_to_top()

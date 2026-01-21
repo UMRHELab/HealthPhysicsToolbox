@@ -35,10 +35,10 @@ configure_plot.
 Finally, if the file is meant to be saved, we pass on the
 work to the save_file function. Otherwise, we show the plot.
 """
-def export_data(root, item, category, mode, choice, save, error_label, linear):
+def export_data(root, item, category, mode, choice, save, error_label):
     root.focus()
 
-    # Gets units from user prefs
+    # Gets units and linear selector from user prefs
     db_path = get_user_data_path("Settings/Shielding/Alphas")
     with shelve.open(db_path) as prefs:
         csda_num = prefs.get("csda_num", "g")
@@ -46,6 +46,7 @@ def export_data(root, item, category, mode, choice, save, error_label, linear):
         csda_den = prefs.get("csda_den", "cm\u00B2")
         d_den = prefs.get("d_den", "cm\u00B3")
         energy_unit = prefs.get("energy_unit", "MeV")
+        linear = prefs.get("linear", False)
 
     # Gets applicable units
     num_units = [csda_num, d_num]

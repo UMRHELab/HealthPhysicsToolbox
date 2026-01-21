@@ -32,7 +32,7 @@ The sections and widgets are stored in export_list so they can be
 accessed later by clear_export.
 """
 def electrons_export(root, category, mode, interactions, common_el, common_mat,
-                     element, material, custom_mat, linear):
+                     element, material, custom_mat):
     global export_list
 
     # Makes title frame
@@ -118,7 +118,7 @@ def electrons_export(root, category, mode, interactions, common_el, common_mat,
                                                                                element, material, custom_mat),
                                                                 category, mode,
                                                                 get_interactions(interaction_choices, interaction_vars),
-                                                                var_export.get(), var_save.get(), error_label, linear),
+                                                                var_export.get(), var_save.get(), error_label),
                        pady=(10,5))
 
     # Creates error label for bad input
@@ -128,7 +128,7 @@ def electrons_export(root, category, mode, interactions, common_el, common_mat,
     # Creates Back button to return to electron stopping power advanced screen
     back_button = make_back_button(root, lambda: advanced_back(root, category, mode, interactions,
                                                                common_el, common_mat, element,
-                                                               material, custom_mat, linear))
+                                                               material, custom_mat))
 
     # Stores nodes into global list
     export_list = [title_frame,
@@ -159,10 +159,10 @@ electron stopping power advanced screen.
 It is called when the Back button is hit.
 """
 def advanced_back(root, category, mode, interactions, common_el, common_mat,
-                  element, material, custom_mat, linear):
+                  element, material, custom_mat):
     from App.Deposition.Electrons.electrons_advanced import electrons_advanced
 
     clear_export()
     electrons_advanced(root, category, mode, interactions, common_el, common_mat,
-                       element, material, custom_mat, linear)
+                       element, material, custom_mat)
     scroll_to_top()

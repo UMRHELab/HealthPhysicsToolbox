@@ -31,7 +31,7 @@ The sections and widgets are stored in export_list so they can be
 accessed later by clear_export.
 """
 def alphas_export(root, category, mode, common_el, common_mat, element,
-                  material, custom_mat, linear):
+                  material, custom_mat):
     global export_list
 
     # Makes title frame
@@ -81,7 +81,7 @@ def alphas_export(root, category, mode, common_el, common_mat, element,
     make_export_button(inner_options_frame, lambda: export_data(root, get_item(category, common_el, common_mat,
                                                                                element, material, custom_mat),
                                                                 category, mode, var_export.get(),
-                                                                var_save.get(), error_label, linear),
+                                                                var_save.get(), error_label),
                        pady=(10,5))
 
     # Creates error label for bad input
@@ -91,7 +91,7 @@ def alphas_export(root, category, mode, common_el, common_mat, element,
     # Creates Back button to return to alpha range advanced screen
     back_button = make_back_button(root, lambda: advanced_back(root, category, mode,
                                                                common_el, common_mat, element,
-                                                               material, custom_mat, linear))
+                                                               material, custom_mat))
 
     # Stores nodes into global list
     export_list = [title_frame,
@@ -121,10 +121,10 @@ alpha range advanced screen.
 It is called when the Back button is hit.
 """
 def advanced_back(root, category, mode, common_el, common_mat, element,
-                  material, custom_mat, linear):
+                  material, custom_mat):
     from App.Shielding.Alphas.alphas_advanced import alphas_advanced
 
     clear_export()
     alphas_advanced(root, category, mode, common_el, common_mat, element,
-                       material, custom_mat, linear)
+                       material, custom_mat)
     scroll_to_top()

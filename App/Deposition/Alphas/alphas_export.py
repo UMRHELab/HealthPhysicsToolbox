@@ -32,7 +32,7 @@ The sections and widgets are stored in export_list so they can be
 accessed later by clear_export.
 """
 def alphas_export(root, category, mode, interactions, common_el, common_mat,
-                  element, material, custom_mat, linear):
+                  element, material, custom_mat):
     global export_list
 
     # Makes title frame
@@ -111,7 +111,7 @@ def alphas_export(root, category, mode, interactions, common_el, common_mat,
                                                                                element, material, custom_mat),
                                                                 category, mode,
                                                                 get_interactions(interaction_choices, interaction_vars),
-                                                                var_export.get(), var_save.get(), error_label, linear),
+                                                                var_export.get(), var_save.get(), error_label),
                        pady=(10,5))
 
     # Creates error label for bad input
@@ -121,7 +121,7 @@ def alphas_export(root, category, mode, interactions, common_el, common_mat,
     # Creates Back button to return to alpha stopping power advanced screen
     back_button = make_back_button(root, lambda: advanced_back(root, category, mode, interactions,
                                                                common_el, common_mat, element,
-                                                               material, custom_mat, linear))
+                                                               material, custom_mat))
 
     # Stores nodes into global list
     export_list = [title_frame,
@@ -152,10 +152,10 @@ alpha stopping power advanced screen.
 It is called when the Back button is hit.
 """
 def advanced_back(root, category, mode, interactions, common_el, common_mat,
-                  element, material, custom_mat, linear):
+                  element, material, custom_mat):
     from App.Deposition.Alphas.alphas_advanced import alphas_advanced
 
     clear_export()
     alphas_advanced(root, category, mode, interactions, common_el, common_mat,
-                    element, material, custom_mat, linear)
+                    element, material, custom_mat)
     scroll_to_top()
