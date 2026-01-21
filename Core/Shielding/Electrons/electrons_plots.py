@@ -4,6 +4,7 @@ import csv
 import shelve
 import pandas as pd
 import matplotlib.pyplot as plt
+from Utility.Functions.plot import configure_plot
 from Utility.Functions.logic_utility import get_unit
 from Utility.Functions.gui_utility import no_selection
 from Utility.Functions.choices import element_choices, material_choices
@@ -132,8 +133,8 @@ def export_data(root, item, category, mode, choice, save, error_label):
         df[mode_col] /= density
 
     if choice == "Plot":
-        configure_plot(df, energy_col, mode_col, item, linear or
-                       mode != "Range-Energy Curve")
+        title = f"{item} - {mode_col}" if linear or mode != "Range-Energy Curve" else mode_col
+        configure_plot(None, df, energy_col, mode_col, title)
         if save == 1:
             save_file(plt, choice, error_label, item, "range")
         else:
@@ -141,36 +142,6 @@ def export_data(root, item, category, mode, choice, save, error_label):
             plt.show()
     else:
         save_file(df, choice, error_label, item, "range")
-
-#####################################################################################
-# PLOT SECTION
-#####################################################################################
-
-"""
-This function configures the plot that is being exported
-using the dataframe and other information.
-First, the plot is cleared from any previous exports.
-Then, we plot the mode column against the data column.
-The title and axis titles are all configured
-and the axis scales are set to logarithmic.
-"""
-def configure_plot(df, energy_col, mode_col, item, full_title):
-    # Clear from past plots
-    plt.clf()
-
-    # Plot the data
-    plt.plot(df[energy_col], df[mode_col], marker='o', label=mode_col)
-    if full_title:
-        plt.title(item + " - " + mode_col, fontsize=8.5)
-    else:
-        plt.title(mode_col, fontsize=8.5)
-    plt.xscale('log')
-    plt.yscale('log')
-    plt.xlabel(energy_col)
-    plt.ylabel(mode_col)
-    plt.grid(True)
-    plt.xticks(rotation=45)
-    plt.tight_layout()
 
 #####################################################################################
 # DATA SECTION

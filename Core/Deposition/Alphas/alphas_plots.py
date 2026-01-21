@@ -4,6 +4,7 @@ import csv
 import shelve
 import pandas as pd
 import matplotlib.pyplot as plt
+from Utility.Functions.plot import configure_plot
 from Utility.Functions.logic_utility import get_unit
 from Utility.Functions.gui_utility import no_selection
 from Utility.Functions.choices import element_choices, material_choices
@@ -130,7 +131,7 @@ def export_data(root, item, category, mode, interactions, choice, save, error_la
     mode_col = mode + unit
 
     if choice == "Plot":
-        configure_plot(interactions, df, energy_col, mode_col, item)
+        configure_plot(interactions, df, energy_col, mode_col, f"{item} - {mode_col}")
         if save == 1:
             save_file(plt, choice, error_label, item, "stopping")
         else:
@@ -140,35 +141,6 @@ def export_data(root, item, category, mode, interactions, choice, save, error_la
         for interaction in interactions:
             df.rename(columns={interaction: interaction+unit}, inplace=True)
         save_file(df, choice, error_label, item, "stopping")
-
-#####################################################################################
-# PLOT SECTION
-#####################################################################################
-
-"""
-This function configures the plot that is being exported
-using the dataframe and other information.
-First, the plot is cleared from any previous exports.
-Then, we plot each interaction column against the data column.
-The title, legend, and axis titles are all configured
-and the axis scales are set to logarithmic.
-"""
-def configure_plot(interactions, df, energy_col, mode_col, item):
-    # Clear from past plots
-    plt.clf()
-
-    # Plot the data
-    for interaction in interactions:
-        plt.plot(df[energy_col], df[interaction], marker='o', label=interaction)
-    plt.title(item + " - " + mode_col, fontsize=8.5)
-    plt.xscale('log')
-    plt.yscale('log')
-    plt.legend()
-    plt.xlabel(energy_col)
-    plt.ylabel(mode_col)
-    plt.grid(True)
-    plt.xticks(rotation=45)
-    plt.tight_layout()
 
 #####################################################################################
 # DATA SECTION
