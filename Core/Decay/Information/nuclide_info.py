@@ -1,6 +1,7 @@
 ##### IMPORTS #####
 import io
 import math
+import json
 import shelve
 import pandas as pd
 import tkinter as tk
@@ -8,9 +9,11 @@ from PIL import Image
 from collections import deque
 import radioactivedecay as rd
 import matplotlib.pyplot as plt
-from Utility.Functions.files import save_file, get_user_data_path
+from Utility.Functions.plot import configure_plot
+from Utility.Functions.math_utility import energy_units
 from Utility.Functions.gui_utility import edit_result, window, no_selection
 from Core.Decay.Information.energies_dataframe import create_energies_dataframe
+from Utility.Functions.files import save_file, get_user_data_path, resource_path
 
 #####################################################################################
 # UNITS SECTION
@@ -47,6 +50,12 @@ def handle_calculation(root, mode, isotope, result_box, save):
             nuclide_half_life(isotope, result_box)
         case "Energies":
             nuclide_energies(isotope, result_box)
+        case "Beta Spectrum":
+            nuclide_beta_spectrum(isotope, result_box, save)
+        case "Auger Electron Spectrum":
+            nuclide_auger_electron_spectrum(isotope, result_box, save)
+        case "Neutron Spectrum":
+            nuclide_neutron_spectrum(isotope, result_box, save)
 
 """
 This function retrieves the decay scheme plot
@@ -212,3 +221,167 @@ def nuclide_energies(isotope, result_box):
         tk.Label(row, text=str(energy), anchor="w").pack(side="left")
 
     tk.Button(popup, text="Close", command=popup.destroy).pack(pady=10)
+
+"""
+This function plots the beta spectrum for the given isotope.
+The function handles the following error:
+   No data for isotope
+"""
+def nuclide_beta_spectrum(isotope, result_box, save):
+    # Gets energy unit from user prefs
+    db_path = get_user_data_path("Settings/Decay/Information")
+    with shelve.open(db_path) as prefs:
+        energy_unit = prefs.get("energy_unit", "MeV")
+
+    # Gets element
+    element = isotope.split('-')[0]
+
+    # Retrieves data and creates dataframe
+    db_path = resource_path('Data/Radioactive Decay/Spectra/Betas/' + element + '.json')
+    try:
+        with open(db_path, 'r') as file:
+            # Retrieves data
+            data = json.load(file).get(isotope, -1)
+
+            # Error-check for missing data
+            if data == -1:
+                edit_result("No data for " + isotope + ".", result_box)
+                return
+
+            df = pd.DataFrame(data)
+    except FileNotFoundError:
+        edit_result("No data for " + isotope + ".", result_box)
+        return
+
+    # Fixes dataframe
+    df["energy_MeV"] = df["energy_MeV"].astype(float)
+    df["electrons"] = df["electrons"].astype(float)
+
+    # Sets up columns for dataframe
+    energy_col = "Energy (" + energy_unit + ")"
+    df.rename(columns={'energy_MeV': energy_col,
+                       'electrons' : 'Electrons'},
+              inplace=True)
+
+    # Converts energy column to desired energy unit
+    df[energy_col] /= energy_units[energy_unit]
+
+    configure_plot(None, df, energy_col, "Electrons", "Beta Spectrum")
+    if not save:
+        edit_result("Plot opened!", result_box)
+        plt.show()
+    else:
+        save_file(plt, "Plot", result_box, isotope, "beta", True)
+
+"""
+This function plots the auger electron spectrum for the given isotope.
+The function handles the following error:
+   No data for isotope
+"""
+def nuclide_auger_electron_spectrum(isotope, result_box, save):
+    # Gets energy unit from user prefs
+    db_path = get_user_data_path("Settings/Decay/Information")
+    with shelve.open(db_path) as prefs:
+        energy_unit = prefs.get("energy_unit", "MeV")
+
+    # Gets element
+    element = isotope.split('-')[0]
+
+    # Retrieves data and creates dataframe
+    try:
+        db_path = resource_path('Data/Radioactive Decay/Spectra/Auger/' + element + '.json')
+        with open(db_path, 'r') as file:
+            # Retrieves data
+            data = json.load(file).get(isotope, -1)
+
+            # Error-check for missing data
+            if data == -1:
+                edit_result("No data for " + isotope + ".", result_box)
+                return
+
+            df = pd.DataFrame(data["records"])
+    except FileNotFoundError:
+        edit_result("No data for " + isotope + ".", result_box)
+        return
+
+    # Fixes dataframe
+    df["energy_eV"] = df["energy_eV"].astype(float)
+    df["yield"] = df["yield"].astype(float)
+
+    # Sets up columns for dataframe
+    energy_col = "Energy (" + energy_unit + ")"
+    df.drop(columns=['orbital_transition'], inplace=True)
+    df.rename(columns={'energy_eV': energy_col,
+                       'yield' : 'Yield'},
+              inplace=True)
+
+    # Converts energy column to desired energy unit
+    eV_to_MeV = 1000 ** 2
+    df[energy_col] /= (energy_units[energy_unit] * eV_to_MeV)
+
+    configure_plot(None, df, energy_col, "Yield", "Auger Electron Spectrum")
+    if not save:
+        edit_result("Plot opened!", result_box)
+        plt.show()
+    else:
+        save_file(plt, "Plot", result_box, isotope, "auger", True)
+
+"""
+This function plots the neutron spectrum for the given isotope.
+The function handles the following error:
+   No data for isotope
+"""
+def nuclide_neutron_spectrum(isotope, result_box, save):
+    # Gets energy unit from user prefs
+    db_path = get_user_data_path("Settings/Decay/Information")
+    with shelve.open(db_path) as prefs:
+        energy_unit = prefs.get("energy_unit", "MeV")
+
+    # Gets element
+    element = isotope.split('-')[0]
+
+    # Retrieves data and creates dataframe
+    db_path = resource_path('Data/Radioactive Decay/Spectra/Neutrons/' + element + '.json')
+    try:
+        with open(db_path, 'r') as file:
+            # Retrieves data
+            data = json.load(file).get(isotope, -1)
+
+            # Error-check for missing data
+            if data == -1:
+                edit_result("No data for " + isotope + ".", result_box)
+                return
+
+            df = pd.DataFrame(data["records"])
+    except FileNotFoundError:
+        edit_result("No data for " + isotope + ".", result_box)
+        return
+
+    # Fixes dataframe
+    df["floor_energy_MeV"] = df["floor_energy_MeV"].astype(float)
+    df["ceiling_energy_MeV"] = df["ceiling_energy_MeV"].astype(float)
+    df["neutrons"] = df["neutrons"].astype(float)
+
+    # Converts energy column to desired energy unit
+    df["floor_energy_MeV"] /= energy_units[energy_unit]
+    df["ceiling_energy_MeV"] /= energy_units[energy_unit]
+
+    # Compute bin edges and counts for step plot
+    edges = df["floor_energy_MeV"].tolist() + [df["ceiling_energy_MeV"].iloc[-1]]
+    counts = df["neutrons"].tolist()
+    counts.append(counts[-1])
+
+    # Configures plot
+    plt.figure(figsize=(8,5))
+    plt.step(edges, counts, where='post', color='blue')
+    plt.fill_between(edges, counts, step='post', alpha=0.3, color='blue')
+    plt.xlabel("Energy (MeV)")
+    plt.ylabel("Neutrons")
+    plt.title("Neutron Spectrum")
+    plt.grid(True)
+
+    if not save:
+        edit_result("Plot opened!", result_box)
+        plt.show()
+    else:
+        save_file(plt, "Plot", result_box, isotope, "neutron", True)

@@ -360,8 +360,8 @@ def decay_info_advanced(root, category, mode, common_el, element, isotope):
     empty_frame5 = tk.Frame()
 
     # Unit options are only created if
-    # Calculation Mode is Half Life
-    if mode == "Half Life" or mode == "Energies":
+    # Calculation Mode is not Decay Scheme
+    if mode != "Decay Scheme (Plot)" and mode != "Decay Scheme (Tabular)":
         # Frame for units
         unit_frame = SectionFrame(root, title="Select Units")
         unit_frame.pack()

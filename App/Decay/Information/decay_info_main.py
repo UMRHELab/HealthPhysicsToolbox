@@ -64,12 +64,12 @@ def decay_info_main(root, category="Common Elements", mode="Decay Scheme (Plot)"
         nonlocal mode
         event.widget.selection_clear()
 
-        if event.widget.get() != "Decay Scheme (Plot)" \
-                and mode == "Decay Scheme (Plot)":
+        if (event.widget.get() != "Decay Scheme (Plot)" and event.widget.get()[-8:] != "Spectrum") \
+                and (mode == "Decay Scheme (Plot)" or mode[-8:] == "Spectrum"):
             # Gets rid of save file option when switching off of decay scheme plot mode
             save.pack_forget()
-        elif mode != "Decay Scheme (Plot)" \
-                and event.widget.get() == "Decay Scheme (Plot)":
+        elif (mode != "Decay Scheme (Plot)" and mode[-8:] != "Spectrum") \
+                and (event.widget.get() == "Decay Scheme (Plot)" or event.widget.get()[-8:] == "Spectrum"):
             # Reset in preparation to re-add results section in correct place
             calc_button.pack_forget()
             result.pack_forget()
@@ -98,7 +98,10 @@ def decay_info_main(root, category="Common Elements", mode="Decay Scheme (Plot)"
     mode_choices = ["Decay Scheme (Plot)",
                     "Decay Scheme (Tabular)",
                     "Half Life",
-                    "Energies"]
+                    "Energies",
+                    "Beta Spectrum",
+                    "Auger Electron Spectrum",
+                    "Neutron Spectrum"]
     _ = make_dropdown(inner_mode_frame, var_mode, mode_choices, select_mode, pady=20)
 
     # Spacer
@@ -263,7 +266,7 @@ def decay_info_main(root, category="Common Elements", mode="Decay Scheme (Plot)"
 
     # If we are in decay scheme plot mode we create the option
     # to save or not save the plot
-    if mode == "Decay Scheme (Plot)":
+    if mode == "Decay Scheme (Plot)" or mode[-8:] == "Spectrum":
         save.pack(pady=(20,0))
 
     # Creates Calculate button
