@@ -38,8 +38,7 @@ behaviors.
 The sections and widgets are stored in advanced_list so they can be
 accessed later by clear_advanced.
 """
-def decay_calc_advanced(root, category, mode, common_el, element, isotope,
-                        nuclide_vars):
+def decay_calc_advanced(root, category, mode, common_el, element, isotope):
     global advanced_list
 
     # Gets units and dates selector from user prefs
@@ -49,6 +48,9 @@ def decay_calc_advanced(root, category, mode, common_el, element, isotope,
         amount_unit = prefs.get("amount_unit", "Bq")
         time_unit = prefs.get("time_unit", "s")
         dates = prefs.get("dates", False)
+        nuclides = prefs.get("nuclides", get_successors(isotope))
+        if not nuclides:
+            prefs["nuclides"] = get_successors(isotope)
 
     # Makes title frame
     title_frame = make_title_frame(root, "Decay Calculator", "Decay/Calculator")
@@ -203,6 +205,33 @@ def decay_calc_advanced(root, category, mode, common_el, element, isotope,
     # Spacer
     empty_frame3 = tk.Frame()
 
+    # Nuclide variables
+    nuclide_vars = {}
+    for successor in successors:
+        nuclide_vars[successor] = tk.IntVar()
+        if successor in nuclides:
+            nuclide_vars[successor].set(1)
+
+    # Logic for when a nuclide is selected
+    def on_nuclide():
+        nonlocal nuclides
+        root.focus()
+
+        # Resets nuclides list
+        nuclides = []
+        for _successor in successors:
+            if nuclide_vars[_successor].get():
+                nuclides.append(_successor)
+
+        if not nuclides:
+            nuclides = successors
+            for var in nuclide_vars.values():
+                var.set(1)
+
+        # Stores new nuclides list into shelve
+        with shelve.open(db_path) as shelve_prefs:
+            shelve_prefs["nuclides"] = nuclides
+
     # Frame for checkboxes
     if len(successors) != 0:
         nuclides_frame.pack()
@@ -213,8 +242,7 @@ def decay_calc_advanced(root, category, mode, common_el, element, isotope,
         checks.pack()
 
         for successor in successors:
-            interaction_checkbox(checks, nuclide_vars[successor], successor,
-                                 lambda: root.focus())
+            interaction_checkbox(checks, nuclide_vars[successor], successor, on_nuclide)
 
         # Spacer
         empty_frame3 = make_spacer(root)
@@ -229,7 +257,7 @@ def decay_calc_advanced(root, category, mode, common_el, element, isotope,
 
     # Creates Back button to return to decay calculator main screen
     back_button = make_back_button(root, lambda: to_main(root, category, mode, common_el,
-                                                         element, isotope, nuclide_vars))
+                                                         element, isotope))
 
     # Stores nodes into global list
     advanced_list = [title_frame,
@@ -261,11 +289,11 @@ decay calculator advanced screen and then creating the
 decay calculator main screen.
 It is called when the Back button is hit.
 """
-def to_main(root, category, mode, common_el, element, isotope, nuclide_vars):
+def to_main(root, category, mode, common_el, element, isotope):
     from App.Decay.Calculator.decay_calc_main import decay_calc_main
 
     clear_advanced()
-    decay_calc_main(root, category, mode, common_el, element, isotope, nuclide_vars)
+    decay_calc_main(root, category, mode, common_el, element, isotope)
     scroll_to_top()
 
 """
