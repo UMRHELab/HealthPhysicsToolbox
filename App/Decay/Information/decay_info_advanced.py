@@ -46,7 +46,7 @@ behaviors.
 The sections and widgets are stored in advanced_list so they can be
 accessed later by clear_advanced.
 """
-def decay_info_advanced(root, category, mode, common_el, element, isotope):
+def decay_info_advanced(root, mode):
     global advanced_list
 
     # List of radiation types
@@ -410,16 +410,14 @@ def decay_info_advanced(root, category, mode, common_el, element, isotope):
 
     if mode == "Energies":
         # Creates Export Menu button
-        make_export_menu_button(bottom_frame, lambda: to_export_menu(root, category, mode,
-                                                                     common_el, element, isotope))
+        make_export_menu_button(bottom_frame, lambda: to_export_menu(root, mode))
 
     # Creates References & Help buttons
     make_references_button(bottom_frame, lambda: open_ref(root))
     make_help_button(bottom_frame, lambda: open_help(root))
 
     # Creates Back button to return to decay information main screen
-    back_button = make_back_button(root, lambda: to_main(root, category, mode, common_el,
-                                                         element, isotope))
+    back_button = make_back_button(root, lambda: to_main(root, mode))
 
     # Stores nodes into global list
     advanced_list = [title_frame,
@@ -453,11 +451,11 @@ decay information advanced screen and then creating the
 decay information main screen.
 It is called when the Back button is hit.
 """
-def to_main(root, category, mode, common_el, element, isotope):
+def to_main(root, mode):
     from App.Decay.Information.decay_info_main import decay_info_main
 
     clear_advanced()
-    decay_info_main(root, category, mode, common_el, element, isotope)
+    decay_info_main(root, mode)
     scroll_to_top()
 
 """
@@ -467,9 +465,9 @@ decay information advanced screen and then creating the
 decay information export screen.
 It is called when the Export Menu button is hit.
 """
-def to_export_menu(root, category, mode, common_el, element, isotope):
+def to_export_menu(root, mode):
     clear_advanced()
-    decay_info_export(root, category, mode, common_el, element, isotope)
+    decay_info_export(root, mode)
     scroll_to_top()
 
 """

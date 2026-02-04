@@ -2,6 +2,7 @@
 import math
 import shelve
 import radioactivedecay as rd
+from Utility.Functions.logic_utility import get_item
 from Utility.Functions.gui_utility import no_selection
 from Utility.Functions.files import save_file, get_user_data_path
 from Core.Decay.Information.energies_dataframe import create_energies_dataframe
@@ -24,8 +25,25 @@ The dataframe is populated from the corresponding energies
 .json file.
 Finally, we pass on the work to the save_file function.
 """
-def export_data(root, element, isotope, error_label):
+def export_data(root, error_label):
     root.focus()
+
+    # Module directory
+    module = "Decay/Information"
+
+    # Gets category, common_el, element, isotope from user prefs
+    db_path = get_user_data_path(f"Settings/{module}")
+    with shelve.open(db_path) as prefs:
+        category = prefs.get("category", "Common Elements")
+        common_el = prefs.get("common_el", "Ag")
+        element = prefs.get("element", "Ac")
+        isotope = prefs.get("isotope", "")
+
+    if not isotope:
+        return
+
+    # Gets element from common_el and element
+    element = get_item(category, common_el, "", element, "", "")
 
     # List of neutron irrelevant radiation types
     neutron_irrelevant_types = [

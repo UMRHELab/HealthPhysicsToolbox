@@ -1,10 +1,14 @@
 ##### IMPORTS #####
+import shelve
 import tkinter as tk
 from tkinter import ttk
 from App.style import SectionFrame
 from App.scroll import scroll_to_top
+from Utility.Functions.files import get_user_data_path
 from Utility.Functions.choices import get_choices, get_isotopes
 from Utility.Functions.logic_utility import get_item, valid_saved
+from Utility.Controllers.element_controller import update_elements
+from Utility.Controllers.isotope_controller import update_isotopes
 from Core.Decay.Information.nuclide_info import handle_calculation
 from Utility.Functions.gui_utility import (
     make_spacer, get_width,
@@ -34,21 +38,37 @@ behaviors.
 The sections and widgets are stored in main_list so they can be
 accessed later by clear_main.
 """
-def decay_info_main(root, category="Common Elements", mode="Decay Scheme (Plot)",
-                    common_el="Ag", element="Ac", isotope=None):
+def decay_info_main(root, mode="Decay Scheme (Plot)"):
     global main_list
 
+    # Module directory
+    module = "Decay/Information"
+
     # Makes title frame
-    title_frame = make_title_frame(root, "Decay Information", "Decay/Information")
+    title_frame = make_title_frame(root, "Decay Information", module)
+
+    # Gets category, common_el, element, isotope from user prefs
+    db_path = get_user_data_path(f"Settings/{module}")
+    with shelve.open(db_path) as prefs:
+        category = prefs.get("category", "Common Elements")
+        common_el = prefs.get("common_el", "Ag")
+
+        # Gets common elements
+        common_elements = get_choices("Common Elements", "Decay", "")
+
+        # Make sure common element is a valid selection
+        common_el = valid_saved(common_el, common_elements)
+        prefs["common_el"] = common_el
+
+        element = prefs.get("element", "Ac")
+
+        # Retrieves isotopes for current element
+        isotope_choices = get_isotopes(get_item(category, common_el, "", element, "", ""))
+
+        isotope = prefs.get("isotope", isotope_choices[0] if isotope_choices else "")
 
     # Gets the element options
     choices = get_choices(category, "Decay", "")
-
-    # Gets common elements
-    common_elements = get_choices("Common Elements", "Decay", "")
-
-    # Make sure common element is a valid selection
-    common_el = valid_saved(common_el, common_elements)
 
     # Stores mode and sets default
     var_mode = tk.StringVar(root)
@@ -123,6 +143,8 @@ def decay_info_main(root, category="Common Elements", mode="Decay Scheme (Plot)"
         event.widget.selection_clear()
         previous_element = get_item(category, common_el, "", element, "", "")
         category = var_category.get()
+        with shelve.open(db_path) as shelve_prefs:
+            shelve_prefs["category"] = category
 
         # Updates element dropdown to match category
         choices = get_choices(category, "Decay", "")
@@ -132,15 +154,8 @@ def decay_info_main(root, category="Common Elements", mode="Decay Scheme (Plot)"
         element_dropdown.config(values=choices, width=get_width(choices))
 
         # Updates isotope dropdown to match element
-        isotopes = get_isotopes(selected_element)
-        if category == "Common Elements":
-            if common_el != previous_element:
-                isotope = isotopes[0] if isotopes else ""
-        elif category == "All Elements":
-            if element != previous_element:
-                isotope = isotopes[0] if isotopes else ""
-        var_isotope.set(isotope)
-        isotope_dropdown.config(values=isotopes, width=get_width(isotopes))
+        isotope = update_isotopes(category, module, selected_element, previous_element,
+                                  var_isotope, isotope_dropdown)
 
         root.focus()
 
@@ -167,18 +182,12 @@ def decay_info_main(root, category="Common Elements", mode="Decay Scheme (Plot)"
             # Falls back on default if invalid element is typed in
             var_element.set(get_item(category, common_el, "", element, "", ""))
         else:
-            # Adjusts isotopes
-            isotopes = get_isotopes(value)
-            if category == "All Elements":
-                if element != value:
-                    isotope = isotopes[0] if isotopes else ""
-                    element = value
-            else:
-                if common_el != value:
-                    isotope = isotopes[0] if isotopes else ""
-                    common_el = value
-            var_isotope.set(isotope)
-            isotope_dropdown.config(values=isotopes, width=get_width(isotopes))
+            # Updates isotope dropdown to match element
+            isotope = update_isotopes(category, module, value, value,
+                                      var_isotope, isotope_dropdown)
+
+            # Updates elements
+            common_el, element = update_elements(category, module, value)
 
         element_dropdown.selection_clear()
         element_dropdown.icursor(tk.END)
@@ -190,18 +199,12 @@ def decay_info_main(root, category="Common Elements", mode="Decay Scheme (Plot)"
         event.widget.selection_clear()
         value = var_element.get()
 
-        # Adjusts isotopes
-        isotopes = get_isotopes(value)
-        if category == "All Elements":
-            if element != value:
-                isotope = isotopes[0] if isotopes else ""
-                element = value
-        else:
-            if common_el != value:
-                isotope = isotopes[0] if isotopes else ""
-                common_el = value
-        var_isotope.set(isotope)
-        isotope_dropdown.config(values=isotopes, width=get_width(isotopes))
+        # Updates isotope dropdown to match element
+        isotope = update_isotopes(category, module, value, value,
+                                  var_isotope, isotope_dropdown)
+
+        # Updates elements
+        common_el, element = update_elements(category, module, value)
 
         root.focus()
 
@@ -226,6 +229,8 @@ def decay_info_main(root, category="Common Elements", mode="Decay Scheme (Plot)"
 
         event.widget.selection_clear()
         isotope = var_isotope.get()
+        with shelve.open(db_path) as shelve_prefs:
+            shelve_prefs["isotope"] = isotope
         root.focus()
 
     # Frame for isotope selection
@@ -234,11 +239,6 @@ def decay_info_main(root, category="Common Elements", mode="Decay Scheme (Plot)"
 
     # Isotope label
     basic_label(isotope_frame, "Isotope:")
-
-    # Retrieves isotopes for current element
-    isotope_choices = get_isotopes(get_item(category, common_el, "", element, "", ""))
-    if not isotope:
-        isotope = isotope_choices[0] if isotope_choices else ""
 
     # Stores isotope and sets default
     var_isotope = tk.StringVar(root)
@@ -280,8 +280,7 @@ def decay_info_main(root, category="Common Elements", mode="Decay Scheme (Plot)"
     result_box = make_result_box(inner_result_frame)
 
     # Creates Advanced Settings button
-    advanced_button = make_advanced_button(root, lambda: to_advanced(root, category, mode,
-                                                                     common_el, element, isotope))
+    advanced_button = make_advanced_button(root, lambda: to_advanced(root, mode))
 
     # Creates Exit button to return to home screen
     exit_button = make_exit_button(root, lambda: exit_to_home(root))
@@ -328,10 +327,10 @@ decay information main screen and then creating the
 decay information advanced screen.
 It is called when the Advanced Settings button is hit.
 """
-def to_advanced(root, category, mode, common_el, element, isotope):
+def to_advanced(root, mode):
     root.focus()
     from App.Decay.Information.decay_info_advanced import decay_info_advanced
 
     clear_main()
-    decay_info_advanced(root, category, mode, common_el, element, isotope)
+    decay_info_advanced(root, mode)
     scroll_to_top()

@@ -2,7 +2,6 @@
 from tkinter import ttk
 from App.style import SectionFrame
 from App.scroll import scroll_to_top
-from Utility.Functions.logic_utility import get_item
 from Core.Decay.Information.energies_export import export_data
 from Utility.Functions.gui_utility import (
     make_title_frame,
@@ -27,7 +26,7 @@ behaviors.
 The sections and widgets are stored in export_list so they can be
 accessed later by clear_export.
 """
-def decay_info_export(root, category, mode, common_el, element, isotope):
+def decay_info_export(root, mode):
     global export_list
 
     # Makes title frame
@@ -40,8 +39,7 @@ def decay_info_export(root, category, mode, common_el, element, isotope):
 
     # Creates Export button
     make_export_button(inner_options_frame, lambda:
-                                    export_data(root, get_item(category, common_el, "", element, "", ""),
-                                                isotope, error_label),
+                                    export_data(root, error_label),
                        pady=(20,5))
 
     # Creates error label for bad input
@@ -49,8 +47,7 @@ def decay_info_export(root, category, mode, common_el, element, isotope):
     error_label.pack(pady=(5,10))
 
     # Creates Back button to return to decay information advanced screen
-    back_button = make_back_button(root, lambda: advanced_back(root, category, mode,
-                                                               common_el, element, isotope))
+    back_button = make_back_button(root, lambda: advanced_back(root, mode))
 
     # Stores nodes into global list
     export_list = [title_frame,
@@ -79,9 +76,9 @@ decay information export screen and then creating the
 decay information advanced screen.
 It is called when the Back button is hit.
 """
-def advanced_back(root, category, mode, common_el, element, isotope):
+def advanced_back(root, mode):
     from App.Decay.Information.decay_info_advanced import decay_info_advanced
 
     clear_export()
-    decay_info_advanced(root, category, mode, common_el, element, isotope)
+    decay_info_advanced(root, mode)
     scroll_to_top()
