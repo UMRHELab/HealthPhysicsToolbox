@@ -179,7 +179,7 @@ def alphas_main(root, category="Common Elements",
     # Creates checkbox for finding range
     range_check = ttk.Checkbutton(inner_mode_frame, text="Find Linear Range?",
                                   variable=var_range, style="Maize.TCheckbutton",
-                                  command=lambda: range_hit())
+                                  command=range_hit)
 
     if mode == "CSDA Range":
         # Displays the range option

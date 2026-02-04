@@ -1,7 +1,12 @@
 ##### IMPORTS #####
+import shelve
+import platform
 import tkinter as tk
+from tkinter import ttk
+import tkinter.font as font
 from App.style import SectionFrame
 from App.scroll import scroll_to_top
+from Utility.Functions.files import get_user_data_path
 from Utility.Functions.logic_utility import get_item, valid_saved
 from Core.Dose.ICRP68.icrp68_calculations import handle_calculation
 from Utility.Functions.choices import get_choices, get_icrp_isotopes, read_dose_columns
@@ -38,8 +43,16 @@ def icrp68_main(root, category="Common Elements", mode="Ingestion",
                 coefficient="Half Life", common_el="Ag", element="Ac", isotope=None):
     global main_list
 
+    # Gets dose selector from user prefs
+    db_path = get_user_data_path("Settings/Dose/ICRP68")
+    with shelve.open(db_path) as prefs:
+        dose = prefs.get("dose", False)
+
     # Makes title frame
     title_frame = make_title_frame(root, "ICRP68 Coefficients", "Dose/ICRP68")
+
+    # Creates font for result label
+    monospace_font = font.Font(family="Menlo", size=12)
 
     # Gets the element options
     choices = get_choices(category, "Dose", "ICRP68")
@@ -73,6 +86,11 @@ def icrp68_main(root, category="Common Elements", mode="Ingestion",
         result_box.delete("1.0", tk.END)
         result_box.config(state="disabled", height=1)
 
+        # Clear dose label
+        dose_result.config(state="normal")
+        dose_result.delete("1.0", tk.END)
+        dose_result.config(state="disabled")
+
         root.focus()
 
     # Creates dropdown menu for mode
@@ -98,18 +116,159 @@ def icrp68_main(root, category="Common Elements", mode="Ingestion",
 
     # Logic for when a coefficient is selected
     def on_select_coefficient(event):
-        nonlocal coefficient
-
+        nonlocal coefficient, empty_frame3, empty_frame4
         event.widget.selection_clear()
+
+        if (event.widget.get() == "Half Life" or event.widget.get() == "f1") \
+                and (coefficient != "Half Life" and coefficient != "f1"):
+            # Gets rid of dose label when switching onto Half Life or f1
+            dose_label.pack_forget()
+            dose_result.pack_forget()
+            dose_check.pack_forget()
+            intake_frame.pack_forget()
+            empty_frame3.pack_forget()
+            coefficient_dropdown.pack(pady=20)
+        elif (coefficient == "Half Life" or coefficient == "f1") \
+             and (event.widget.get() != "Half Life" and event.widget.get() != "f1"):
+            # Creates dose label
+            coefficient_dropdown.pack(pady=(20,10))
+            dose_check.pack(pady=(0,20))
+            var_dose.set(dose)
+
+            if dose:
+                # Adds dose box
+                dose_label.pack(pady=(5,1))
+                dose_result.pack(pady=(1,20))
+
+                # Adds intake frame
+                main_list.remove(empty_frame3)
+                main_list.remove(empty_frame4)
+                empty_frame3.pack_forget()
+                nuclide_frame.pack_forget()
+                empty_frame4.pack_forget()
+                result_frame.pack_forget()
+                advanced_button.pack_forget()
+                exit_button.pack_forget()
+                intake_frame.pack()
+                empty_frame3 = make_spacer(root)
+                main_list.append(empty_frame3)
+                nuclide_frame.pack()
+                empty_frame4 = make_spacer(root)
+                main_list.append(empty_frame4)
+                result_frame.pack()
+                advanced_button.pack(pady=5)
+                exit_button.pack(pady=5)
+
+                # Adds intake box
+                intake_label.pack(pady=(15,1))
+                intake_entry.pack(pady=(1,20))
+
+        # Update coefficient variable
         coefficient = var_coefficient.get()
+
+        # Clear result label
+        result_box.config(state="normal")
+        result_box.delete("1.0", tk.END)
+        result_box.config(state="disabled", height=1)
+
+        # Clear dose label
+        dose_result.config(state="normal")
+        dose_result.delete("1.0", tk.END)
+        dose_result.config(state="disabled")
+
         root.focus()
 
     # Creates dropdown menu for coefficient
-    _ = make_dropdown(inner_coefficient_frame, var_coefficient, coefficient_choices,
-                      on_select_coefficient, pady=20)
+    coefficient_dropdown = make_dropdown(inner_coefficient_frame, var_coefficient, coefficient_choices,
+                                         on_select_coefficient, pady=20)
+
+    # Stores whether to find total dose for  mode
+    var_dose = tk.IntVar()
+    var_dose.set(int(dose))
+
+    def dose_hit():
+        nonlocal dose, empty_frame3, empty_frame4
+
+        root.focus()
+        if var_dose.get() == 1:
+            # Adds dose box
+            dose_label.pack(pady=(5,1))
+            dose_result.pack(pady=(1,20))
+
+            # Adds intake frame
+            main_list.remove(empty_frame3)
+            main_list.remove(empty_frame4)
+            empty_frame3.pack_forget()
+            nuclide_frame.pack_forget()
+            empty_frame4.pack_forget()
+            result_frame.pack_forget()
+            advanced_button.pack_forget()
+            exit_button.pack_forget()
+            intake_frame.pack()
+            empty_frame3 = make_spacer(root)
+            main_list.append(empty_frame3)
+            nuclide_frame.pack()
+            empty_frame4 = make_spacer(root)
+            main_list.append(empty_frame4)
+            result_frame.pack()
+            advanced_button.pack(pady=5)
+            exit_button.pack(pady=5)
+
+            # Adds intake box
+            intake_label.pack(pady=(15,1))
+            intake_entry.pack(pady=(1,20))
+        else:
+            # Forgets dose box
+            dose_label.pack_forget()
+            dose_result.pack_forget()
+
+            # Forgets intake frame
+            intake_frame.pack_forget()
+            empty_frame3.pack_forget()
+
+        dose = bool(var_dose.get())
+        with shelve.open(db_path) as shelve_prefs:
+            shelve_prefs["dose"] = dose
+
+    # Creates checkbox for finding total dose
+    dose_check = ttk.Checkbutton(inner_coefficient_frame, text="Find Total Dose?",
+                                 variable=var_dose, style="Maize.TCheckbutton",
+                                 command=dose_hit)
+
+    if coefficient != "Half Life" and coefficient != "f1":
+        # Displays the dose option
+        coefficient_dropdown.pack(pady=(20,10))
+        dose_check.pack(pady=(0,20))
 
     # Spacer
     empty_frame2 = make_spacer(root)
+
+    # Frame for nuclide selection
+    intake_frame = SectionFrame(root, title="Specify Intake")
+    inner_intake_frame = intake_frame.get_inner_frame()
+
+    # Input/output box width
+    entry_width = 28 if platform.system() == "Windows" else 32
+
+    # Intake label
+    intake_label = ttk.Label(inner_intake_frame,
+                             text="Intake (Bq):",
+                             style="Black.TLabel")
+    intake_entry = tk.Entry(inner_intake_frame, width=entry_width, insertbackground="black",
+                            background="white", foreground="black", borderwidth=3, bd=3,
+                            highlightthickness=0, relief='solid', font=monospace_font)
+
+    # Spacer
+    empty_frame3 = tk.Frame()
+
+    # Only show intake frame if necessary
+    if (coefficient != "Half Life" and coefficient != "f1") and dose:
+        intake_frame.pack()
+        intake_label.pack(pady=(15,1))
+        intake_entry.pack(pady=(1,20))
+
+        # Spacer
+        empty_frame3 = make_spacer(root)
 
     # Frame for nuclide selection
     nuclide_frame = SectionFrame(root, title="Select Nuclide")
@@ -253,7 +412,7 @@ def icrp68_main(root, category="Common Elements", mode="Ingestion",
                                      on_select_isotope)
 
     # Spacer
-    empty_frame3 = make_spacer(root)
+    empty_frame4 = make_spacer(root)
 
     # Frame for result
     result_frame = SectionFrame(root, title=mode)
@@ -262,13 +421,27 @@ def icrp68_main(root, category="Common Elements", mode="Ingestion",
 
     # Creates Calculate button
     make_calculate_button(inner_result_frame, lambda: handle_calculation(root, mode, coefficient,
-                                                                         isotope, result_box))
+                                                                         isotope, intake_entry.get(),
+                                                                         result_box, dose_result))
 
     # Result label
     result_label(inner_result_frame)
 
     # Displays the result of calculation
     result_box = make_result_box(inner_result_frame)
+
+    # Creates dose result box
+    dose_label = ttk.Label(inner_result_frame, text="Total Dose:",
+                            style="Black.TLabel")
+    dose_result = tk.Text(inner_result_frame, height=1, borderwidth=3, bd=3,
+                          highlightthickness=0, relief='solid')
+    dose_result.config(bg='white', fg='black', state="disabled", width=entry_width,
+                       font=monospace_font)
+
+    if (coefficient != "Half Life" and coefficient != "f1") and dose:
+        # Adds dose box
+        dose_label.pack(pady=(5,1))
+        dose_result.pack(pady=(1,20))
 
     # Creates Advanced Settings button
     advanced_button = make_advanced_button(root, lambda: to_advanced(root, category, mode, coefficient,
@@ -281,7 +454,8 @@ def icrp68_main(root, category="Common Elements", mode="Ingestion",
     main_list = [title_frame,
                  mode_frame, empty_frame1,
                  coefficient_frame, empty_frame2,
-                 nuclide_frame, empty_frame3,
+                 intake_frame, empty_frame3,
+                 nuclide_frame, empty_frame4,
                  result_frame, advanced_button, exit_button]
 
 #####################################################################################
