@@ -54,7 +54,7 @@ def export_data(root, error_label):
     ]
 
     # Gets radiation types and filter percentage from user prefs
-    db_path = get_user_data_path("Settings/Decay/Information")
+    db_path = get_user_data_path(f"Settings/{module}")
     with shelve.open(db_path) as prefs:
         rad_types = prefs.get("rad_types", [rad_type for rad_type in neutron_irrelevant_types])
         filter_percentage = prefs.get("filter_percentage", "100")
@@ -89,7 +89,7 @@ def export_data(root, error_label):
     error_label.config(style="Error.TLabel", text="")
 
     # Creates dataframe
-    df = create_energies_dataframe(element, isotope, error_label)
+    df = create_energies_dataframe(error_label)
     if df is None:
         return
 

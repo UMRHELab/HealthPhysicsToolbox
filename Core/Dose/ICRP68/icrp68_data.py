@@ -49,7 +49,6 @@ def export_data(root, mode, isotope, daughters, error_label):
         reader = csv.DictReader(file)
         for row in reader:
             if row["Nuclide"] in isotopes:
-                print(row["Nuclide"])
                 df.insert(len(df.columns), row["Nuclide"]+'_', pd.Series(list(row.values())[1:]))
                 df.columns = list(df.columns[:-1]) + [row["Nuclide"]]
 

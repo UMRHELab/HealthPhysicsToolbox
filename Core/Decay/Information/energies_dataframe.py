@@ -19,7 +19,7 @@ The function handles the following error:
 If this error is encountered, None is returned. Otherwise, the populated
 dataframe is returned.
 """
-def create_energies_dataframe(element, isotope, error_label, box = False):
+def create_energies_dataframe(error_label, box = False):
     # List of neutron irrelevant radiation types
     neutron_irrelevant_types = [
         "Gamma Ray", "Annihilation Photon",
@@ -28,10 +28,12 @@ def create_energies_dataframe(element, isotope, error_label, box = False):
         "Alpha Particle"
     ]
 
-    # Gets radiation types, column, order, filter type, filter direction,
+    # Gets element, isotope, radiation types, column, order, filter type, filter direction,
     # filter percentage, and energy unit from user prefs
     db_path = get_user_data_path("Settings/Decay/Information")
     with shelve.open(db_path) as prefs:
+        element = prefs.get("element", "Ac")
+        isotope = prefs.get("isotope", "")
         rad_types = prefs.get("rad_types", [rad_type for rad_type in neutron_irrelevant_types])
         sort_column = prefs.get("column", "Radiation Type")
         sort_order = prefs.get("order", "Ascending")

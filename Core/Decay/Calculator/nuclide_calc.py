@@ -20,13 +20,13 @@ The function also handles the following error:
 If not, the function decides what calculation to
 perform based on the selected calculation mode.
 """
-def handle_calculation(root, mode, isotope, initial_amount, time,
-                       result_box, save):
+def handle_calculation(root, mode, initial_amount, time, result_box, save):
     root.focus()
 
-    # Gets dates selector from user prefs
+    # Gets isotope and dates selector from user prefs
     db_path = get_user_data_path("Settings/Decay/Calculator")
     with shelve.open(db_path) as prefs:
+        isotope = prefs.get("isotope", "")
         dates = prefs.get("dates", False)
 
     # Error-check for invalid time inputs

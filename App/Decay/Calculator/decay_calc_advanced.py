@@ -4,7 +4,9 @@ import tkinter as tk
 from tkinter import ttk
 from App.style import SectionFrame
 from App.scroll import scroll_to_top
+from Utility.Functions.choices import get_isotopes
 from Utility.Functions.choices import get_successors
+from Utility.Functions.logic_utility import get_item
 from Utility.Functions.files import resource_path, open_file, get_user_data_path
 from Utility.Functions.gui_utility import (
     make_title_frame,
@@ -38,14 +40,29 @@ behaviors.
 The sections and widgets are stored in advanced_list so they can be
 accessed later by clear_advanced.
 """
-def decay_calc_advanced(root, category, mode, common_el, element, isotope):
+def decay_calc_advanced(root, mode):
     global advanced_list
+
+    # Module directory
+    module = "Decay/Calculator"
+
+    # Gets isotope from user prefs
+    db_path = get_user_data_path(f"Settings/{module}")
+    with shelve.open(db_path) as prefs:
+        category = prefs.get("category", "Common Elements")
+        common_el = prefs.get("common_el", "Ag")
+        element = prefs.get("element", "Ac")
+
+        # Retrieves isotopes for current element
+        isotope_choices = get_isotopes(get_item(category, common_el, "", element, "", ""))
+
+        isotope = prefs.get("isotope", isotope_choices[0] if isotope_choices else "")
 
     # Gets successors of isotope
     successors = get_successors(isotope)
 
     # Gets units and dates selector from user prefs
-    db_path = get_user_data_path("Settings/Decay/Calculator")
+    db_path = get_user_data_path(f"Settings/{module}")
     with shelve.open(db_path) as prefs:
         amount_type = prefs.get("amount_type", "Activity (Bq)")
         amount_unit = prefs.get("amount_unit", "Bq")
@@ -57,7 +74,7 @@ def decay_calc_advanced(root, category, mode, common_el, element, isotope):
             nuclides = successors
 
     # Makes title frame
-    title_frame = make_title_frame(root, "Decay Calculator", "Decay/Calculator")
+    title_frame = make_title_frame(root, "Decay Calculator", module)
 
     # Frame for add/remove settings
     a_r_frame = make_customize_common_elements_frame(root, "Shielding", "Photons")
@@ -257,8 +274,7 @@ def decay_calc_advanced(root, category, mode, common_el, element, isotope):
     make_help_button(bottom_frame, lambda: open_help(root))
 
     # Creates Back button to return to decay calculator main screen
-    back_button = make_back_button(root, lambda: to_main(root, category, mode, common_el,
-                                                         element, isotope))
+    back_button = make_back_button(root, lambda: to_main(root, mode))
 
     # Stores nodes into global list
     advanced_list = [title_frame,
@@ -290,11 +306,11 @@ decay calculator advanced screen and then creating the
 decay calculator main screen.
 It is called when the Back button is hit.
 """
-def to_main(root, category, mode, common_el, element, isotope):
+def to_main(root, mode):
     from App.Decay.Calculator.decay_calc_main import decay_calc_main
 
     clear_advanced()
-    decay_calc_main(root, category, mode, common_el, element, isotope)
+    decay_calc_main(root, mode)
     scroll_to_top()
 
 """

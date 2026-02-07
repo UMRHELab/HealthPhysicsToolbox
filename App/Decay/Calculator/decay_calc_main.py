@@ -10,6 +10,9 @@ from Utility.Functions.time import get_time
 from Utility.Functions.files import get_user_data_path
 from Utility.Functions.choices import get_choices, get_isotopes
 from Utility.Functions.logic_utility import get_item, valid_saved
+from Utility.Controllers.element_controller import update_elements
+from Utility.Controllers.isotope_controller import update_isotopes
+from Utility.Controllers.nuclides_controller import delete_nuclides
 from Core.Decay.Calculator.nuclide_calc import handle_calculation
 from Utility.Functions.gui_utility import (
     make_spacer, get_width,
@@ -40,36 +43,44 @@ behaviors.
 The sections and widgets are stored in main_list so they can be
 accessed later by clear_main.
 """
-def decay_calc_main(root, category="Common Elements", mode="Activities",
-                    common_el="Ag", element="Ac", isotope=None):
+def decay_calc_main(root, mode="Activities"):
     global main_list
 
-    # Gets units and dates selector from user prefs
-    db_path = get_user_data_path("Settings/Decay/Calculator")
+    # Module directory
+    module = "Decay/Calculator"
+
+    # Gets category, common_el, element, isotope, units, and dates selector from user prefs
+    db_path = get_user_data_path(f"Settings/{module}")
     with shelve.open(db_path) as prefs:
+        category = prefs.get("category", "Common Elements")
+        common_el = prefs.get("common_el", "Ag")
+
+        # Gets common elements
+        common_elements = get_choices("Common Elements", "Decay", "")
+
+        # Make sure common element is a valid selection
+        common_el = valid_saved(common_el, common_elements)
+        prefs["common_el"] = common_el
+
+        element = prefs.get("element", "Ac")
+
+        # Retrieves isotopes for current element
+        isotope_choices = get_isotopes(get_item(category, common_el, "", element, "", ""))
+
+        isotope = prefs.get("isotope", isotope_choices[0] if isotope_choices else "")
+
         amount_unit = prefs.get("amount_unit", "Bq")
         time_unit = prefs.get("time_unit", "s")
         dates = prefs.get("dates", False)
 
     # Makes title frame
-    title_frame = make_title_frame(root, "Decay Calculator", "Decay/Calculator")
+    title_frame = make_title_frame(root, "Decay Calculator", module)
 
     # Creates font for result label and energy entry
     monospace_font = font.Font(family="Menlo", size=12)
 
     # Gets the element options
     choices = get_choices(category, "Decay", "")
-
-    # Gets common elements
-    common_elements = get_choices("Common Elements", "Decay", "")
-
-    # Make sure common element is a valid selection
-    common_el = valid_saved(common_el, common_elements)
-
-    # Retrieves isotopes for current element
-    isotope_choices = get_isotopes(get_item(category, common_el, "", element, "", ""))
-    if not isotope:
-        isotope = isotope_choices[0] if isotope_choices else ""
 
     # Stores mode and sets default
     var_mode = tk.StringVar(root)
@@ -139,6 +150,8 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
         event.widget.selection_clear()
         previous_element = get_item(category, common_el, "", element, "", "")
         category = var_category.get()
+        with shelve.open(db_path) as shelve_prefs:
+            shelve_prefs["category"] = category
 
         # Updates element dropdown to match category
         choices = get_choices(category, "Decay", "")
@@ -148,21 +161,8 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
         element_dropdown.config(values=choices, width=get_width(choices))
 
         # Updates isotope dropdown to match element
-        isotopes = get_isotopes(selected_element)
-        if category == "Common Elements":
-            if common_el != previous_element:
-                isotope = isotopes[0] if isotopes else ""
-                with shelve.open(db_path) as shelve_prefs:
-                    if "nuclides" in shelve_prefs:
-                        del shelve_prefs["nuclides"]
-        elif category == "All Elements":
-            if element != previous_element:
-                isotope = isotopes[0] if isotopes else ""
-                with shelve.open(db_path) as shelve_prefs:
-                    if "nuclides" in shelve_prefs:
-                        del shelve_prefs["nuclides"]
-        var_isotope.set(isotope)
-        isotope_dropdown.config(values=isotopes, width=get_width(isotopes))
+        isotope = update_isotopes(category, module, selected_element, previous_element,
+                                  var_isotope, isotope_dropdown, True)
 
         root.focus()
 
@@ -189,24 +189,12 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
             # Falls back on default if invalid item is typed in
             var_element.set(get_item(category, common_el, "", element, "", ""))
         else:
-            # Adjusts isotopes
-            isotopes = get_isotopes(value)
-            if category == "All Elements":
-                if element != value:
-                    isotope = isotopes[0] if isotopes else ""
-                    element = value
-                    with shelve.open(db_path) as shelve_prefs:
-                        if "nuclides" in shelve_prefs:
-                            del shelve_prefs["nuclides"]
-            else:
-                if common_el != value:
-                    isotope = isotopes[0] if isotopes else ""
-                    common_el = value
-                    with shelve.open(db_path) as shelve_prefs:
-                        if "nuclides" in shelve_prefs:
-                            del shelve_prefs["nuclides"]
-            var_isotope.set(isotope)
-            isotope_dropdown.config(values=isotopes, width=get_width(isotopes))
+            # Updates isotope dropdown to match element
+            isotope = update_isotopes(category, module, value, value,
+                                      var_isotope, isotope_dropdown, True)
+
+            # Updates elements
+            common_el, element = update_elements(category, module, value)
 
         element_dropdown.selection_clear()
         element_dropdown.icursor(tk.END)
@@ -218,24 +206,12 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
         event.widget.selection_clear()
         value = var_element.get()
 
-        # Adjusts isotopes
-        isotopes = get_isotopes(value)
-        if category == "All Elements":
-            if element != value:
-                isotope = isotopes[0] if isotopes else ""
-                element = value
-                with shelve.open(db_path) as shelve_prefs:
-                    if "nuclides" in shelve_prefs:
-                        del shelve_prefs["nuclides"]
-        else:
-            if common_el != value:
-                isotope = isotopes[0] if isotopes else ""
-                common_el = value
-                with shelve.open(db_path) as shelve_prefs:
-                    if "nuclides" in shelve_prefs:
-                        del shelve_prefs["nuclides"]
-        var_isotope.set(isotope)
-        isotope_dropdown.config(values=isotopes, width=get_width(isotopes))
+        # Updates isotope dropdown to match element
+        isotope = update_isotopes(category, module, value, value,
+                                  var_isotope, isotope_dropdown, True)
+
+        # Updates elements
+        common_el, element = update_elements(category, module, value)
 
         root.focus()
 
@@ -259,11 +235,13 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
         nonlocal isotope
 
         event.widget.selection_clear()
-        if isotope != var_isotope.get():
-            with shelve.open(db_path) as shelve_prefs:
-                if "nuclides" in shelve_prefs:
-                    del shelve_prefs["nuclides"]
-        isotope = var_isotope.get()
+        value = var_isotope.get()
+
+        if isotope != value:
+            delete_nuclides(module)
+        isotope = value
+        with shelve.open(db_path) as shelve_prefs:
+            shelve_prefs["isotope"] = isotope
         root.focus()
 
     # Frame for isotope selection
@@ -382,7 +360,7 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
         save.pack(pady=(20,0))
 
     # Creates Calculate button
-    calc_button = make_calculate_button(inner_result_frame, lambda: handle_calculation(root, mode, isotope,
+    calc_button = make_calculate_button(inner_result_frame, lambda: handle_calculation(root, mode,
                                                                                        initial_input.get(),
                             get_time(dates, time_input.get(), start_date_input.get(), end_date_input.get()),
                                                                                        result_box,
@@ -395,8 +373,7 @@ def decay_calc_main(root, category="Common Elements", mode="Activities",
     result_box = make_result_box(inner_result_frame)
 
     # Creates Advanced Settings button
-    advanced_button = make_advanced_button(root, lambda: to_advanced(root, category, mode,
-                                                                     common_el, element, isotope))
+    advanced_button = make_advanced_button(root, lambda: to_advanced(root, mode))
 
     # Creates Exit button to return to home screen
     exit_button = make_exit_button(root, lambda: exit_to_home(root))
@@ -447,10 +424,10 @@ decay calculator main screen and then creating the
 decay calculator advanced screen.
 It is called when the Advanced Settings button is hit.
 """
-def to_advanced(root, category, mode, common_el, element, isotope):
+def to_advanced(root, mode):
     root.focus()
     from App.Decay.Calculator.decay_calc_advanced import decay_calc_advanced
 
     clear_main()
-    decay_calc_advanced(root, category, mode, common_el, element, isotope)
+    decay_calc_advanced(root, mode)
     scroll_to_top()

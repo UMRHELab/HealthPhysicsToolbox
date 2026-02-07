@@ -33,8 +33,13 @@ The function handles the following error:
 The function decides what calculation to perform
 based on the selected calculation mode.
 """
-def handle_calculation(root, mode, isotope, result_box, save):
+def handle_calculation(root, mode, result_box, save):
     root.focus()
+
+    # Gets isotope from user prefs
+    db_path = get_user_data_path("Settings/Decay/Information")
+    with shelve.open(db_path) as prefs:
+        isotope = prefs.get("isotope", "")
 
     # Error-check for no selected element
     if isotope == "":
@@ -193,11 +198,8 @@ def nuclide_energies(isotope, result_box):
     # Create pop-up window
     popup, scroll_frame = window(isotope+" Energies", "600x600")
 
-    # Gets element
-    element = isotope.split('-')[0]
-
     # Creates dataframe
-    df = create_energies_dataframe(element, isotope, result_box, True)
+    df = create_energies_dataframe(result_box, True)
     if df is None:
         return
 

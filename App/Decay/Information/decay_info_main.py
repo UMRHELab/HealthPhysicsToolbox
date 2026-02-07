@@ -270,8 +270,8 @@ def decay_info_main(root, mode="Decay Scheme (Plot)"):
         save.pack(pady=(20,0))
 
     # Creates Calculate button
-    calc_button = make_calculate_button(inner_result_frame, lambda: handle_calculation(root, mode, isotope,
-                                                                                       result_box, var_save.get()))
+    calc_button = make_calculate_button(inner_result_frame, lambda: handle_calculation(root, mode, result_box,
+                                                                                       var_save.get()))
 
     # Result label
     result = result_label(inner_result_frame)
