@@ -49,6 +49,9 @@ accessed later by clear_advanced.
 def decay_info_advanced(root, mode):
     global advanced_list
 
+    # Module directory
+    module = "Decay/Information"
+
     # List of radiation types
     rad_types = [
         "Gamma Ray", "Prompt Gamma Ray",
@@ -72,7 +75,7 @@ def decay_info_advanced(root, mode):
 
     # Gets half-life unit, energy unit, radiation types, column, order, filter type,
     # filter direction, and filter percentage from user prefs
-    db_path = get_user_data_path("Settings/Decay/Information")
+    db_path = get_user_data_path(f"Settings/{module}")
     with shelve.open(db_path) as prefs:
         half_life_unit = prefs.get("hl_unit", "s")
         energy_unit = prefs.get("energy_unit", "MeV")
@@ -85,7 +88,7 @@ def decay_info_advanced(root, mode):
         filter_percentage = prefs.get("filter_percentage", "100")
 
     # Makes title frame
-    title_frame = make_title_frame(root, "Decay Information", "Decay/Information")
+    title_frame = make_title_frame(root, "Decay Information", module)
 
     # Frame for add/remove settings
     a_r_frame = make_customize_common_elements_frame(root, "Shielding", "Photons")

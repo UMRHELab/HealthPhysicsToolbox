@@ -8,6 +8,8 @@ from App.style import SectionFrame
 from App.scroll import scroll_to_top
 from Utility.Functions.files import get_user_data_path
 from Utility.Functions.logic_utility import get_item, valid_saved
+from Utility.Controllers.element_controller import update_elements
+from Utility.Controllers.isotope_controller import update_isotopes
 from Core.Dose.ICRP68.icrp68_calculations import handle_calculation
 from Utility.Functions.choices import get_choices, get_icrp_isotopes, read_dose_columns
 from Utility.Functions.gui_utility import (
@@ -39,17 +41,35 @@ behaviors.
 The sections and widgets are stored in main_list so they can be
 accessed later by clear_main.
 """
-def icrp68_main(root, category="Common Elements", mode="Ingestion",
-                coefficient="Half Life", common_el="Ag", element="Ac", isotope=None):
+def icrp68_main(root, mode="Ingestion", coefficient="Half Life"):
     global main_list
 
-    # Gets dose selector from user prefs
-    db_path = get_user_data_path("Settings/Dose/ICRP68")
+    # Module directory
+    module = "Dose/ICRP68"
+
+    # Gets category, common_el, element, isotope, and dose selector from user prefs
+    db_path = get_user_data_path(f"Settings/{module}")
     with shelve.open(db_path) as prefs:
+        category = prefs.get("category", "Common Elements")
+        common_el = prefs.get("common_el", "Ag")
+
+        # Gets common elements
+        common_elements = get_choices("Common Elements", "Decay", "")
+
+        # Make sure common element is a valid selection
+        common_el = valid_saved(common_el, common_elements)
+        prefs["common_el"] = common_el
+
+        element = prefs.get("element", "Ac")
+
+        # Retrieves isotopes for current element
+        isotope_choices = get_icrp_isotopes(get_item(category, common_el, "", element, "", ""), "ICRP68")
+
+        isotope = prefs.get("isotope", isotope_choices[0] if isotope_choices else "")
         dose = prefs.get("dose", False)
 
     # Makes title frame
-    title_frame = make_title_frame(root, "ICRP68 Coefficients", "Dose/ICRP68")
+    title_frame = make_title_frame(root, "ICRP68 Coefficients", module)
 
     # Creates font for result label
     monospace_font = font.Font(family="Menlo", size=12)
@@ -286,6 +306,8 @@ def icrp68_main(root, category="Common Elements", mode="Ingestion",
         event.widget.selection_clear()
         previous_element = get_item(category, common_el, "", element, "", "")
         category = var_category.get()
+        with shelve.open(db_path) as shelve_prefs:
+            shelve_prefs["category"] = category
 
         # Updates element dropdown to match category
         choices = get_choices(category, "Dose", "ICRP68")
@@ -295,15 +317,8 @@ def icrp68_main(root, category="Common Elements", mode="Ingestion",
         element_dropdown.config(values=choices, width=get_width(choices))
 
         # Updates isotope dropdown to match element
-        isotopes = get_icrp_isotopes(selected_element, "ICRP68")
-        if category == "Common Elements":
-            if common_el != previous_element:
-                isotope = isotopes[0] if isotopes else ""
-        elif category == "All Elements":
-            if element != previous_element:
-                isotope = isotopes[0] if isotopes else ""
-        var_isotope.set(isotope)
-        isotope_dropdown.config(values=isotopes, width=get_width(isotopes))
+        isotope = update_isotopes(category, module, selected_element, previous_element,
+                                  var_isotope, isotope_dropdown, icrp="ICRP68")
 
         root.focus()
 
@@ -330,18 +345,12 @@ def icrp68_main(root, category="Common Elements", mode="Ingestion",
             # Falls back on default if invalid element is typed in
             var_element.set(get_item(category, common_el, "", element, "", ""))
         else:
-            # Adjusts isotopes
-            isotopes = get_icrp_isotopes(value, "ICRP68")
-            if category == "All Elements":
-                if element != value:
-                    isotope = isotopes[0] if isotopes else ""
-                    element = value
-            else:
-                if common_el != value:
-                    isotope = isotopes[0] if isotopes else ""
-                    common_el = value
-            var_isotope.set(isotope)
-            isotope_dropdown.config(values=isotopes, width=get_width(isotopes))
+            # Updates isotope dropdown to match element
+            isotope = update_isotopes(category, module, value, value,
+                                      var_isotope, isotope_dropdown, icrp="ICRP68")
+
+            # Updates elements
+            common_el, element = update_elements(category, module, value)
 
         element_dropdown.selection_clear()
         element_dropdown.icursor(tk.END)
@@ -353,18 +362,12 @@ def icrp68_main(root, category="Common Elements", mode="Ingestion",
         event.widget.selection_clear()
         value = var_element.get()
 
-        # Adjusts isotopes
-        isotopes = get_icrp_isotopes(value, "ICRP68")
-        if category == "All Elements":
-            if element != value:
-                isotope = isotopes[0] if isotopes else ""
-                element = value
-        else:
-            if common_el != value:
-                isotope = isotopes[0] if isotopes else ""
-                common_el = value
-        var_isotope.set(isotope)
-        isotope_dropdown.config(values=isotopes, width=get_width(isotopes))
+        # Updates isotope dropdown to match element
+        isotope = update_isotopes(category, module, value, value,
+                                  var_isotope, isotope_dropdown, icrp="ICRP68")
+
+        # Updates elements
+        common_el, element = update_elements(category, module, value)
 
         root.focus()
 
@@ -389,6 +392,8 @@ def icrp68_main(root, category="Common Elements", mode="Ingestion",
 
         event.widget.selection_clear()
         isotope = var_isotope.get()
+        with shelve.open(db_path) as shelve_prefs:
+            shelve_prefs["isotope"] = isotope
         root.focus()
 
     # Frame for isotope selection
@@ -421,7 +426,7 @@ def icrp68_main(root, category="Common Elements", mode="Ingestion",
 
     # Creates Calculate button
     make_calculate_button(inner_result_frame, lambda: handle_calculation(root, mode, coefficient,
-                                                                         isotope, intake_entry.get(),
+                                                                         intake_entry.get(),
                                                                          result_box, dose_result))
 
     # Result label
@@ -444,8 +449,7 @@ def icrp68_main(root, category="Common Elements", mode="Ingestion",
         dose_result.pack(pady=(1,20))
 
     # Creates Advanced Settings button
-    advanced_button = make_advanced_button(root, lambda: to_advanced(root, category, mode, coefficient,
-                                                                     common_el, element, isotope))
+    advanced_button = make_advanced_button(root, lambda: to_advanced(root, mode, coefficient))
 
     # Creates Exit button to return to home screen
     exit_button = make_exit_button(root, lambda: exit_to_home(root))
@@ -494,10 +498,10 @@ ICRP68 main screen and then creating the
 ICRP68 advanced screen.
 It is called when the Advanced Settings button is hit.
 """
-def to_advanced(root, category, mode, coefficient, common_el, element, isotope):
+def to_advanced(root, mode, coefficient):
     root.focus()
     from App.Dose.ICRP68.icrp68_advanced import icrp68_advanced
 
     clear_main()
-    icrp68_advanced(root, category, mode, coefficient, common_el, element, isotope)
+    icrp68_advanced(root, mode, coefficient)
     scroll_to_top()

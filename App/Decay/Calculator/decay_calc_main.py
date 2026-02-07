@@ -162,7 +162,7 @@ def decay_calc_main(root, mode="Activities"):
 
         # Updates isotope dropdown to match element
         isotope = update_isotopes(category, module, selected_element, previous_element,
-                                  var_isotope, isotope_dropdown, True)
+                                  var_isotope, isotope_dropdown, tracking_nuclides=True)
 
         root.focus()
 
@@ -191,7 +191,7 @@ def decay_calc_main(root, mode="Activities"):
         else:
             # Updates isotope dropdown to match element
             isotope = update_isotopes(category, module, value, value,
-                                      var_isotope, isotope_dropdown, True)
+                                      var_isotope, isotope_dropdown, tracking_nuclides=True)
 
             # Updates elements
             common_el, element = update_elements(category, module, value)
@@ -208,7 +208,7 @@ def decay_calc_main(root, mode="Activities"):
 
         # Updates isotope dropdown to match element
         isotope = update_isotopes(category, module, value, value,
-                                  var_isotope, isotope_dropdown, True)
+                                  var_isotope, isotope_dropdown, tracking_nuclides=True)
 
         # Updates elements
         common_el, element = update_elements(category, module, value)

@@ -27,7 +27,7 @@ behaviors.
 The sections and widgets are stored in export_list so they can be
 accessed later by clear_export.
 """
-def icrp68_export(root, category, mode, coefficient, common_el, element, isotope):
+def icrp68_export(root, mode, coefficient):
     global export_list
 
     # Makes title frame
@@ -48,16 +48,15 @@ def icrp68_export(root, category, mode, coefficient, common_el, element, isotope
     daughters.pack(pady=(10,0))
 
     # Creates Export button
-    make_export_button(inner_options_frame, lambda: export_data(root, mode, isotope,
-                                                                var_daughters.get(), error_label), pady=(15,5))
+    make_export_button(inner_options_frame, lambda: export_data(root, mode, var_daughters.get(), error_label),
+                       pady=(15,5))
 
     # Creates error label for bad input
     error_label = ttk.Label(inner_options_frame, text="", style="Error.TLabel")
     error_label.pack(pady=(5,10))
 
     # Creates Back button to return to ICRP68 advanced screen
-    back_button = make_back_button(root, lambda: advanced_back(root, category, mode, coefficient,
-                                                               common_el, element, isotope))
+    back_button = make_back_button(root, lambda: advanced_back(root, mode, coefficient))
 
     # Stores nodes into global list
     export_list = [title_frame,
@@ -86,9 +85,9 @@ ICRP68 export screen and then creating the
 ICRP68 advanced screen.
 It is called when the Back button is hit.
 """
-def advanced_back(root, category, mode, coefficient, common_el, element, isotope):
+def advanced_back(root, mode, coefficient):
     from App.Dose.ICRP68.icrp68_advanced import icrp68_advanced
 
     clear_export()
-    icrp68_advanced(root, category, mode, coefficient, common_el, element, isotope)
+    icrp68_advanced(root, mode, coefficient)
     scroll_to_top()

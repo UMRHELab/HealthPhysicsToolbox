@@ -18,12 +18,13 @@ If the error is not applicable, the coefficient
 is retrieved from the database, and then
 displayed in the result label.
 """
-def handle_calculation(root, mode, coefficient, isotope, intake_str, result_box, dose_result):
+def handle_calculation(root, mode, coefficient, intake_str, result_box, dose_result):
     root.focus()
 
-    # Gets dose selector from user prefs
-    db_path = get_user_data_path("Settings/Dose/ICRP68")
+    # Gets isotope and dose selector from user prefs
+    db_path = get_user_data_path(f"Settings/Dose/ICRP68")
     with shelve.open(db_path) as prefs:
+        isotope = prefs.get("isotope", "")
         dose = prefs.get("dose", False)
 
     # Clears result box

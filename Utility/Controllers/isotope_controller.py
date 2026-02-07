@@ -1,9 +1,9 @@
 ##### IMPORTS #####
 import shelve
-from Utility.Functions.choices import get_isotopes
 from Utility.Functions.gui_utility import get_width
 from Utility.Functions.files import get_user_data_path
 from Utility.Controllers.nuclides_controller import delete_nuclides
+from Utility.Functions.choices import get_isotopes, get_icrp_isotopes
 
 #####################################################################################
 # CONTROLLER SECTION
@@ -13,8 +13,11 @@ from Utility.Controllers.nuclides_controller import delete_nuclides
 This function causes a full update of isotopes due to a change in category or element.
 """
 def update_isotopes(category, module, new_element, compare_element, var_isotope,
-                    isotope_dropdown, tracking_nuclides = False):
-    isotopes = get_isotopes(new_element)
+                    isotope_dropdown, tracking_nuclides = False, icrp = ""):
+    if not icrp:
+        isotopes = get_isotopes(new_element)
+    else:
+        isotopes = get_icrp_isotopes(new_element, icrp)
     isotope = None
 
     # Gets common_el, element, isotope from user prefs
