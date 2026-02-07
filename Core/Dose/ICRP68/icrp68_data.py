@@ -1,6 +1,7 @@
 ##### IMPORTS #####
 import csv
 import pandas as pd
+from Utility.Functions.choices import get_successors
 from Utility.Functions.gui_utility import no_selection
 from Utility.Functions.files import save_file, resource_path
 
@@ -17,7 +18,7 @@ with the ICRP68 coefficients for the selected nuclide.
 The dataframe is populated from the corresponding ICRP68 file.
 Finally, we pass on the work to the save_file function.
 """
-def export_data(root, mode, isotope, error_label):
+def export_data(root, mode, isotope, daughters, error_label):
     root.focus()
 
     # Error-check for no selected element
@@ -27,27 +28,29 @@ def export_data(root, mode, isotope, error_label):
 
     error_label.config(text="")
 
-    # Sets up columns for dataframe
-    names_col = "Nuclide"
-    values_col = isotope
-    cols = [names_col, values_col]
+    # Gets successors of isotope
+    isotopes = get_successors(isotope) if daughters else [isotope]
 
-    df = pd.DataFrame(columns=cols)
+    df = pd.DataFrame()
+    rows = []
 
-    # Populates dataframe
-    db_path = resource_path('Data/ICRP Coefficients/ICRP68/'+mode+'.csv')
+    # Gets rows
+    db_path = resource_path('Data/ICRP Coefficients/ICRP68/' + mode + '.csv')
     with open(db_path, 'r') as file:
         reader = csv.DictReader(file)
-        filled_first = False
+
         for row in reader:
-            if row["Nuclide"] == isotope:
-                if not filled_first:
-                    for key, val in row.items():
-                        if key != "Nuclide":
-                            df.loc[len(df.index)] = [key, val]
-                            filled_first = True
-                else:
-                    df.insert(len(df.columns), isotope+'_', pd.Series(list(row.values())[1:]))
-                    df.columns = list(df.columns[:-1]) + [isotope]
+            rows = list(row.keys())
+            break
+        df.insert(0, "Nuclide", pd.Series(rows[1:]))
+
+    # Populates dataframe
+    with open(db_path, 'r') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            if row["Nuclide"] in isotopes:
+                print(row["Nuclide"])
+                df.insert(len(df.columns), row["Nuclide"]+'_', pd.Series(list(row.values())[1:]))
+                df.columns = list(df.columns[:-1]) + [row["Nuclide"]]
 
     save_file(df, "Data", error_label, isotope, mode.lower(), False)

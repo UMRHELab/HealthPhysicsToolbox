@@ -1,4 +1,5 @@
 ##### IMPORTS #####
+import tkinter as tk
 from tkinter import ttk
 from App.style import SectionFrame
 from App.scroll import scroll_to_top
@@ -37,8 +38,18 @@ def icrp68_export(root, category, mode, coefficient, common_el, element, isotope
     options_frame.pack()
     inner_options_frame = options_frame.get_inner_frame()
 
+    # Stores whether to include daughters and sets default
+    var_daughters = tk.IntVar()
+    var_daughters.set(0)
+
+    # Creates checkbox for saving file
+    daughters = ttk.Checkbutton(inner_options_frame, text="Include Daughters", variable=var_daughters,
+                                style="Maize.TCheckbutton", command=lambda: root.focus())
+    daughters.pack(pady=(10,0))
+
     # Creates Export button
-    make_export_button(inner_options_frame, lambda: export_data(root, mode, isotope, error_label), pady=(20,5))
+    make_export_button(inner_options_frame, lambda: export_data(root, mode, isotope,
+                                                                var_daughters.get(), error_label), pady=(15,5))
 
     # Creates error label for bad input
     error_label = ttk.Label(inner_options_frame, text="", style="Error.TLabel")

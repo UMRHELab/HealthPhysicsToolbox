@@ -58,9 +58,11 @@ def nuclide_activities(isotope, initial_amount, time, result_box):
         amount_unit = prefs.get("amount_unit", "Bq")
         time_unit = prefs.get("time_unit", "s")
         dates = prefs.get("dates", False)
-        nuclides = prefs.get("nuclides", get_successors(isotope))
+        successors = get_successors(isotope)
+        nuclides = prefs.get("nuclides", successors)
         if not nuclides:
-            prefs["nuclides"] = get_successors(isotope)
+            prefs["nuclides"] = successors
+            nuclides = successors
     if dates:
         time_unit = "d"
 
@@ -104,9 +106,11 @@ def nuclide_plot(isotope, initial_amount, time, result_box, save):
         amount_unit = prefs.get("amount_unit", "Bq")
         time_unit = prefs.get("time_unit", "s")
         dates = prefs.get("dates", False)
-        nuclides = prefs.get("nuclides", get_successors(isotope))
+        successors = get_successors(isotope)
+        nuclides = prefs.get("nuclides", successors)
         if not nuclides:
-            prefs["nuclides"] = get_successors(isotope)
+            prefs["nuclides"] = successors
+            nuclides = successors
     if dates:
         time_unit = "d"
 

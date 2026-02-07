@@ -41,6 +41,9 @@ accessed later by clear_advanced.
 def decay_calc_advanced(root, category, mode, common_el, element, isotope):
     global advanced_list
 
+    # Gets successors of isotope
+    successors = get_successors(isotope)
+
     # Gets units and dates selector from user prefs
     db_path = get_user_data_path("Settings/Decay/Calculator")
     with shelve.open(db_path) as prefs:
@@ -48,9 +51,10 @@ def decay_calc_advanced(root, category, mode, common_el, element, isotope):
         amount_unit = prefs.get("amount_unit", "Bq")
         time_unit = prefs.get("time_unit", "s")
         dates = prefs.get("dates", False)
-        nuclides = prefs.get("nuclides", get_successors(isotope))
+        nuclides = prefs.get("nuclides", successors)
         if not nuclides:
-            prefs["nuclides"] = get_successors(isotope)
+            prefs["nuclides"] = successors
+            nuclides = successors
 
     # Makes title frame
     title_frame = make_title_frame(root, "Decay Calculator", "Decay/Calculator")
@@ -195,9 +199,6 @@ def decay_calc_advanced(root, category, mode, common_el, element, isotope):
 
     # Spacer
     empty_frame2 = make_spacer(root)
-
-    # Gets successors of isotope
-    successors = get_successors(isotope)
 
     # Frame for nuclide selection settings
     nuclides_frame = SectionFrame(root, title="Desired Nuclides for " + isotope)
