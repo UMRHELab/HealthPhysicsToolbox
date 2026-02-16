@@ -6,6 +6,22 @@ from Utility.Functions.gui_utility import edit_result, no_selection
 from Utility.Functions.files import resource_path, get_user_data_path
 
 #####################################################################################
+# UNITS SECTION
+#####################################################################################
+
+# Unit choices paired with their factor in relation to the default
+Bq_TO_Ci = 1 / 3.7e10
+dose_numerator = {"pSv" : 10 ** 12, "nSv" : 10 ** 9,
+                  "μSv" : 10 ** 6, "mSv" : 10 ** 3,
+                  "Sv" : 1, "μrem" : 100 * (10 ** 6),
+                  "mrem" : 100 * (10 ** 3), "rem" : 100}
+dose_denominator = {"Bq" : 1, "kBq" : 10 ** -3,
+                    "MBq" : 10 ** -6, "GBq" : 10 ** -9,
+                    "pCi" : Bq_TO_Ci * (10 ** 12), "nCi" : Bq_TO_Ci * (10 ** 9),
+                    "μCi" : Bq_TO_Ci * (10 ** 6), "mCi" : Bq_TO_Ci * (10 ** 3),
+                    "Ci" : Bq_TO_Ci}
+
+#####################################################################################
 # CALCULATIONS SECTION
 #####################################################################################
 
@@ -21,10 +37,12 @@ displayed in the result label.
 def handle_calculation(root, mode, coefficient, intake_str, result_box, dose_result):
     root.focus()
 
-    # Gets isotope and dose selector from user prefs
+    # Gets isotope, units, and dose selector from user prefs
     db_path = get_user_data_path(f"Settings/Dose/ICRP68")
     with shelve.open(db_path) as prefs:
         isotope = prefs.get("isotope", "")
+        num = prefs.get("dose_unit", "Sv")
+        den = prefs.get("intake_unit", "Bq")
         dose = prefs.get("dose", False)
 
     # Clears result box
@@ -63,9 +81,12 @@ def handle_calculation(root, mode, coefficient, intake_str, result_box, dose_res
                     if key == coefficient:
                         results.append(val)
 
-    # Converts to float
+    # Converts result to desired units
     if coefficient != "Half Life" and coefficient != "f1":
         results = [float(result) for result in results]
+        results = [result * dose_numerator[num] for result in results]
+        results = [result / dose_denominator[den] for result in results]
+        intake /= dose_denominator[den]
     elif results and coefficient == "Half Life":
         results = [results[0]]
 
@@ -76,9 +97,9 @@ def handle_calculation(root, mode, coefficient, intake_str, result_box, dose_res
                 result_box.insert(END, f"{result}\n")
         else:
             for result in results:
-                result_box.insert(END, f"{result:.4g} Sv/Bq\n")
+                result_box.insert(END, f"{result:.4g} {num}/{den}\n")
                 if dose:
-                    dose_result.insert(END, f"{result * intake:.4g} Sv\n")
+                    dose_result.insert(END, f"{result * intake:.4g} {num}\n")
         result_box.config(state="disabled", height=len(results))
         dose_result.config(state="disabled", height=len(results))
     else:

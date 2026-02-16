@@ -46,7 +46,7 @@ def decay_calc_advanced(root, mode):
     # Module directory
     module = "Decay/Calculator"
 
-    # Gets isotope from user prefs
+    # Gets category, common_el, element, isotope, units, and dates selector from user prefs
     db_path = get_user_data_path(f"Settings/{module}")
     with shelve.open(db_path) as prefs:
         category = prefs.get("category", "Common Elements")
@@ -58,12 +58,9 @@ def decay_calc_advanced(root, mode):
 
         isotope = prefs.get("isotope", isotope_choices[0] if isotope_choices else "")
 
-    # Gets successors of isotope
-    successors = get_successors(isotope)
+        # Gets successors of isotope
+        successors = get_successors(isotope)
 
-    # Gets units and dates selector from user prefs
-    db_path = get_user_data_path(f"Settings/{module}")
-    with shelve.open(db_path) as prefs:
         amount_type = prefs.get("amount_type", "Activity (Bq)")
         amount_unit = prefs.get("amount_unit", "Bq")
         time_unit = prefs.get("time_unit", "s")

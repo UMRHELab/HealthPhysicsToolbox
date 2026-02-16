@@ -47,7 +47,7 @@ def icrp68_main(root, mode="Ingestion", coefficient="Half Life"):
     # Module directory
     module = "Dose/ICRP68"
 
-    # Gets category, common_el, element, isotope, and dose selector from user prefs
+    # Gets category, common_el, element, isotope, intake unit, and dose selector from user prefs
     db_path = get_user_data_path(f"Settings/{module}")
     with shelve.open(db_path) as prefs:
         category = prefs.get("category", "Common Elements")
@@ -66,6 +66,7 @@ def icrp68_main(root, mode="Ingestion", coefficient="Half Life"):
         isotope_choices = get_icrp_isotopes(get_item(category, common_el, "", element, "", ""), "ICRP68")
 
         isotope = prefs.get("isotope", isotope_choices[0] if isotope_choices else "")
+        intake_unit = prefs.get("intake_unit", "Bq")
         dose = prefs.get("dose", False)
 
     # Makes title frame
@@ -272,7 +273,7 @@ def icrp68_main(root, mode="Ingestion", coefficient="Half Life"):
 
     # Intake label
     intake_label = ttk.Label(inner_intake_frame,
-                             text="Intake (Bq):",
+                             text=f"Intake ({intake_unit}):",
                              style="Black.TLabel")
     intake_entry = tk.Entry(inner_intake_frame, width=entry_width, insertbackground="black",
                             background="white", foreground="black", borderwidth=3, bd=3,
