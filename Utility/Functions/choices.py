@@ -40,7 +40,8 @@ def get_choices(category, module, submodule):
             return [choice for choice in choices if "Plutonium" not in choice]
         return choices
 
-    if category == "All Elements":
+    choices = []
+    if category == "All Elements" or category == "Common Elements":
         # Obtains list of items from csv file
         data = "ICRP Coefficients" if module == "Dose" else "NIST Coefficients"
         db_path = resource_path('Data/' + data + '/' + submodule + '/Elements.csv')
@@ -51,7 +52,8 @@ def get_choices(category, module, submodule):
             choices.sort()
         else:
             read_choices(choices, db_path)
-        return choices
+        if category == "All Elements":
+            return choices
 
     # Obtains list of items from shelve
     db_path = get_user_data_path(category)
@@ -61,9 +63,12 @@ def get_choices(category, module, submodule):
             # Obtains list of default items from csv file
             db_path2 = resource_path('Data/General Data/' + category + '.csv')
             read_choices(default, db_path2)
-        choices = prefs.get(category, default)
-        choices.sort()
-        return choices
+        new_choices = prefs.get(category, default)
+        new_choices.sort()
+        if category == "Common Elements":
+            choices_set = set(choices)
+            new_choices = [choice for choice in new_choices if choice in choices_set]
+        return new_choices
 
 """
 This function reads the list of items (elements/materials)
