@@ -54,7 +54,7 @@ def icrp68_main(root, mode="Ingestion", coefficient="Half Life"):
         common_el = prefs.get("common_el", "Ag")
 
         # Gets common elements
-        common_elements = get_choices("Common Elements", "Decay", "")
+        common_elements = get_choices("Common Elements", "Dose", "")
 
         # Make sure common element is a valid selection
         common_el = valid_saved(common_el, common_elements)
