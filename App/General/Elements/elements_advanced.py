@@ -36,7 +36,7 @@ behaviors.
 The sections and widgets are stored in advanced_list so they can be
 accessed later by clear_advanced.
 """
-def elements_advanced(root, category, common_el, element):
+def elements_advanced(root):
     global advanced_list
 
     # Gets atomic mass units from user prefs
@@ -113,7 +113,7 @@ def elements_advanced(root, category, common_el, element):
     make_help_button(bottom_frame, lambda: open_help(root))
 
     # Creates Back button to return to elements main screen
-    back_button = make_back_button(root, lambda: to_main(root, category, common_el, element))
+    back_button = make_back_button(root, lambda: to_main(root))
 
     # Stores nodes into global list
     advanced_list = [title_frame,
@@ -144,11 +144,11 @@ elements advanced screen and then creating the
 elements main screen.
 It is called when the Back button is hit.
 """
-def to_main(root, category, common_el, element):
+def to_main(root):
     from App.General.Elements.elements_main import elements_main
 
     clear_advanced()
-    elements_main(root, category, common_el, element)
+    elements_main(root)
     scroll_to_top()
 
 """

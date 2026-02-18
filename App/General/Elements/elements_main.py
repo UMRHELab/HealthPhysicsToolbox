@@ -1,11 +1,14 @@
 ##### IMPORTS #####
+import shelve
 import tkinter as tk
 from tkinter import ttk
 from App.style import SectionFrame
 from App.scroll import scroll_to_top
 from Utility.Functions.choices import get_choices
+from Utility.Functions.files import get_user_data_path
 from Core.General.Elements.elements import handle_action
 from Utility.Functions.logic_utility import get_item, valid_saved
+from Utility.Controllers.element_controller import update_elements
 from Utility.Functions.gui_utility import (
     get_width,
     basic_label,
@@ -34,20 +37,32 @@ behaviors.
 The sections and widgets are stored in main_list so they can be
 accessed later by clear_main.
 """
-def elements_main(root, category="Common Elements", common_el="Ag", element="Ac"):
+def elements_main(root):
     global main_list
 
+    # Module directory
+    module = "General/Elements"
+
     # Makes title frame
-    title_frame = make_title_frame(root, "Element Information", "General/Elements")
+    title_frame = make_title_frame(root, "Element Information", module)
+
+    # Gets category, common_el, element from user prefs
+    db_path = get_user_data_path(f"Settings/{module}")
+    with shelve.open(db_path) as prefs:
+        category = prefs.get("category", "Common Elements")
+        common_el = prefs.get("common_el", "Ag")
+
+        # Gets common elements
+        common_elements = get_choices("Common Elements", "General", "")
+
+        # Make sure common element is a valid selection
+        common_el = valid_saved(common_el, common_elements)
+        prefs["common_el"] = common_el
+
+        element = prefs.get("element", "Ac")
 
     # Gets the element options
     choices = get_choices(category, "General", "")
-
-    # Gets common elements
-    common_elements = get_choices("Common Elements", "General", "")
-
-    # Make sure common element is a valid selection
-    common_el = valid_saved(common_el, common_elements)
 
     # Frame for element selection
     main_element_frame = SectionFrame(root, title="Select Element")
@@ -64,6 +79,8 @@ def elements_main(root, category="Common Elements", common_el="Ag", element="Ac"
 
         event.widget.selection_clear()
         category = var_category.get()
+        with shelve.open(db_path) as shelve_prefs:
+            shelve_prefs["category"] = category
 
         # Updates element dropdown to match category
         choices = get_choices(category, "General", "")
@@ -91,14 +108,23 @@ def elements_main(root, category="Common Elements", common_el="Ag", element="Ac"
             # Falls back on default if invalid element is typed in
             var_element.set(get_item(category, common_el, "", element, "", ""))
         else:
-            # Stores most recent items
-            if category == "All Elements":
-                element = value
-            else:
-                common_el = value
+            # Updates elements
+            common_el, element = update_elements(category, module, value)
 
         element_dropdown.selection_clear()
         element_dropdown.icursor(tk.END)
+
+    # Logic for when an element is selected
+    def on_select_element(event):
+        nonlocal common_el, element
+
+        event.widget.selection_clear()
+        value = var_element.get()
+
+        # Updates elements
+        common_el, element = update_elements(category, module, value)
+
+        root.focus()
 
     # Frame for element selection
     element_frame = tk.Frame(inner_element_frame, bg="#F2F2F2")
@@ -112,7 +138,8 @@ def elements_main(root, category="Common Elements", common_el="Ag", element="Ac"
     var_element.set(get_item(category, common_el, "", element, "", ""))
 
     # Creates dropdown menu for element
-    element_dropdown = make_item_dropdown(root, element_frame, var_element, choices, on_enter)
+    element_dropdown = make_item_dropdown(root, element_frame, var_element,
+                                          choices, on_enter, on_select_element)
 
     # Creates error label for bad input
     error_label = ttk.Label(root, text="", style="Error.TLabel")
@@ -130,8 +157,7 @@ def elements_main(root, category="Common Elements", common_el="Ag", element="Ac"
                        side='left', padx=5)
 
     # Creates Advanced Settings button
-    advanced_button = make_advanced_button(root, lambda: to_advanced(root, category,
-                                                                     common_el, element))
+    advanced_button = make_advanced_button(root, lambda: to_advanced(root))
 
     # Creates Exit button to return to home screen
     exit_button = make_exit_button(root, lambda: exit_to_home(root))
@@ -177,10 +203,10 @@ elements main screen and then creating the
 elements advanced screen.
 It is called when the Advanced Settings button is hit.
 """
-def to_advanced(root, category, common_el, element):
+def to_advanced(root):
     root.focus()
     from App.General.Elements.elements_advanced import elements_advanced
 
     clear_main()
-    elements_advanced(root, category, common_el, element)
+    elements_advanced(root)
     scroll_to_top()
