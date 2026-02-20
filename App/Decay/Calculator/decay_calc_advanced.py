@@ -215,7 +215,7 @@ def decay_calc_advanced(root, mode):
     empty_frame2 = make_spacer(root)
 
     # Frame for nuclide selection settings
-    nuclides_frame = SectionFrame(root, title="Desired Nuclides for " + isotope)
+    nuclides_frame = SectionFrame(root, title=f"Desired Nuclides for {isotope}")
 
     # Spacer
     empty_frame3 = tk.Frame()

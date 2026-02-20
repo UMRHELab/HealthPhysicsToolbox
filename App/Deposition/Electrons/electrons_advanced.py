@@ -229,7 +229,7 @@ def electrons_advanced(root, category, mode, interactions, common_el,
 
         # Units label
         mode_text = mode[5:] if mode == "Mass Stopping Power" else mode
-        unit_label = ttk.Label(unit_side_frame, text=mode_text+" Units:",
+        unit_label = ttk.Label(unit_side_frame, text=f"{mode_text} Units:",
                                style="Black.TLabel")
         unit_label.pack(side='left', padx=5)
 

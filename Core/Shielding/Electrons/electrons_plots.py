@@ -74,19 +74,19 @@ def export_data(root, item, category, mode, choice, save, error_label):
     error_label.config(style="Error.TLabel", text="")
 
     # Sets up columns for dataframe
-    energy_col = "Electron Energy (" + energy_unit + ")"
-    unit = " (" + num + "/" + den + ")"
+    energy_col = f"Electron Energy ({energy_unit})"
+    unit = f"({num}/{den})"
     if (mode == "CSDA Range" or mode == "Range-Energy Curve") and linear:
-        unit = " (" + den.split("\u00B2", 1)[0] + ")"
+        unit = f"({den.split("\u00B2", 1)[0]})"
     mode_col = mode
     if mode == "CSDA Range" or mode == "Range-Energy Curve":
-        mode_col += unit
+        mode_col = f"{mode} {unit}"
     cols = [energy_col, mode_col]
 
     df = pd.DataFrame(columns=cols)
     if category in element_choices:
         # Load the CSV file
-        db_path = resource_path('Data/NIST Coefficients/Electrons/Elements/' + item + '.csv')
+        db_path = resource_path(f'Data/NIST Coefficients/Electrons/Elements/{item}.csv')
         df2 = pd.read_csv(db_path)
 
         df[energy_col] = df2["Kinetic Energy"]
@@ -103,12 +103,12 @@ def export_data(root, item, category, mode, choice, save, error_label):
                                                    energy_unit, None)
                 df.loc[index] = [row[energy_col], row[mode_col]]
     elif category in material_choices:
-        db_path = resource_path('Data/General Data/Material Composition/' + item + '.csv')
+        db_path = resource_path(f'Data/General Data/Material Composition/{item}.csv')
         with open(db_path, 'r') as file:
             make_df_for_material(file, df, item, category, mode, energy_unit,
                                  "Electrons")
     else:
-        db_path = get_user_data_path('Custom Materials/_' + item)
+        db_path = get_user_data_path(f'Custom Materials/_{item}')
         with shelve.open(db_path) as db:
             stored_data = db[item]
             stored_data = stored_data.replace('\\n', '\n')
@@ -129,7 +129,7 @@ def export_data(root, item, category, mode, choice, save, error_label):
     if (mode == "CSDA Range" or mode == "Range-Energy Curve") and linear:
         density = find_density(category, item)
         density *= density_numerator[num]
-        density /= density_denominator[den.split("\u00B2", 1)[0] + "\u00B3"]
+        density /= density_denominator[f"{den.split("\u00B2", 1)[0]}\u00B3"]
         df[mode_col] /= density
 
     if choice == "Plot":
@@ -138,7 +138,7 @@ def export_data(root, item, category, mode, choice, save, error_label):
         if save == 1:
             save_file(plt, choice, error_label, item, "range")
         else:
-            error_label.config(style="Success.TLabel", text=choice + " exported!")
+            error_label.config(style="Success.TLabel", text="{choice} exported!")
             plt.show()
     else:
         save_file(df, choice, error_label, item, "range")

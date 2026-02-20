@@ -72,7 +72,7 @@ def handle_calculation(root, mode, coefficient, intake_str, result_box, dose_res
     results = []
 
     # Finds coefficient
-    db_path = resource_path('Data/ICRP Coefficients/ICRP68/' + mode + '.csv')
+    db_path = resource_path(f'Data/ICRP Coefficients/ICRP68/{mode}.csv')
     with open(db_path, 'r') as file:
         reader = csv.DictReader(file)
         for row in reader:

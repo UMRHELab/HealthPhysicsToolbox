@@ -75,7 +75,7 @@ def export_data(root, item, category, mode, interactions, choice, save, error_la
     error_label.config(style="Error.TLabel", text="")
 
     # Sets up columns for dataframe
-    energy_col = "Photon Energy (" + energy_unit + ")"
+    energy_col = f"Photon Energy ({energy_unit})"
     cols = [energy_col]
     for interaction in interactions:
         cols.append(interaction)
@@ -83,7 +83,7 @@ def export_data(root, item, category, mode, interactions, choice, save, error_la
     df = pd.DataFrame(columns=cols)
     if category in element_choices:
         # Load the CSV file
-        db_path = resource_path('Data/NIST Coefficients/Photons/Elements/' + item + '.csv')
+        db_path = resource_path(f'Data/NIST Coefficients/Photons/Elements/{item}.csv')
         df2 = pd.read_csv(db_path)
 
         df[energy_col] = df2["Photon Energy"]
@@ -91,12 +91,12 @@ def export_data(root, item, category, mode, interactions, choice, save, error_la
         for interaction in interactions:
             df[interaction] = df2[interaction]
     elif category in material_choices:
-        db_path = resource_path('Data/General Data/Material Composition/' + item + '.csv')
+        db_path = resource_path(f'Data/General Data/Material Composition/{item}.csv')
         with open(db_path, 'r') as file:
             make_df_for_material(file, df, item, category, mode, energy_unit,
                                  "Photons", interactions=interactions)
     else:
-        db_path = get_user_data_path('Custom Materials/_' + item)
+        db_path = get_user_data_path(f'Custom Materials/_{item}')
         with shelve.open(db_path) as db:
             stored_data = db[item]
             stored_data = stored_data.replace('\\n', '\n')
@@ -122,19 +122,19 @@ def export_data(root, item, category, mode, interactions, choice, save, error_la
             df[interaction] *= lac_numerator[num]
             df[interaction] /= lac_denominator[den]
 
-    unit = " (" + num + "/" + den + ")"
+    unit = f"({num}/{den})"
     if num == "1":
-        unit = " (" + den + "\u207B\u00B9)"
-    mode_col = mode + unit
+        unit = f"({den}\u207B\u00B9)"
+    mode_col = f"{mode} {unit}"
 
     if choice == "Plot":
         configure_plot(interactions, df, energy_col, mode_col, f"{item} - {mode_col}")
         if save == 1:
             save_file(plt, choice, error_label, item, "attenuation")
         else:
-            error_label.config(style="Success.TLabel", text=choice + " exported!")
+            error_label.config(style="Success.TLabel", text=f"{choice} exported!")
             plt.show()
     else:
         for interaction in interactions:
-            df.rename(columns={interaction: interaction+unit}, inplace=True)
+            df.rename(columns={interaction: f"{interaction} {unit}"}, inplace=True)
         save_file(df, choice, error_label, item, "attenuation")

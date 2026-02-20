@@ -185,7 +185,7 @@ def is_error(isotope, time, initial_amount, result_box):
 
     # Error check for stable isotope
     if math.isinf(rd.Nuclide(isotope).half_life()):
-        result_box.insert(tk.END, "Isotope " + isotope + " is stable.")
+        result_box.insert(tk.END, f"Isotope {isotope} is stable.")
         result_box.config(state="disabled", height=1)
         return True
 

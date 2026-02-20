@@ -61,15 +61,15 @@ def export_data(root, item, category, mode, choice, save, error_label):
     error_label.config(style="Error.TLabel", text="")
 
     # Sets up columns for dataframe
-    energy_col = "Photon Energy (" + energy_unit + ")"
-    unit = " (" + num + "/" + den + ")"
-    mode_col = mode + unit
+    energy_col = f"Photon Energy ({energy_unit})"
+    unit = f"({num}/{den})"
+    mode_col = f"{mode} {unit}"
     cols = [energy_col, mode_col]
 
     df = pd.DataFrame(columns=cols)
     if category in element_choices:
         # Load the CSV file
-        db_path = resource_path('Data/NIST Coefficients/Photons/Elements/' + item + '.csv')
+        db_path = resource_path(f'Data/NIST Coefficients/Photons/Elements/{item}.csv')
         df2 = pd.read_csv(db_path)
 
         df[energy_col] = df2["Photon Energy"]
@@ -80,12 +80,12 @@ def export_data(root, item, category, mode, choice, save, error_label):
             if math.isnan(row[mode_col]):
                 df.drop(index=index, inplace=True)
     elif category in material_choices:
-        db_path = resource_path('Data/General Data/Material Composition/' + item + '.csv')
+        db_path = resource_path(f'Data/General Data/Material Composition/{item}.csv')
         with open(db_path, 'r') as file:
             make_df_for_material(file, df, item, category, mode, energy_unit,
                                  "Photons")
     else:
-        db_path = get_user_data_path('Custom Materials/_' + item)
+        db_path = get_user_data_path(f'Custom Materials/_{item}')
         with shelve.open(db_path) as db:
             stored_data = db[item]
             stored_data = stored_data.replace('\\n', '\n')
@@ -108,7 +108,7 @@ def export_data(root, item, category, mode, choice, save, error_label):
         if save == 1:
             save_file(plt, choice, error_label, item, "absorption")
         else:
-            error_label.config(style="Success.TLabel", text=choice + " exported!")
+            error_label.config(style="Success.TLabel", text=f"{choice} exported!")
             plt.show()
     else:
         save_file(df, choice, error_label, item, "absorption")

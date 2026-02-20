@@ -175,7 +175,7 @@ def nuclide_energies(isotope, result_box):
 
     # Error-check for isotope is stable
     if math.isinf(rd.Nuclide(isotope).half_life('s')):
-        edit_result("Error: "+isotope+" is stable.", result_box)
+        edit_result(f"Error: {isotope} is stable.", result_box)
         return
 
     # Error-check for no radiation types selected
@@ -196,7 +196,7 @@ def nuclide_energies(isotope, result_box):
         return
 
     # Create pop-up window
-    popup, scroll_frame = window(isotope+" Energies", "600x600")
+    popup, scroll_frame = window(f"{isotope} Energies", "600x600")
 
     # Creates dataframe
     df = create_energies_dataframe(result_box, True)
@@ -239,7 +239,7 @@ def nuclide_beta_spectrum(isotope, result_box, save):
     element = isotope.split('-')[0]
 
     # Retrieves data and creates dataframe
-    db_path = resource_path('Data/Radioactive Decay/Spectra/Betas/' + element + '.json')
+    db_path = resource_path(f'Data/Radioactive Decay/Spectra/Betas/{element}.json')
     try:
         with open(db_path, 'r') as file:
             # Retrieves data
@@ -247,12 +247,12 @@ def nuclide_beta_spectrum(isotope, result_box, save):
 
             # Error-check for missing data
             if data == -1:
-                edit_result("No data for " + isotope + ".", result_box)
+                edit_result(f"No data for {isotope}.", result_box)
                 return
 
             df = pd.DataFrame(data)
     except FileNotFoundError:
-        edit_result("No data for " + isotope + ".", result_box)
+        edit_result(f"No data for {isotope}.", result_box)
         return
 
     # Fixes dataframe
@@ -260,7 +260,7 @@ def nuclide_beta_spectrum(isotope, result_box, save):
     df["electrons"] = df["electrons"].astype(float)
 
     # Sets up columns for dataframe
-    energy_col = "Energy (" + energy_unit + ")"
+    energy_col = f"Energy ({energy_unit})"
     df.rename(columns={'energy_MeV': energy_col,
                        'electrons' : 'Electrons'},
               inplace=True)
@@ -291,19 +291,19 @@ def nuclide_auger_electron_spectrum(isotope, result_box, save):
 
     # Retrieves data and creates dataframe
     try:
-        db_path = resource_path('Data/Radioactive Decay/Spectra/Auger/' + element + '.json')
+        db_path = resource_path(f'Data/Radioactive Decay/Spectra/Auger/{element}.json')
         with open(db_path, 'r') as file:
             # Retrieves data
             data = json.load(file).get(isotope, -1)
 
             # Error-check for missing data
             if data == -1:
-                edit_result("No data for " + isotope + ".", result_box)
+                edit_result(f"No data for {isotope}.", result_box)
                 return
 
             df = pd.DataFrame(data["records"])
     except FileNotFoundError:
-        edit_result("No data for " + isotope + ".", result_box)
+        edit_result(f"No data for {isotope}.", result_box)
         return
 
     # Fixes dataframe
@@ -311,7 +311,7 @@ def nuclide_auger_electron_spectrum(isotope, result_box, save):
     df["yield"] = df["yield"].astype(float)
 
     # Sets up columns for dataframe
-    energy_col = "Energy (" + energy_unit + ")"
+    energy_col = f"Energy ({energy_unit})"
     df.drop(columns=['orbital_transition'], inplace=True)
     df.rename(columns={'energy_eV': energy_col,
                        'yield' : 'Yield'},
@@ -343,7 +343,7 @@ def nuclide_neutron_spectrum(isotope, result_box, save):
     element = isotope.split('-')[0]
 
     # Retrieves data and creates dataframe
-    db_path = resource_path('Data/Radioactive Decay/Spectra/Neutrons/' + element + '.json')
+    db_path = resource_path(f'Data/Radioactive Decay/Spectra/Neutrons/{element}.json')
     try:
         with open(db_path, 'r') as file:
             # Retrieves data
@@ -351,12 +351,12 @@ def nuclide_neutron_spectrum(isotope, result_box, save):
 
             # Error-check for missing data
             if data == -1:
-                edit_result("No data for " + isotope + ".", result_box)
+                edit_result(f"No data for {isotope}.", result_box)
                 return
 
             df = pd.DataFrame(data["records"])
     except FileNotFoundError:
-        edit_result("No data for " + isotope + ".", result_box)
+        edit_result(f"No data for {isotope}.", result_box)
         return
 
     # Fixes dataframe

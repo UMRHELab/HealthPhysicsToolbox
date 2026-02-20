@@ -70,7 +70,7 @@ def add_custom(root, name_box, density_box, weights_box, error_label, normalize,
         error_label.config(style="Error.TLabel", text="Error: No element weights provided.")
         return
 
-    csv_data = '"Weight","Element"\n' + cleaned_input
+    csv_data = f'"Weight","Element"\n{cleaned_input}'
 
     # Create file-like object from the stored string
     csv_file_like = io.StringIO(csv_data)
@@ -101,7 +101,7 @@ def add_custom(root, name_box, density_box, weights_box, error_label, normalize,
 
         # Error check for an invalid element
         if row[1] != "Element" and not row[1] in elements:
-            error_label.config(style="Error.TLabel", text="Error: Invalid element: " + row[1] + ".")
+            error_label.config(style="Error.TLabel", text=f"Error: Invalid element: {row[1]}.")
             return
 
     # Error check for weights that do not sum to 1
@@ -121,8 +121,8 @@ def add_custom(root, name_box, density_box, weights_box, error_label, normalize,
         row[0] = row[0].strip()
         if row[0] != "Weight":
             row[0] = str(float(row[0]) / weights_sum)
-        csv_data2 += row[0].strip() + ","
-        csv_data2 += row[1].strip() + "\n"
+        csv_data2 += f"{row[0].strip()},"
+        csv_data2 += f"{row[1].strip()}\n"
     csv_data = csv_data2.rstrip("\n")
 
     error_label.config(style="Success.TLabel", text="Material added!")
@@ -136,13 +136,13 @@ def add_custom(root, name_box, density_box, weights_box, error_label, normalize,
         prefs["Custom Materials"] = choices
 
     # Save material data to shelve
-    db_path2 = get_user_data_path('Custom Materials/_' + name)
+    db_path2 = get_user_data_path(f'Custom Materials/_{name}')
     with shelve.open(db_path2) as db:
         # Store name
         db[name] = csv_data
 
         # Convert density to g/cm^3 before storing
-        db[name + '_Density'] = str(float(density) * density_denominator[d_den] / density_numerator[d_num])
+        db[f'{name}_Density'] = str(float(density) * density_denominator[d_den] / density_numerator[d_num])
 
     # Clear input boxes
     name_box.delete(0, tk.END)

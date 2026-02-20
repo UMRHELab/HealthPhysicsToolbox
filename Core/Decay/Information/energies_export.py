@@ -66,7 +66,7 @@ def export_data(root, error_label):
 
     # Error-check for isotope is stable
     if math.isinf(rd.Nuclide(isotope).half_life('s')):
-        error_label.config(style="Error.TLabel", text="Error: "+isotope+" is stable.")
+        error_label.config(style="Error.TLabel", text=f"Error: {isotope} is stable.")
         return
 
     # Error-check for no radiation types selected

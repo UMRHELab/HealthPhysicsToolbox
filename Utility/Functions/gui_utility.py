@@ -34,9 +34,9 @@ def edit_result(result, result_box, num="", den=""):
     result_box.config(state="normal")
     result_box.delete("1.0", tk.END)
     result_box.insert(tk.END, result)
-    unit = num + "/" + den
+    unit = f"{num}/{den}"
     if num == "1":
-        unit = den + "\u207B\u00B9"
+        unit = f"{den}\u207B\u00B9"
     if not result in errors and num != "":
         result_box.insert(tk.END, " ")
         result_box.insert(tk.END, unit)

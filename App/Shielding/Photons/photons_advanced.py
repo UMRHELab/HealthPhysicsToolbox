@@ -265,7 +265,7 @@ def photons_advanced(root, category, mode, interactions, common_el, common_mat,
     unit_side_frame.pack(pady=20)
 
     # Units label
-    unit_label = ttk.Label(unit_side_frame, text=mode+" Units:", style="Black.TLabel")
+    unit_label = ttk.Label(unit_side_frame, text=f"{mode} Units:", style="Black.TLabel")
     unit_label.pack(side='left', padx=5)
 
     # Logic for when a numerator unit is selected

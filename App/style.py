@@ -172,7 +172,7 @@ class Tooltip:
         self.tooltip_window = tw = tk.Toplevel(self.widget)
         tw.wm_overrideredirect(True)
         tw.wm_geometry(f"+{x}+{y}")
-        db_path = resource_path('Utility/Modules/' + self.module + '/Info.txt')
+        db_path = resource_path(f'Utility/Modules/{self.module}/Info.txt')
         with open(db_path, 'r') as file:
             text = file.read()
         label = ttk.Label(

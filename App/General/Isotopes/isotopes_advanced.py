@@ -73,7 +73,7 @@ def isotopes_advanced(root, mode):
         unit_side_frame.pack(pady=20)
 
         # Unit label
-        unit_label = ttk.Label(unit_side_frame, text=mode + " Units:", style="Black.TLabel")
+        unit_label = ttk.Label(unit_side_frame, text=f"{mode} Units:", style="Black.TLabel")
         unit_label.pack(side='left', padx=5)
 
         # Logic for when a numerator is selected

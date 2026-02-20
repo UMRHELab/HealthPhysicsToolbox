@@ -147,7 +147,7 @@ def alphas_advanced(root, category, mode, common_el, common_mat, element,
     unit_side_frame.pack(pady=(20,0) if mode != "Density" else 20)
 
     # Units label
-    unit_label = ttk.Label(unit_side_frame, text=mode + " Units:", style="Black.TLabel")
+    unit_label = ttk.Label(unit_side_frame, text=f"{mode} Units:", style="Black.TLabel")
     unit_label.pack(side='left', padx=5)
 
     # Logic for when a numerator unit is selected

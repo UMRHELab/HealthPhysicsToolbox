@@ -44,7 +44,7 @@ def get_choices(category, module, submodule):
     if category == "All Elements" or category == "Common Elements":
         # Obtains list of items from csv file
         data = "ICRP Coefficients" if module == "Dose" else "NIST Coefficients"
-        db_path = resource_path('Data/' + data + '/' + submodule + '/Elements.csv')
+        db_path = resource_path(f'Data/{data}/{submodule}/Elements.csv')
         if module == "Decay":
             db_path = resource_path('Data/Radioactive Decay/Elements.csv')
         if module == "General":
@@ -61,7 +61,7 @@ def get_choices(category, module, submodule):
         default = []
         if category != "Custom Materials":
             # Obtains list of default items from csv file
-            db_path2 = resource_path('Data/General Data/' + category + '.csv')
+            db_path2 = resource_path(f'Data/General Data/{category}.csv')
             read_choices(default, db_path2)
         new_choices = prefs.get(category, default)
         new_choices.sort()
@@ -110,7 +110,7 @@ def get_isotopes(element):
 Gets all isotopes of an element for a particular ICRP publication.
 """
 def get_icrp_isotopes(element, publication):
-    db_path = resource_path("Data/ICRP Coefficients/"+publication+"/Isotopes.json")
+    db_path = resource_path(f"Data/ICRP Coefficients/{publication}/Isotopes.json")
     with open(db_path, "r") as f:
         isotopes = json.load(f)
     return isotopes.get(element, [])

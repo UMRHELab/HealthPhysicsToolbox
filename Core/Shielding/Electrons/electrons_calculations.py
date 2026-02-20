@@ -100,7 +100,7 @@ def handle_calculation(root, category, mode, item, energy_str,
             result *= csda_numerator[num]
             result /= csda_denominator[den]
             result2 *= density_numerator[num]
-            result2 /= density_denominator[den.split("\u00B2", 1)[0] + "\u00B3"]
+            result2 /= density_denominator[f"{den.split("\u00B2", 1)[0]}\u00B3"]
             edit_result(f"{(result/result2):.4g} {den.split("\u00B2", 1)[0]}", range_result)
         elif mode == "Density":
             result *= density_numerator[num]

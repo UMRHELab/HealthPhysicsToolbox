@@ -49,7 +49,7 @@ def handle_action(root, element, error_label, export = False):
 
     if not export:
         # Create pop-up window
-        popup, scroll_frame = window(element+" Information", "400x600")
+        popup, scroll_frame = window(f"{element} Information", "400x600")
 
         # Convert atomic mass to desired unit
         information["Atomic Mass"] = float(information["Atomic Mass"])

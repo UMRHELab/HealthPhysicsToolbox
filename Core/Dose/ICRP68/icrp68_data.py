@@ -41,7 +41,7 @@ def export_data(root, mode, daughters, error_label):
     rows = []
 
     # Gets rows
-    db_path = resource_path('Data/ICRP Coefficients/ICRP68/' + mode + '.csv')
+    db_path = resource_path(f'Data/ICRP Coefficients/ICRP68/{mode}.csv')
     with open(db_path, 'r') as file:
         reader = csv.DictReader(file)
 
@@ -55,7 +55,7 @@ def export_data(root, mode, daughters, error_label):
         reader = csv.DictReader(file)
         for row in reader:
             if row["Nuclide"] in isotopes:
-                df.insert(len(df.columns), row["Nuclide"]+'_', pd.Series(list(row.values())[1:]))
+                df.insert(len(df.columns), f'{row["Nuclide"]}_', pd.Series(list(row.values())[1:]))
                 df.columns = list(df.columns[:-1]) + [row["Nuclide"]]
 
     save_file(df, "Data", error_label, isotope, mode.lower(), False)

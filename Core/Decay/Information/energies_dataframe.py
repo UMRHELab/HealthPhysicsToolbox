@@ -48,7 +48,7 @@ def create_energies_dataframe(error_label, box = False):
     # Sets up columns for dataframe
     type_col = "Radiation Type"
     yield_col = "Yield"
-    energy_col = "Energy (" + energy_unit + ")"
+    energy_col = f"Energy ({energy_unit})"
     cols = [type_col, yield_col, energy_col]
 
     df = pd.DataFrame(columns=cols)
@@ -56,7 +56,7 @@ def create_energies_dataframe(error_label, box = False):
     # Energy unit divisor
     divisor = energy_units[energy_unit]
 
-    db_path = resource_path('Data/Radioactive Decay/Energies/'+element+'.json')
+    db_path = resource_path(f'Data/Radioactive Decay/Energies/{element}.json')
     with open(db_path, 'r') as file:
         # Retrieves data
         data = json.load(file).get(isotope, -1)
@@ -64,9 +64,9 @@ def create_energies_dataframe(error_label, box = False):
         # Error-check for missing data
         if data == -1:
             if box:
-                edit_result("No data for "+isotope+".", error_label)
+                edit_result(f"No data for {isotope}.", error_label)
             else:
-                error_label.config(style="Error.TLabel", text="No data for "+isotope+".")
+                error_label.config(style="Error.TLabel", text=f"No data for {isotope}.")
             return None
 
         # Populates dataframe and converts energy to desired energy unit

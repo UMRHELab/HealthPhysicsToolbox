@@ -101,9 +101,9 @@ def save_file(obj, choice, error_label, item, name, box = False):
     # Show the "Save As" dialog
     file_path = asksaveasfilename(
         defaultextension=file_format,
-        filetypes=[(file_format[1:].upper() + " files", "*" + file_format)],
-        title="Save " + file_format[1:].upper() + " As...",
-        initialfile=item.lower().replace(" ", "_") + "_" + name + "_" + choice.lower()
+        filetypes=[(f"{file_format[1:].upper()} files", f"*{file_format}")],
+        title=f"Save {file_format[1:].upper()} As...",
+        initialfile=f"{item.lower().replace(' ', '_')}_{name}_{choice.lower()}"
     )
 
     # If the user selected a path, save the file
@@ -115,9 +115,9 @@ def save_file(obj, choice, error_label, item, name, box = False):
         if not choice:
             choice = item
         if box:
-            edit_result(choice+" exported!", error_label)
+            edit_result(f"{choice} exported!", error_label)
         elif error_label:
-            error_label.config(style="Success.TLabel", text=choice+" exported!")
+            error_label.config(style="Success.TLabel", text=f"{choice} exported!")
         open_file(file_path)
     else:
         if box:

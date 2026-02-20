@@ -271,7 +271,7 @@ def alphas_main(root, category="Common Elements",
     entry_width = 28 if platform.system() == "Windows" else 32
 
     # Energy label
-    energy_label = ttk.Label(inner_energy_frame, text="Alpha Energy (" + energy_unit + "):",
+    energy_label = ttk.Label(inner_energy_frame, text=f"Alpha Energy ({energy_unit}):",
                              style="Black.TLabel")
     energy_entry = tk.Entry(inner_energy_frame, width=entry_width, insertbackground="black",
                             background="white", foreground="black", borderwidth=3, bd=3,

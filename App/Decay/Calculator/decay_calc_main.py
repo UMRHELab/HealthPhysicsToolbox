@@ -278,7 +278,7 @@ def decay_calc_main(root, mode="Activities"):
 
     if not dates:
         # Time label
-        time_label = ttk.Label(inner_details_frame, text="Time Elapsed (" + time_unit + "):",
+        time_label = ttk.Label(inner_details_frame, text=f"Time Elapsed ({time_unit}):",
                                style="Black.TLabel")
         time_label.pack(pady=(15,1))
 
@@ -328,7 +328,7 @@ def decay_calc_main(root, mode="Activities"):
         end_date_input.pack(pady=(1,20))
 
     # Initial amount label
-    initial_label = ttk.Label(inner_details_frame, text="Initial Amount (" + amount_unit + "):",
+    initial_label = ttk.Label(inner_details_frame, text=f"Initial Amount ({amount_unit}):",
                               style="Black.TLabel")
     initial_label.pack(pady=(0,1))
 

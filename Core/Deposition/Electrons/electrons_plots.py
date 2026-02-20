@@ -66,7 +66,7 @@ def export_data(root, item, category, mode, interactions, choice, save, error_la
                     "Density"]
     num_e = get_unit(num_e_units, mode_choices, mode)
     num_l = get_unit(num_l_units, mode_choices, mode)
-    num = num_e + " * " + num_l if mode == "Mass Stopping Power" else num_e
+    num = f"{num_e} * {num_l}" if mode == "Mass Stopping Power" else num_e
     den = get_unit(den_units, mode_choices, mode)
 
     # Error-check for no selected item
@@ -82,7 +82,7 @@ def export_data(root, item, category, mode, interactions, choice, save, error_la
     error_label.config(style="Error.TLabel", text="")
 
     # Sets up columns for dataframe
-    energy_col = "Electron Energy (" + energy_unit + ")"
+    energy_col = f"Electron Energy ({energy_unit})"
     cols = [energy_col]
     if mode == "Mass Stopping Power":
         for interaction in interactions:
@@ -93,7 +93,7 @@ def export_data(root, item, category, mode, interactions, choice, save, error_la
     df = pd.DataFrame(columns=cols)
     if category in element_choices:
         # Load the CSV file
-        db_path = resource_path('Data/NIST Coefficients/Electrons/Elements/' + item + '.csv')
+        db_path = resource_path(f'Data/NIST Coefficients/Electrons/Elements/{item}.csv')
         df2 = pd.read_csv(db_path)
 
         df[energy_col] = df2["Kinetic Energy"]
@@ -104,12 +104,12 @@ def export_data(root, item, category, mode, interactions, choice, save, error_la
         else:
             df[mode] = df2[mode]
     elif category in material_choices:
-        db_path = resource_path('Data/General Data/Material Composition/' + item + '.csv')
+        db_path = resource_path(f'Data/General Data/Material Composition/{item}.csv')
         with open(db_path, 'r') as file:
             make_df_for_material(file, df, item, category, mode, energy_unit,
                                  "Electrons", interactions=interactions if mode == "Mass Stopping Power" else None)
     else:
-        db_path = get_user_data_path('Custom Materials/_' + item)
+        db_path = get_user_data_path(f'Custom Materials/_{item}')
         with shelve.open(db_path) as db:
             stored_data = db[item]
             stored_data = stored_data.replace('\\n', '\n')
@@ -129,19 +129,19 @@ def export_data(root, item, category, mode, interactions, choice, save, error_la
         if linear:
             density_mult = find_density(category, item)
             density_mult *= density_numerator[den]
-            density_mult /= density_denominator[num_l.split("\u00B2", 1)[0] + "\u00B3"]
+            density_mult /= density_denominator[f"{num_l.split("\u00B2", 1)[0]}\u00B3"]
         for interaction in interactions:
             df[interaction] *= sp_e_numerator[num_e]
             df[interaction] *= sp_l_numerator[num_l]
             df[interaction] /= sp_denominator[den]
             df[interaction] *= density_mult
 
-    unit = " (" + num + "/" + den + ")"
+    unit = f"({num}/{den})"
     mode_col = mode
     if mode == "Mass Stopping Power":
         if linear:
-            unit = " (" + num_e + "/" + num_l.split("\u00B2", 1)[0] + ")"
-        mode_col += unit
+            unit = f"({num_e}/{num_l.split("\u00B2", 1)[0]})"
+        mode_col = f"{mode} {unit}"
 
     if choice == "Plot":
         interactions_for_plot = interactions if mode == "Mass Stopping Power" else None
@@ -149,10 +149,10 @@ def export_data(root, item, category, mode, interactions, choice, save, error_la
         if save == 1:
             save_file(plt, choice, error_label, item, "stopping")
         else:
-            error_label.config(style="Success.TLabel", text=choice + " exported!")
+            error_label.config(style="Success.TLabel", text=f"{choice} exported!")
             plt.show()
     else:
         if mode == "Mass Stopping Power":
             for interaction in interactions:
-                df.rename(columns={interaction: interaction+unit}, inplace=True)
+                df.rename(columns={interaction: f"{interaction} {unit}"}, inplace=True)
         save_file(df, choice, error_label, item, "stopping")

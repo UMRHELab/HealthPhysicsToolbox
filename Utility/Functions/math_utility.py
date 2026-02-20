@@ -46,12 +46,12 @@ Otherwise, the density is retrieved from the data.
 """
 def find_density(category, item):
     if category == "Custom Materials":
-        db_path = get_user_data_path('Custom Materials/_' + item)
+        db_path = get_user_data_path(f'Custom Materials/_{item}')
         with shelve.open(db_path) as db:
-            return float(db[item + '_Density'])
+            return float(db[f'{item}_Density'])
 
     name = 'Elements' if category in element_choices else 'Materials'
-    db_path = resource_path('Data/General Data/Density/' + name + '.csv')
+    db_path = resource_path(f'Data/General Data/Density/{name}.csv')
     with open(db_path, 'r') as file:
         reader = csv.DictReader(file)
         for row in reader:
@@ -69,11 +69,11 @@ def find_data(category, column, item, energy_target, particle):
     if category in element_choices:
         result = find_data_for_element(item, column, energy_target, particle)
     elif category in material_choices:
-        db_path = resource_path('Data/General Data/Material Composition/' + item + '.csv')
+        db_path = resource_path(f'Data/General Data/Material Composition/{item}.csv')
         with open(db_path, 'r') as file:
             result = find_data_for_material(file, column, energy_target, particle)
     else:
-        db_path = get_user_data_path('Custom Materials/_' + item)
+        db_path = get_user_data_path(f'Custom Materials/_{item}')
         with shelve.open(db_path) as db:
             stored_data = db[item]
             stored_data = stored_data.replace('\\n', '\n')
@@ -136,7 +136,7 @@ def find_data_for_element(element, column, energy_target, particle):
         sys.exit()
 
     # Opens file
-    db_path = resource_path('Data/NIST Coefficients/' + particle + '/Elements/' + element + '.csv')
+    db_path = resource_path(f'Data/NIST Coefficients/{particle}/Elements/{element}.csv')
     with open(db_path, 'r') as file:
         # Reads in file in dictionary format
         reader = csv.DictReader(file)
@@ -211,9 +211,13 @@ def range_energy_curve(energy, energy_unit, warning_label):
         if high > 10000:
             high = f"{high:.0e}"
 
-        warning_label.config(text="Warning: Model is only accurate with input in ["
-                                  + str(low).rstrip('0').rstrip('.') + ", "
-                                  + str(high).rstrip('0').rstrip('.') + "].")
+        warning_label.config(
+            text=(
+                f"Warning: Model is only accurate with input in ["
+                f"{str(low).rstrip('0').rstrip('.')}, "
+                f"{str(high).rstrip('0').rstrip('.')}]."
+            )
+        )
 
     # Model
     if energy <= 0.8:

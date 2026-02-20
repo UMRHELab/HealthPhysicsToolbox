@@ -58,7 +58,7 @@ def handle_calculation(root, category, mode, interactions, item,
                     "Density"]
     num_e = get_unit(num_e_units, mode_choices, mode)
     num_l = get_unit(num_l_units, mode_choices, mode)
-    num = num_e + " * " + num_l if mode == "Mass Stopping Power" else num_e
+    num = f"{num_e} * {num_l}" if mode == "Mass Stopping Power" else num_e
     den = get_unit(den_units, mode_choices, mode)
 
     # Error-check for no selected item
@@ -102,7 +102,7 @@ def handle_calculation(root, category, mode, interactions, item,
             result /= sp_denominator[den]
             result2 *= density_numerator[den]
             lin_den = num_l.split("\u00B2", 1)[0]
-            result2 /= density_denominator[lin_den + "\u00B3"]
+            result2 /= density_denominator[f"{lin_den}\u00B3"]
             edit_result(f"{(result*result2):.4g} {num_e}/{lin_den}", range_result)
         else:
             result *= density_numerator[num]
