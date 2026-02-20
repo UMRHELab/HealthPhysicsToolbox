@@ -4,7 +4,7 @@ from Utility.Functions.logic_utility import get_unit
 from Utility.Functions.files import get_user_data_path
 from Utility.Functions.gui_utility import edit_result, non_number, no_selection
 from Utility.Functions.math_utility import (
-    too_low,
+    range_energy_curve,
     density_numerator, density_denominator,
     find_data, find_density, errors, energy_units
 )
@@ -108,38 +108,3 @@ def handle_calculation(root, category, mode, item, energy_str,
         edit_result(f"{result:.4g}", result_box, num=num, den=den)
     else:
         edit_result(result, result_box)
-
-"""
-This function calculates the range-energy curve value
-given a particular energy value.
-"""
-def range_energy_curve(energy, energy_unit, warning_label):
-    if warning_label is not None:
-        warning_label.config(text="")
-
-    # Error-check for a negative energy input
-    if energy < 0:
-        return too_low
-
-    # Warning for model being inaccurate
-    if energy < 0.001 or energy > 10 and warning_label is not None:
-        # Convert energy back to original unit
-        low = 0.001 / energy_units[energy_unit]
-        high = 10 / energy_units[energy_unit]
-
-        # Remove float rounding error
-        if abs(low - 1000) < 0.001:
-            low = 1000.0
-
-        # Scientific notation for large number
-        if high > 10000:
-            high = f"{high:.0e}"
-
-        warning_label.config(text="Warning: Model is only accurate with input in ["
-                                  + str(low).rstrip('0').rstrip('.') + ", "
-                                  + str(high).rstrip('0').rstrip('.') + "].")
-
-    # Model
-    if energy <= 0.8:
-        return 0.407 * pow(energy, 1.38)
-    return 0.542 * energy - 0.133

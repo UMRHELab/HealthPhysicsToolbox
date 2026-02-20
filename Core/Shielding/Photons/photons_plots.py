@@ -1,6 +1,5 @@
 ##### IMPORTS #####
 import io
-import csv
 import shelve
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -9,7 +8,7 @@ from Utility.Functions.logic_utility import get_unit
 from Utility.Functions.gui_utility import no_selection
 from Utility.Functions.choices import element_choices, material_choices
 from Utility.Functions.files import save_file, resource_path, get_user_data_path
-from Utility.Functions.math_utility import find_data, find_density, energy_units
+from Utility.Functions.math_utility import make_df_for_material, find_density, energy_units
 from Core.Shielding.Photons.photons_calculations import (
     mac_numerator, mac_denominator,
     lac_numerator, lac_denominator
@@ -94,7 +93,8 @@ def export_data(root, item, category, mode, interactions, choice, save, error_la
     elif category in material_choices:
         db_path = resource_path('Data/General Data/Material Composition/' + item + '.csv')
         with open(db_path, 'r') as file:
-            make_df_for_material(file, df, item, category, interactions)
+            make_df_for_material(file, df, item, category, mode, energy_unit,
+                                 "Photons", interactions=interactions)
     else:
         db_path = get_user_data_path('Custom Materials/_' + item)
         with shelve.open(db_path) as db:
@@ -104,7 +104,8 @@ def export_data(root, item, category, mode, interactions, choice, save, error_la
         # Create file-like object from the stored string
         csv_file_like = io.StringIO(stored_data)
 
-        make_df_for_material(csv_file_like, df, item, category, interactions)
+        make_df_for_material(csv_file_like, df, item, category, mode, energy_unit,
+                             "Photons", interactions=interactions)
 
     # Converts energy column to desired energy unit
     df[energy_col] /= energy_units[energy_unit]
@@ -137,56 +138,3 @@ def export_data(root, item, category, mode, interactions, choice, save, error_la
         for interaction in interactions:
             df.rename(columns={interaction: interaction+unit}, inplace=True)
         save_file(df, choice, error_label, item, "attenuation")
-
-#####################################################################################
-# DATA SECTION
-#####################################################################################
-
-"""
-This function fills out the dataframe when we are
-exporting data for a material. First, we retrieve
-the energy values for the dataframe by taking the values
-from the raw data of the first element and then removing
-any values that are out of range for any of the remaining
-elements. Then, for each energy value, we get the M.A.C. values
-for the rest of the row by calling the find_data function
-with each interaction. If L.A.C. is the selected calculation mode,
-the export_data function will handle the conversion by multiplying
-these rows by the density.
-"""
-def make_df_for_material(file_like, df, material, category, interactions):
-    # Reads in file
-    reader = csv.DictReader(file_like)
-
-    # Create the dataframe
-    vals = []
-    for row in reader:
-        db_path = resource_path('Data/NIST Coefficients/Photons/Elements/' + row['Element'] + '.csv')
-        if len(vals) == 0:
-            with open(db_path, 'r') as file:
-                # Reads in file
-                reader2 = csv.DictReader(file)
-
-                # Gets energy values to use as dots
-                for row2 in reader2:
-                    vals.append(float(row2["Photon Energy"]))
-        else:
-            with open(db_path, 'r') as file:
-                # Reads in file
-                reader2 = csv.DictReader(file)
-
-                new_vals = []
-                # Gets energy values to use as dots
-                for row2 in reader2:
-                    new_vals.append(float(row2["Photon Energy"]))
-                max_val = max(new_vals)
-                min_val = min(new_vals)
-                vals = [val for val in vals if min_val <= val <= max_val]
-
-    # Finds the M.A.C. at each energy value and adds to dataframe
-    for index, val in enumerate(vals):
-        row = [val]
-        for interaction in interactions:
-            x = find_data(category, interaction, material, val, "Photons")
-            row.append(x)
-        df.loc[index] = row

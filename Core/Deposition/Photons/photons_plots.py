@@ -1,6 +1,5 @@
 ##### IMPORTS #####
 import io
-import csv
 import math
 import shelve
 import pandas as pd
@@ -8,8 +7,8 @@ import matplotlib.pyplot as plt
 from Utility.Functions.plot import configure_plot
 from Utility.Functions.logic_utility import get_unit
 from Utility.Functions.gui_utility import no_selection
-from Utility.Functions.math_utility import find_data, energy_units
 from Utility.Functions.choices import element_choices, material_choices
+from Utility.Functions.math_utility import make_df_for_material, energy_units
 from Utility.Functions.files import save_file, resource_path, get_user_data_path
 from Core.Deposition.Photons.photons_calculations import mea_numerator, mea_denominator
 
@@ -83,7 +82,8 @@ def export_data(root, item, category, mode, choice, save, error_label):
     elif category in material_choices:
         db_path = resource_path('Data/General Data/Material Composition/' + item + '.csv')
         with open(db_path, 'r') as file:
-            make_df_for_material(file, df, item, category, mode)
+            make_df_for_material(file, df, item, category, mode, energy_unit,
+                                 "Photons")
     else:
         db_path = get_user_data_path('Custom Materials/_' + item)
         with shelve.open(db_path) as db:
@@ -93,7 +93,8 @@ def export_data(root, item, category, mode, choice, save, error_label):
         # Create file-like object from the stored string
         csv_file_like = io.StringIO(stored_data)
 
-        make_df_for_material(csv_file_like, df, item, category, mode)
+        make_df_for_material(csv_file_like, df, item, category, mode, energy_unit,
+                             "Photons")
 
     # Converts energy column to desired energy unit
     df[energy_col] /= energy_units[energy_unit]
@@ -111,61 +112,3 @@ def export_data(root, item, category, mode, choice, save, error_label):
             plt.show()
     else:
         save_file(df, choice, error_label, item, "absorption")
-
-#####################################################################################
-# DATA SECTION
-#####################################################################################
-
-"""
-This function fills out the dataframe when we are
-exporting data for a material. First, we retrieve
-the energy values for the dataframe by taking the values
-from the raw data of the first element and then removing
-any values that are out of range for any of the remaining
-elements. Then, for each energy value, we get the corresponding
-calculation mode value by calling the find_data function
-with the mode.
-"""
-def make_df_for_material(file_like, df, material, category, mode):
-    # Reads in file
-    reader = csv.DictReader(file_like)
-
-    # Create the dataframe
-    vals = []
-    for row in reader:
-        db_path = resource_path('Data/NIST Coefficients/Photons/Elements/' + row['Element'] + '.csv')
-        if len(vals) == 0:
-            with open(db_path, 'r') as file:
-                # Reads in file
-                reader2 = csv.DictReader(file)
-
-                # Gets energy values to use as dots
-                row2: dict[str, str]
-                for row2 in reader2:
-                    try:
-                        _ = float(row2[mode])
-                        vals.append(float(row2["Photon Energy"]))
-                    except ValueError:
-                        pass
-        else:
-            with open(db_path, 'r') as file:
-                # Reads in file
-                reader2 = csv.DictReader(file)
-
-                new_vals = []
-                # Gets energy values to use as dots
-                for row2 in reader2:
-                    try:
-                        _ = float(row2[mode])
-                        new_vals.append(float(row2["Photon Energy"]))
-                    except ValueError:
-                        pass
-                max_val = max(new_vals)
-                min_val = min(new_vals)
-                vals = [val for val in vals if min_val <= val <= max_val]
-
-    # Finds the data for mode at each energy value and adds to dataframe
-    for index, val in enumerate(vals):
-        x = find_data(category, mode, material, val, "Photons")
-        row = [val, x]
-        df.loc[index] = row

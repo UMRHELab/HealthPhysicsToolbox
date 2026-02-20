@@ -184,3 +184,122 @@ def find_data_for_element(element, column, energy_target, particle):
     # Uses linear interpolation to find the exact coefficient
     return linear_interpolation(energy_target, closest_low, closest_high,
                                 low_coefficient, high_coefficient)
+
+"""
+This function calculates the range-energy curve value
+given a particular energy value.
+"""
+def range_energy_curve(energy, energy_unit, warning_label):
+    if warning_label is not None:
+        warning_label.config(text="")
+
+    # Error-check for a negative energy input
+    if energy < 0:
+        return too_low
+
+    # Warning for model being inaccurate
+    if energy < 0.001 or energy > 10 and warning_label is not None:
+        # Convert energy back to original unit
+        low = 0.001 / energy_units[energy_unit]
+        high = 10 / energy_units[energy_unit]
+
+        # Remove float rounding error
+        if abs(low - 1000) < 0.001:
+            low = 1000.0
+
+        # Scientific notation for large number
+        if high > 10000:
+            high = f"{high:.0e}"
+
+        warning_label.config(text="Warning: Model is only accurate with input in ["
+                                  + str(low).rstrip('0').rstrip('.') + ", "
+                                  + str(high).rstrip('0').rstrip('.') + "].")
+
+    # Model
+    if energy <= 0.8:
+        return 0.407 * pow(energy, 1.38)
+    return 0.542 * energy - 0.133
+
+#####################################################################################
+# DATAFRAME SECTION
+#####################################################################################
+
+"""
+This function fills out the dataframe when we are
+exporting data for a material. First, we retrieve
+the energy values for the dataframe by taking the values
+from the raw data of the first element and then removing
+any values that are out of range for any of the remaining
+elements. Then, for each energy value, we get the data values
+for the rest of the row by calling the find_data function.
+"""
+def make_df_for_material(file_like, df, material, category, mode, energy_unit,
+                         submodule, interactions = None):
+    # Reads in file
+    reader = csv.DictReader(file_like)
+
+    energy_row = "Photon Energy"
+    if submodule == "Electrons":
+        energy_row = "Kinetic Energy"
+    elif submodule == "Alphas":
+        energy_row = "Alpha Energy"
+
+    # Create the dataframe
+    vals = []
+    for row in reader:
+        db_path = resource_path(f'Data/NIST Coefficients/{submodule}/Elements/{row['Element']}.csv')
+        if len(vals) == 0:
+            with open(db_path, 'r') as file:
+                # Reads in file
+                reader2 = csv.DictReader(file)
+
+                # Gets energy values to use as dots
+                for row2 in reader2:
+                    if not interactions and submodule == "Photons":
+                        try:
+                            _ = float(row2[mode])
+                            vals.append(float(row2[energy_row]))
+                        except ValueError:
+                            pass
+                    else:
+                        vals.append(float(row2[energy_row]))
+        else:
+            with open(db_path, 'r') as file:
+                # Reads in file
+                reader2 = csv.DictReader(file)
+
+                new_vals = []
+                # Gets energy values to use as dots
+                for row2 in reader2:
+                    if not interactions and submodule == "Photons":
+                        try:
+                            _ = float(row2[mode])
+                            new_vals.append(float(row2[energy_row]))
+                        except ValueError:
+                            pass
+                    else:
+                        new_vals.append(float(row2[energy_row]))
+                max_val = max(new_vals)
+                min_val = min(new_vals)
+                vals = [val for val in vals if min_val <= val <= max_val]
+
+    # Gets rid of bad R.E.C. energy values
+    if mode == "Range-Energy Curve":
+        min_val = 0.001
+        max_val = 10
+        vals = [val for val in vals if min_val <= val <= max_val]
+
+    # Finds the data at each energy value and adds to dataframe
+    for index, val in enumerate(vals):
+        row = [val]
+        if interactions:
+            for interaction in interactions:
+                x = find_data(category, interaction, material, val, submodule)
+                row.append(x)
+        else:
+            if mode == "Range-Energy Curve":
+                x = range_energy_curve(val, energy_unit, None)
+            else:
+                x = find_data(category, mode, material, val, submodule)
+            row.append(x)
+        df.loc[index] = row
