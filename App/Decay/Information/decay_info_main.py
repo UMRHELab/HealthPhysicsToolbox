@@ -6,10 +6,10 @@ from App.style import SectionFrame
 from App.scroll import scroll_to_top
 from Utility.Functions.files import get_user_data_path
 from Utility.Functions.choices import get_choices, get_isotopes
-from Utility.Functions.logic_utility import get_item, valid_saved
 from Utility.Controllers.element_controller import update_elements
 from Utility.Controllers.isotope_controller import update_isotopes
 from Core.Decay.Information.nuclide_info import handle_calculation
+from Utility.Functions.logic_utility import get_item, valid_saved, get_decay_submodule
 from Utility.Functions.gui_utility import (
     make_spacer, get_width,
     basic_label, result_label,
@@ -54,7 +54,7 @@ def decay_info_main(root, mode="Decay Scheme (Plot)"):
         common_el = prefs.get("common_el", "Ag")
 
         # Gets common elements
-        common_elements = get_choices("Common Elements", "Decay", "")
+        common_elements = get_choices("Common Elements", "Decay", get_decay_submodule(mode))
 
         # Make sure common element is a valid selection
         common_el = valid_saved(common_el, common_elements)
@@ -68,7 +68,7 @@ def decay_info_main(root, mode="Decay Scheme (Plot)"):
         isotope = prefs.get("isotope", isotope_choices[0] if isotope_choices else "")
 
     # Gets the element options
-    choices = get_choices(category, "Decay", "")
+    choices = get_choices(category, "Decay", get_decay_submodule(mode))
 
     # Stores mode and sets default
     var_mode = tk.StringVar(root)
@@ -81,7 +81,7 @@ def decay_info_main(root, mode="Decay Scheme (Plot)"):
 
     # Logic for when a Calculation Mode is selected
     def select_mode(event):
-        nonlocal mode
+        nonlocal mode, choices, isotope, common_el, element
         event.widget.selection_clear()
 
         if (event.widget.get() != "Decay Scheme (Plot)" and event.widget.get()[-8:] != "Spectrum") \
@@ -106,6 +106,25 @@ def decay_info_main(root, mode="Decay Scheme (Plot)"):
         # Update mode variable and fixes result section title
         mode = var_mode.get()
         result_frame.change_title(mode)
+
+        # Updates element dropdown to match category
+        common_els = get_choices("Common Elements", "Decay", get_decay_submodule(mode))
+        all_els = get_choices("All Elements", "Decay", get_decay_submodule(mode))
+        choices = get_choices(category, "Decay", get_decay_submodule(mode))
+        common_el = valid_saved(common_el, common_els)
+        element = valid_saved(element, all_els)
+        item = get_item(category, common_el, "", element, "", "")
+        var_element.set(item)
+        element_dropdown.set_completion_list(choices)
+        element_dropdown.config(values=choices, width=get_width(choices))
+
+        # Updates isotope dropdown to match element
+        isotope = update_isotopes(category, module, item, item,
+                                  var_isotope, isotope_dropdown)
+
+        # Updates elements
+        common_el, _ = update_elements("Common Elements", module, common_el)
+        _, element = update_elements("All Elements", module, element)
 
         # Clear result label
         result_box.config(state="normal")
@@ -147,7 +166,7 @@ def decay_info_main(root, mode="Decay Scheme (Plot)"):
             shelve_prefs["category"] = category
 
         # Updates element dropdown to match category
-        choices = get_choices(category, "Decay", "")
+        choices = get_choices(category, "Decay", get_decay_submodule(mode))
         selected_element = get_item(category, common_el, "", element, "", "")
         var_element.set(selected_element)
         element_dropdown.set_completion_list(choices)

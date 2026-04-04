@@ -47,6 +47,8 @@ def get_choices(category, module, submodule):
         db_path = resource_path(f'Data/{data}/{submodule}/Elements.csv')
         if module == "Decay":
             db_path = resource_path('Data/Radioactive Decay/Elements.csv')
+            if submodule:
+                db_path = resource_path(f'Data/Radioactive Decay/Spectra/{submodule}/Elements.csv')
         if module == "General":
             read_pt_choices(choices)
             choices.sort()

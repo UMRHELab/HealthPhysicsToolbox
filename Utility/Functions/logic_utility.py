@@ -42,6 +42,18 @@ def get_unit(units, modes, mode):
     return dict(zip(modes, units))[mode]
 
 """
+This function gets the Decay Information submodule based on the mode.
+"""
+def get_decay_submodule(mode):
+    if mode[0:5] == "Auger":
+        return "Auger"
+    if mode[0:4] == "Beta":
+        return "Betas"
+    if mode[0:7] == "Neutron":
+        return "Neutrons"
+    return ""
+
+"""
 Fixes inconsistency in one particular nuclide across
 ICRP-68 files.
 """
